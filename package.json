@@ -1,0 +1,9 @@
+{
+    "private": true,
+    "scripts": {
+        "start": "sable src"
+    },
+    "devDependencies": {
+        "sable": "^0.5.14"
+    }
+}

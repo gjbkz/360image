@@ -1,0 +1,48 @@
+{
+    "title": "Sample Image",
+    "author": "Takeo Ito",
+    "hotSpots": [
+        {
+            "pitch": 0,
+            "yaw": 0,
+            "type": "info",
+            "text": "Hotspot (0,0)"
+        },
+        {
+            "pitch": -10,
+            "yaw": 0,
+            "type": "info",
+            "text": "Hotspot (-10,0)"
+        },
+        {
+            "pitch": -20,
+            "yaw": 0,
+            "type": "info",
+            "text": "Hotspot (-20,0)"
+        },
+        {
+            "pitch": -30,
+            "yaw": 0,
+            "type": "info",
+            "text": "Hotspot (-30,0)"
+        },
+        {
+            "pitch": 0,
+            "yaw": 10,
+            "type": "info",
+            "text": "Hotspot (0,10)"
+        },
+        {
+            "pitch": 0,
+            "yaw": 20,
+            "type": "info",
+            "text": "Hotspot (0,20)"
+        },
+        {
+            "pitch": 0,
+            "yaw": 30,
+            "type": "info",
+            "text": "Hotspot (0,30)"
+        }
+    ]
+}
