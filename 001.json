@@ -1,48 +1,30 @@
 {
-    "title": "Sample Image",
+    "title": "230723_小貝川撮影練習",
     "author": "Takeo Ito",
     "hotSpots": [
         {
-            "pitch": 0,
-            "yaw": 0,
+            "pitch": -6.15,
+            "yaw": -30.45,
             "type": "info",
-            "text": "Hotspot (0,0)"
+            "text": "小貝川決壊口の碑"
         },
         {
-            "pitch": -10,
-            "yaw": 0,
+            "pitch": -32.28,
+            "yaw": -1.48,
             "type": "info",
-            "text": "Hotspot (-10,0)"
+            "text": "撮影チームがいた場所"
         },
         {
-            "pitch": -20,
-            "yaw": 0,
+            "pitch": -7.10,
+            "yaw": 135.53,
             "type": "info",
-            "text": "Hotspot (-20,0)"
+            "text": "台地にできた住宅地"
         },
         {
-            "pitch": -30,
-            "yaw": 0,
+            "pitch": -1.21,
+            "yaw": -139.58,
             "type": "info",
-            "text": "Hotspot (-30,0)"
-        },
-        {
-            "pitch": 0,
-            "yaw": 10,
-            "type": "info",
-            "text": "Hotspot (0,10)"
-        },
-        {
-            "pitch": 0,
-            "yaw": 20,
-            "type": "info",
-            "text": "Hotspot (0,20)"
-        },
-        {
-            "pitch": 0,
-            "yaw": 30,
-            "type": "info",
-            "text": "Hotspot (0,30)"
+            "text": "千葉県方面"
         }
     ]
 }
