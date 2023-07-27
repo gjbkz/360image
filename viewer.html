@@ -182,7 +182,8 @@
       tooltip.classList.add('hotspot-tooltip');
       tooltip.append(document.createTextNode(hotSpot.text));
       hotSpotDiv.append(tooltip);
-      hotSpotDiv.addEventListener('click', () => {
+      hotSpotDiv.addEventListener('click', (event) => {
+        event.preventDefault();
         location.hash = `#${hotSpot.id}`;
         viewer.setYaw(hotSpot.yaw);
         viewer.setPitch(hotSpot.pitch);
