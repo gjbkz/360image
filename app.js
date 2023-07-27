@@ -117,7 +117,6 @@
         coordinateText.textContent = 'コピーしました';
         setTimeout(showCoordinate, 800);
       });
-      alert(text);
     });
     coordinateDiv.append(coordinateText, createMarker());
     const showCoordinate = () => {
