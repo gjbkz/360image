@@ -45,6 +45,11 @@
     tooltip.classList.add('hotspot-tooltip');
     tooltip.append(document.createTextNode(hotSpot.text));
     hotSpotDiv.append(tooltip);
+    hotSpotDiv.addEventListener('click', () => {
+      location.hash = `#${hotSpot.id}`;
+      viewer.setYaw(hotSpot.yaw);
+      viewer.setPitch(hotSpot.pitch);
+    });
   };
   for (const [name, value] of Object.entries(config)) {
     switch (name) {
@@ -61,6 +66,15 @@
       default:
     }
   }
+  const hotSpots = config.hotSpots.slice();
+  if (location.hash.startsWith('#')) {
+    const targetId = location.hash.slice(1);
+    const hotSpot = hotSpots.find((hotSpot) => hotSpot.id === targetId);
+    if (hotSpot) {
+      config.pitch = hotSpot.pitch;
+      config.yaw = hotSpot.yaw;
+    }
+  }
   const viewer = pannellum.viewer('container', config);
   const container = viewer.getContainer();
   const options = document.createElement('div');
@@ -72,7 +86,6 @@
   });
   const items = document.createElement('section');
   {
-    const hotSpots = config.hotSpots.slice();
     const input = document.createElement('input');
     input.type = 'checkbox';
     input.checked = true;
