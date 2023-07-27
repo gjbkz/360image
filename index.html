@@ -1,31 +1,41 @@
-<!doctype html>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>360度パノラマ画像</title>
 <style>
-    :root {
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        font-size: 16px;
-    }
-    code {
-        display: inline-grid;
-        padding: 1px 4px;
-    }
-    body {
-        display: grid;
-        grid-auto-flow: row;
-        justify-content: center;
-    }
-    main {
-        max-inline-size: 400px;
-    }
+  * {
+    font: inherit;
+    margin: 0;
+    padding: 0;
+  }
+  :root {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+      Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
+      sans-serif;
+    font-size: 16px;
+  }
+  code {
+    display: inline-grid;
+    padding: 1px 4px;
+  }
+  body {
+    display: grid;
+    grid-auto-flow: row;
+    justify-content: center;
+  }
+  main {
+    max-inline-size: 400px;
+  }
+  ul,
+  ol {
+    padding-inline-start: 2em;
+  }
 </style>
 <main>
-    <h1>360度パノラマ画像</h1>
-    <h2>画像一覧</h2>
-    <ul>
-        <li><a href="viewer.html?image=001">230723_小貝川撮影練習</a></li>
-    </ul>
-    <h2>編集支援モード</h2>
-    <p>URLの末尾に<code>&debug</code>をつけるとクリック位置が画面上に表示されるようになります。hotSpotsの位置を決める際に使用してください。</p>
+  <h1>360度パノラマ画像ライブラリ</h1>
+  <p>閲覧中の</p>
+  <h2>画像一覧</h2>
+  <ul>
+    <li><a href="viewer.html?image=001">230723_小貝川撮影練習</a></li>
+  </ul>
 </main>
