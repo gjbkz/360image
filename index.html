@@ -100,7 +100,7 @@
         const json = await res.json();
         const ol = document.createElement('ol');
         (json.hotSpots || []).forEach((hotSpot, index) => {
-          const id = hotSpot.id || `hs-${index}`;
+          const id = hotSpot.id || `hs-${index + 1}`;
           const li = document.createElement('li');
           const a = document.createElement('a');
           a.href = `viewer.html?image=${image}#${id}`;

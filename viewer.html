@@ -2,6 +2,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
 <title>360度パノラマ画像ライブラリ</title>
 <link rel="stylesheet" href="pannellum.css" />
+<script>
+  // @ts-ignore
+  if (!('DeviceMotionEvent' in globalThis)) {
+    globalThis.DeviceMotionEvent = {};
+  }
+</script>
 <style>
   * {
     margin: 0;
@@ -11,16 +17,34 @@
     appearance: none;
     background-color: transparent;
     border-style: none;
+    border-color: currentColor;
+    border-width: 1px;
+    border-radius: 0;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    stroke-width: 1px;
+  }
+  button {
+    cursor: pointer;
   }
   :root {
+    --footer-baseline: 6px;
+    --border-radius: 5px;
+    --ui-background: rgba(0, 0, 0, 0.4);
+    --font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN',
+      'Hiragino Sans', 'BIZ UDPGothic', Meiryo, sans-serif;
     height: 100%;
-    font-family: Roboto, Arial, sans-serif;
   }
   body {
     position: fixed;
     width: 100%;
     height: 100%;
     overflow: hidden;
+    font-family: var(--font-family);
+    font-size: 14px;
+  }
+  .pnlm-container {
+    font-family: var(--font-family);
   }
   .pnlm-hotspot {
     display: grid;
@@ -29,73 +53,99 @@
     cursor: pointer;
   }
   .pnlm-title-box {
-    font-size: 15px;
+    font-size: inherit;
     margin-bottom: 0;
   }
   .hotspot-tooltip {
-    writing-mode: vertical-rl;
-    display: grid;
-    justify-content: end;
     position: absolute;
-    bottom: 100%;
+    bottom: 50%;
     left: 50%;
-    inline-size: max-content;
-    max-inline-size: 160px;
-    padding-inline-end: 2px;
-    color: #ffffff;
     transform: translateX(-50%);
-    font-weight: 600;
+    writing-mode: vertical-rl;
+    inline-size: max-content;
+    max-inline-size: 155px;
+    padding-inline: 6px;
+    padding-block: 2px;
+    color: #ffffff;
   }
   .hotspot-marker {
-    inline-size: 9px;
-    block-size: 9px;
-    fill: #ffffff;
-    stroke: #ffffff;
-    stroke-linejoin: round;
-    stroke-width: 1px;
+    position: absolute;
+    /* fill: var(--ui-background); */
+    /* fill: none; */
+    fill: currentColor;
+    stroke: currentColor;
+    pointer-events: none;
+    filter: drop-shadow(0 0 2px #000000);
   }
   .pnlm-hotspot > .hotspot-marker {
-    transform: translateY(-50%);
+    bottom: 50%;
+    left: 50%;
+    transform: translateX(-50%);
   }
-  .pnlm-hotspot,
-  .coordinate {
-    filter: drop-shadow(0 0 3px #000000);
+  .hotspot-marker-backdrop {
+    display: none;
+    position: absolute;
+  }
+  .hotspot-marker-backdrop,
+  .pnlm-panorama-info,
+  .app-options {
+    backdrop-filter: blur(2px);
+  }
+  .coordinate-text,
+  .hotspot-tooltip,
+  .pnlm-panorama-info,
+  .app-options {
+    text-shadow: 0 0 4px #000000;
   }
   .coordinate {
     z-index: 1;
     position: absolute;
     left: 50%;
-    top: 50%;
-    transform: translate(-50%, -100%);
+    bottom: 50%;
+    transform: translateX(-50%);
     display: grid;
     grid-auto-flow: row;
     row-gap: 2px;
     justify-items: center;
   }
+  .coordinate > .hotspot-marker {
+    bottom: 0;
+  }
   .coordinate > button {
+    position: absolute;
+    bottom: 0;
+    padding: 2px 6px;
     background: none;
     border: none;
     color: inherit;
     font: inherit;
     cursor: pointer;
+    white-space: nowrap;
   }
   .pnlm-panorama-info,
   .app-options,
   .pnlm-hotspot,
   .coordinate {
     color: #ffffff;
-    font-size: 14px;
+    font-size: inherit;
+    font-weight: 600;
   }
   .pnlm-panorama-info,
   .app-options {
-    background-color: rgba(0, 0, 0, 0.5);
+    --gap: 4px;
+    --padding-v: 8px;
+    --padding-h: 11px;
+    bottom: var(--footer-baseline);
+    padding: var(--padding-v) var(--padding-h);
+    /* border-style: solid; */
+    background-color: var(--ui-background);
   }
   .pnlm-panorama-info {
     display: grid;
     grid-auto-flow: row;
     align-items: end;
-    padding: 6px 10px 6px 8px;
-    border-radius: 0;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    border-left-width: 0;
   }
   .pnlm-panorama-info > * {
     padding: 0;
@@ -104,23 +154,35 @@
     z-index: 1;
     position: absolute;
     right: 0;
-    bottom: 4px;
     display: grid;
     grid-auto-flow: row;
     justify-content: end;
     justify-items: end;
-    max-width: 100%;
-    border-radius: 0;
-    overflow: hidden;
+    row-gap: var(--gap);
+    max-width: 90%;
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+    border-right-width: 0;
+  }
+  .app-options > #config-toggle {
+    padding: var(--padding-v) var(--padding-h);
+    margin: calc(-1 * var(--padding-v)) calc(-1 * var(--padding-h));
   }
   .app-options > section {
-    --gap: 4px;
     display: grid;
     grid-template-columns: max-content 1fr;
     align-items: center;
     column-gap: var(--gap);
     row-gap: var(--gap);
-    padding: 10px;
+    padding-block: var(--gap);
+  }
+  .app-options > #config-toggle::before {
+    content: '設定';
+  }
+  .app-options.active > #config-toggle::before {
+    content: '閉じる';
+  }
+  .app-options.active + .pnlm-panorama-info {
+    display: none;
   }
   .app-options > section > input {
     margin: 0;
@@ -129,28 +191,24 @@
   .app-options:not(.active) > section {
     display: none;
   }
-  .app-options > .toggle::before {
-    content: '設定';
-  }
-  .app-options.active > .toggle::before {
-    content: '閉じる';
-  }
-  .app-options > .toggle {
-    padding: 8px 8px;
-    text-decoration: underline;
-    cursor: pointer;
+  .hotspot-list-title {
+    grid-column: 1 / 3;
   }
   .hotspot-list {
     grid-column: 1 / 3;
     display: grid;
-    grid-auto-flow: row;
+    grid-template-columns: max-content 1fr;
     row-gap: var(--gap);
+    column-gap: var(--gap);
   }
-  .hotspot-list > ol {
-    padding-left: 22px;
-  }
-  .hotspot-list > ol > li:hover {
+  .hotspot-list > dd {
+    max-inline-size: 20em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     cursor: pointer;
+  }
+  .hotspot-list > dd:hover {
     text-decoration: underline;
   }
 </style>
@@ -166,28 +224,99 @@
 <script>
   //@ts-check
   (async function () {
-    const createMarker = () => {
-      const SVGNS = 'http://www.w3.org/2000/svg';
-      const marker = document.createElementNS(SVGNS, 'svg');
-      marker.setAttribute('viewBox', '0 0 10 10');
-      const path = document.createElementNS(SVGNS, 'path');
-      path.setAttribute('d', 'M0,0L10,0 5,10z');
-      marker.append(path);
-      marker.classList.add('hotspot-marker');
-      return marker;
+    const SVGNS = 'http://www.w3.org/2000/svg';
+    const createElement = (tagName) => {
+      switch (tagName) {
+        case 'svg':
+        case 'path':
+          return document.createElementNS(SVGNS, tagName);
+        default:
+          return document.createElement(tagName);
+      }
     };
-    const createTooltip = (hotSpotDiv, hotSpot) => {
-      hotSpotDiv.id = hotSpot.id;
-      hotSpotDiv.style.backgroundImage = 'none';
-      hotSpotDiv.append(createMarker());
-      const tooltip = document.createElement('div');
-      tooltip.classList.add('hotspot-tooltip');
-      tooltip.append(document.createTextNode(hotSpot.text));
-      hotSpotDiv.append(tooltip);
-      hotSpotDiv.addEventListener('click', (event) => {
-        location.hash = `#${hotSpot.id}`;
-        viewer.setYaw(hotSpot.yaw);
-        viewer.setPitch(hotSpot.pitch);
+    /** @typedef {Record<string, string | boolean>} Attrs */
+    /** @typedef {[string, Attrs, Array<NodeDef | string>]} NodeDef */
+    /**
+     * @template {HTMLElement} T
+     * @typedef {(parent: T) => Iterable<Node>} NodeGen
+     */
+    /**
+     * @template {string} T
+     * @template {HTMLElement} S
+     * @param {T} tagName
+     * @param {Attrs | null} attrs
+     * @param {Array<NodeGen<S> | Node | string>} children
+     * @returns {S}
+     */
+    const dom = (tagName, attrs = {}, ...children) => {
+      const node = createElement(tagName);
+      if (attrs) {
+        for (const [name, value] of Object.entries(attrs)) {
+          switch (name) {
+            case 'checked':
+            case 'disabled':
+            case 'selected':
+              node[name] = value;
+              break;
+            default:
+              if (value) {
+                node.setAttribute(name, `${value}`);
+              }
+          }
+        }
+      }
+      if (children) {
+        for (const child of children) {
+          if (typeof child === 'function') {
+            node.append(...child(node));
+          } else if (typeof child === 'string') {
+            node.append(document.createTextNode(child));
+          } else if (child instanceof Node) {
+            node.append(child);
+          }
+        }
+      }
+      return node;
+    };
+    const createMarker = function* (wrappee) {
+      const backdrop = dom('div', { class: 'hotspot-marker-backdrop' });
+      yield backdrop;
+      yield dom('svg', { class: 'hotspot-marker' }, function* (svg) {
+        const lw = 1;
+        const aw2 = 4;
+        const ah = 6;
+        const r = 4;
+        const path = dom('path', { style: `stroke-width:${lw}px` });
+        const observer = new ResizeObserver(([{ target }]) => {
+          const rect = target.getBoundingClientRect();
+          const pRect = target.parentElement?.getBoundingClientRect();
+          if (pRect) {
+            Object.assign(backdrop.style, {
+              left: `${rect.left - pRect.left}px`,
+              top: `${rect.top - pRect.top}px`,
+              width: `${rect.width}px`,
+              height: `${rect.height}px`,
+            });
+          }
+          const w2 = rect.width / 2;
+          const h = rect.height;
+          {
+            const ww = w2 * 2 + lw * 2;
+            const hh = h + ah + lw * 2;
+            svg.style.width = `${ww}px`;
+            svg.style.height = `${hh}px`;
+            const viewBox = `${ww / -2} ${-hh + ah + lw} ${ww} ${hh}`;
+            svg.setAttribute('viewBox', viewBox);
+          }
+          const d = `M${-aw2} 0L0 ${ah}L${aw2} 0Z`;
+          // let d = `M${-aw2} 0L0 ${ah}L${aw2} 0H${w2 - r}q${r} 0 ${r} ${-r}`;
+          // d += `V${-h + r}q0 ${-r} ${-r} ${-r}H${-w2 + r}`;
+          // d += `q${-r} 0 ${-r} ${r}V${-r}q0 ${r} ${r} ${r}Z`;
+          path.setAttribute('d', d);
+        });
+        observer.observe(wrappee);
+        wrappee.style.marginBottom = `${ah + lw / 2}px`;
+        yield path;
       });
     };
     const loadConfig = async () => {
@@ -209,21 +338,37 @@
           case 'title':
             document.title = value;
             break;
-          case 'hotSpots':
+          case 'hotSpots': {
+            const createTooltip = (hotSpotDiv, hotSpot) => {
+              hotSpotDiv.dataset.hotspot = hotSpot.id;
+              hotSpotDiv.style.backgroundImage = 'none';
+              const tooltip = dom(
+                'div',
+                { class: 'hotspot-tooltip' },
+                hotSpot.text,
+              );
+              hotSpotDiv.append(...createMarker(tooltip), tooltip);
+              hotSpotDiv.addEventListener('click', (event) => {
+                focusHotSpot(hotSpot.id);
+              });
+            };
             value.forEach((hotSpot, index) => {
-              hotSpot.id = hotSpot.id || `hs-${index}`;
+              hotSpot.id = hotSpot.id || `hs-${index + 1}`;
               hotSpot.createTooltipFunc = createTooltip;
               hotSpot.createTooltipArgs = hotSpot;
             });
             if (location.hash.startsWith('#')) {
               const targetId = location.hash.slice(1);
-              const hotSpot = value.find((hotSpot) => hotSpot.id === targetId);
-              if (hotSpot) {
-                merged.pitch = hotSpot.pitch;
-                merged.yaw = hotSpot.yaw;
+              for (const hotSpot of value) {
+                if (hotSpot.id === targetId) {
+                  merged.pitch = hotSpot.pitch;
+                  merged.yaw = hotSpot.yaw;
+                  break;
+                }
               }
             }
             break;
+          }
           default:
         }
       }
@@ -234,68 +379,16 @@
     // @ts-ignore
     const viewer = pannellum.viewer('container', config);
     const container = viewer.getContainer();
-    const options = document.createElement('div');
-    options.classList.add('app-options');
-    const toggle = document.createElement('button');
-    toggle.append(document.createTextNode(' (c)'));
-    toggle.classList.add('toggle');
-    toggle.addEventListener('click', () => {
-      options.classList.toggle('active');
-    });
-    const items = document.createElement('section');
-    {
-      const hotSpotsList = document.createElement('ol');
-      for (const hotSpot of hotSpots) {
-        const item = document.createElement('li');
-        item.addEventListener('click', () => {
-          viewer.setYaw(hotSpot.yaw);
-          viewer.setPitch(hotSpot.pitch);
-        });
-        item.append(document.createTextNode(hotSpot.text));
-        hotSpotsList.append(item);
-      }
-      const wrapper = document.createElement('div');
-      wrapper.classList.add('hotspot-list');
-      const title = document.createElement('h1');
-      title.append(document.createTextNode('マーカー'));
-      wrapper.append(title, hotSpotsList);
-      items.append(wrapper);
-    }
-    {
-      const input = document.createElement('input');
-      input.type = 'checkbox';
-      input.checked = true;
-      input.id = 'show-markers';
-      const label = document.createElement('label');
-      label.append(document.createTextNode('マーカーを表示する [m]'));
-      label.htmlFor = input.id;
-      items.append(input, label);
-      const onChange = () => {
-        if (input.checked) {
-          hotSpots.forEach((hotSpot) => {
-            viewer.addHotSpot(hotSpot);
-          });
-        } else {
-          hotSpots.forEach((hotSpot) => {
-            viewer.removeHotSpot(hotSpot.id);
-          });
-        }
+    const coordinateMonitor = (function () {
+      const coordinateText = dom('button', {
+        title: 'クリックでコピー',
+        class: 'coordinate-text',
+      });
+      const sync = () => {
+        const yaw = viewer.getYaw().toFixed(2);
+        const pitch = viewer.getPitch().toFixed(2);
+        coordinateText.textContent = `${yaw}, ${pitch}`;
       };
-      input.addEventListener('change', onChange);
-    }
-    {
-      const input = document.createElement('input');
-      input.type = 'checkbox';
-      input.checked = false;
-      input.id = 'show-coordinate';
-      const label = document.createElement('label');
-      label.append(document.createTextNode('画面中心の座標を表示する [p]'));
-      label.htmlFor = input.id;
-      items.append(input, label);
-      const coordinateDiv = document.createElement('div');
-      coordinateDiv.classList.add('coordinate');
-      const coordinateText = document.createElement('button');
-      coordinateText.title = 'クリックでコピー';
       coordinateText.addEventListener('pointerup', () => {
         const text = JSON.stringify({
           yaw: Number(viewer.getYaw().toFixed(3)),
@@ -304,56 +397,148 @@
         });
         navigator.clipboard.writeText(text).then(() => {
           coordinateText.textContent = 'コピーしました';
-          setTimeout(showCoordinate, 800);
+          setTimeout(sync, 800);
         });
       });
-      coordinateDiv.append(coordinateText, createMarker());
-      const showCoordinate = () => {
-        coordinateText.textContent = `(${viewer.getYaw().toFixed(2)}, ${viewer
-          .getPitch()
-          .toFixed(2)})`;
+      const coordinateDiv = dom('div', { class: 'coordinate' }, function* () {
+        yield* createMarker(coordinateText);
+        yield coordinateText;
+      });
+      let timerId = requestAnimationFrame(() => {});
+      const track = () => {
+        cancelAnimationFrame(timerId);
+        let lastChangedAt = Infinity;
+        let previousYaw = Infinity;
+        let previousPitch = Infinity;
+        /** @param {number} timeStamp */
+        const onRendering = (timeStamp) => {
+          timerId = requestAnimationFrame(onRendering);
+          const yaw = viewer.getYaw();
+          const pitch = viewer.getPitch();
+          if (yaw === previousYaw && pitch === previousPitch) {
+            if (100 < timeStamp - lastChangedAt) {
+              cancelAnimationFrame(timerId);
+            }
+          } else {
+            sync();
+            previousYaw = yaw;
+            previousPitch = pitch;
+            lastChangedAt = timeStamp;
+          }
+        };
+        timerId = requestAnimationFrame(onRendering);
       };
-      let frameId = requestAnimationFrame(() => {});
-      const onPointerDown = () => {
+      const watch = () => {
+        cancelAnimationFrame(timerId);
         const onRendering = () => {
-          frameId = requestAnimationFrame(onRendering);
-          showCoordinate();
+          timerId = requestAnimationFrame(onRendering);
+          sync();
         };
         onRendering();
       };
-      const onPointerUp = () => {
-        cancelAnimationFrame(frameId);
+      const enable = () => {
+        track();
+        container.append(coordinateDiv);
+        viewer.on('mousedown', watch);
+        viewer.on('mouseup', track);
+        viewer.on('touchstart', watch);
+        viewer.on('touchend', track);
+        viewer.on('animatefinished', sync);
       };
-      const onChange = () => {
-        if (input.checked) {
-          container.append(coordinateDiv);
-          viewer.on('mousedown', onPointerDown);
-          viewer.on('mouseup', onPointerUp);
-          viewer.on('touchstart', onPointerDown);
-          viewer.on('touchend', onPointerUp);
-          viewer.on('animatefinished', showCoordinate);
-          showCoordinate();
-        } else {
-          coordinateDiv.remove();
-          viewer.off('mousedown', onPointerDown);
-          viewer.off('mouseup', onPointerUp);
-          viewer.off('touchstart', onPointerDown);
-          viewer.off('touchend', onPointerUp);
-          viewer.off('animatefinished', showCoordinate);
-        }
+      const disable = () => {
+        coordinateDiv.remove();
+        viewer.off('mousedown', watch);
+        viewer.off('mouseup', track);
+        viewer.off('touchstart', watch);
+        viewer.off('touchend', track);
+        viewer.off('animatefinished', sync);
       };
+      return { enable, disable, track };
+    })();
+    /** @param {string} id */
+    const focusHotSpot = (id) => {
+      const hotSpot = hotSpots.find((hotSpot) => hotSpot.id === id);
+      if (hotSpot) {
+        location.hash = `#${hotSpot.id}`;
+        viewer.setYaw(hotSpot.yaw);
+        viewer.setPitch(hotSpot.pitch);
+        coordinateMonitor.track();
+      }
+    };
+    /** @param {{id: string, name: string, checked: boolean, handler: (checked: boolean) => void}} props */
+    const generateToggle = function* ({ name, id, checked, handler }) {
+      /** @type {HTMLInputElement} */
+      const input = dom('input', { id, type: 'checkbox', checked });
+      const label = dom('label', { for: input.id }, name);
+      const onChange = () => handler(input.checked);
       input.addEventListener('change', onChange);
-    }
-    options.append(items, toggle);
-    container.append(options);
-    container.addEventListener('scroll', () => {
-      container.scrollTop = 0;
-      container.scrollLeft = 0;
-    });
-    addEventListener('keydown', (event) => {
+      yield input;
+      yield label;
+    };
+    container.querySelector('.pnlm-panorama-info').before(
+      dom(
+        'div',
+        { class: 'app-options' },
+        dom(
+          'section',
+          null,
+          dom('h1', { class: 'hotspot-list-title' }, 'マーカー'),
+          function* () {
+            const hotSpotsList = dom('dl', { class: 'hotspot-list' });
+            hotSpots.forEach((hotSpot, index) => {
+              const dd = dom('dd', null, hotSpot.text);
+              dd.addEventListener('click', () => focusHotSpot(hotSpot.id));
+              hotSpotsList.append(dom('dt', null, `${index + 1}.`), dd);
+            });
+            yield hotSpotsList;
+          },
+          ...generateToggle({
+            id: 'show-markers',
+            name: 'マーカーを表示する (m)',
+            checked: true,
+            handler: (checked) => {
+              if (checked) {
+                hotSpots.forEach((hotSpot) => {
+                  viewer.addHotSpot(hotSpot);
+                });
+              } else {
+                hotSpots.forEach((hotSpot) => {
+                  viewer.removeHotSpot(hotSpot.id);
+                });
+              }
+            },
+          }),
+          ...generateToggle({
+            id: 'show-coordinate',
+            name: '画面中心の座標を表示する (p)',
+            checked: false,
+            handler: (checked) => {
+              if (checked) {
+                coordinateMonitor.enable();
+              } else {
+                coordinateMonitor.disable();
+              }
+            },
+          }),
+        ),
+        function* (options) {
+          const toggle = dom(
+            'button',
+            { id: 'config-toggle', class: 'toggle' },
+            ' (c)',
+          );
+          toggle.addEventListener('click', () => {
+            options.classList.toggle('active');
+          });
+          yield toggle;
+        },
+      ),
+    );
+    /** @param {{key: string}} event */
+    const onKeyDown = (event) => {
       switch (event.key) {
         case 'c':
-          toggle.click();
+          container.querySelector('#config-toggle')?.click();
           break;
         case 'p':
           container.querySelector('#show-coordinate')?.click();
@@ -375,13 +560,13 @@
         case '9': {
           const hotSpot = hotSpots[Number(event.key) - 1];
           if (hotSpot) {
-            viewer.setYaw(hotSpot.yaw);
-            viewer.setPitch(hotSpot.pitch);
+            focusHotSpot(hotSpot.id);
           }
           break;
         }
         default:
       }
-    });
-  })();
+    };
+    addEventListener('keydown', onKeyDown);
+  })().catch((error) => alert(`${error}`));
 </script>
