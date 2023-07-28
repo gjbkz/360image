@@ -3,7 +3,6 @@
 <title>360度パノラマ画像ライブラリ</title>
 <link rel="stylesheet" href="pannellum.css" />
 <script>
-  // @ts-ignore
   if (!('DeviceMotionEvent' in globalThis)) {
     globalThis.DeviceMotionEvent = {};
   }
@@ -46,6 +45,10 @@
   .pnlm-container {
     font-family: var(--font-family);
   }
+  .pnlm-container[data-show-markers='0'] .pnlm-hotspot {
+    opacity: 0;
+    pointer-events: none;
+  }
   .pnlm-hotspot {
     display: grid;
     align-content: center;
@@ -56,14 +59,16 @@
     font-size: inherit;
     margin-bottom: 0;
   }
+  .pnlm-container[data-vertical-markers='1'] .hotspot-tooltip {
+    writing-mode: vertical-rl;
+  }
   .hotspot-tooltip {
     position: absolute;
     bottom: 50%;
     left: 50%;
     transform: translateX(-50%);
-    writing-mode: vertical-rl;
     inline-size: max-content;
-    max-inline-size: 155px;
+    max-inline-size: 183px;
     padding-inline: 6px;
     padding-block: 2px;
     color: #ffffff;
@@ -339,30 +344,30 @@
             document.title = value;
             break;
           case 'hotSpots': {
-            const createTooltip = (hotSpotDiv, hotSpot) => {
-              hotSpotDiv.dataset.hotspot = hotSpot.id;
-              hotSpotDiv.style.backgroundImage = 'none';
+            const createTooltip = (markerDiv, marker) => {
+              markerDiv.dataset.hotspot = marker.id;
+              markerDiv.style.backgroundImage = 'none';
               const tooltip = dom(
                 'div',
                 { class: 'hotspot-tooltip' },
-                hotSpot.text,
+                marker.text,
               );
-              hotSpotDiv.append(...createMarker(tooltip), tooltip);
-              hotSpotDiv.addEventListener('click', (event) => {
-                focusHotSpot(hotSpot.id);
+              markerDiv.append(...createMarker(tooltip), tooltip);
+              markerDiv.addEventListener('click', (event) => {
+                focusMarker(marker.id);
               });
             };
-            value.forEach((hotSpot, index) => {
-              hotSpot.id = hotSpot.id || `hs-${index + 1}`;
-              hotSpot.createTooltipFunc = createTooltip;
-              hotSpot.createTooltipArgs = hotSpot;
+            value.forEach((marker, index) => {
+              marker.id = marker.id || `hs-${index + 1}`;
+              marker.createTooltipFunc = createTooltip;
+              marker.createTooltipArgs = marker;
             });
             if (location.hash.startsWith('#')) {
               const targetId = location.hash.slice(1);
-              for (const hotSpot of value) {
-                if (hotSpot.id === targetId) {
-                  merged.pitch = hotSpot.pitch;
-                  merged.yaw = hotSpot.yaw;
+              for (const marker of value) {
+                if (marker.id === targetId) {
+                  merged.pitch = marker.pitch;
+                  merged.yaw = marker.yaw;
                   break;
                 }
               }
@@ -375,9 +380,9 @@
       return merged;
     };
     const config = await loadConfig();
-    const hotSpots = config.hotSpots.slice();
     // @ts-ignore
     const viewer = pannellum.viewer('container', config);
+    const getMarkers = () => viewer.getConfig().hotSpots || [];
     const container = viewer.getContainer();
     const coordinateMonitor = (function () {
       const coordinateText = dom('button', {
@@ -438,30 +443,34 @@
       };
       const enable = () => {
         track();
-        container.append(coordinateDiv);
-        viewer.on('mousedown', watch);
-        viewer.on('mouseup', track);
-        viewer.on('touchstart', watch);
-        viewer.on('touchend', track);
-        viewer.on('animatefinished', sync);
+        if (!container.contains(coordinateDiv)) {
+          container.append(coordinateDiv);
+          viewer.on('mousedown', watch);
+          viewer.on('mouseup', track);
+          viewer.on('touchstart', watch);
+          viewer.on('touchend', track);
+          viewer.on('animatefinished', sync);
+        }
       };
       const disable = () => {
-        coordinateDiv.remove();
-        viewer.off('mousedown', watch);
-        viewer.off('mouseup', track);
-        viewer.off('touchstart', watch);
-        viewer.off('touchend', track);
-        viewer.off('animatefinished', sync);
+        if (container.contains(coordinateDiv)) {
+          coordinateDiv.remove();
+          viewer.off('mousedown', watch);
+          viewer.off('mouseup', track);
+          viewer.off('touchstart', watch);
+          viewer.off('touchend', track);
+          viewer.off('animatefinished', sync);
+        }
       };
       return { enable, disable, track };
     })();
     /** @param {string} id */
-    const focusHotSpot = (id) => {
-      const hotSpot = hotSpots.find((hotSpot) => hotSpot.id === id);
-      if (hotSpot) {
-        location.hash = `#${hotSpot.id}`;
-        viewer.setYaw(hotSpot.yaw);
-        viewer.setPitch(hotSpot.pitch);
+    const focusMarker = (id) => {
+      const marker = getMarkers().find((marker) => marker.id === id);
+      if (marker) {
+        location.hash = `#${marker.id}`;
+        viewer.setYaw(marker.yaw);
+        viewer.setPitch(marker.pitch);
         coordinateMonitor.track();
       }
     };
@@ -471,6 +480,7 @@
       const input = dom('input', { id, type: 'checkbox', checked });
       const label = dom('label', { for: input.id }, name);
       const onChange = () => handler(input.checked);
+      setTimeout(onChange);
       input.addEventListener('change', onChange);
       yield input;
       yield label;
@@ -484,28 +494,28 @@
           null,
           dom('h1', { class: 'hotspot-list-title' }, 'マーカー'),
           function* () {
-            const hotSpotsList = dom('dl', { class: 'hotspot-list' });
-            hotSpots.forEach((hotSpot, index) => {
-              const dd = dom('dd', null, hotSpot.text);
-              dd.addEventListener('click', () => focusHotSpot(hotSpot.id));
-              hotSpotsList.append(dom('dt', null, `${index + 1}.`), dd);
+            const markersList = dom('dl', { class: 'hotspot-list' });
+            getMarkers().forEach((marker, index) => {
+              const dd = dom('dd', null, marker.text);
+              dd.addEventListener('click', () => focusMarker(marker.id));
+              markersList.append(dom('dt', null, `${index + 1}.`), dd);
             });
-            yield hotSpotsList;
+            yield markersList;
           },
           ...generateToggle({
             id: 'show-markers',
             name: 'マーカーを表示する (m)',
             checked: true,
             handler: (checked) => {
-              if (checked) {
-                hotSpots.forEach((hotSpot) => {
-                  viewer.addHotSpot(hotSpot);
-                });
-              } else {
-                hotSpots.forEach((hotSpot) => {
-                  viewer.removeHotSpot(hotSpot.id);
-                });
-              }
+              container.dataset.showMarkers = Number(checked);
+            },
+          }),
+          ...generateToggle({
+            id: 'vertical-markers',
+            name: 'マーカーを縦書き表示する (v)',
+            checked: true,
+            handler: (checked) => {
+              container.dataset.verticalMarkers = Number(checked);
             },
           }),
           ...generateToggle({
@@ -525,7 +535,7 @@
           const toggle = dom(
             'button',
             { id: 'config-toggle', class: 'toggle' },
-            ' (c)',
+            ' (?)',
           );
           toggle.addEventListener('click', () => {
             options.classList.toggle('active');
@@ -537,7 +547,7 @@
     /** @param {{key: string}} event */
     const onKeyDown = (event) => {
       switch (event.key) {
-        case 'c':
+        case '?':
           container.querySelector('#config-toggle')?.click();
           break;
         case 'p':
@@ -545,6 +555,9 @@
           break;
         case 'm':
           container.querySelector('#show-markers')?.click();
+          break;
+        case 'v':
+          container.querySelector('#vertical-markers')?.click();
           break;
         case '0':
           viewer.setYaw(0);
@@ -558,9 +571,9 @@
         case '7':
         case '8':
         case '9': {
-          const hotSpot = hotSpots[Number(event.key) - 1];
-          if (hotSpot) {
-            focusHotSpot(hotSpot.id);
+          const marker = getMarkers()[Number(event.key) - 1];
+          if (marker) {
+            focusMarker(marker.id);
           }
           break;
         }
