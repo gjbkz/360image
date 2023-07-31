@@ -9,6 +9,8 @@
 </script>
 <style>
   * {
+    position: relative;
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
     font: inherit;
@@ -269,6 +271,9 @@
     border-radius: var(--border-radius);
     box-shadow: 0 0 3px #000000;
   }
+  .marker-list > button.disabled {
+    opacity: 0.6;
+  }
 </style>
 <div id="container">
   <noscript>
@@ -428,9 +433,12 @@
           dd.addEventListener('click', () => focusMarker(marker.id));
           listElement.append(dom('dt', null, `(${index + 1})`), dd);
         });
+        const buttonText = '現在位置に追加する';
+        const alertText =
+          '追加するには「画面中心の座標を表示」を有効にして追加位置を指定してください。';
+        const button = dom('button', null, buttonText);
+        listElement.append(button);
         if (container.querySelector('#show-coordinate')?.checked) {
-          const buttonText = '現在位置に追加する';
-          const button = dom('button', null, buttonText);
           button.addEventListener('click', () => {
             const yaw = Number(viewer.getYaw().toFixed(3));
             const pitch = Number(viewer.getPitch().toFixed(3));
@@ -440,7 +448,10 @@
             );
             setMarker({ pitch, yaw, text });
           });
-          listElement.append(button);
+        } else {
+          button.classList.add('disabled');
+          button.title = alertText;
+          button.addEventListener('click', () => alert(alertText));
         }
         const a = container.querySelector('#export-json');
         if (a) {

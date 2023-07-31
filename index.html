@@ -1,16 +1,32 @@
 <!DOCTYPE html>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#f1f5f9" />
 <title>360度パノラマ画像ライブラリ</title>
 <style>
   * {
+    position: relative;
+    box-sizing: border-box;
     font: inherit;
     margin: 0;
     padding: 0;
   }
   :root {
+    --base-size: 760px;
+    block-size: 100%;
     font-family: Roboto, Arial, sans-serif;
     font-size: 15px;
+    line-height: 1.6;
+  }
+  @media (max-width: 809px) {
+    :root {
+      --base-size: 94%;
+    }
+  }
+  @media (max-width: 500px) {
+    :root {
+      font-size: 14px;
+    }
   }
   code {
     display: inline-grid;
@@ -19,16 +35,29 @@
   body {
     block-size: 100%;
     display: grid;
-    grid-auto-flow: row;
-    justify-content: center;
+    grid-template-rows: max-content 1fr;
+    color: #0f172a;
+    background-color: #ffffff;
   }
+  header,
   main {
     display: grid;
     grid-auto-flow: row;
     justify-content: center;
+    grid-template-columns: var(--base-size);
+  }
+  header {
+    justify-items: center;
+    padding-block-start: 0.5em;
+    padding-block-end: 0.2em;
+    border-block-end: 1px solid #cbd5e1;
+    background-color: #f1f5f9;
+  }
+  main {
     row-gap: 1em;
-    max-inline-size: 760px;
-    padding: 1em 3%;
+    padding-block-start: 2em;
+    padding-block-end: 3em;
+    overflow-y: auto;
   }
   ul,
   ol {
@@ -38,7 +67,7 @@
     margin-block: 0.3em;
   }
   h1 {
-    font-size: 18px;
+    font-size: 110%;
   }
   h1,
   h2,
@@ -47,12 +76,12 @@
   }
   img {
     display: block;
-    max-width: 100%;
+    inline-size: 100%;
   }
   figure {
     display: grid;
     grid-auto-flow: row;
-    justify-items: center;
+    justify-items: stretch;
     row-gap: 0.3em;
     counter-increment: figure;
   }
@@ -60,13 +89,15 @@
     content: '図' counter(figure) ' ';
   }
 </style>
-<main>
+<header>
   <h1>360度パノラマ画像ライブラリ</h1>
-  <h2>画像一覧</h2>
+</header>
+<main>
+  <h1>画像一覧</h1>
   <ul id="images">
     <li><a href="viewer.html?image=001">230723_小貝川撮影練習</a></li>
   </ul>
-  <h2>使い方</h2>
+  <h1>使い方</h1>
   <figure>
     <img src="screen01.jpg" alt="" />
     <figcaption>閲覧画面</figcaption>
@@ -87,13 +118,16 @@
     <li>マーカーを表示：画面上にマーカーが表示されます。</li>
     <li>マーカーを縦書き表示：マーカーのテキストが縦書き表示されます。</li>
     <li>
-      画面中心の座標を表示：画面中央に座標が表示されます。座標をクリックするとクリップボードに座標がコピーされます。マーカーを追加する際の位置決めにご利用ください。
+      画面中心の座標を表示：画面中央に座標が表示されます。座標が表示されている間は一覧にあるボタンからマーカーを追加できます。
     </li>
     <li>
       フルスクリーンで表示：フルスクリーンで表示します。スマートフォン等では何も起こらない場合があります。
     </li>
     <li>
       加速度センサーで操作：加速度センサーが使える場合にクリックできます。クリックすると端末の向きで視点を操作できます。
+    </li>
+    <li>
+      マーカー情報をダウンロード：現在のマーカーの情報をファイルとしてダウンロードします。ダウンロードしたファイルはテキスト編集ソフトで編集できます。編集したファイルを画面にドラッグ＆ドロップするとマーカーを表示できます。
     </li>
   </ol>
   <p>
