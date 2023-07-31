@@ -190,9 +190,6 @@
   .app-settings.active > #config-toggle::before {
     content: '閉じる';
   }
-  .app-settings.active + .pnlm-panorama-info {
-    display: none;
-  }
   .app-settings:not(.active) > section {
     display: none;
   }
@@ -262,6 +259,15 @@
   }
   .marker-list > dd:hover {
     text-decoration: underline;
+  }
+  .marker-list > button {
+    grid-column: 1 / 3;
+    text-shadow: inherit;
+    padding-block: 2px;
+    margin-block-start: var(--gap);
+    border: solid 1px currentColor;
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 3px #000000;
   }
 </style>
 <div id="container">
@@ -422,6 +428,20 @@
           dd.addEventListener('click', () => focusMarker(marker.id));
           listElement.append(dom('dt', null, `(${index + 1})`), dd);
         });
+        if (container.querySelector('#show-coordinate')?.checked) {
+          const buttonText = '現在位置に追加する';
+          const button = dom('button', null, buttonText);
+          button.addEventListener('click', () => {
+            const yaw = Number(viewer.getYaw().toFixed(3));
+            const pitch = Number(viewer.getPitch().toFixed(3));
+            const text = prompt(
+              `(${yaw.toFixed(2)},${pitch.toFixed(2)}) にマーカーを追加する`,
+              '',
+            );
+            setMarker({ pitch, yaw, text });
+          });
+          listElement.append(button);
+        }
         const a = container.querySelector('#export-json');
         if (a) {
           const { title, author } = current;
@@ -453,22 +473,26 @@
               viewer.removeHotSpot(marker.id);
             }
           }
+        } else {
+          newMarker.id = Date.now().toString(16);
         }
+        let result = false;
         if (newMarker.text) {
+          result = true;
           viewer.addHotSpot({
-            id: Date.now().toString(16),
             ...newMarker,
             createTooltipFunc: createTooltip,
             createTooltipArgs: newMarker,
           });
         }
         syncMarkersList();
+        return result;
       };
       /** @param {string} id */
       const focusMarker = (id) => {
         const marker = getMarkers().find((marker) => marker.id === id);
-        const { pitch, yaw } = marker;
         if (marker) {
+          const { pitch, yaw } = marker;
           const d = Math.hypot(
             yaw - viewer.getYaw(),
             pitch - viewer.getPitch(),
@@ -505,15 +529,6 @@
           const pitch = viewer.getPitch().toFixed(2);
           coordinateText.textContent = `${yaw}, ${pitch}`;
         };
-        coordinateText.addEventListener('pointerup', () => {
-          const yaw = Number(viewer.getYaw().toFixed(3));
-          const pitch = Number(viewer.getPitch().toFixed(3));
-          const text = prompt(
-            `(${yaw.toFixed(2)},${pitch.toFixed(2)}) にマーカーを追加する`,
-            '',
-          );
-          setMarker({ pitch, yaw, text });
-        });
         const coordinateDiv = dom('div', { class: 'coordinate' }, function* () {
           yield* createMarker(coordinateText);
           yield coordinateText;
@@ -554,13 +569,14 @@
           track();
           const container = viewer.getContainer();
           if (!container.contains(coordinateDiv)) {
-            container.append(coordinateDiv);
+            container.prepend(coordinateDiv);
             viewer.on('mousedown', watch);
             viewer.on('mouseup', track);
             viewer.on('touchstart', watch);
             viewer.on('touchend', track);
             viewer.on('animatefinished', sync);
           }
+          syncMarkersList();
         };
         const disable = () => {
           const container = viewer.getContainer();
@@ -572,6 +588,7 @@
             viewer.off('touchend', track);
             viewer.off('animatefinished', sync);
           }
+          syncMarkersList();
         };
         return { enable, disable, track };
       })();
@@ -860,6 +877,7 @@
       syncMarkersList();
       if (isLocalFile) {
         container.querySelector('#show-coordinate')?.click();
+        container.querySelector('#config-toggle')?.click();
       }
     };
     start(await loadConfig());
