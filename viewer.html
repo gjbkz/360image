@@ -209,6 +209,7 @@
   }
   .app-options > h1,
   .app-options > hr,
+  .app-options > #export-json,
   .app-options > .zoom-slider {
     grid-column: 1 / 3;
   }
@@ -217,6 +218,13 @@
     block-size: 1px;
     background-color: currentColor;
     opacity: 0.5;
+  }
+  #export-json {
+    padding-inline: 8px;
+    text-decoration: none;
+  }
+  #export-json:hover {
+    text-decoration: underline;
   }
   .zoom-slider {
     display: grid;
@@ -372,7 +380,7 @@
       if (!res.ok) {
         throw new Error(`The file ${params.config} could not be accessed.`);
       }
-      const merged = {
+      return {
         ...params,
         ...(await res.json()),
         autoLoad: true,
@@ -380,25 +388,199 @@
         showControls: false,
         friction: 0.8,
       };
-      for (const [name, value] of Object.entries(merged)) {
+    };
+    let viewer;
+    const start = (config) => {
+      if (viewer) {
+        const oldConfig = viewer.getConfig();
+        if (oldConfig.panorama.startsWith('blob:')) {
+          URL.revokeObjectURL(oldConfig.panorama);
+        }
+        viewer.destroy();
+        viewer = null;
+      }
+      const createTooltip = (markerDiv, marker) => {
+        markerDiv.dataset.hotspot = marker.id;
+        markerDiv.style.backgroundImage = 'none';
+        const tooltip = dom('div', { class: 'hotspot-tooltip' }, marker.text);
+        markerDiv.append(...createMarker(tooltip), tooltip);
+        markerDiv.addEventListener('click', (event) => {
+          focusMarker(marker.id);
+        });
+      };
+      const getMarkers = () => (viewer.getConfig().hotSpots || []).slice();
+      const syncMarkersList = () => {
+        const container = viewer.getContainer();
+        const listElement = container.querySelector('.marker-list');
+        while (listElement.firstChild) {
+          listElement.firstChild.remove();
+        }
+        const current = viewer.getConfig();
+        const markers = getMarkers();
+        markers.forEach((marker, index) => {
+          const dd = dom('dd', null, marker.text);
+          dd.addEventListener('click', () => focusMarker(marker.id));
+          listElement.append(dom('dt', null, `(${index + 1})`), dd);
+        });
+        const a = container.querySelector('#export-json');
+        if (a) {
+          const { title, author } = current;
+          const data = JSON.stringify(
+            {
+              title,
+              author,
+              hotSpots: markers.map(({ pitch, yaw, text }) => ({
+                pitch,
+                yaw,
+                text,
+              })),
+            },
+            null,
+            2,
+          );
+          const BOM = new Uint8Array([0xef, 0xbb, 0xbf]);
+          const blob = new Blob([BOM, data], { type: 'application/json' });
+          URL.revokeObjectURL(a.href);
+          a.href = URL.createObjectURL(blob);
+          const name = isLocalFile ? title : current.panorama;
+          a.setAttribute('download', name.replace(/(\.[^.]*?)?$/, '.json'));
+        }
+      };
+      const setMarker = (newMarker) => {
+        if (newMarker.id) {
+          for (const marker of getMarkers()) {
+            if (marker.id === newMarker.id) {
+              viewer.removeHotSpot(marker.id);
+            }
+          }
+        }
+        if (newMarker.text) {
+          viewer.addHotSpot({
+            id: Date.now().toString(16),
+            ...newMarker,
+            createTooltipFunc: createTooltip,
+            createTooltipArgs: newMarker,
+          });
+        }
+        syncMarkersList();
+      };
+      /** @param {string} id */
+      const focusMarker = (id) => {
+        const marker = getMarkers().find((marker) => marker.id === id);
+        const { pitch, yaw } = marker;
+        if (marker) {
+          const d = Math.hypot(
+            yaw - viewer.getYaw(),
+            pitch - viewer.getPitch(),
+          );
+          if (1e-3 < d) {
+            location.hash = `#${marker.id}`;
+            viewer.setYaw(yaw);
+            viewer.setPitch(pitch);
+            coordinateMonitor.track();
+          } else {
+            const newText = prompt(
+              `(${yaw.toFixed(2)},${pitch.toFixed(
+                2,
+              )}) のマーカーのテキストを修正する（空にすると削除します）`,
+              marker.text,
+            );
+            if (newText === null) {
+              return;
+            }
+            if (newText === null) {
+              return;
+            }
+            setMarker({ ...marker, text: newText });
+          }
+        }
+      };
+      const coordinateMonitor = (function () {
+        const coordinateText = dom('button', {
+          title: 'クリックでコピー',
+          class: 'coordinate-text',
+        });
+        const sync = () => {
+          const yaw = viewer.getYaw().toFixed(2);
+          const pitch = viewer.getPitch().toFixed(2);
+          coordinateText.textContent = `${yaw}, ${pitch}`;
+        };
+        coordinateText.addEventListener('pointerup', () => {
+          const yaw = Number(viewer.getYaw().toFixed(3));
+          const pitch = Number(viewer.getPitch().toFixed(3));
+          const text = prompt(
+            `(${yaw.toFixed(2)},${pitch.toFixed(2)}) にマーカーを追加する`,
+            '',
+          );
+          setMarker({ pitch, yaw, text });
+        });
+        const coordinateDiv = dom('div', { class: 'coordinate' }, function* () {
+          yield* createMarker(coordinateText);
+          yield coordinateText;
+        });
+        let timerId = requestAnimationFrame(() => {});
+        const track = () => {
+          cancelAnimationFrame(timerId);
+          let lastChangedAt = Infinity;
+          let previousYaw = Infinity;
+          let previousPitch = Infinity;
+          /** @param {number} timeStamp */
+          const onRendering = (timeStamp) => {
+            timerId = requestAnimationFrame(onRendering);
+            const yaw = viewer.getYaw();
+            const pitch = viewer.getPitch();
+            if (yaw === previousYaw && pitch === previousPitch) {
+              if (100 < timeStamp - lastChangedAt) {
+                cancelAnimationFrame(timerId);
+              }
+            } else {
+              sync();
+              previousYaw = yaw;
+              previousPitch = pitch;
+              lastChangedAt = timeStamp;
+            }
+          };
+          timerId = requestAnimationFrame(onRendering);
+        };
+        const watch = () => {
+          cancelAnimationFrame(timerId);
+          const onRendering = () => {
+            timerId = requestAnimationFrame(onRendering);
+            sync();
+          };
+          onRendering();
+        };
+        const enable = () => {
+          track();
+          const container = viewer.getContainer();
+          if (!container.contains(coordinateDiv)) {
+            container.append(coordinateDiv);
+            viewer.on('mousedown', watch);
+            viewer.on('mouseup', track);
+            viewer.on('touchstart', watch);
+            viewer.on('touchend', track);
+            viewer.on('animatefinished', sync);
+          }
+        };
+        const disable = () => {
+          const container = viewer.getContainer();
+          if (container.contains(coordinateDiv)) {
+            coordinateDiv.remove();
+            viewer.off('mousedown', watch);
+            viewer.off('mouseup', track);
+            viewer.off('touchstart', watch);
+            viewer.off('touchend', track);
+            viewer.off('animatefinished', sync);
+          }
+        };
+        return { enable, disable, track };
+      })();
+      for (const [name, value] of Object.entries(config)) {
         switch (name) {
           case 'title':
             document.title = value;
             break;
           case 'hotSpots': {
-            const createTooltip = (markerDiv, marker) => {
-              markerDiv.dataset.hotspot = marker.id;
-              markerDiv.style.backgroundImage = 'none';
-              const tooltip = dom(
-                'div',
-                { class: 'hotspot-tooltip' },
-                marker.text,
-              );
-              markerDiv.append(...createMarker(tooltip), tooltip);
-              markerDiv.addEventListener('click', (event) => {
-                focusMarker(marker.id);
-              });
-            };
             value.forEach((marker, index) => {
               marker.id = marker.id || `hs-${index + 1}`;
               marker.createTooltipFunc = createTooltip;
@@ -408,8 +590,8 @@
               const targetId = location.hash.slice(1);
               for (const marker of value) {
                 if (marker.id === targetId) {
-                  merged.pitch = marker.pitch;
-                  merged.yaw = marker.yaw;
+                  config.pitch = marker.pitch;
+                  config.yaw = marker.yaw;
                   break;
                 }
               }
@@ -419,316 +601,270 @@
           default:
         }
       }
-      return merged;
-    };
-    const config = await loadConfig();
-    // @ts-ignore
-    const viewer = pannellum.viewer('container', config);
-    const getMarkers = () => viewer.getConfig().hotSpots || [];
-    const container = viewer.getContainer();
-    const coordinateMonitor = (function () {
-      const coordinateText = dom('button', {
-        title: 'クリックでコピー',
-        class: 'coordinate-text',
-      });
-      const sync = () => {
-        const yaw = viewer.getYaw().toFixed(2);
-        const pitch = viewer.getPitch().toFixed(2);
-        coordinateText.textContent = `${yaw}, ${pitch}`;
+      viewer = pannellum.viewer('container', config);
+      const isLocalFile = config.panorama.startsWith('blob:');
+      const container = viewer.getContainer();
+      /** @param {{id: string, name: string, checked: boolean, disabled?: boolean, handler: (checked: boolean) => void}} props */
+      const generateToggle = function* ({
+        name,
+        id,
+        checked,
+        disabled,
+        handler,
+      }) {
+        /** @type {HTMLInputElement} */
+        const input = dom('input', { id, type: 'checkbox', checked, disabled });
+        const label = dom('label', { for: input.id }, name);
+        const onChange = () => handler(input.checked);
+        setTimeout(onChange);
+        input.addEventListener('change', onChange);
+        yield input;
+        yield label;
       };
-      coordinateText.addEventListener('pointerup', () => {
-        const text = JSON.stringify({
-          yaw: Number(viewer.getYaw().toFixed(3)),
-          pitch: Number(viewer.getPitch().toFixed(3)),
-          text: 'タイトル',
-        });
-        navigator.clipboard.writeText(text).then(() => {
-          coordinateText.textContent = 'コピーしました';
-          setTimeout(sync, 800);
-        });
-      });
-      const coordinateDiv = dom('div', { class: 'coordinate' }, function* () {
-        yield* createMarker(coordinateText);
-        yield coordinateText;
-      });
-      let timerId = requestAnimationFrame(() => {});
-      const track = () => {
-        cancelAnimationFrame(timerId);
-        let lastChangedAt = Infinity;
-        let previousYaw = Infinity;
-        let previousPitch = Infinity;
-        /** @param {number} timeStamp */
-        const onRendering = (timeStamp) => {
-          timerId = requestAnimationFrame(onRendering);
-          const yaw = viewer.getYaw();
-          const pitch = viewer.getPitch();
-          if (yaw === previousYaw && pitch === previousPitch) {
-            if (100 < timeStamp - lastChangedAt) {
-              cancelAnimationFrame(timerId);
-            }
-          } else {
-            sync();
-            previousYaw = yaw;
-            previousPitch = pitch;
-            lastChangedAt = timeStamp;
-          }
-        };
-        timerId = requestAnimationFrame(onRendering);
-      };
-      const watch = () => {
-        cancelAnimationFrame(timerId);
-        const onRendering = () => {
-          timerId = requestAnimationFrame(onRendering);
-          sync();
-        };
-        onRendering();
-      };
-      const enable = () => {
-        track();
-        if (!container.contains(coordinateDiv)) {
-          container.append(coordinateDiv);
-          viewer.on('mousedown', watch);
-          viewer.on('mouseup', track);
-          viewer.on('touchstart', watch);
-          viewer.on('touchend', track);
-          viewer.on('animatefinished', sync);
-        }
-      };
-      const disable = () => {
-        if (container.contains(coordinateDiv)) {
-          coordinateDiv.remove();
-          viewer.off('mousedown', watch);
-          viewer.off('mouseup', track);
-          viewer.off('touchstart', watch);
-          viewer.off('touchend', track);
-          viewer.off('animatefinished', sync);
-        }
-      };
-      return { enable, disable, track };
-    })();
-    /** @param {string} id */
-    const focusMarker = (id) => {
-      const marker = getMarkers().find((marker) => marker.id === id);
-      if (marker) {
-        location.hash = `#${marker.id}`;
-        viewer.setYaw(marker.yaw);
-        viewer.setPitch(marker.pitch);
-        coordinateMonitor.track();
-      }
-    };
-    /** @param {{id: string, name: string, checked: boolean, disabled?: boolean, handler: (checked: boolean) => void}} props */
-    const generateToggle = function* ({
-      name,
-      id,
-      checked,
-      disabled,
-      handler,
-    }) {
-      /** @type {HTMLInputElement} */
-      const input = dom('input', { id, type: 'checkbox', checked, disabled });
-      const label = dom('label', { for: input.id }, name);
-      const onChange = () => handler(input.checked);
-      setTimeout(onChange);
-      input.addEventListener('change', onChange);
-      yield input;
-      yield label;
-    };
-    container.querySelector('.pnlm-panorama-info').before(
-      dom(
-        'div',
-        { class: 'app-settings' },
+      container.append(
         dom(
-          'section',
-          { class: 'app-options' },
-          dom('h1', null, 'マーカー（クリックで移動）'),
-          function* () {
-            const markersList = dom('dl', { class: 'marker-list' });
-            getMarkers().forEach((marker, index) => {
-              const dd = dom('dd', null, marker.text);
-              dd.addEventListener('click', () => focusMarker(marker.id));
-              markersList.append(dom('dt', null, `(${index + 1})`), dd);
-            });
-            yield markersList;
-          },
-          dom('hr'),
-          ...generateToggle({
-            id: 'show-markers',
-            name: 'マーカーを表示 (m)',
-            checked: true,
-            handler: (checked) => {
-              container.dataset.showMarkers = Number(checked);
-            },
-          }),
-          ...generateToggle({
-            id: 'vertical-markers',
-            name: 'マーカーを縦書き表示 (v)',
-            checked: true,
-            handler: (checked) => {
-              container.dataset.verticalMarkers = Number(checked);
-            },
-          }),
-          ...generateToggle({
-            id: 'show-coordinate',
-            name: '画面中心の座標を表示 (p)',
-            checked: false,
-            handler: (checked) => {
-              if (checked) {
-                coordinateMonitor.enable();
-              } else {
-                coordinateMonitor.disable();
-              }
-            },
-          }),
-          function* () {
-            const fullscreenIsSupported =
-              'fullscreenElement' in document ||
-              'webkitFullscreenElement' in document;
-            const gen = generateToggle({
-              id: 'toggle-fullscreen',
-              name: 'フルスクリーンで表示 (f)',
+          'div',
+          { class: 'app-settings' },
+          dom(
+            'section',
+            { class: 'app-options' },
+            dom('h1', null, 'マーカー（クリックで移動）'),
+            dom('dl', { class: 'marker-list' }),
+            dom('hr'),
+            ...generateToggle({
+              id: 'show-markers',
+              name: 'マーカーを表示 (m)',
+              checked: true,
+              handler: (checked) => {
+                container.dataset.showMarkers = Number(checked);
+              },
+            }),
+            ...generateToggle({
+              id: 'vertical-markers',
+              name: 'マーカーを縦書き表示 (v)',
+              checked: true,
+              handler: (checked) => {
+                container.dataset.verticalMarkers = Number(checked);
+              },
+            }),
+            ...generateToggle({
+              id: 'show-coordinate',
+              name: '画面中心の座標を表示 (p)',
               checked: false,
-              disabled: !fullscreenIsSupported,
-              handler: () => viewer.toggleFullscreen(),
-            });
-            const input = gen.next().value;
-            if (input) {
-              viewer.on('fullscreenchange', (active) => {
-                input.checked = active;
-              });
-              yield input;
-            }
-            yield* gen;
-          },
-          function* () {
-            const gen = generateToggle({
-              id: 'toggle-orientation',
-              name: '加速度センサーで操作',
-              checked: viewer.isOrientationActive(),
-              disabled: !viewer.isOrientationSupported(),
               handler: (checked) => {
                 if (checked) {
-                  viewer.startOrientation();
+                  coordinateMonitor.enable();
                 } else {
-                  viewer.stopOrientation();
+                  coordinateMonitor.disable();
                 }
               },
-            });
-            const input = gen.next().value;
-            if (input) {
-              viewer.on('orientationmode', (active) => {
-                input.checked = active;
+            }),
+            function* () {
+              const fullscreenIsSupported =
+                'fullscreenElement' in document ||
+                'webkitFullscreenElement' in document;
+              const gen = generateToggle({
+                id: 'toggle-fullscreen',
+                name: 'フルスクリーンで表示 (f)',
+                checked: false,
+                disabled: !fullscreenIsSupported,
+                handler: () => viewer.toggleFullscreen(),
               });
-              yield input;
-            }
-            yield* gen;
+              const input = gen.next().value;
+              if (input) {
+                viewer.on('fullscreenchange', (active) => {
+                  input.checked = active;
+                });
+                yield input;
+              }
+              yield* gen;
+            },
+            function* () {
+              const gen = generateToggle({
+                id: 'toggle-orientation',
+                name: '加速度センサーで操作',
+                checked: viewer.isOrientationActive(),
+                disabled: !viewer.isOrientationSupported(),
+                handler: (checked) => {
+                  if (checked) {
+                    viewer.startOrientation();
+                  } else {
+                    viewer.stopOrientation();
+                  }
+                },
+              });
+              const input = gen.next().value;
+              if (input) {
+                viewer.on('orientationmode', (active) => {
+                  input.checked = active;
+                });
+                yield input;
+              }
+              yield* gen;
+            },
+            dom('hr'),
+            dom('a', { id: 'export-json' }, 'マーカー情報をダウンロード'),
+            dom('hr'),
+            dom('div', { class: 'zoom-slider' }, function* () {
+              const d = 0.1;
+              const viewBox = '-6.5 -6.5 13 13';
+              const zoomOut = dom(
+                'svg',
+                { title: '縮小', viewBox },
+                dom('circle', { cx: 0, cy: 0, r: 5 }),
+                dom('path', { d: 'M-3 0H3' }),
+              );
+              const zoomIn = dom(
+                'svg',
+                { title: '拡大', viewBox },
+                dom('circle', { cx: 0, cy: 0, r: 5 }),
+                dom('path', { d: 'M-3 0H3M0 -3V3' }),
+              );
+              const range = dom('input', {
+                type: 'range',
+                min: 0,
+                max: 1,
+                step: 0.004,
+              });
+              /** @param {number} hfov */
+              const syncZoom = (hfov) => {
+                const [min, max] = viewer.getHfovBounds();
+                range.value = 1 - Math.log(hfov / min) / Math.log(max / min);
+              };
+              syncZoom();
+              yield zoomOut;
+              yield range;
+              yield zoomIn;
+              /**
+               * @param {number|string} z in [0,1]
+               * @param {number} a
+               */
+              const setZoom = (z, a = 200) => {
+                z = range.value = Math.max(0, Math.min(1, Number(z)));
+                const [min, max] = viewer.getHfovBounds();
+                const hfov = min * (max / min) ** (1 - z);
+                viewer.lookAt(undefined, undefined, hfov, a);
+              };
+              const setZoomDiff = (d) => setZoom(Number(range.value) + d);
+              range.addEventListener('input', () => setZoom(range.value, 0));
+              zoomOut.addEventListener('click', (event) => {
+                event.preventDefault();
+                setZoomDiff(-d);
+              });
+              zoomIn.addEventListener('click', (event) => {
+                event.preventDefault();
+                setZoomDiff(d);
+              });
+              viewer.on('zoomchange', syncZoom);
+            }),
+            dom('hr'),
+          ),
+          function* (options) {
+            const toggle = dom(
+              'button',
+              { id: 'config-toggle', class: 'toggle' },
+              '',
+            );
+            toggle.addEventListener('click', () => {
+              options.classList.toggle('active');
+            });
+            yield toggle;
           },
-          dom('hr'),
-          dom('div', { class: 'zoom-slider' }, function* () {
-            const d = 0.1;
-            const viewBox = '-6.5 -6.5 13 13';
-            const zoomOut = dom(
-              'svg',
-              { title: '縮小', viewBox },
-              dom('circle', { cx: 0, cy: 0, r: 5 }),
-              dom('path', { d: 'M-3 0H3' }),
-            );
-            const zoomIn = dom(
-              'svg',
-              { title: '拡大', viewBox },
-              dom('circle', { cx: 0, cy: 0, r: 5 }),
-              dom('path', { d: 'M-3 0H3M0 -3V3' }),
-            );
-            const range = dom('input', {
-              type: 'range',
-              min: 0,
-              max: 1,
-              step: 0.004,
-            });
-            /** @param {number} hfov */
-            const syncZoom = (hfov) => {
-              const [min, max] = viewer.getHfovBounds();
-              range.value = 1 - Math.log(hfov / min) / Math.log(max / min);
-            };
-            syncZoom();
-            yield zoomOut;
-            yield range;
-            yield zoomIn;
-            /**
-             * @param {number|string} z in [0,1]
-             * @param {number} a
-             */
-            const setZoom = (z, a = 200) => {
-              z = range.value = Math.max(0, Math.min(1, Number(z)));
-              const [min, max] = viewer.getHfovBounds();
-              const hfov = min * (max / min) ** (1 - z);
-              viewer.lookAt(undefined, undefined, hfov, a);
-            };
-            const setZoomDiff = (d) => setZoom(Number(range.value) + d);
-            range.addEventListener('input', () => setZoom(range.value, 0));
-            zoomOut.addEventListener('click', (event) => {
-              event.preventDefault();
-              setZoomDiff(-d);
-            });
-            zoomIn.addEventListener('click', (event) => {
-              event.preventDefault();
-              setZoomDiff(d);
-            });
-            viewer.on('zoomchange', syncZoom);
-          }),
-          dom('hr'),
         ),
-        function* (options) {
-          const toggle = dom(
-            'button',
-            { id: 'config-toggle', class: 'toggle' },
-            ' (?)',
-          );
-          toggle.addEventListener('click', () => {
-            options.classList.toggle('active');
-          });
-          yield toggle;
-        },
-      ),
-    );
-    /** @param {{key: string}} event */
-    const onKeyDown = (event) => {
-      switch (event.key) {
-        case '?':
-          container.querySelector('#config-toggle')?.click();
-          break;
-        case 'f':
-          container.querySelector('#toggle-fullscreen')?.click();
-          break;
-        case 'p':
-          container.querySelector('#show-coordinate')?.click();
-          break;
-        case 'm':
-          container.querySelector('#show-markers')?.click();
-          break;
-        case 'v':
-          container.querySelector('#vertical-markers')?.click();
-          break;
-        case '0':
-          viewer.setYaw(0);
-          viewer.setPitch(0);
-        case '1':
-        case '2':
-        case '3':
-        case '4':
-        case '5':
-        case '6':
-        case '7':
-        case '8':
-        case '9': {
-          const marker = getMarkers()[Number(event.key) - 1];
-          if (marker) {
-            focusMarker(marker.id);
+      );
+      /** @param {{key: string}} event */
+      const onKeyDown = (event) => {
+        switch (event.key) {
+          case '?':
+            container.querySelector('#config-toggle')?.click();
+            break;
+          case 'f':
+            container.querySelector('#toggle-fullscreen')?.click();
+            break;
+          case 'p':
+            container.querySelector('#show-coordinate')?.click();
+            break;
+          case 'm':
+            container.querySelector('#show-markers')?.click();
+            break;
+          case 'v':
+            container.querySelector('#vertical-markers')?.click();
+            break;
+          case '0':
+            viewer.setYaw(0);
+            viewer.setPitch(0);
+          case '1':
+          case '2':
+          case '3':
+          case '4':
+          case '5':
+          case '6':
+          case '7':
+          case '8':
+          case '9': {
+            const marker = getMarkers()[Number(event.key) - 1];
+            if (marker) {
+              focusMarker(marker.id);
+            }
+            break;
           }
-          break;
+          default:
         }
-        default:
+      };
+      addEventListener('keydown', onKeyDown);
+      addEventListener('dragover', (event) => event.preventDefault());
+      addEventListener('drop', (event) => {
+        event.preventDefault();
+        let imageFile;
+        let jsonPromise = Promise.resolve();
+        for (const file of event.dataTransfer.files) {
+          if (file.type.startsWith('image/')) {
+            imageFile = file;
+          } else if (file.type.endsWith('/json')) {
+            jsonPromise = new Promise((resolve) => {
+              const reader = new FileReader();
+              reader.readAsText(file);
+              reader.onload = () => resolve(JSON.parse(reader.result));
+            });
+          }
+        }
+        jsonPromise
+          .then((newConfig) => {
+            if (newConfig) {
+              newConfig = { ...config, ...newConfig };
+            } else {
+              newConfig = { ...config };
+              if (imageFile) {
+                newConfig.hotSpots = [];
+                newConfig.author = 'No Name';
+                newConfig.title = imageFile.name;
+              }
+            }
+            if (imageFile) {
+              newConfig.panorama = URL.createObjectURL(imageFile);
+              start(newConfig);
+            } else {
+              for (const marker of getMarkers()) {
+                viewer.removeHotSpot(marker.id);
+              }
+              for (const marker of newConfig.hotSpots.slice()) {
+                setMarker(marker);
+              }
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+            alert(`${error}`);
+          });
+      });
+      syncMarkersList();
+      if (isLocalFile) {
+        container.querySelector('#show-coordinate')?.click();
       }
     };
-    addEventListener('keydown', onKeyDown);
-  })().catch((error) => alert(`${error}`));
+    start(await loadConfig());
+  })().catch((error) => {
+    console.error(error);
+    alert(`${error}`);
+  });
 </script>
