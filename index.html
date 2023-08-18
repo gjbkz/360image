@@ -13,6 +13,16 @@
   }
   :root {
     --base-size: 760px;
+    --col-900: #1a202c;
+    --col-800: #2d3748;
+    --col-700: #4a5568;
+    --col-600: #718096;
+    --col-500: #a0aec0;
+    --col-400: #cbd5e1;
+    --col-300: #e2e8f0;
+    --col-200: #edf2f7;
+    --col-100: #f7fafc;
+    --col-50: #ffffff;
     block-size: 100%;
     font-family: Roboto, Arial, sans-serif;
     font-size: 15px;
@@ -37,7 +47,7 @@
     display: grid;
     grid-template-rows: max-content 1fr;
     color: #0f172a;
-    background-color: #ffffff;
+    background-color: var(--col-100);
   }
   header,
   main {
@@ -50,8 +60,8 @@
     justify-items: center;
     padding-block-start: 0.5em;
     padding-block-end: 0.2em;
-    border-block-end: 1px solid #cbd5e1;
-    background-color: #f1f5f9;
+    border-block-end: 1px solid var(--col-400);
+    background-color: var(--col-100);
   }
   main {
     row-gap: 1em;
@@ -87,6 +97,39 @@
   }
   figcaption::before {
     content: '図' counter(figure) ' ';
+  }
+  svg {
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1;
+  }
+  .markers-list {
+    display: flex;
+    padding-inline-start: 0;
+    list-style: none;
+  }
+  .markers-list > li {
+    display: grid;
+    block-size: 1.6em;
+    max-inline-size: 16em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    justify-content: center;
+    align-content: center;
+    margin-inline-end: 1em;
+    font-size: 90%;
+    line-height: 1;
+  }
+  .markers-list > li > a {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    align-items: center;
+    column-gap: 0.3em;
+  }
+  .icon {
+    inline-size: 0.9em;
+    block-size: 0.9em;
   }
 </style>
 <header>
@@ -137,14 +180,26 @@
   </p>
 </main>
 <script>
+  //@ts-check
   (async function () {
+    const SVGNS = 'http://www.w3.org/2000/svg';
+    const createIcon = () => {
+      const svg = document.createElementNS(SVGNS, 'svg');
+      svg.setAttributeNS(null, 'viewBox', '-1 -1 14 14');
+      svg.classList.add('icon');
+      const use = document.createElementNS(SVGNS, 'use');
+      use.setAttribute('href', '#external-link');
+      svg.append(use);
+      return svg;
+    };
     await Promise.all(
       [...document.querySelectorAll('#images li')].map(async (li) => {
-        const a = li.querySelector('a');
-        if (!a) {
+        const liA = li.querySelector('a');
+        if (!liA) {
           return;
         }
-        const url = new URL(a.href, location.href);
+        liA.target = '_blank';
+        const url = new URL(liA.href, location.href);
         const image = url.searchParams.get('image');
         if (!image) {
           return;
@@ -154,13 +209,18 @@
           return;
         }
         const json = await res.json();
+        if (json.title) {
+          liA.textContent = json.title;
+        }
         const ol = document.createElement('ol');
+        ol.classList.add('markers-list');
         (json.hotSpots || []).forEach((hotSpot, index) => {
           const id = hotSpot.id || `hs-${index + 1}`;
           const li = document.createElement('li');
           const a = document.createElement('a');
+          a.target = '_blank';
           a.href = `viewer.html?image=${image}#${id}`;
-          a.textContent = hotSpot.text;
+          a.append(createIcon(), document.createTextNode(hotSpot.text));
           li.append(a);
           ol.append(li);
         });
@@ -169,3 +229,13 @@
     );
   })().catch(console.error);
 </script>
+<svg style="display: none">
+  <g id="external-link">
+    <path
+      d="M5 0H0V12H12V7M8 0H12V4M5 7L12 0"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.2"
+    />
+  </g>
+</svg>
