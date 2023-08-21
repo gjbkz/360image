@@ -399,6 +399,7 @@
         showControls: false,
         friction: 0.8,
         maxPitch: 38,
+        minHfov: 25,
       };
     };
     let viewer;
@@ -758,6 +759,7 @@
               /** @param {number} hfov */
               const syncZoom = (hfov) => {
                 const [min, max] = viewer.getHfovBounds();
+                console.info({ hfov, min, max });
                 range.value = 1 - Math.log(hfov / min) / Math.log(max / min);
               };
               syncZoom();
