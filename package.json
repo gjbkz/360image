@@ -1,6 +1,7 @@
 {
     "private": true,
     "scripts": {
+        "build": "node build.mjs",
         "start": "sable ."
     },
     "devDependencies": {
