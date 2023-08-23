@@ -51,6 +51,11 @@ const builders = [
       if (!data) {
         return;
       }
+      // if (file.pathname.endsWith('ray01.json')) {
+      //   for (const hotSpot of data.hotSpots) {
+      //     hotSpot.yaw += -0.1;
+      //   }
+      // }
       data.hotSpots.sort((a, b) => a.yaw - b.yaw);
       fs.writeFileSync(file, JSON.stringify(data, null, 4));
     },
