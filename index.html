@@ -71,7 +71,7 @@
   }
   ul,
   ol {
-    padding-inline-start: 2em;
+    padding-inline-start: 1.4em;
   }
   li {
     margin-block: 0.3em;
@@ -139,36 +139,54 @@
 <main>
   <h1>画像一覧</h1>
   <ul id="images">
-    <li><a href="viewer.html?image=001">230723_小貝川</a></li>
     <li>
-      <a href="viewer.html?image=usa/tioga01">Tioga01</a>
+      <h2>ニュージャージー州</h2>
+      <ul>
+        <li>
+          <a href="viewer.html?image=us/nj/01"></a>
+        </li>
+      </ul>
     </li>
     <li>
-      <a href="viewer.html?image=usa/tioga02">Tioga02</a>
+      <h2>ノースダコタ州</h2>
+      <ul>
+        <li>
+          <a href="viewer.html?image=us/nd/01"></a>
+        </li>
+        <li>
+          <a href="viewer.html?image=us/nd/02"></a>
+        </li>
+        <li>
+          <a href="viewer.html?image=us/nd/03"></a>
+        </li>
+        <li>
+          <a href="viewer.html?image=us/nd/04"></a>
+        </li>
+        <li>
+          <a href="viewer.html?image=us/nd/05"></a>
+        </li>
+        <li>
+          <a href="viewer.html?image=us/nd/06"></a>
+        </li>
+        <li>
+          <a href="viewer.html?image=us/nd/07"></a>
+        </li>
+        <li>
+          <a href="viewer.html?image=us/nd/08"></a>
+        </li>
+        <li>
+          <a href="viewer.html?image=us/nd/09"></a>
+        </li>
+      </ul>
     </li>
     <li>
-      <a href="viewer.html?image=usa/tioga03">Tioga03</a>
+      <a href="viewer.html?image=us/torquay01">Torquay01</a>
     </li>
     <li>
-      <a href="viewer.html?image=usa/tioga04">Tioga04</a>
-    </li>
-    <li>
-      <a href="viewer.html?image=usa/tioga05">Tioga05</a>
-    </li>
-    <li>
-      <a href="viewer.html?image=usa/tioga06">Tioga06</a>
-    </li>
-    <li>
-      <a href="viewer.html?image=usa/tioga07">Tioga07</a>
-    </li>
-    <li>
-      <a href="viewer.html?image=usa/tioga08">Tioga08</a>
-    </li>
-    <li>
-      <a href="viewer.html?image=usa/torquay01">Torquay01</a>
-    </li>
-    <li>
-      <a href="viewer.html?image=usa/ray01">ray01</a>
+      <h2>茨城県</h2>
+      <ul>
+        <li><a href="viewer.html?image=jp/ibaraki/01">小貝川</a></li>
+      </ul>
     </li>
   </ul>
   <h1>使い方</h1>
@@ -223,40 +241,49 @@
       svg.append(use);
       return svg;
     };
+    const ignored = new Set([...'東西南北']);
     await Promise.all(
-      [...document.querySelectorAll('#images li')].map(async (li) => {
-        const liA = li.querySelector('a');
-        if (!liA) {
-          return;
-        }
-        liA.target = '_blank';
-        const url = new URL(liA.href, location.href);
-        const image = url.searchParams.get('image');
-        if (!image) {
-          return;
-        }
-        const res = await fetch(`${image}.json`);
-        if (!res.ok) {
-          return;
-        }
-        const json = await res.json();
-        if (json.title) {
-          liA.textContent = json.title;
-        }
-        const ol = document.createElement('ol');
-        ol.classList.add('markers-list');
-        (json.hotSpots || []).forEach((hotSpot, index) => {
-          const id = hotSpot.id || `hs-${index + 1}`;
-          const li = document.createElement('li');
-          const a = document.createElement('a');
-          a.target = '_blank';
-          a.href = `viewer.html?image=${image}#${id}`;
-          a.append(createIcon(), document.createTextNode(hotSpot.text));
-          li.append(a);
-          ol.append(li);
-        });
-        li.append(ol);
-      }),
+      [...document.querySelectorAll('#images li a')].map(
+        async (
+          /** @type {HTMLAnchorElement} */
+          liA,
+        ) => {
+          const li = liA.closest('li');
+          if (!li) {
+            return;
+          }
+          liA.target = '_blank';
+          const url = new URL(liA.href, location.href);
+          const image = url.searchParams.get('image');
+          if (!image) {
+            return;
+          }
+          const res = await fetch(`${image}.json`);
+          if (!res.ok) {
+            return;
+          }
+          const json = await res.json();
+          if (json.title) {
+            liA.textContent = json.title;
+          }
+          const ol = document.createElement('ol');
+          ol.classList.add('markers-list');
+          (json.hotSpots || []).forEach((hotSpot, index) => {
+            if (ignored.has(hotSpot.text)) {
+              return;
+            }
+            const id = hotSpot.id || `hs-${index + 1}`;
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.target = '_blank';
+            a.href = `viewer.html?image=${image}#${id}`;
+            a.append(createIcon(), document.createTextNode(hotSpot.text));
+            li.append(a);
+            ol.append(li);
+          });
+          li.append(ol);
+        },
+      ),
     );
   })().catch(console.error);
 </script>
