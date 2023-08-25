@@ -1,0 +1,238 @@
+body {
+  block-size: 100%;
+  inline-size: 100%;
+  overflow: hidden;
+  font-size: 14px;
+}
+#panorama {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.pnlm-container {
+  font-family: var(--font-family);
+}
+.pnlm-container[data-show-markers='0'] .pnlm-hotspot {
+  opacity: 0;
+  pointer-events: none;
+}
+.pnlm-hotspot {
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.pnlm-title-box {
+  font-size: inherit;
+  margin-bottom: 0;
+}
+.pnlm-container[data-vertical-markers='1'] .hotspot-tooltip {
+  writing-mode: vertical-rl;
+}
+.hotspot-tooltip {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  inline-size: max-content;
+  max-inline-size: 183px;
+  padding-inline: 6px;
+  padding-block: 2px;
+  color: #ffffff;
+}
+.hotspot-marker {
+  position: absolute;
+  filter: drop-shadow(0 0 2px #000000);
+}
+.hotspot-marker > path {
+  /* fill: var(--ui-background); */
+  fill: currentColor;
+  stroke: currentColor;
+  pointer-events: none;
+}
+.pnlm-hotspot > .hotspot-marker {
+  bottom: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.hotspot-marker-backdrop {
+  display: none;
+  position: absolute;
+}
+.hotspot-marker-backdrop,
+.pnlm-panorama-info,
+.app-settings {
+  backdrop-filter: blur(2px);
+}
+.coordinate-text,
+.hotspot-tooltip,
+.pnlm-panorama-info,
+.app-settings {
+  text-shadow: 0 0 4px #000000;
+}
+.coordinate {
+  z-index: 1;
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 2px;
+  justify-items: center;
+}
+.coordinate > .hotspot-marker {
+  bottom: 0;
+}
+.coordinate > button {
+  position: absolute;
+  bottom: 0;
+  padding: 2px 6px;
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.pnlm-panorama-info,
+.app-settings,
+.pnlm-hotspot,
+.coordinate {
+  color: #ffffff;
+  font-size: inherit;
+  font-weight: 600;
+}
+.pnlm-panorama-info,
+.app-settings {
+  --gap: 4px;
+  --padding-v: 8px;
+  --padding-h: 11px;
+  bottom: var(--footer-baseline);
+  padding: var(--padding-v) var(--padding-h);
+  /* border-style: solid; */
+  background-color: var(--ui-background);
+}
+.pnlm-panorama-info {
+  display: grid;
+  grid-auto-flow: row;
+  align-items: end;
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
+  border-left-width: 0;
+}
+.pnlm-panorama-info > * {
+  padding: 0;
+}
+.app-settings {
+  z-index: 1;
+  position: absolute;
+  right: 0;
+  display: grid;
+  grid-auto-flow: row;
+  justify-content: end;
+  justify-items: end;
+  row-gap: var(--gap);
+  max-width: 90%;
+  border-radius: var(--border-radius) 0 0 var(--border-radius);
+  border-right-width: 0;
+}
+.app-settings > #config-toggle {
+  padding: var(--padding-v) var(--padding-h);
+  margin: calc(-1 * var(--padding-v)) calc(-1 * var(--padding-h));
+}
+.app-options {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  align-items: center;
+  column-gap: var(--gap);
+  row-gap: var(--gap);
+  padding-block: var(--gap);
+}
+.app-settings > #config-toggle::before {
+  content: '設定';
+}
+.app-settings.active > #config-toggle::before {
+  content: '閉じる';
+}
+.app-settings:not(.active) > section {
+  display: none;
+}
+.app-options > input {
+  appearance: auto;
+}
+.app-options > input:disabled,
+.app-options > input:disabled + label {
+  opacity: 0.7;
+  pointer-events: none;
+}
+.app-options > input:disabled + label {
+  text-decoration: line-through;
+}
+.app-options > h1,
+.app-options > hr,
+.app-options > #export-json,
+.app-options > .zoom-slider {
+  grid-column: 1 / 3;
+}
+.app-options > hr {
+  margin-block: var(--gap);
+  block-size: 1px;
+  background-color: currentColor;
+  opacity: 0.5;
+}
+#export-json {
+  padding-inline: 8px;
+  text-decoration: none;
+}
+#export-json:hover {
+  text-decoration: underline;
+}
+.zoom-slider {
+  display: grid;
+  grid-template-columns: max-content 1fr max-content;
+  align-items: center;
+  column-gap: 6px;
+  padding: 4px 0;
+}
+.zoom-slider > input {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 100% 1px;
+}
+.zoom-slider > svg {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+.zoom-slider > svg > * {
+  stroke: currentColor;
+  stroke-width: 1.5px;
+}
+.marker-list {
+  grid-column: 1 / 3;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  row-gap: var(--gap);
+  column-gap: var(--gap);
+}
+.marker-list > dd {
+  max-inline-size: 20em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.marker-list > dd:hover {
+  text-decoration: underline;
+}
+.marker-list > button {
+  grid-column: 1 / 3;
+  text-shadow: inherit;
+  padding-block: 2px;
+  margin-block-start: var(--gap);
+  border: solid 1px currentColor;
+  border-radius: var(--border-radius);
+  box-shadow: 0 0 3px #000000;
+}
+.marker-list > button.disabled {
+  opacity: 0.6;
+}

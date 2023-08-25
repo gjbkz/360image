@@ -1,0 +1,10 @@
+{
+  "name": "@types/gjbkz__360image",
+  "version": "0.0.0",
+  "main": "index.d.ts",
+  "eslintConfig": {
+    "extends": [
+      "@nlib/eslint-config"
+    ]
+  }
+}
