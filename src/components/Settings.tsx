@@ -82,9 +82,9 @@ const MarkersDiv = styled.div`
 
 const FocusMarker = ({ marker }: { marker: Marker }) => {
   const viewer = useContextValue(ViewerContext);
-  const { text, pitch, yaw } = marker;
+  const { text, pitch, yaw, hfov } = marker;
   const onClick = useCallback(() => {
-    viewer.lookAt(pitch, yaw, viewer.getHfov(), 600);
+    viewer.lookAt(pitch, yaw, hfov || viewer.getHfov(), 600);
   }, [viewer, pitch, yaw]);
   return <TextButton onClick={onClick}>{text}</TextButton>;
 };

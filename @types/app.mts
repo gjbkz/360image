@@ -1,6 +1,7 @@
 export interface Marker {
   pitch: number;
   yaw: number;
+  hfov?: number;
   text: string;
   id: string;
 }

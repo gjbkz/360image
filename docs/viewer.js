@@ -19477,11 +19477,11 @@ igInt64Array',
   overflow: auto;
   transition-property: width, height, opacity;
   transition-timing-function: ease-in-out, ease-in-out, linear;
-  transition-duration: 0.2s, 0.2s, 0.2s;
-  transition-delay: 0s, 0s, 0.2s;
+  transition-duration: 150ms, 150ms, 150ms;
+  transition-delay: 0s, 0s, 150ms;
   opacity: 1;
   &.closed {
-    transition-delay: 0.2s, 0.2s, 0s;
+    transition-delay: 150ms, 150ms, 0s;
     opacity: 0;
   }
 `;
@@ -19669,11 +19669,11 @@ igInt64Array',
 `,
     BA = ({ marker: e }) => {
       let t = ar(sn),
-        { text: n, pitch: r, yaw: o } = e,
-        i = (0, Dt.useCallback)(() => {
-          t.lookAt(r, o, t.getHfov(), 600);
+        { text: n, pitch: r, yaw: o, hfov: i } = e,
+        s = (0, Dt.useCallback)(() => {
+          t.lookAt(r, o, i || t.getHfov(), 600);
         }, [t, r, o]);
-      return (0, J.jsx)(Rd, { onClick: i, children: n });
+      return (0, J.jsx)(Rd, { onClick: s, children: n });
     },
     jA = ({ marker: e }) => {
       let t = Qy(

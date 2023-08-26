@@ -34,6 +34,7 @@ const filterMarkers = function* (
       const marker = ensure(item, {
         pitch: isFiniteNumber,
         yaw: isFiniteNumber,
+        hfov: isFiniteNumber.optional,
         text: isString,
         id: isString.optional,
       });

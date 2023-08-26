@@ -65,11 +65,11 @@ const Container = styled.div`
   overflow: auto;
   transition-property: width, height, opacity;
   transition-timing-function: ease-in-out, ease-in-out, linear;
-  transition-duration: 0.2s, 0.2s, 0.2s;
-  transition-delay: 0s, 0s, 0.2s;
+  transition-duration: 150ms, 150ms, 150ms;
+  transition-delay: 0s, 0s, 150ms;
   opacity: 1;
   &.closed {
-    transition-delay: 0.2s, 0.2s, 0s;
+    transition-delay: 150ms, 150ms, 0s;
     opacity: 0;
   }
 `;
