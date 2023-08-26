@@ -6,7 +6,7 @@ import { Collapsable } from './Collapsable.js';
 import { Settings } from './Settings.js';
 
 export const Menu = () => {
-  const [opened, setOpened] = useState(false);
+  const [opened, setOpened] = useState(true);
   const toggle = useCallback(() => setOpened((v) => !v), []);
   return (
     <MenuDiv>

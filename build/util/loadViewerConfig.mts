@@ -1,6 +1,6 @@
 import * as fs from 'node:fs';
 import { ensure, isArray, isFiniteNumber, isString } from '@nlib/typing';
-import type { HotSpot, ViewerConfig } from '../../@types/app.mjs';
+import type { Marker, ViewerConfig } from '../../@types/app.mjs';
 import { imagesDir } from './files.mjs';
 
 export const loadViewerConfig = (jsonFileUrl: URL): ViewerConfig => {
@@ -8,7 +8,7 @@ export const loadViewerConfig = (jsonFileUrl: URL): ViewerConfig => {
   const parsed = ensure(JSON.parse(json), {
     title: isString,
     author: isString.optional,
-    hotSpots: isArray.optional,
+    markers: isArray.optional,
     latitude: isFiniteNumber.optional,
     longitude: isFiniteNumber.optional,
     altitude: isFiniteNumber.optional,
@@ -19,26 +19,26 @@ export const loadViewerConfig = (jsonFileUrl: URL): ViewerConfig => {
     ...parsed,
     initPitch: parsed.initPitch || 0,
     initYaw: parsed.initYaw || 0,
-    hotSpots: [...filterHotSpots(parsed.hotSpots)],
+    markers: [...filterMarkers(parsed.markers)],
     path: jsonFileUrl.pathname.slice(imagesDir.pathname.length, -5),
   };
 };
 
-const filterHotSpots = function* (
-  hotSpots?: Iterable<unknown> | null,
-): Generator<HotSpot> {
-  if (hotSpots) {
+const filterMarkers = function* (
+  markers?: Iterable<unknown> | null,
+): Generator<Marker> {
+  if (markers) {
     let count = 0;
-    for (const item of hotSpots) {
+    for (const item of markers) {
       count += 1;
-      const hotSpot = ensure(item, {
+      const marker = ensure(item, {
         pitch: isFiniteNumber,
         yaw: isFiniteNumber,
         text: isString,
         id: isString.optional,
       });
-      const id = hotSpot.id || `hs-${count}`;
-      yield { ...hotSpot, id };
+      const id = marker.id || `hs-${count}`;
+      yield { ...marker, id };
     }
   }
 };

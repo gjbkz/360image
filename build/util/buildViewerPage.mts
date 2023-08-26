@@ -17,8 +17,8 @@ export const buildViewerPage = async (image: FilledImageState) => {
 
 const generateViewerHtml = async function* ({ config }: FilledImageState) {
   yield* generateHtmlPreamble({ title: config.title });
-  yield '<script id="viewer-config" type="application/json">';
+  yield '<script id="viewer-config" type="application/json">\n';
   yield JSON.stringify(config, null, 2);
-  yield '</script>\n';
+  yield '\n</script>\n';
   yield* pipeFile(new URL('viewer.html', srcDir));
 };

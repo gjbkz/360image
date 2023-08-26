@@ -54,14 +54,14 @@ const generateIndexHtml = async function* (imageTree: ImageTree) {
     for (const leaf of leaves) {
       yield '<li>';
       yield `<a href="${leaf.htmlPath}">${sanitize(leaf.config.title)}</a>`;
-      const hotSpots = [...leaf.listHotSpots()];
-      if (0 < hotSpots.length) {
+      const markers = [...leaf.listMarkers()];
+      if (0 < markers.length) {
         yield '<ol class="markers-list">';
-        for (const hotSpot of hotSpots) {
-          const href = `${leaf.htmlPath}#${encodeURIComponent(hotSpot.id)}`;
+        for (const marker of markers) {
+          const href = `${leaf.htmlPath}#${encodeURIComponent(marker.id)}`;
           yield `<li><a target="_blank" href="${href}">`;
           yield '<svg viewBox="-1 -1 14 14" class="icon"><use href="#external-link"/></svg>';
-          yield `${sanitize(hotSpot.text)}</a></li>`;
+          yield `${sanitize(marker.text)}</a></li>`;
         }
         yield '</ol>';
       }

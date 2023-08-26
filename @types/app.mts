@@ -1,4 +1,4 @@
-export interface HotSpot {
+export interface Marker {
   pitch: number;
   yaw: number;
   text: string;
@@ -9,7 +9,7 @@ export interface ViewerConfig {
   path: string;
   title: string;
   author?: string;
-  hotSpots: Array<HotSpot>;
+  markers: Array<Marker>;
   latitude?: number;
   longitude?: number;
   altitude?: number;

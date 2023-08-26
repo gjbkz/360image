@@ -4,9 +4,9 @@ import {
   isFiniteNumber,
   isString,
 } from '@nlib/typing';
-import type { HotSpot, ViewerConfig } from '../../@types/app.mjs';
+import type { Marker, ViewerConfig } from '../../@types/app.mjs';
 
-const isHotSpot = createTypeChecker<HotSpot>('HotSpot', {
+const isMarker = createTypeChecker<Marker>('Marker', {
   pitch: isFiniteNumber,
   yaw: isFiniteNumber,
   text: isString,
@@ -17,7 +17,7 @@ const isViewerConfig = createTypeChecker<ViewerConfig>('ViewerConfig', {
   path: isString,
   title: isString,
   author: isString.optional,
-  hotSpots: isHotSpot.array,
+  markers: isMarker.array,
   latitude: isFiniteNumber.optional,
   longitude: isFiniteNumber.optional,
   altitude: isFiniteNumber.optional,

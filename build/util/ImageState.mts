@@ -1,4 +1,4 @@
-import type * as app from '../../@types/app.mjs';
+import type { Marker, ViewerConfig } from '../../@types/app.mjs';
 import type { ImageTree } from './ImageTree.mjs';
 import { imagesDir } from './files.mjs';
 import { loadViewerConfig } from './loadViewerConfig.mjs';
@@ -6,7 +6,7 @@ import { loadViewerConfig } from './loadViewerConfig.mjs';
 export class ImageState {
   public readonly parent: ImageTree;
   public readonly name: string;
-  public config: Readonly<app.ViewerConfig> | null = null;
+  public config: Readonly<ViewerConfig> | null = null;
   private image = false;
 
   public constructor(parent: ImageTree, name: string) {
@@ -37,13 +37,13 @@ export class ImageState {
     }
   }
 
-  public *listHotSpots(): Generator<app.HotSpot> {
+  public *listMarkers(): Generator<Marker> {
     const { config } = this;
     if (config) {
       const ignored = [...'東西南北'];
-      for (const hotSpot of config.hotSpots) {
-        if (!ignored.includes(hotSpot.text)) {
-          yield hotSpot;
+      for (const marker of config.markers) {
+        if (!ignored.includes(marker.text)) {
+          yield marker;
         }
       }
     }
@@ -51,5 +51,5 @@ export class ImageState {
 }
 
 export interface FilledImageState extends ImageState {
-  readonly config: Readonly<app.ViewerConfig>;
+  readonly config: Readonly<ViewerConfig>;
 }

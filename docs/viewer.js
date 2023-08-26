@@ -42940,7 +42940,7 @@ ${stringifyError(error)}`,
   );
 
   // src/util/viewerConfig.mts
-  var isHotSpot = createTypeChecker('HotSpot', {
+  var isMarker = createTypeChecker('Marker', {
     pitch: isFiniteNumber,
     yaw: isFiniteNumber,
     text: isString,
@@ -42950,7 +42950,7 @@ ${stringifyError(error)}`,
     path: isString,
     title: isString,
     author: isString.optional,
-    hotSpots: isHotSpot.array,
+    markers: isMarker.array,
     latitude: isFiniteNumber.optional,
     longitude: isFiniteNumber.optional,
     altitude: isFiniteNumber.optional,
@@ -45439,7 +45439,7 @@ ${stringifyError(error)}`,
   // src/components/Menu.tsx
   var import_jsx_runtime3 = __toESM(require_jsx_runtime(), 1);
   var Menu = () => {
-    const [opened, setOpened] = (0, import_react5.useState)(false);
+    const [opened, setOpened] = (0, import_react5.useState)(true);
     const toggle = (0, import_react5.useCallback)(
       () => setOpened((v2) => !v2),
       [],
@@ -45515,6 +45515,38 @@ ${stringifyError(error)}`,
   // src/components/HotSpots.tsx
   var import_react7 = __toESM(require_react(), 1);
 
+  // src/recoil/Markers.mts
+  var rcMarkers = Recoil_index_8({
+    key: 'Markers',
+    default: viewerConfig.markers,
+  });
+  var rcMarker = Recoil_index_11({
+    key: 'Marker',
+    get:
+      (id) =>
+      ({ get }) => {
+        const markers = get(rcMarkers);
+        const marker = markers.find((hs) => hs.id === id);
+        if (!marker) {
+          throw new Error(`NoSuchMarker:${id}`);
+        }
+        return marker;
+      },
+  });
+
+  // src/use/ContextValue.ts
+  var import_react6 = __toESM(require_react(), 1);
+  var useContextValue = (context) => {
+    const value = (0, import_react6.useContext)(context);
+    if (value === null) {
+      throw Object.assign(
+        new Error(`${context.displayName || 'context'} is null`),
+        { context },
+      );
+    }
+    return value;
+  };
+
   // src/util/dom.mts
   var setAttributes = (node2, attrs) => {
     if (attrs) {
@@ -45559,76 +45591,34 @@ ${stringifyError(error)}`,
     return setChildren(setAttributes(node2, attrs), children);
   };
 
-  // src/recoil/HotSpots.mts
-  var createTooltipFunc = (element, hotSpot) => {
-    element.dataset.id = hotSpot.id;
+  // src/components/HotSpots.tsx
+  var HotSpots = () => {
+    const viewer = useContextValue(ViewerContext);
+    const markers = Recoil_index_20(rcMarkers);
+    (0, import_react7.useEffect)(() => {
+      for (const hotSpot of viewer.getConfig().hotSpots.slice()) {
+        viewer.removeHotSpot(hotSpot.id);
+      }
+      for (const marker of markers) {
+        viewer.addHotSpot({
+          ...marker,
+          createTooltipFunc,
+          createTooltipArgs: marker,
+        });
+      }
+    }, [viewer, markers]);
+    return null;
+  };
+  var createTooltipFunc = (element, marker) => {
+    element.dataset.id = marker.id;
     element.append(
-      dom('div', null, hotSpot.text),
+      dom('div', null, marker.text),
       svg(
         'svg',
         { viewBox: '-5 -1 10 7' },
         svg('path', { d: 'M-4 0L0 6L4 0Z' }),
       ),
     );
-  };
-  var rcHotSpots = Recoil_index_8({
-    key: 'HotSpots',
-    default: viewerConfig.hotSpots.map((hotSpot) => ({
-      ...hotSpot,
-      createTooltipFunc,
-      createTooltipArgs: hotSpot,
-    })),
-    effects: [
-      ({ onSet }) => {
-        onSet((hotSpots) => {
-          for (const hotSpot of hotSpots) {
-            hotSpot.createTooltipFunc = createTooltipFunc;
-            hotSpot.createTooltipArgs = hotSpot;
-          }
-        });
-      },
-    ],
-  });
-  var rcHotSpot = Recoil_index_11({
-    key: 'HotSpot',
-    get:
-      (id) =>
-      ({ get }) => {
-        const hotSpots = get(rcHotSpots);
-        const hotSpot = hotSpots.find((hs) => hs.id === id);
-        if (!hotSpot) {
-          throw new Error(`NoSuchHotSpot:${id}`);
-        }
-        return hotSpot;
-      },
-  });
-
-  // src/use/ContextValue.ts
-  var import_react6 = __toESM(require_react(), 1);
-  var useContextValue = (context) => {
-    const value = (0, import_react6.useContext)(context);
-    if (value === null) {
-      throw Object.assign(
-        new Error(`${context.displayName || 'context'} is null`),
-        { context },
-      );
-    }
-    return value;
-  };
-
-  // src/components/HotSpots.tsx
-  var HotSpots = () => {
-    const viewer = useContextValue(ViewerContext);
-    const hotSpots = Recoil_index_20(rcHotSpots);
-    (0, import_react7.useEffect)(() => {
-      for (const hotSpot of viewer.getConfig().hotSpots.slice()) {
-        viewer.removeHotSpot(hotSpot.id);
-      }
-      for (const hotSpot of hotSpots) {
-        viewer.addHotSpot({ ...hotSpot });
-      }
-    }, [viewer, hotSpots]);
-    return null;
   };
 
   // src/components/Overlay.tsx

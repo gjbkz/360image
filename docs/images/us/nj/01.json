@@ -3,7 +3,7 @@
   "latitude": 40.810215,
   "longitude": -74.075657,
   "altitude": 103.95,
-  "hotSpots": [
+  "markers": [
     {
       "pitch": 0.399,
       "yaw": -157.625,
