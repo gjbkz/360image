@@ -6,27 +6,37 @@ export interface CollapsableProps {
   opened?: boolean;
 }
 
+const defaultStyle: CSSProperties = { width: 0, height: 0 };
+
 export const Collapsable = ({
   opened,
   children,
 }: PropsWithChildren<CollapsableProps>) => {
-  const [contentDiv, setContentDiv] = useState<HTMLDivElement | null>(null);
-  const [style, setStyle] = useState<CSSProperties>({ width: 0, height: 0 });
+  const [outerDiv, setOuterDiv] = useState<HTMLDivElement | null>(null);
+  const [innerDiv, setInnerDiv] = useState<HTMLDivElement | null>(null);
+  const [style, setStyle] = useState<CSSProperties>(defaultStyle);
   useEffect(() => {
-    if (contentDiv) {
+    if (innerDiv && outerDiv) {
       if (opened) {
+        const w = outerDiv.style.width;
+        outerDiv.style.width = 'auto';
+        const outerWidth = outerDiv.scrollWidth;
+        outerDiv.style.width = w;
         setStyle({
-          width: contentDiv.scrollWidth,
-          height: contentDiv.scrollHeight,
+          width: Math.max(innerDiv.scrollWidth, outerWidth),
+          height: innerDiv.scrollHeight,
         });
       } else {
-        setStyle({ width: 0, height: 0 });
+        setStyle(defaultStyle);
       }
     }
-  }, [opened, contentDiv]);
+  }, [opened, outerDiv, innerDiv]);
   return (
-    <Outer style={style} className={opened ? 'opened' : ''}>
-      <Inner ref={setContentDiv} className={opened ? 'opened' : ''}>
+    <Outer ref={setOuterDiv} style={style} className={opened ? 'opened' : ''}>
+      <Inner
+        ref={setInnerDiv}
+        className={style === defaultStyle ? '' : 'opened'}
+      >
         {children}
       </Inner>
     </Outer>
@@ -44,7 +54,8 @@ const Outer = styled.div`
   }
 `;
 const Inner = styled.div`
-  width: max-content;
+  width: auto;
+  min-width: max-content;
   opacity: 0;
   transition-property: opacity;
   transition-duration: 0.2s;
