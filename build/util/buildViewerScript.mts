@@ -19,9 +19,10 @@ export const buildViewerScript = async ({ watch, signal }: Options = {}) => {
       entryPoints: ['src/viewer.tsx'],
       resolveExtensions: ['.tsx', '.ts', '.mts'],
       outfile: 'docs/viewer.js',
-      bundle: true,
-      minify: false,
       banner: { js: await fs.readFile(pnlmJs, 'utf8') },
+      bundle: true,
+      minify: true,
+      lineLimit: 500,
     });
     console.info(`buildViewerScript:done (${getElapsedMs(startedAt)})`);
   };
