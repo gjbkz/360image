@@ -45439,11 +45439,10 @@ ${stringifyError(error)}`,
   };
   var HotSpot = ({ id }) => {
     const hotSpot = Recoil_index_20(rcHotSpot(id));
-    const [element, setElement] = (0, import_react5.useState)(null);
+    const [, setElement] = (0, import_react5.useState)(null);
     (0, import_react5.useEffect)(() => {
       const timer = setInterval(() => {
         const hotSpotElement = hotSpotElementMap.get(hotSpot) || null;
-        console.info(hotSpot.id, hotSpotElement);
         setElement(hotSpotElement);
       }, 50);
       return () => {
