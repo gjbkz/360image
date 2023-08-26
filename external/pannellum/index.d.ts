@@ -3,14 +3,14 @@ export interface HotSpot<T = unknown> {
   yaw: number;
   text: string;
   id: string;
-  createTooltipFunc?: (hotSpotDiv: HTMLElement, arg: T) => void;
+  createTooltipFunc?: (element: HTMLElement, arg: T) => void;
   createTooltipArgs?: T;
 }
 
-export interface Config<T> {
+export interface Config {
   panorama: string;
   title?: string;
-  hotSpots: Array<HotSpot<T>>;
+  hotSpots: Array<HotSpot>;
   author?: string;
   autoLoad?: boolean;
   keyboardZoom?: boolean;
@@ -20,8 +20,22 @@ export interface Config<T> {
   minHfov?: number;
 }
 
-export interface Viewer<T = unknown> {
-  getConfig: () => Config<T>;
+/** https://pannellum.org/documentation/reference/#api-events */
+export type APIEventType =
+  | 'animatefinished'
+  | 'error'
+  | 'errorcleared'
+  | 'fullscreenchange'
+  | 'load'
+  | 'mousedown'
+  | 'mouseup'
+  | 'scenechange'
+  | 'touchend'
+  | 'touchstart'
+  | 'zoomchange';
+
+export interface Viewer {
+  getConfig: () => Config;
   getContainer: () => Omit<HTMLElement, 'querySelector'> & {
     querySelector: (selector: string) => HTMLElement | null;
   };
@@ -32,20 +46,22 @@ export interface Viewer<T = unknown> {
     hfov: number,
     animated: boolean | number,
     callback?: () => void,
-  ) => Viewer<T>;
+  ) => Viewer;
   getYaw: () => number;
-  setYaw: (yaw: number) => Viewer<T>;
+  setYaw: (yaw: number) => Viewer;
   getPitch: () => number;
-  setPitch: (pitch: number) => Viewer<T>;
+  setPitch: (pitch: number) => Viewer;
   getHfov: () => number;
-  setHfov: (hfov: number) => Viewer<T>;
+  setHfov: (hfov: number) => Viewer;
   removeHotSpot: (id: string) => boolean;
-  addHotSpot: (hotSpot: HotSpot<T>, sceneId?: string) => boolean;
+  addHotSpot: <T>(hotSpot: HotSpot<T>, sceneId?: string) => boolean;
+  on: (type: APIEventType, callback: (event: unknown) => void) => void;
+  off: (type: APIEventType, callback: (event: unknown) => void) => void;
 }
 
 declare global {
   // eslint-disable-next-line no-var
   var pannellum: {
-    viewer: <T>(container: HTMLElement, initialConfig: Config<T>) => Viewer<T>;
+    viewer: (container: HTMLElement, initialConfig: Config) => Viewer;
   };
 }

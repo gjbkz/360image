@@ -2862,14 +2862,14 @@ window.pannellum = (function (E, g, p) {
         mod.exports
       );
     };
-  var __copyProps = (to, from, except, desc) => {
-    if ((from && typeof from === 'object') || typeof from === 'function') {
-      for (let key of __getOwnPropNames(from))
+  var __copyProps = (to, from2, except, desc) => {
+    if ((from2 && typeof from2 === 'object') || typeof from2 === 'function') {
+      for (let key of __getOwnPropNames(from2))
         if (!__hasOwnProp.call(to, key) && key !== except)
           __defProp(to, key, {
-            get: () => from[key],
+            get: () => from2[key],
             enumerable:
-              !(desc = __getOwnPropDesc(from, key)) || desc.enumerable,
+              !(desc = __getOwnPropDesc(from2, key)) || desc.enumerable,
           });
     }
     return to;
@@ -3143,7 +3143,7 @@ window.pannellum = (function (E, g, p) {
               warnNoop(publicInstance, 'setState');
             },
           };
-          var assign = Object.assign;
+          var assign2 = Object.assign;
           var emptyObject = {};
           {
             Object.freeze(emptyObject);
@@ -3215,7 +3215,7 @@ window.pannellum = (function (E, g, p) {
           var pureComponentPrototype = (PureComponent.prototype =
             new ComponentDummy());
           pureComponentPrototype.constructor = PureComponent;
-          assign(pureComponentPrototype, Component.prototype);
+          assign2(pureComponentPrototype, Component.prototype);
           pureComponentPrototype.isPureReactComponent = true;
           function createRef() {
             var refObject = {
@@ -3227,8 +3227,8 @@ window.pannellum = (function (E, g, p) {
             return refObject;
           }
           var isArrayImpl = Array.isArray;
-          function isArray2(a) {
-            return isArrayImpl(a);
+          function isArray2(a2) {
+            return isArrayImpl(a2);
           }
           function typeName(value) {
             {
@@ -3331,7 +3331,7 @@ window.pannellum = (function (E, g, p) {
                   var init = lazyComponent._init;
                   try {
                     return getComponentNameFromType(init(payload));
-                  } catch (x) {
+                  } catch (x2) {
                     return null;
                   }
                 }
@@ -3515,8 +3515,8 @@ window.pannellum = (function (E, g, p) {
               props.children = children;
             } else if (childrenLength > 1) {
               var childArray = Array(childrenLength);
-              for (var i = 0; i < childrenLength; i++) {
-                childArray[i] = arguments[i + 2];
+              for (var i2 = 0; i2 < childrenLength; i2++) {
+                childArray[i2] = arguments[i2 + 2];
               }
               {
                 if (Object.freeze) {
@@ -3578,7 +3578,7 @@ window.pannellum = (function (E, g, p) {
               );
             }
             var propName;
-            var props = assign({}, element.props);
+            var props = assign2({}, element.props);
             var key = element.key;
             var ref = element.ref;
             var self = element._self;
@@ -3617,8 +3617,8 @@ window.pannellum = (function (E, g, p) {
               props.children = children;
             } else if (childrenLength > 1) {
               var childArray = Array(childrenLength);
-              for (var i = 0; i < childrenLength; i++) {
-                childArray[i] = arguments[i + 2];
+              for (var i2 = 0; i2 < childrenLength; i2++) {
+                childArray[i2] = arguments[i2 + 2];
               }
               props.children = childArray;
             }
@@ -3647,8 +3647,8 @@ window.pannellum = (function (E, g, p) {
               '=': '=0',
               ':': '=2',
             };
-            var escapedString = key.replace(escapeRegex, function (match) {
-              return escaperLookup[match];
+            var escapedString = key.replace(escapeRegex, function (match2) {
+              return escaperLookup[match2];
             });
             return '$' + escapedString;
           }
@@ -3715,8 +3715,8 @@ window.pannellum = (function (E, g, p) {
                   array,
                   escapedChildKey,
                   '',
-                  function (c) {
-                    return c;
+                  function (c2) {
+                    return c2;
                   },
                 );
               } else if (mappedChild != null) {
@@ -3753,9 +3753,9 @@ window.pannellum = (function (E, g, p) {
             var nextNamePrefix =
               nameSoFar === '' ? SEPARATOR : nameSoFar + SUBSEPARATOR;
             if (isArray2(children)) {
-              for (var i = 0; i < children.length; i++) {
-                child = children[i];
-                nextName = nextNamePrefix + getElementKey(child, i);
+              for (var i2 = 0; i2 < children.length; i2++) {
+                child = children[i2];
+                nextName = nextNamePrefix + getElementKey(child, i2);
                 subtreeCount += mapIntoArray(
                   child,
                   array,
@@ -4215,7 +4215,7 @@ window.pannellum = (function (E, g, p) {
             }
             return dispatcher.useContext(Context);
           }
-          function useState3(initialState) {
+          function useState4(initialState) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState);
           }
@@ -4330,25 +4330,25 @@ window.pannellum = (function (E, g, p) {
                   writable: true,
                 };
                 Object.defineProperties(console, {
-                  log: assign({}, props, {
+                  log: assign2({}, props, {
                     value: prevLog,
                   }),
-                  info: assign({}, props, {
+                  info: assign2({}, props, {
                     value: prevInfo,
                   }),
-                  warn: assign({}, props, {
+                  warn: assign2({}, props, {
                     value: prevWarn,
                   }),
-                  error: assign({}, props, {
+                  error: assign2({}, props, {
                     value: prevError,
                   }),
-                  group: assign({}, props, {
+                  group: assign2({}, props, {
                     value: prevGroup,
                   }),
-                  groupCollapsed: assign({}, props, {
+                  groupCollapsed: assign2({}, props, {
                     value: prevGroupCollapsed,
                   }),
-                  groupEnd: assign({}, props, {
+                  groupEnd: assign2({}, props, {
                     value: prevGroupEnd,
                   }),
                 });
@@ -4362,18 +4362,18 @@ window.pannellum = (function (E, g, p) {
           }
           var ReactCurrentDispatcher$1 =
             ReactSharedInternals.ReactCurrentDispatcher;
-          var prefix;
+          var prefix2;
           function describeBuiltInComponentFrame(name, source, ownerFn) {
             {
-              if (prefix === void 0) {
+              if (prefix2 === void 0) {
                 try {
                   throw Error();
-                } catch (x) {
-                  var match = x.stack.trim().match(/\n( *(at )?)/);
-                  prefix = (match && match[1]) || '';
+                } catch (x2) {
+                  var match2 = x2.stack.trim().match(/\n( *(at )?)/);
+                  prefix2 = (match2 && match2[1]) || '';
                 }
               }
-              return '\n' + prefix + name;
+              return '\n' + prefix2 + name;
             }
           }
           var reentry = false;
@@ -4415,23 +4415,23 @@ window.pannellum = (function (E, g, p) {
                 if (typeof Reflect === 'object' && Reflect.construct) {
                   try {
                     Reflect.construct(Fake, []);
-                  } catch (x) {
-                    control = x;
+                  } catch (x2) {
+                    control = x2;
                   }
                   Reflect.construct(fn, [], Fake);
                 } else {
                   try {
                     Fake.call();
-                  } catch (x) {
-                    control = x;
+                  } catch (x2) {
+                    control = x2;
                   }
                   fn.call(Fake.prototype);
                 }
               } else {
                 try {
                   throw Error();
-                } catch (x) {
-                  control = x;
+                } catch (x2) {
+                  control = x2;
                 }
                 fn();
               }
@@ -4439,20 +4439,24 @@ window.pannellum = (function (E, g, p) {
               if (sample && control && typeof sample.stack === 'string') {
                 var sampleLines = sample.stack.split('\n');
                 var controlLines = control.stack.split('\n');
-                var s = sampleLines.length - 1;
-                var c = controlLines.length - 1;
-                while (s >= 1 && c >= 0 && sampleLines[s] !== controlLines[c]) {
-                  c--;
+                var s2 = sampleLines.length - 1;
+                var c2 = controlLines.length - 1;
+                while (
+                  s2 >= 1 &&
+                  c2 >= 0 &&
+                  sampleLines[s2] !== controlLines[c2]
+                ) {
+                  c2--;
                 }
-                for (; s >= 1 && c >= 0; s--, c--) {
-                  if (sampleLines[s] !== controlLines[c]) {
-                    if (s !== 1 || c !== 1) {
+                for (; s2 >= 1 && c2 >= 0; s2--, c2--) {
+                  if (sampleLines[s2] !== controlLines[c2]) {
+                    if (s2 !== 1 || c2 !== 1) {
                       do {
-                        s--;
-                        c--;
-                        if (c < 0 || sampleLines[s] !== controlLines[c]) {
+                        s2--;
+                        c2--;
+                        if (c2 < 0 || sampleLines[s2] !== controlLines[c2]) {
                           var _frame =
-                            '\n' + sampleLines[s].replace(' at new ', ' at ');
+                            '\n' + sampleLines[s2].replace(' at new ', ' at ');
                           if (
                             fn.displayName &&
                             _frame.includes('<anonymous>')
@@ -4469,7 +4473,7 @@ window.pannellum = (function (E, g, p) {
                           }
                           return _frame;
                         }
-                      } while (s >= 1 && c >= 0);
+                      } while (s2 >= 1 && c2 >= 0);
                     }
                     break;
                   }
@@ -4544,7 +4548,7 @@ window.pannellum = (function (E, g, p) {
                       source,
                       ownerFn,
                     );
-                  } catch (x) {}
+                  } catch (x2) {}
                 }
               }
             }
@@ -4571,7 +4575,7 @@ window.pannellum = (function (E, g, p) {
           function checkPropTypes(
             typeSpecs,
             values2,
-            location2,
+            location,
             componentName,
             element,
           ) {
@@ -4585,7 +4589,7 @@ window.pannellum = (function (E, g, p) {
                       var err2 = Error(
                         (componentName || 'React class') +
                           ': ' +
-                          location2 +
+                          location +
                           ' type `' +
                           typeSpecName +
                           '` is invalid; it must be a function, usually from the `prop-types` package, but received `' +
@@ -4599,7 +4603,7 @@ window.pannellum = (function (E, g, p) {
                       values2,
                       typeSpecName,
                       componentName,
-                      location2,
+                      location,
                       null,
                       'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED',
                     );
@@ -4611,7 +4615,7 @@ window.pannellum = (function (E, g, p) {
                     error(
                       '%s: type specification of %s `%s` is invalid; the type checker function must return `null` or an `Error` but returned a %s. You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument).',
                       componentName || 'React class',
-                      location2,
+                      location,
                       typeSpecName,
                       typeof error$1,
                     );
@@ -4623,7 +4627,7 @@ window.pannellum = (function (E, g, p) {
                   ) {
                     loggedTypeFailures[error$1.message] = true;
                     setCurrentlyValidatingElement(element);
-                    error('Failed %s type: %s', location2, error$1.message);
+                    error('Failed %s type: %s', location, error$1.message);
                     setCurrentlyValidatingElement(null);
                   }
                 }
@@ -4729,26 +4733,26 @@ window.pannellum = (function (E, g, p) {
               setCurrentlyValidatingElement$1(null);
             }
           }
-          function validateChildKeys(node, parentType) {
-            if (typeof node !== 'object') {
+          function validateChildKeys(node2, parentType) {
+            if (typeof node2 !== 'object') {
               return;
             }
-            if (isArray2(node)) {
-              for (var i = 0; i < node.length; i++) {
-                var child = node[i];
+            if (isArray2(node2)) {
+              for (var i2 = 0; i2 < node2.length; i2++) {
+                var child = node2[i2];
                 if (isValidElement(child)) {
                   validateExplicitKey(child, parentType);
                 }
               }
-            } else if (isValidElement(node)) {
-              if (node._store) {
-                node._store.validated = true;
+            } else if (isValidElement(node2)) {
+              if (node2._store) {
+                node2._store.validated = true;
               }
-            } else if (node) {
-              var iteratorFn = getIteratorFn(node);
+            } else if (node2) {
+              var iteratorFn = getIteratorFn(node2);
               if (typeof iteratorFn === 'function') {
-                if (iteratorFn !== node.entries) {
-                  var iterator = iteratorFn.call(node);
+                if (iteratorFn !== node2.entries) {
+                  var iterator = iteratorFn.call(node2);
                   var step;
                   while (!(step = iterator.next()).done) {
                     if (isValidElement(step.value)) {
@@ -4809,8 +4813,8 @@ window.pannellum = (function (E, g, p) {
           function validateFragmentProps(fragment) {
             {
               var keys5 = Object.keys(fragment.props);
-              for (var i = 0; i < keys5.length; i++) {
-                var key = keys5[i];
+              for (var i2 = 0; i2 < keys5.length; i2++) {
+                var key = keys5[i2];
                 if (key !== 'children' && key !== 'key') {
                   setCurrentlyValidatingElement$1(fragment);
                   error(
@@ -4878,8 +4882,8 @@ window.pannellum = (function (E, g, p) {
               return element;
             }
             if (validType) {
-              for (var i = 2; i < arguments.length; i++) {
-                validateChildKeys(arguments[i], type);
+              for (var i2 = 2; i2 < arguments.length; i2++) {
+                validateChildKeys(arguments[i2], type);
               }
             }
             if (type === REACT_FRAGMENT_TYPE) {
@@ -4917,8 +4921,8 @@ window.pannellum = (function (E, g, p) {
           }
           function cloneElementWithValidation(element, props, children) {
             var newElement = cloneElement.apply(this, arguments);
-            for (var i = 2; i < arguments.length; i++) {
-              validateChildKeys(arguments[i], newElement.type);
+            for (var i2 = 2; i2 < arguments.length; i2++) {
+              validateChildKeys(arguments[i2], newElement.type);
             }
             validatePropTypes(newElement);
             return newElement;
@@ -5134,17 +5138,17 @@ window.pannellum = (function (E, g, p) {
             {
               if (!isFlushing) {
                 isFlushing = true;
-                var i = 0;
+                var i2 = 0;
                 try {
-                  for (; i < queue.length; i++) {
-                    var callback = queue[i];
+                  for (; i2 < queue.length; i2++) {
+                    var callback = queue[i2];
                     do {
                       callback = callback(true);
                     } while (callback !== null);
                   }
                   queue.length = 0;
                 } catch (error2) {
-                  queue = queue.slice(i + 1);
+                  queue = queue.slice(i2 + 1);
                   throw error2;
                 } finally {
                   isFlushing = false;
@@ -5194,7 +5198,7 @@ window.pannellum = (function (E, g, p) {
           exports.useMemo = useMemo2;
           exports.useReducer = useReducer;
           exports.useRef = useRef2;
-          exports.useState = useState3;
+          exports.useState = useState4;
           exports.useSyncExternalStore = useSyncExternalStore2;
           exports.useTransition = useTransition;
           exports.version = ReactVersion;
@@ -5243,12 +5247,12 @@ window.pannellum = (function (E, g, p) {
           var enableSchedulerDebugging = false;
           var enableProfiling = false;
           var frameYieldMs = 5;
-          function push(heap, node) {
+          function push(heap, node2) {
             var index = heap.length;
-            heap.push(node);
-            siftUp(heap, node, index);
+            heap.push(node2);
+            siftUp(heap, node2, index);
           }
-          function peek(heap) {
+          function peek2(heap) {
             return heap.length === 0 ? null : heap[0];
           }
           function pop(heap) {
@@ -5263,13 +5267,13 @@ window.pannellum = (function (E, g, p) {
             }
             return first;
           }
-          function siftUp(heap, node, i) {
-            var index = i;
+          function siftUp(heap, node2, i2) {
+            var index = i2;
             while (index > 0) {
               var parentIndex = (index - 1) >>> 1;
               var parent = heap[parentIndex];
-              if (compare(parent, node) > 0) {
-                heap[parentIndex] = node;
+              if (compare(parent, node2) > 0) {
+                heap[parentIndex] = node2;
                 heap[index] = parent;
                 index = parentIndex;
               } else {
@@ -5277,37 +5281,37 @@ window.pannellum = (function (E, g, p) {
               }
             }
           }
-          function siftDown(heap, node, i) {
-            var index = i;
-            var length = heap.length;
-            var halfLength = length >>> 1;
+          function siftDown(heap, node2, i2) {
+            var index = i2;
+            var length2 = heap.length;
+            var halfLength = length2 >>> 1;
             while (index < halfLength) {
               var leftIndex = (index + 1) * 2 - 1;
               var left = heap[leftIndex];
               var rightIndex = leftIndex + 1;
               var right = heap[rightIndex];
-              if (compare(left, node) < 0) {
-                if (rightIndex < length && compare(right, left) < 0) {
+              if (compare(left, node2) < 0) {
+                if (rightIndex < length2 && compare(right, left) < 0) {
                   heap[index] = right;
-                  heap[rightIndex] = node;
+                  heap[rightIndex] = node2;
                   index = rightIndex;
                 } else {
                   heap[index] = left;
-                  heap[leftIndex] = node;
+                  heap[leftIndex] = node2;
                   index = leftIndex;
                 }
-              } else if (rightIndex < length && compare(right, node) < 0) {
+              } else if (rightIndex < length2 && compare(right, node2) < 0) {
                 heap[index] = right;
-                heap[rightIndex] = node;
+                heap[rightIndex] = node2;
                 index = rightIndex;
               } else {
                 return;
               }
             }
           }
-          function compare(a, b) {
-            var diff = a.sortIndex - b.sortIndex;
-            return diff !== 0 ? diff : a.id - b.id;
+          function compare(a2, b2) {
+            var diff = a2.sortIndex - b2.sortIndex;
+            return diff !== 0 ? diff : a2.id - b2.id;
           }
           var ImmediatePriority = 1;
           var UserBlockingPriority = 2;
@@ -5357,7 +5361,7 @@ window.pannellum = (function (E, g, p) {
               ? navigator.scheduling.isInputPending.bind(navigator.scheduling)
               : null;
           function advanceTimers(currentTime) {
-            var timer = peek(timerQueue);
+            var timer = peek2(timerQueue);
             while (timer !== null) {
               if (timer.callback === null) {
                 pop(timerQueue);
@@ -5368,18 +5372,18 @@ window.pannellum = (function (E, g, p) {
               } else {
                 return;
               }
-              timer = peek(timerQueue);
+              timer = peek2(timerQueue);
             }
           }
           function handleTimeout(currentTime) {
             isHostTimeoutScheduled = false;
             advanceTimers(currentTime);
             if (!isHostCallbackScheduled) {
-              if (peek(taskQueue) !== null) {
+              if (peek2(taskQueue) !== null) {
                 isHostCallbackScheduled = true;
                 requestHostCallback(flushWork);
               } else {
-                var firstTimer = peek(timerQueue);
+                var firstTimer = peek2(timerQueue);
                 if (firstTimer !== null) {
                   requestHostTimeout(
                     handleTimeout,
@@ -5421,7 +5425,7 @@ window.pannellum = (function (E, g, p) {
           function workLoop(hasTimeRemaining, initialTime2) {
             var currentTime = initialTime2;
             advanceTimers(currentTime);
-            currentTask = peek(taskQueue);
+            currentTask = peek2(taskQueue);
             while (currentTask !== null && !enableSchedulerDebugging) {
               if (
                 currentTask.expirationTime > currentTime &&
@@ -5440,7 +5444,7 @@ window.pannellum = (function (E, g, p) {
                 if (typeof continuationCallback === 'function') {
                   currentTask.callback = continuationCallback;
                 } else {
-                  if (currentTask === peek(taskQueue)) {
+                  if (currentTask === peek2(taskQueue)) {
                     pop(taskQueue);
                   }
                 }
@@ -5448,12 +5452,12 @@ window.pannellum = (function (E, g, p) {
               } else {
                 pop(taskQueue);
               }
-              currentTask = peek(taskQueue);
+              currentTask = peek2(taskQueue);
             }
             if (currentTask !== null) {
               return true;
             } else {
-              var firstTimer = peek(timerQueue);
+              var firstTimer = peek2(timerQueue);
               if (firstTimer !== null) {
                 requestHostTimeout(
                   handleTimeout,
@@ -5558,7 +5562,7 @@ window.pannellum = (function (E, g, p) {
             if (startTime2 > currentTime) {
               newTask.sortIndex = startTime2;
               push(timerQueue, newTask);
-              if (peek(taskQueue) === null && newTask === peek(timerQueue)) {
+              if (peek2(taskQueue) === null && newTask === peek2(timerQueue)) {
                 if (isHostTimeoutScheduled) {
                   cancelHostTimeout();
                 } else {
@@ -5584,7 +5588,7 @@ window.pannellum = (function (E, g, p) {
             }
           }
           function unstable_getFirstCallbackNode() {
-            return peek(taskQueue);
+            return peek2(taskQueue);
           }
           function unstable_cancelCallback(task) {
             task.callback = null;
@@ -5806,7 +5810,7 @@ window.pannellum = (function (E, g, p) {
           var HostPortal = 4;
           var HostComponent = 5;
           var HostText = 6;
-          var Fragment = 7;
+          var Fragment4 = 7;
           var Mode = 8;
           var ContextConsumer = 9;
           var ContextProvider = 10;
@@ -5859,8 +5863,8 @@ window.pannellum = (function (E, g, p) {
                 possibleRegistrationNames.ondblclick = registrationName;
               }
             }
-            for (var i = 0; i < dependencies.length; i++) {
-              allNativeEvents.add(dependencies[i]);
+            for (var i2 = 0; i2 < dependencies.length; i2++) {
+              allNativeEvents.add(dependencies[i2]);
             }
           }
           var canUseDOM = !!(
@@ -6042,8 +6046,8 @@ window.pannellum = (function (E, g, p) {
                 if (propertyInfo !== null) {
                   return !propertyInfo.acceptsBooleans;
                 } else {
-                  var prefix2 = name.toLowerCase().slice(0, 5);
-                  return prefix2 !== 'data-' && prefix2 !== 'aria-';
+                  var prefix3 = name.toLowerCase().slice(0, 5);
+                  return prefix3 !== 'data-' && prefix3 !== 'aria-';
                 }
               }
               default:
@@ -6325,8 +6329,8 @@ window.pannellum = (function (E, g, p) {
             );
           });
           var CAMELIZE = /[\-\:]([a-z])/g;
-          var capitalize = function (token) {
-            return token[1].toUpperCase();
+          var capitalize = function (token2) {
+            return token2[1].toUpperCase();
           };
           [
             'accent-height',
@@ -6523,11 +6527,11 @@ window.pannellum = (function (E, g, p) {
               }
             }
           }
-          function getValueForProperty(node, name, expected, propertyInfo) {
+          function getValueForProperty(node2, name, expected, propertyInfo) {
             {
               if (propertyInfo.mustUseProperty) {
                 var propertyName = propertyInfo.propertyName;
-                return node[propertyName];
+                return node2[propertyName];
               } else {
                 {
                   checkAttributeStringCoercion(expected, name);
@@ -6538,8 +6542,8 @@ window.pannellum = (function (E, g, p) {
                 var attributeName = propertyInfo.attributeName;
                 var stringValue = null;
                 if (propertyInfo.type === OVERLOADED_BOOLEAN) {
-                  if (node.hasAttribute(attributeName)) {
-                    var value = node.getAttribute(attributeName);
+                  if (node2.hasAttribute(attributeName)) {
+                    var value = node2.getAttribute(attributeName);
                     if (value === '') {
                       return true;
                     }
@@ -6553,16 +6557,16 @@ window.pannellum = (function (E, g, p) {
                     }
                     return value;
                   }
-                } else if (node.hasAttribute(attributeName)) {
+                } else if (node2.hasAttribute(attributeName)) {
                   if (
                     shouldRemoveAttribute(name, expected, propertyInfo, false)
                   ) {
-                    return node.getAttribute(attributeName);
+                    return node2.getAttribute(attributeName);
                   }
                   if (propertyInfo.type === BOOLEAN) {
                     return expected;
                   }
-                  stringValue = node.getAttribute(attributeName);
+                  stringValue = node2.getAttribute(attributeName);
                 }
                 if (
                   shouldRemoveAttribute(name, expected, propertyInfo, false)
@@ -6577,7 +6581,7 @@ window.pannellum = (function (E, g, p) {
             }
           }
           function getValueForAttribute(
-            node,
+            node2,
             name,
             expected,
             isCustomComponentTag,
@@ -6586,10 +6590,10 @@ window.pannellum = (function (E, g, p) {
               if (!isAttributeNameSafe(name)) {
                 return;
               }
-              if (!node.hasAttribute(name)) {
+              if (!node2.hasAttribute(name)) {
                 return expected === void 0 ? void 0 : null;
               }
-              var value = node.getAttribute(name);
+              var value = node2.getAttribute(name);
               {
                 checkAttributeStringCoercion(expected, name);
               }
@@ -6600,7 +6604,7 @@ window.pannellum = (function (E, g, p) {
             }
           }
           function setValueForProperty(
-            node,
+            node2,
             name,
             value,
             isCustomComponentTag,
@@ -6625,12 +6629,12 @@ window.pannellum = (function (E, g, p) {
               if (isAttributeNameSafe(name)) {
                 var _attributeName = name;
                 if (value === null) {
-                  node.removeAttribute(_attributeName);
+                  node2.removeAttribute(_attributeName);
                 } else {
                   {
                     checkAttributeStringCoercion(value, name);
                   }
-                  node.setAttribute(_attributeName, '' + value);
+                  node2.setAttribute(_attributeName, '' + value);
                 }
               }
               return;
@@ -6640,16 +6644,16 @@ window.pannellum = (function (E, g, p) {
               var propertyName = propertyInfo.propertyName;
               if (value === null) {
                 var type = propertyInfo.type;
-                node[propertyName] = type === BOOLEAN ? false : '';
+                node2[propertyName] = type === BOOLEAN ? false : '';
               } else {
-                node[propertyName] = value;
+                node2[propertyName] = value;
               }
               return;
             }
             var attributeName = propertyInfo.attributeName,
               attributeNamespace = propertyInfo.attributeNamespace;
             if (value === null) {
-              node.removeAttribute(attributeName);
+              node2.removeAttribute(attributeName);
             } else {
               var _type = propertyInfo.type;
               var attributeValue;
@@ -6670,13 +6674,13 @@ window.pannellum = (function (E, g, p) {
                 }
               }
               if (attributeNamespace) {
-                node.setAttributeNS(
+                node2.setAttributeNS(
                   attributeNamespace,
                   attributeName,
                   attributeValue,
                 );
               } else {
-                node.setAttribute(attributeName, attributeValue);
+                node2.setAttribute(attributeName, attributeValue);
               }
             }
           }
@@ -6714,7 +6718,7 @@ window.pannellum = (function (E, g, p) {
             }
             return null;
           }
-          var assign = Object.assign;
+          var assign2 = Object.assign;
           var disabledDepth = 0;
           var prevLog;
           var prevInfo;
@@ -6764,25 +6768,25 @@ window.pannellum = (function (E, g, p) {
                   writable: true,
                 };
                 Object.defineProperties(console, {
-                  log: assign({}, props, {
+                  log: assign2({}, props, {
                     value: prevLog,
                   }),
-                  info: assign({}, props, {
+                  info: assign2({}, props, {
                     value: prevInfo,
                   }),
-                  warn: assign({}, props, {
+                  warn: assign2({}, props, {
                     value: prevWarn,
                   }),
-                  error: assign({}, props, {
+                  error: assign2({}, props, {
                     value: prevError,
                   }),
-                  group: assign({}, props, {
+                  group: assign2({}, props, {
                     value: prevGroup,
                   }),
-                  groupCollapsed: assign({}, props, {
+                  groupCollapsed: assign2({}, props, {
                     value: prevGroupCollapsed,
                   }),
-                  groupEnd: assign({}, props, {
+                  groupEnd: assign2({}, props, {
                     value: prevGroupEnd,
                   }),
                 });
@@ -6796,18 +6800,18 @@ window.pannellum = (function (E, g, p) {
           }
           var ReactCurrentDispatcher =
             ReactSharedInternals.ReactCurrentDispatcher;
-          var prefix;
+          var prefix2;
           function describeBuiltInComponentFrame(name, source, ownerFn) {
             {
-              if (prefix === void 0) {
+              if (prefix2 === void 0) {
                 try {
                   throw Error();
-                } catch (x) {
-                  var match = x.stack.trim().match(/\n( *(at )?)/);
-                  prefix = (match && match[1]) || '';
+                } catch (x2) {
+                  var match2 = x2.stack.trim().match(/\n( *(at )?)/);
+                  prefix2 = (match2 && match2[1]) || '';
                 }
               }
-              return '\n' + prefix + name;
+              return '\n' + prefix2 + name;
             }
           }
           var reentry = false;
@@ -6849,23 +6853,23 @@ window.pannellum = (function (E, g, p) {
                 if (typeof Reflect === 'object' && Reflect.construct) {
                   try {
                     Reflect.construct(Fake, []);
-                  } catch (x) {
-                    control = x;
+                  } catch (x2) {
+                    control = x2;
                   }
                   Reflect.construct(fn, [], Fake);
                 } else {
                   try {
                     Fake.call();
-                  } catch (x) {
-                    control = x;
+                  } catch (x2) {
+                    control = x2;
                   }
                   fn.call(Fake.prototype);
                 }
               } else {
                 try {
                   throw Error();
-                } catch (x) {
-                  control = x;
+                } catch (x2) {
+                  control = x2;
                 }
                 fn();
               }
@@ -6873,20 +6877,24 @@ window.pannellum = (function (E, g, p) {
               if (sample && control && typeof sample.stack === 'string') {
                 var sampleLines = sample.stack.split('\n');
                 var controlLines = control.stack.split('\n');
-                var s = sampleLines.length - 1;
-                var c = controlLines.length - 1;
-                while (s >= 1 && c >= 0 && sampleLines[s] !== controlLines[c]) {
-                  c--;
+                var s2 = sampleLines.length - 1;
+                var c2 = controlLines.length - 1;
+                while (
+                  s2 >= 1 &&
+                  c2 >= 0 &&
+                  sampleLines[s2] !== controlLines[c2]
+                ) {
+                  c2--;
                 }
-                for (; s >= 1 && c >= 0; s--, c--) {
-                  if (sampleLines[s] !== controlLines[c]) {
-                    if (s !== 1 || c !== 1) {
+                for (; s2 >= 1 && c2 >= 0; s2--, c2--) {
+                  if (sampleLines[s2] !== controlLines[c2]) {
+                    if (s2 !== 1 || c2 !== 1) {
                       do {
-                        s--;
-                        c--;
-                        if (c < 0 || sampleLines[s] !== controlLines[c]) {
+                        s2--;
+                        c2--;
+                        if (c2 < 0 || sampleLines[s2] !== controlLines[c2]) {
                           var _frame =
-                            '\n' + sampleLines[s].replace(' at new ', ' at ');
+                            '\n' + sampleLines[s2].replace(' at new ', ' at ');
                           if (
                             fn.displayName &&
                             _frame.includes('<anonymous>')
@@ -6903,7 +6911,7 @@ window.pannellum = (function (E, g, p) {
                           }
                           return _frame;
                         }
-                      } while (s >= 1 && c >= 0);
+                      } while (s2 >= 1 && c2 >= 0);
                     }
                     break;
                   }
@@ -6983,7 +6991,7 @@ window.pannellum = (function (E, g, p) {
                       source,
                       ownerFn,
                     );
-                  } catch (x) {}
+                  } catch (x2) {}
                 }
               }
             }
@@ -7016,14 +7024,16 @@ window.pannellum = (function (E, g, p) {
           function getStackByFiberInDevAndProd(workInProgress2) {
             try {
               var info = '';
-              var node = workInProgress2;
+              var node2 = workInProgress2;
               do {
-                info += describeFiber(node);
-                node = node.return;
-              } while (node);
+                info += describeFiber(node2);
+                node2 = node2.return;
+              } while (node2);
               return info;
-            } catch (x) {
-              return '\nError generating stack: ' + x.message + '\n' + x.stack;
+            } catch (x2) {
+              return (
+                '\nError generating stack: ' + x2.message + '\n' + x2.stack
+              );
             }
           }
           function getWrappedName(outerType, innerType, wrapperName) {
@@ -7092,7 +7102,7 @@ window.pannellum = (function (E, g, p) {
                   var init = lazyComponent._init;
                   try {
                     return getComponentNameFromType(init(payload));
-                  } catch (x) {
+                  } catch (x2) {
                     return null;
                   }
                 }
@@ -7128,7 +7138,7 @@ window.pannellum = (function (E, g, p) {
                 return 'DehydratedFragment';
               case ForwardRef:
                 return getWrappedName$1(type, type.render, 'ForwardRef');
-              case Fragment:
+              case Fragment4:
                 return 'Fragment';
               case HostComponent:
                 return type;
@@ -7289,36 +7299,36 @@ window.pannellum = (function (E, g, p) {
               (type === 'checkbox' || type === 'radio')
             );
           }
-          function getTracker(node) {
-            return node._valueTracker;
+          function getTracker(node2) {
+            return node2._valueTracker;
           }
-          function detachTracker(node) {
-            node._valueTracker = null;
+          function detachTracker(node2) {
+            node2._valueTracker = null;
           }
-          function getValueFromNode(node) {
+          function getValueFromNode(node2) {
             var value = '';
-            if (!node) {
+            if (!node2) {
               return value;
             }
-            if (isCheckable(node)) {
-              value = node.checked ? 'true' : 'false';
+            if (isCheckable(node2)) {
+              value = node2.checked ? 'true' : 'false';
             } else {
-              value = node.value;
+              value = node2.value;
             }
             return value;
           }
-          function trackValueOnNode(node) {
-            var valueField = isCheckable(node) ? 'checked' : 'value';
+          function trackValueOnNode(node2) {
+            var valueField = isCheckable(node2) ? 'checked' : 'value';
             var descriptor = Object.getOwnPropertyDescriptor(
-              node.constructor.prototype,
+              node2.constructor.prototype,
               valueField,
             );
             {
-              checkFormFieldValueStringCoercion(node[valueField]);
+              checkFormFieldValueStringCoercion(node2[valueField]);
             }
-            var currentValue = '' + node[valueField];
+            var currentValue = '' + node2[valueField];
             if (
-              node.hasOwnProperty(valueField) ||
+              node2.hasOwnProperty(valueField) ||
               typeof descriptor === 'undefined' ||
               typeof descriptor.get !== 'function' ||
               typeof descriptor.set !== 'function'
@@ -7327,7 +7337,7 @@ window.pannellum = (function (E, g, p) {
             }
             var get2 = descriptor.get,
               set2 = descriptor.set;
-            Object.defineProperty(node, valueField, {
+            Object.defineProperty(node2, valueField, {
               configurable: true,
               get: function () {
                 return get2.call(this);
@@ -7340,7 +7350,7 @@ window.pannellum = (function (E, g, p) {
                 set2.call(this, value);
               },
             });
-            Object.defineProperty(node, valueField, {
+            Object.defineProperty(node2, valueField, {
               enumerable: descriptor.enumerable,
             });
             var tracker = {
@@ -7354,28 +7364,28 @@ window.pannellum = (function (E, g, p) {
                 currentValue = '' + value;
               },
               stopTracking: function () {
-                detachTracker(node);
-                delete node[valueField];
+                detachTracker(node2);
+                delete node2[valueField];
               },
             };
             return tracker;
           }
-          function track(node) {
-            if (getTracker(node)) {
+          function track(node2) {
+            if (getTracker(node2)) {
               return;
             }
-            node._valueTracker = trackValueOnNode(node);
+            node2._valueTracker = trackValueOnNode(node2);
           }
-          function updateValueIfChanged(node) {
-            if (!node) {
+          function updateValueIfChanged(node2) {
+            if (!node2) {
               return false;
             }
-            var tracker = getTracker(node);
+            var tracker = getTracker(node2);
             if (!tracker) {
               return true;
             }
             var lastValue = tracker.getValue();
-            var nextValue = getValueFromNode(node);
+            var nextValue = getValueFromNode(node2);
             if (nextValue !== lastValue) {
               tracker.setValue(nextValue);
               return true;
@@ -7403,14 +7413,14 @@ window.pannellum = (function (E, g, p) {
             return usesChecked ? props.checked != null : props.value != null;
           }
           function getHostProps(element, props) {
-            var node = element;
+            var node2 = element;
             var checked = props.checked;
-            var hostProps = assign({}, props, {
+            var hostProps = assign2({}, props, {
               defaultChecked: void 0,
               defaultValue: void 0,
               value: void 0,
               checked:
-                checked != null ? checked : node._wrapperState.initialChecked,
+                checked != null ? checked : node2._wrapperState.initialChecked,
             });
             return hostProps;
           }
@@ -7442,10 +7452,10 @@ window.pannellum = (function (E, g, p) {
                 didWarnValueDefaultValue = true;
               }
             }
-            var node = element;
+            var node2 = element;
             var defaultValue =
               props.defaultValue == null ? '' : props.defaultValue;
-            node._wrapperState = {
+            node2._wrapperState = {
               initialChecked:
                 props.checked != null ? props.checked : props.defaultChecked,
               initialValue: getToStringValue(
@@ -7455,18 +7465,18 @@ window.pannellum = (function (E, g, p) {
             };
           }
           function updateChecked(element, props) {
-            var node = element;
+            var node2 = element;
             var checked = props.checked;
             if (checked != null) {
-              setValueForProperty(node, 'checked', checked, false);
+              setValueForProperty(node2, 'checked', checked, false);
             }
           }
           function updateWrapper(element, props) {
-            var node = element;
+            var node2 = element;
             {
               var controlled = isControlled(props);
               if (
-                !node._wrapperState.controlled &&
+                !node2._wrapperState.controlled &&
                 controlled &&
                 !didWarnUncontrolledToControlled
               ) {
@@ -7476,7 +7486,7 @@ window.pannellum = (function (E, g, p) {
                 didWarnUncontrolledToControlled = true;
               }
               if (
-                node._wrapperState.controlled &&
+                node2._wrapperState.controlled &&
                 !controlled &&
                 !didWarnControlledToUncontrolled
               ) {
@@ -7492,25 +7502,25 @@ window.pannellum = (function (E, g, p) {
             if (value != null) {
               if (type === 'number') {
                 if (
-                  (value === 0 && node.value === '') || // We explicitly want to coerce to number here if possible.
+                  (value === 0 && node2.value === '') || // We explicitly want to coerce to number here if possible.
                   // eslint-disable-next-line
-                  node.value != value
+                  node2.value != value
                 ) {
-                  node.value = toString3(value);
+                  node2.value = toString3(value);
                 }
-              } else if (node.value !== toString3(value)) {
-                node.value = toString3(value);
+              } else if (node2.value !== toString3(value)) {
+                node2.value = toString3(value);
               }
             } else if (type === 'submit' || type === 'reset') {
-              node.removeAttribute('value');
+              node2.removeAttribute('value');
               return;
             }
             {
               if (props.hasOwnProperty('value')) {
-                setDefaultValue(node, props.type, value);
+                setDefaultValue(node2, props.type, value);
               } else if (props.hasOwnProperty('defaultValue')) {
                 setDefaultValue(
-                  node,
+                  node2,
                   props.type,
                   getToStringValue(props.defaultValue),
                 );
@@ -7518,12 +7528,12 @@ window.pannellum = (function (E, g, p) {
             }
             {
               if (props.checked == null && props.defaultChecked != null) {
-                node.defaultChecked = !!props.defaultChecked;
+                node2.defaultChecked = !!props.defaultChecked;
               }
             }
           }
           function postMountWrapper(element, props, isHydrating2) {
-            var node = element;
+            var node2 = element;
             if (
               props.hasOwnProperty('value') ||
               props.hasOwnProperty('defaultValue')
@@ -7536,34 +7546,34 @@ window.pannellum = (function (E, g, p) {
               ) {
                 return;
               }
-              var initialValue = toString3(node._wrapperState.initialValue);
+              var initialValue = toString3(node2._wrapperState.initialValue);
               if (!isHydrating2) {
                 {
-                  if (initialValue !== node.value) {
-                    node.value = initialValue;
+                  if (initialValue !== node2.value) {
+                    node2.value = initialValue;
                   }
                 }
               }
               {
-                node.defaultValue = initialValue;
+                node2.defaultValue = initialValue;
               }
             }
-            var name = node.name;
+            var name = node2.name;
             if (name !== '') {
-              node.name = '';
+              node2.name = '';
             }
             {
-              node.defaultChecked = !node.defaultChecked;
-              node.defaultChecked = !!node._wrapperState.initialChecked;
+              node2.defaultChecked = !node2.defaultChecked;
+              node2.defaultChecked = !!node2._wrapperState.initialChecked;
             }
             if (name !== '') {
-              node.name = name;
+              node2.name = name;
             }
           }
           function restoreControlledState(element, props) {
-            var node = element;
-            updateWrapper(node, props);
-            updateNamedCousins(node, props);
+            var node2 = element;
+            updateWrapper(node2, props);
+            updateNamedCousins(node2, props);
           }
           function updateNamedCousins(rootNode, props) {
             var name = props.name;
@@ -7578,8 +7588,8 @@ window.pannellum = (function (E, g, p) {
               var group = queryRoot.querySelectorAll(
                 'input[name=' + JSON.stringify('' + name) + '][type="radio"]',
               );
-              for (var i = 0; i < group.length; i++) {
-                var otherNode = group[i];
+              for (var i2 = 0; i2 < group.length; i2++) {
+                var otherNode = group[i2];
                 if (
                   otherNode === rootNode ||
                   otherNode.form !== rootNode.form
@@ -7597,16 +7607,18 @@ window.pannellum = (function (E, g, p) {
               }
             }
           }
-          function setDefaultValue(node, type, value) {
+          function setDefaultValue(node2, type, value) {
             if (
               // Focused number inputs synchronize on blur. See ChangeEventPlugin.js
               type !== 'number' ||
-              getActiveElement(node.ownerDocument) !== node
+              getActiveElement(node2.ownerDocument) !== node2
             ) {
               if (value == null) {
-                node.defaultValue = toString3(node._wrapperState.initialValue);
-              } else if (node.defaultValue !== toString3(value)) {
-                node.defaultValue = toString3(value);
+                node2.defaultValue = toString3(
+                  node2._wrapperState.initialValue,
+                );
+              } else if (node2.defaultValue !== toString3(value)) {
+                node2.defaultValue = toString3(value);
               }
             }
           }
@@ -7663,8 +7675,8 @@ window.pannellum = (function (E, g, p) {
             }
           }
           var isArrayImpl = Array.isArray;
-          function isArray2(a) {
-            return isArrayImpl(a);
+          function isArray2(a2) {
+            return isArrayImpl(a2);
           }
           var didWarnValueDefaultValue$1;
           {
@@ -7681,8 +7693,8 @@ window.pannellum = (function (E, g, p) {
           function checkSelectPropTypes(props) {
             {
               checkControlledValueProps('select', props);
-              for (var i = 0; i < valuePropNames.length; i++) {
-                var propName = valuePropNames[i];
+              for (var i2 = 0; i2 < valuePropNames.length; i2++) {
+                var propName = valuePropNames[i2];
                 if (props[propName] == null) {
                   continue;
                 }
@@ -7704,17 +7716,17 @@ window.pannellum = (function (E, g, p) {
             }
           }
           function updateOptions(
-            node,
+            node2,
             multiple,
             propValue,
             setDefaultSelected,
           ) {
-            var options2 = node.options;
+            var options2 = node2.options;
             if (multiple) {
               var selectedValues = propValue;
               var selectedValue = {};
-              for (var i = 0; i < selectedValues.length; i++) {
-                selectedValue['$' + selectedValues[i]] = true;
+              for (var i2 = 0; i2 < selectedValues.length; i2++) {
+                selectedValue['$' + selectedValues[i2]] = true;
               }
               for (var _i = 0; _i < options2.length; _i++) {
                 var selected = selectedValue.hasOwnProperty(
@@ -7748,16 +7760,16 @@ window.pannellum = (function (E, g, p) {
             }
           }
           function getHostProps$1(element, props) {
-            return assign({}, props, {
+            return assign2({}, props, {
               value: void 0,
             });
           }
           function initWrapperState$1(element, props) {
-            var node = element;
+            var node2 = element;
             {
               checkSelectPropTypes(props);
             }
-            node._wrapperState = {
+            node2._wrapperState = {
               wasMultiple: !!props.multiple,
             };
             {
@@ -7774,28 +7786,33 @@ window.pannellum = (function (E, g, p) {
             }
           }
           function postMountWrapper$2(element, props) {
-            var node = element;
-            node.multiple = !!props.multiple;
+            var node2 = element;
+            node2.multiple = !!props.multiple;
             var value = props.value;
             if (value != null) {
-              updateOptions(node, !!props.multiple, value, false);
+              updateOptions(node2, !!props.multiple, value, false);
             } else if (props.defaultValue != null) {
-              updateOptions(node, !!props.multiple, props.defaultValue, true);
+              updateOptions(node2, !!props.multiple, props.defaultValue, true);
             }
           }
           function postUpdateWrapper(element, props) {
-            var node = element;
-            var wasMultiple = node._wrapperState.wasMultiple;
-            node._wrapperState.wasMultiple = !!props.multiple;
+            var node2 = element;
+            var wasMultiple = node2._wrapperState.wasMultiple;
+            node2._wrapperState.wasMultiple = !!props.multiple;
             var value = props.value;
             if (value != null) {
-              updateOptions(node, !!props.multiple, value, false);
+              updateOptions(node2, !!props.multiple, value, false);
             } else if (wasMultiple !== !!props.multiple) {
               if (props.defaultValue != null) {
-                updateOptions(node, !!props.multiple, props.defaultValue, true);
+                updateOptions(
+                  node2,
+                  !!props.multiple,
+                  props.defaultValue,
+                  true,
+                );
               } else {
                 updateOptions(
-                  node,
+                  node2,
                   !!props.multiple,
                   props.multiple ? [] : '',
                   false,
@@ -7804,29 +7821,29 @@ window.pannellum = (function (E, g, p) {
             }
           }
           function restoreControlledState$1(element, props) {
-            var node = element;
+            var node2 = element;
             var value = props.value;
             if (value != null) {
-              updateOptions(node, !!props.multiple, value, false);
+              updateOptions(node2, !!props.multiple, value, false);
             }
           }
           var didWarnValDefaultVal = false;
           function getHostProps$2(element, props) {
-            var node = element;
+            var node2 = element;
             if (props.dangerouslySetInnerHTML != null) {
               throw new Error(
                 '`dangerouslySetInnerHTML` does not make sense on <textarea>.',
               );
             }
-            var hostProps = assign({}, props, {
+            var hostProps = assign2({}, props, {
               value: void 0,
               defaultValue: void 0,
-              children: toString3(node._wrapperState.initialValue),
+              children: toString3(node2._wrapperState.initialValue),
             });
             return hostProps;
           }
           function initWrapperState$2(element, props) {
-            var node = element;
+            var node2 = element;
             {
               checkControlledValueProps('textarea', props);
               if (
@@ -7873,36 +7890,36 @@ window.pannellum = (function (E, g, p) {
               }
               initialValue = defaultValue;
             }
-            node._wrapperState = {
+            node2._wrapperState = {
               initialValue: getToStringValue(initialValue),
             };
           }
           function updateWrapper$1(element, props) {
-            var node = element;
+            var node2 = element;
             var value = getToStringValue(props.value);
             var defaultValue = getToStringValue(props.defaultValue);
             if (value != null) {
               var newValue = toString3(value);
-              if (newValue !== node.value) {
-                node.value = newValue;
+              if (newValue !== node2.value) {
+                node2.value = newValue;
               }
               if (
                 props.defaultValue == null &&
-                node.defaultValue !== newValue
+                node2.defaultValue !== newValue
               ) {
-                node.defaultValue = newValue;
+                node2.defaultValue = newValue;
               }
             }
             if (defaultValue != null) {
-              node.defaultValue = toString3(defaultValue);
+              node2.defaultValue = toString3(defaultValue);
             }
           }
           function postMountWrapper$3(element, props) {
-            var node = element;
-            var textContent = node.textContent;
-            if (textContent === node._wrapperState.initialValue) {
+            var node2 = element;
+            var textContent = node2.textContent;
+            if (textContent === node2._wrapperState.initialValue) {
               if (textContent !== '' && textContent !== null) {
-                node.value = textContent;
+                node2.value = textContent;
               }
             }
           }
@@ -7944,24 +7961,24 @@ window.pannellum = (function (E, g, p) {
           };
           var reusableSVGContainer;
           var setInnerHTML = createMicrosoftUnsafeLocalFunction(
-            function (node, html) {
-              if (node.namespaceURI === SVG_NAMESPACE) {
-                if (!('innerHTML' in node)) {
+            function (node2, html) {
+              if (node2.namespaceURI === SVG_NAMESPACE) {
+                if (!('innerHTML' in node2)) {
                   reusableSVGContainer =
                     reusableSVGContainer || document.createElement('div');
                   reusableSVGContainer.innerHTML =
                     '<svg>' + html.valueOf().toString() + '</svg>';
                   var svgNode = reusableSVGContainer.firstChild;
-                  while (node.firstChild) {
-                    node.removeChild(node.firstChild);
+                  while (node2.firstChild) {
+                    node2.removeChild(node2.firstChild);
                   }
                   while (svgNode.firstChild) {
-                    node.appendChild(svgNode.firstChild);
+                    node2.appendChild(svgNode.firstChild);
                   }
                   return;
                 }
               }
-              node.innerHTML = html;
+              node2.innerHTML = html;
             },
           );
           var ELEMENT_NODE = 1;
@@ -7969,19 +7986,19 @@ window.pannellum = (function (E, g, p) {
           var COMMENT_NODE = 8;
           var DOCUMENT_NODE = 9;
           var DOCUMENT_FRAGMENT_NODE = 11;
-          var setTextContent = function (node, text) {
+          var setTextContent = function (node2, text) {
             if (text) {
-              var firstChild = node.firstChild;
+              var firstChild = node2.firstChild;
               if (
                 firstChild &&
-                firstChild === node.lastChild &&
+                firstChild === node2.lastChild &&
                 firstChild.nodeType === TEXT_NODE
               ) {
                 firstChild.nodeValue = text;
                 return;
               }
             }
-            node.textContent = text;
+            node2.textContent = text;
           };
           var shorthandToLonghand = {
             animation: [
@@ -8238,13 +8255,13 @@ window.pannellum = (function (E, g, p) {
             strokeOpacity: true,
             strokeWidth: true,
           };
-          function prefixKey(prefix2, key) {
-            return prefix2 + key.charAt(0).toUpperCase() + key.substring(1);
+          function prefixKey(prefix3, key) {
+            return prefix3 + key.charAt(0).toUpperCase() + key.substring(1);
           }
           var prefixes = ['Webkit', 'ms', 'Moz', 'O'];
           Object.keys(isUnitlessNumber).forEach(function (prop) {
-            prefixes.forEach(function (prefix2) {
-              isUnitlessNumber[prefixKey(prefix2, prop)] =
+            prefixes.forEach(function (prefix3) {
+              isUnitlessNumber[prefixKey(prefix3, prop)] =
                 isUnitlessNumber[prop];
             });
           });
@@ -8286,8 +8303,8 @@ window.pannellum = (function (E, g, p) {
             var warnedForNaNValue = false;
             var warnedForInfinityValue = false;
             var camelize = function (string) {
-              return string.replace(hyphenPattern, function (_, character) {
-                return character.toUpperCase();
+              return string.replace(hyphenPattern, function (_2, character2) {
+                return character2.toUpperCase();
               });
             };
             var warnHyphenatedStyleName = function (name) {
@@ -8376,7 +8393,7 @@ window.pannellum = (function (E, g, p) {
           function createDangerousStringForStyles(styles) {
             {
               var serialized = '';
-              var delimiter = '';
+              var delimiter2 = '';
               for (var styleName in styles) {
                 if (!styles.hasOwnProperty(styleName)) {
                   continue;
@@ -8385,7 +8402,7 @@ window.pannellum = (function (E, g, p) {
                 if (styleValue != null) {
                   var isCustomProperty = styleName.indexOf('--') === 0;
                   serialized +=
-                    delimiter +
+                    delimiter2 +
                     (isCustomProperty
                       ? styleName
                       : hyphenateStyleName(styleName)) +
@@ -8395,14 +8412,14 @@ window.pannellum = (function (E, g, p) {
                     styleValue,
                     isCustomProperty,
                   );
-                  delimiter = ';';
+                  delimiter2 = ';';
                 }
               }
               return serialized || null;
             }
           }
-          function setValueForStyles(node, styles) {
-            var style2 = node.style;
+          function setValueForStyles(node2, styles) {
+            var style2 = node2.style;
             for (var styleName in styles) {
               if (!styles.hasOwnProperty(styleName)) {
                 continue;
@@ -8435,8 +8452,8 @@ window.pannellum = (function (E, g, p) {
             var expanded = {};
             for (var key in styles) {
               var longhands = shorthandToLonghand[key] || [key];
-              for (var i = 0; i < longhands.length; i++) {
-                expanded[longhands[i]] = key;
+              for (var i2 = 0; i2 < longhands.length; i2++) {
+                expanded[longhands[i2]] = key;
               }
             }
             return expanded;
@@ -8491,7 +8508,7 @@ window.pannellum = (function (E, g, p) {
             wbr: true,
             // NOTE: menuitem's close tag should be omitted, but that causes problems.
           };
-          var voidElementTags = assign(
+          var voidElementTags = assign2(
             {
               menuitem: true,
             },
@@ -9558,8 +9575,8 @@ window.pannellum = (function (E, g, p) {
             restoreQueue = null;
             restoreStateOfTarget(target);
             if (queuedTargets) {
-              for (var i = 0; i < queuedTargets.length; i++) {
-                restoreStateOfTarget(queuedTargets[i]);
+              for (var i2 = 0; i2 < queuedTargets.length; i2++) {
+                restoreStateOfTarget(queuedTargets[i2]);
               }
             }
           }
@@ -9575,13 +9592,13 @@ window.pannellum = (function (E, g, p) {
               restoreStateIfNeeded();
             }
           }
-          function batchedUpdates(fn, a, b) {
+          function batchedUpdates(fn, a2, b2) {
             if (isInsideEventHandler) {
-              return fn(a, b);
+              return fn(a2, b2);
             }
             isInsideEventHandler = true;
             try {
-              return batchedUpdatesImpl(fn, a, b);
+              return batchedUpdatesImpl(fn, a2, b2);
             } finally {
               isInsideEventHandler = false;
               finishEventHandler();
@@ -9664,12 +9681,12 @@ window.pannellum = (function (E, g, p) {
             name,
             func,
             context,
-            a,
-            b,
-            c,
+            a2,
+            b2,
+            c2,
             d,
             e,
-            f,
+            f2,
           ) {
             var funcArgs = Array.prototype.slice.call(arguments, 3);
             try {
@@ -9691,12 +9708,12 @@ window.pannellum = (function (E, g, p) {
                 name,
                 func,
                 context,
-                a,
-                b,
-                c,
+                a2,
+                b2,
+                c2,
                 d,
                 e,
-                f,
+                f2,
               ) {
                 if (typeof document === 'undefined' || document === null) {
                   throw new Error(
@@ -9792,12 +9809,12 @@ window.pannellum = (function (E, g, p) {
             name,
             func,
             context,
-            a,
-            b,
-            c,
+            a2,
+            b2,
+            c2,
             d,
             e,
-            f,
+            f2,
           ) {
             hasError = false;
             caughtError = null;
@@ -9807,12 +9824,12 @@ window.pannellum = (function (E, g, p) {
             name,
             func,
             context,
-            a,
-            b,
-            c,
+            a2,
+            b2,
+            c2,
             d,
             e,
-            f,
+            f2,
           ) {
             invokeGuardedCallback.apply(this, arguments);
             if (hasError) {
@@ -9949,23 +9966,23 @@ window.pannellum = (function (E, g, p) {
           var StaticMask = LayoutStatic | PassiveStatic | RefStatic;
           var ReactCurrentOwner = ReactSharedInternals.ReactCurrentOwner;
           function getNearestMountedFiber(fiber) {
-            var node = fiber;
+            var node2 = fiber;
             var nearestMounted = fiber;
             if (!fiber.alternate) {
-              var nextNode = node;
+              var nextNode = node2;
               do {
-                node = nextNode;
-                if ((node.flags & (Placement | Hydrating)) !== NoFlags) {
-                  nearestMounted = node.return;
+                node2 = nextNode;
+                if ((node2.flags & (Placement | Hydrating)) !== NoFlags) {
+                  nearestMounted = node2.return;
                 }
-                nextNode = node.return;
+                nextNode = node2.return;
               } while (nextNode);
             } else {
-              while (node.return) {
-                node = node.return;
+              while (node2.return) {
+                node2 = node2.return;
               }
             }
-            if (node.tag === HostRoot) {
+            if (node2.tag === HostRoot) {
               return nearestMounted;
             }
             return null;
@@ -10033,10 +10050,10 @@ window.pannellum = (function (E, g, p) {
               }
               return fiber;
             }
-            var a = fiber;
-            var b = alternate;
+            var a2 = fiber;
+            var b2 = alternate;
             while (true) {
-              var parentA = a.return;
+              var parentA = a2.return;
               if (parentA === null) {
                 break;
               }
@@ -10044,7 +10061,7 @@ window.pannellum = (function (E, g, p) {
               if (parentB === null) {
                 var nextParent = parentA.return;
                 if (nextParent !== null) {
-                  a = b = nextParent;
+                  a2 = b2 = nextParent;
                   continue;
                 }
                 break;
@@ -10052,11 +10069,11 @@ window.pannellum = (function (E, g, p) {
               if (parentA.child === parentB.child) {
                 var child = parentA.child;
                 while (child) {
-                  if (child === a) {
+                  if (child === a2) {
                     assertIsMounted(parentA);
                     return fiber;
                   }
-                  if (child === b) {
+                  if (child === b2) {
                     assertIsMounted(parentA);
                     return alternate;
                   }
@@ -10066,23 +10083,23 @@ window.pannellum = (function (E, g, p) {
                   'Unable to find node on an unmounted component.',
                 );
               }
-              if (a.return !== b.return) {
-                a = parentA;
-                b = parentB;
+              if (a2.return !== b2.return) {
+                a2 = parentA;
+                b2 = parentB;
               } else {
                 var didFindChild = false;
                 var _child = parentA.child;
                 while (_child) {
-                  if (_child === a) {
+                  if (_child === a2) {
                     didFindChild = true;
-                    a = parentA;
-                    b = parentB;
+                    a2 = parentA;
+                    b2 = parentB;
                     break;
                   }
-                  if (_child === b) {
+                  if (_child === b2) {
                     didFindChild = true;
-                    b = parentA;
-                    a = parentB;
+                    b2 = parentA;
+                    a2 = parentB;
                     break;
                   }
                   _child = _child.sibling;
@@ -10090,16 +10107,16 @@ window.pannellum = (function (E, g, p) {
                 if (!didFindChild) {
                   _child = parentB.child;
                   while (_child) {
-                    if (_child === a) {
+                    if (_child === a2) {
                       didFindChild = true;
-                      a = parentB;
-                      b = parentA;
+                      a2 = parentB;
+                      b2 = parentA;
                       break;
                     }
-                    if (_child === b) {
+                    if (_child === b2) {
                       didFindChild = true;
-                      b = parentB;
-                      a = parentA;
+                      b2 = parentB;
+                      a2 = parentA;
                       break;
                     }
                     _child = _child.sibling;
@@ -10111,16 +10128,16 @@ window.pannellum = (function (E, g, p) {
                   }
                 }
               }
-              if (a.alternate !== b) {
+              if (a2.alternate !== b2) {
                 throw new Error(
                   "Return fibers should always be each others' alternates. This error is likely caused by a bug in React. Please file an issue.",
                 );
               }
             }
-            if (a.tag !== HostRoot) {
+            if (a2.tag !== HostRoot) {
               throw new Error('Unable to find node on an unmounted component.');
             }
-            if (a.stateNode.current === a) {
+            if (a2.stateNode.current === a2) {
               return fiber;
             }
             return alternate;
@@ -10131,15 +10148,15 @@ window.pannellum = (function (E, g, p) {
               ? findCurrentHostFiberImpl(currentParent)
               : null;
           }
-          function findCurrentHostFiberImpl(node) {
-            if (node.tag === HostComponent || node.tag === HostText) {
-              return node;
+          function findCurrentHostFiberImpl(node2) {
+            if (node2.tag === HostComponent || node2.tag === HostText) {
+              return node2;
             }
-            var child = node.child;
+            var child = node2.child;
             while (child !== null) {
-              var match = findCurrentHostFiberImpl(child);
-              if (match !== null) {
-                return match;
+              var match2 = findCurrentHostFiberImpl(child);
+              if (match2 !== null) {
+                return match2;
               }
               child = child.sibling;
             }
@@ -10151,16 +10168,16 @@ window.pannellum = (function (E, g, p) {
               ? findCurrentHostFiberWithNoPortalsImpl(currentParent)
               : null;
           }
-          function findCurrentHostFiberWithNoPortalsImpl(node) {
-            if (node.tag === HostComponent || node.tag === HostText) {
-              return node;
+          function findCurrentHostFiberWithNoPortalsImpl(node2) {
+            if (node2.tag === HostComponent || node2.tag === HostText) {
+              return node2;
             }
-            var child = node.child;
+            var child = node2.child;
             while (child !== null) {
               if (child.tag !== HostPortal) {
-                var match = findCurrentHostFiberWithNoPortalsImpl(child);
-                if (match !== null) {
-                  return match;
+                var match2 = findCurrentHostFiberWithNoPortalsImpl(child);
+                if (match2 !== null) {
+                  return match2;
                 }
               }
               child = child.sibling;
@@ -10206,7 +10223,7 @@ window.pannellum = (function (E, g, p) {
             }
             try {
               if (enableSchedulingProfiler) {
-                internals = assign({}, internals, {
+                internals = assign2({}, internals, {
                   getLaneLabelMap,
                   injectProfilingHooks,
                 });
@@ -10671,8 +10688,8 @@ window.pannellum = (function (E, g, p) {
           var clz32 = Math.clz32 ? Math.clz32 : clz32Fallback;
           var log = Math.log;
           var LN2 = Math.LN2;
-          function clz32Fallback(x) {
-            var asUint = x >>> 0;
+          function clz32Fallback(x2) {
+            var asUint = x2 >>> 0;
             if (asUint === 0) {
               return 32;
             }
@@ -11110,30 +11127,30 @@ window.pannellum = (function (E, g, p) {
           function laneToIndex(lane) {
             return pickArbitraryLaneIndex(lane);
           }
-          function includesSomeLane(a, b) {
-            return (a & b) !== NoLanes;
+          function includesSomeLane(a2, b2) {
+            return (a2 & b2) !== NoLanes;
           }
           function isSubsetOfLanes(set2, subset) {
             return (set2 & subset) === subset;
           }
-          function mergeLanes(a, b) {
-            return a | b;
+          function mergeLanes(a2, b2) {
+            return a2 | b2;
           }
           function removeLanes(set2, subset) {
             return set2 & ~subset;
           }
-          function intersectLanes(a, b) {
-            return a & b;
+          function intersectLanes(a2, b2) {
+            return a2 & b2;
           }
           function laneToLanes(lane) {
             return lane;
           }
-          function higherPriorityLane(a, b) {
-            return a !== NoLane && a < b ? a : b;
+          function higherPriorityLane(a2, b2) {
+            return a2 !== NoLane && a2 < b2 ? a2 : b2;
           }
           function createLaneMap(initial) {
             var laneMap = [];
-            for (var i = 0; i < TotalLanes; i++) {
+            for (var i2 = 0; i2 < TotalLanes; i2++) {
               laneMap.push(initial);
             }
             return laneMap;
@@ -11306,14 +11323,14 @@ window.pannellum = (function (E, g, p) {
               currentUpdatePriority = previousPriority;
             }
           }
-          function higherEventPriority(a, b) {
-            return a !== 0 && a < b ? a : b;
+          function higherEventPriority(a2, b2) {
+            return a2 !== 0 && a2 < b2 ? a2 : b2;
           }
-          function lowerEventPriority(a, b) {
-            return a === 0 || a > b ? a : b;
+          function lowerEventPriority(a2, b2) {
+            return a2 === 0 || a2 > b2 ? a2 : b2;
           }
-          function isHigherEventPriority(a, b) {
-            return a !== 0 && a < b;
+          function isHigherEventPriority(a2, b2) {
+            return a2 !== 0 && a2 < b2;
           }
           function lanesToEventPriority(lanes) {
             var lane = getHighestPriorityLane(lanes);
@@ -11593,19 +11610,19 @@ window.pannellum = (function (E, g, p) {
               target,
               priority: updatePriority,
             };
-            var i = 0;
-            for (; i < queuedExplicitHydrationTargets.length; i++) {
+            var i2 = 0;
+            for (; i2 < queuedExplicitHydrationTargets.length; i2++) {
               if (
                 !isHigherEventPriority(
                   updatePriority,
-                  queuedExplicitHydrationTargets[i].priority,
+                  queuedExplicitHydrationTargets[i2].priority,
                 )
               ) {
                 break;
               }
             }
-            queuedExplicitHydrationTargets.splice(i, 0, queuedTarget);
-            if (i === 0) {
+            queuedExplicitHydrationTargets.splice(i2, 0, queuedTarget);
+            if (i2 === 0) {
               attemptExplicitHydrationTarget(queuedTarget);
             }
           }
@@ -11694,8 +11711,8 @@ window.pannellum = (function (E, g, p) {
           function retryIfBlockedOn(unblocked) {
             if (queuedDiscreteEvents.length > 0) {
               scheduleCallbackIfUnblocked(queuedDiscreteEvents[0], unblocked);
-              for (var i = 1; i < queuedDiscreteEvents.length; i++) {
-                var queuedEvent = queuedDiscreteEvents[i];
+              for (var i2 = 1; i2 < queuedDiscreteEvents.length; i2++) {
+                var queuedEvent = queuedDiscreteEvents[i2];
                 if (queuedEvent.blockedOn === unblocked) {
                   queuedEvent.blockedOn = null;
                 }
@@ -12175,7 +12192,7 @@ window.pannellum = (function (E, g, p) {
               this.isPropagationStopped = functionThatReturnsFalse;
               return this;
             }
-            assign(SyntheticBaseEvent.prototype, {
+            assign2(SyntheticBaseEvent.prototype, {
               preventDefault: function () {
                 this.defaultPrevented = true;
                 var event = this.nativeEvent;
@@ -12227,7 +12244,7 @@ window.pannellum = (function (E, g, p) {
             isTrusted: 0,
           };
           var SyntheticEvent = createSyntheticEvent(EventInterface);
-          var UIEventInterface = assign({}, EventInterface, {
+          var UIEventInterface = assign2({}, EventInterface, {
             view: 0,
             detail: 0,
           });
@@ -12247,7 +12264,7 @@ window.pannellum = (function (E, g, p) {
               lastMouseEvent = event;
             }
           }
-          var MouseEventInterface = assign({}, UIEventInterface, {
+          var MouseEventInterface = assign2({}, UIEventInterface, {
             screenX: 0,
             screenY: 0,
             clientX: 0,
@@ -12283,15 +12300,15 @@ window.pannellum = (function (E, g, p) {
             },
           });
           var SyntheticMouseEvent = createSyntheticEvent(MouseEventInterface);
-          var DragEventInterface = assign({}, MouseEventInterface, {
+          var DragEventInterface = assign2({}, MouseEventInterface, {
             dataTransfer: 0,
           });
           var SyntheticDragEvent = createSyntheticEvent(DragEventInterface);
-          var FocusEventInterface = assign({}, UIEventInterface, {
+          var FocusEventInterface = assign2({}, UIEventInterface, {
             relatedTarget: 0,
           });
           var SyntheticFocusEvent = createSyntheticEvent(FocusEventInterface);
-          var AnimationEventInterface = assign({}, EventInterface, {
+          var AnimationEventInterface = assign2({}, EventInterface, {
             animationName: 0,
             elapsedTime: 0,
             pseudoElement: 0,
@@ -12299,7 +12316,7 @@ window.pannellum = (function (E, g, p) {
           var SyntheticAnimationEvent = createSyntheticEvent(
             AnimationEventInterface,
           );
-          var ClipboardEventInterface = assign({}, EventInterface, {
+          var ClipboardEventInterface = assign2({}, EventInterface, {
             clipboardData: function (event) {
               return 'clipboardData' in event
                 ? event.clipboardData
@@ -12309,7 +12326,7 @@ window.pannellum = (function (E, g, p) {
           var SyntheticClipboardEvent = createSyntheticEvent(
             ClipboardEventInterface,
           );
-          var CompositionEventInterface = assign({}, EventInterface, {
+          var CompositionEventInterface = assign2({}, EventInterface, {
             data: 0,
           });
           var SyntheticCompositionEvent = createSyntheticEvent(
@@ -12405,7 +12422,7 @@ window.pannellum = (function (E, g, p) {
           function getEventModifierState(nativeEvent) {
             return modifierStateGetter;
           }
-          var KeyboardEventInterface = assign({}, UIEventInterface, {
+          var KeyboardEventInterface = assign2({}, UIEventInterface, {
             key: getEventKey,
             code: 0,
             location: 0,
@@ -12442,7 +12459,7 @@ window.pannellum = (function (E, g, p) {
           var SyntheticKeyboardEvent = createSyntheticEvent(
             KeyboardEventInterface,
           );
-          var PointerEventInterface = assign({}, MouseEventInterface, {
+          var PointerEventInterface = assign2({}, MouseEventInterface, {
             pointerId: 0,
             width: 0,
             height: 0,
@@ -12457,7 +12474,7 @@ window.pannellum = (function (E, g, p) {
           var SyntheticPointerEvent = createSyntheticEvent(
             PointerEventInterface,
           );
-          var TouchEventInterface = assign({}, UIEventInterface, {
+          var TouchEventInterface = assign2({}, UIEventInterface, {
             touches: 0,
             targetTouches: 0,
             changedTouches: 0,
@@ -12468,7 +12485,7 @@ window.pannellum = (function (E, g, p) {
             getModifierState: getEventModifierState,
           });
           var SyntheticTouchEvent = createSyntheticEvent(TouchEventInterface);
-          var TransitionEventInterface = assign({}, EventInterface, {
+          var TransitionEventInterface = assign2({}, EventInterface, {
             propertyName: 0,
             elapsedTime: 0,
             pseudoElement: 0,
@@ -12476,7 +12493,7 @@ window.pannellum = (function (E, g, p) {
           var SyntheticTransitionEvent = createSyntheticEvent(
             TransitionEventInterface,
           );
-          var WheelEventInterface = assign({}, MouseEventInterface, {
+          var WheelEventInterface = assign2({}, MouseEventInterface, {
             deltaX: function (event) {
               return 'deltaX' in event
                 ? event.deltaX
@@ -12949,13 +12966,13 @@ window.pannellum = (function (E, g, p) {
               return getInstIfValueChanged(targetInst);
             }
           }
-          function handleControlledInputBlur(node) {
-            var state = node._wrapperState;
-            if (!state || !state.controlled || node.type !== 'number') {
+          function handleControlledInputBlur(node2) {
+            var state = node2._wrapperState;
+            if (!state || !state.controlled || node2.type !== 'number') {
               return;
             }
             {
-              setDefaultValue(node, 'number', node.value);
+              setDefaultValue(node2, 'number', node2.value);
             }
           }
           function extractEvents$1(
@@ -13053,11 +13070,11 @@ window.pannellum = (function (E, g, p) {
                 win = window;
               }
             }
-            var from;
+            var from2;
             var to;
             if (isOutEvent) {
               var _related = nativeEvent.relatedTarget || nativeEvent.toElement;
-              from = targetInst;
+              from2 = targetInst;
               to = _related ? getClosestInstanceFromNode(_related) : null;
               if (to !== null) {
                 var nearestMounted = getNearestMountedFiber(to);
@@ -13069,10 +13086,10 @@ window.pannellum = (function (E, g, p) {
                 }
               }
             } else {
-              from = null;
+              from2 = null;
               to = targetInst;
             }
-            if (from === to) {
+            if (from2 === to) {
               return;
             }
             var SyntheticEventCtor = SyntheticMouseEvent;
@@ -13088,12 +13105,12 @@ window.pannellum = (function (E, g, p) {
               enterEventType = 'onPointerEnter';
               eventTypePrefix = 'pointer';
             }
-            var fromNode = from == null ? win : getNodeFromInstance(from);
+            var fromNode = from2 == null ? win : getNodeFromInstance(from2);
             var toNode = to == null ? win : getNodeFromInstance(to);
             var leave = new SyntheticEventCtor(
               leaveEventType,
               eventTypePrefix + 'leave',
-              from,
+              from2,
               nativeEvent,
               nativeEventTarget,
             );
@@ -13118,13 +13135,14 @@ window.pannellum = (function (E, g, p) {
               dispatchQueue,
               leave,
               enter,
-              from,
+              from2,
               to,
             );
           }
-          function is(x, y) {
+          function is(x2, y2) {
             return (
-              (x === y && (x !== 0 || 1 / x === 1 / y)) || (x !== x && y !== y)
+              (x2 === y2 && (x2 !== 0 || 1 / x2 === 1 / y2)) ||
+              (x2 !== x2 && y2 !== y2)
             );
           }
           var objectIs = typeof Object.is === 'function' ? Object.is : is;
@@ -13145,8 +13163,8 @@ window.pannellum = (function (E, g, p) {
             if (keysA.length !== keysB.length) {
               return false;
             }
-            for (var i = 0; i < keysA.length; i++) {
-              var currentKey = keysA[i];
+            for (var i2 = 0; i2 < keysA.length; i2++) {
+              var currentKey = keysA[i2];
               if (
                 !hasOwnProperty.call(objB, currentKey) ||
                 !objectIs(objA[currentKey], objB[currentKey])
@@ -13156,36 +13174,36 @@ window.pannellum = (function (E, g, p) {
             }
             return true;
           }
-          function getLeafNode(node) {
-            while (node && node.firstChild) {
-              node = node.firstChild;
+          function getLeafNode(node2) {
+            while (node2 && node2.firstChild) {
+              node2 = node2.firstChild;
             }
-            return node;
+            return node2;
           }
-          function getSiblingNode(node) {
-            while (node) {
-              if (node.nextSibling) {
-                return node.nextSibling;
+          function getSiblingNode(node2) {
+            while (node2) {
+              if (node2.nextSibling) {
+                return node2.nextSibling;
               }
-              node = node.parentNode;
+              node2 = node2.parentNode;
             }
           }
           function getNodeForCharacterOffset(root3, offset) {
-            var node = getLeafNode(root3);
+            var node2 = getLeafNode(root3);
             var nodeStart = 0;
             var nodeEnd = 0;
-            while (node) {
-              if (node.nodeType === TEXT_NODE) {
-                nodeEnd = nodeStart + node.textContent.length;
+            while (node2) {
+              if (node2.nodeType === TEXT_NODE) {
+                nodeEnd = nodeStart + node2.textContent.length;
                 if (nodeStart <= offset && nodeEnd >= offset) {
                   return {
-                    node,
+                    node: node2,
                     offset: offset - nodeStart,
                   };
                 }
                 nodeStart = nodeEnd;
               }
-              node = getLeafNode(getSiblingNode(node));
+              node2 = getLeafNode(getSiblingNode(node2));
             }
           }
           function getOffsets(outerNode) {
@@ -13220,60 +13238,60 @@ window.pannellum = (function (E, g, p) {
             focusNode,
             focusOffset,
           ) {
-            var length = 0;
+            var length2 = 0;
             var start = -1;
             var end = -1;
             var indexWithinAnchor = 0;
             var indexWithinFocus = 0;
-            var node = outerNode;
+            var node2 = outerNode;
             var parentNode = null;
             outer: while (true) {
-              var next = null;
+              var next2 = null;
               while (true) {
                 if (
-                  node === anchorNode &&
-                  (anchorOffset === 0 || node.nodeType === TEXT_NODE)
+                  node2 === anchorNode &&
+                  (anchorOffset === 0 || node2.nodeType === TEXT_NODE)
                 ) {
-                  start = length + anchorOffset;
+                  start = length2 + anchorOffset;
                 }
                 if (
-                  node === focusNode &&
-                  (focusOffset === 0 || node.nodeType === TEXT_NODE)
+                  node2 === focusNode &&
+                  (focusOffset === 0 || node2.nodeType === TEXT_NODE)
                 ) {
-                  end = length + focusOffset;
+                  end = length2 + focusOffset;
                 }
-                if (node.nodeType === TEXT_NODE) {
-                  length += node.nodeValue.length;
+                if (node2.nodeType === TEXT_NODE) {
+                  length2 += node2.nodeValue.length;
                 }
-                if ((next = node.firstChild) === null) {
+                if ((next2 = node2.firstChild) === null) {
                   break;
                 }
-                parentNode = node;
-                node = next;
+                parentNode = node2;
+                node2 = next2;
               }
               while (true) {
-                if (node === outerNode) {
+                if (node2 === outerNode) {
                   break outer;
                 }
                 if (
                   parentNode === anchorNode &&
                   ++indexWithinAnchor === anchorOffset
                 ) {
-                  start = length;
+                  start = length2;
                 }
                 if (
                   parentNode === focusNode &&
                   ++indexWithinFocus === focusOffset
                 ) {
-                  end = length;
+                  end = length2;
                 }
-                if ((next = node.nextSibling) !== null) {
+                if ((next2 = node2.nextSibling) !== null) {
                   break;
                 }
-                node = parentNode;
-                parentNode = node.parentNode;
+                node2 = parentNode;
+                parentNode = node2.parentNode;
               }
-              node = next;
+              node2 = next2;
             }
             if (start === -1 || end === -1) {
               return null;
@@ -13283,24 +13301,24 @@ window.pannellum = (function (E, g, p) {
               end,
             };
           }
-          function setOffsets(node, offsets) {
-            var doc = node.ownerDocument || document;
+          function setOffsets(node2, offsets) {
+            var doc = node2.ownerDocument || document;
             var win = (doc && doc.defaultView) || window;
             if (!win.getSelection) {
               return;
             }
             var selection = win.getSelection();
-            var length = node.textContent.length;
-            var start = Math.min(offsets.start, length);
+            var length2 = node2.textContent.length;
+            var start = Math.min(offsets.start, length2);
             var end =
-              offsets.end === void 0 ? start : Math.min(offsets.end, length);
+              offsets.end === void 0 ? start : Math.min(offsets.end, length2);
             if (!selection.extend && start > end) {
               var temp = end;
               end = start;
               start = temp;
             }
-            var startMarker = getNodeForCharacterOffset(node, start);
-            var endMarker = getNodeForCharacterOffset(node, end);
+            var startMarker = getNodeForCharacterOffset(node2, start);
+            var endMarker = getNodeForCharacterOffset(node2, end);
             if (startMarker && endMarker) {
               if (
                 selection.rangeCount === 1 &&
@@ -13323,8 +13341,8 @@ window.pannellum = (function (E, g, p) {
               }
             }
           }
-          function isTextNode(node) {
-            return node && node.nodeType === TEXT_NODE;
+          function isTextNode(node2) {
+            return node2 && node2.nodeType === TEXT_NODE;
           }
           function containsNode(outerNode, innerNode) {
             if (!outerNode || !innerNode) {
@@ -13343,11 +13361,11 @@ window.pannellum = (function (E, g, p) {
               return false;
             }
           }
-          function isInDocument(node) {
+          function isInDocument(node2) {
             return (
-              node &&
-              node.ownerDocument &&
-              containsNode(node.ownerDocument.documentElement, node)
+              node2 &&
+              node2.ownerDocument &&
+              containsNode(node2.ownerDocument.documentElement, node2)
             );
           }
           function isSameOriginFrame(iframe) {
@@ -13421,8 +13439,8 @@ window.pannellum = (function (E, g, p) {
               if (typeof priorFocusedElem.focus === 'function') {
                 priorFocusedElem.focus();
               }
-              for (var i = 0; i < ancestors.length; i++) {
-                var info = ancestors[i];
+              for (var i2 = 0; i2 < ancestors.length; i2++) {
+                var info = ancestors[i2];
                 info.element.scrollLeft = info.left;
                 info.element.scrollTop = info.top;
               }
@@ -13479,15 +13497,15 @@ window.pannellum = (function (E, g, p) {
           var activeElementInst$1 = null;
           var lastSelection = null;
           var mouseDown = false;
-          function getSelection$1(node) {
-            if ('selectionStart' in node && hasSelectionCapabilities(node)) {
+          function getSelection$1(node2) {
+            if ('selectionStart' in node2 && hasSelectionCapabilities(node2)) {
               return {
-                start: node.selectionStart,
-                end: node.selectionEnd,
+                start: node2.selectionStart,
+                end: node2.selectionEnd,
               };
             } else {
               var win =
-                (node.ownerDocument && node.ownerDocument.defaultView) ||
+                (node2.ownerDocument && node2.ownerDocument.defaultView) ||
                 window;
               var selection = win.getSelection();
               return {
@@ -13722,8 +13740,8 @@ window.pannellum = (function (E, g, p) {
             registerTwoPhaseEvent(reactName, [domEventName]);
           }
           function registerSimpleEvents() {
-            for (var i = 0; i < simpleEventPluginEvents.length; i++) {
-              var eventName = simpleEventPluginEvents[i];
+            for (var i2 = 0; i2 < simpleEventPluginEvents.length; i2++) {
+              var eventName = simpleEventPluginEvents[i2];
               var domEventName = eventName.toLowerCase();
               var capitalizedEvent =
                 eventName[0].toUpperCase() + eventName.slice(1);
@@ -13968,8 +13986,8 @@ window.pannellum = (function (E, g, p) {
           ) {
             var previousInstance;
             if (inCapturePhase) {
-              for (var i = dispatchListeners.length - 1; i >= 0; i--) {
-                var _dispatchListeners$i = dispatchListeners[i],
+              for (var i2 = dispatchListeners.length - 1; i2 >= 0; i2--) {
+                var _dispatchListeners$i = dispatchListeners[i2],
                   instance = _dispatchListeners$i.instance,
                   currentTarget = _dispatchListeners$i.currentTarget,
                   listener = _dispatchListeners$i.listener;
@@ -14001,8 +14019,8 @@ window.pannellum = (function (E, g, p) {
           }
           function processDispatchQueue(dispatchQueue, eventSystemFlags) {
             var inCapturePhase = (eventSystemFlags & IS_CAPTURE_PHASE) !== 0;
-            for (var i = 0; i < dispatchQueue.length; i++) {
-              var _dispatchQueue$i = dispatchQueue[i],
+            for (var i2 = 0; i2 < dispatchQueue.length; i2++) {
+              var _dispatchQueue$i = dispatchQueue[i2],
                 event = _dispatchQueue$i.event,
                 listeners = _dispatchQueue$i.listeners;
               processDispatchQueueItemsInOrder(
@@ -14190,21 +14208,21 @@ window.pannellum = (function (E, g, p) {
             ) {
               var targetContainerNode = targetContainer;
               if (targetInst !== null) {
-                var node = targetInst;
+                var node2 = targetInst;
                 mainLoop: while (true) {
-                  if (node === null) {
+                  if (node2 === null) {
                     return;
                   }
-                  var nodeTag = node.tag;
+                  var nodeTag = node2.tag;
                   if (nodeTag === HostRoot || nodeTag === HostPortal) {
-                    var container2 = node.stateNode.containerInfo;
+                    var container2 = node2.stateNode.containerInfo;
                     if (
                       isMatchingRootContainer(container2, targetContainerNode)
                     ) {
                       break;
                     }
                     if (nodeTag === HostPortal) {
-                      var grandNode = node.return;
+                      var grandNode = node2.return;
                       while (grandNode !== null) {
                         var grandTag = grandNode.tag;
                         if (grandTag === HostRoot || grandTag === HostPortal) {
@@ -14232,13 +14250,13 @@ window.pannellum = (function (E, g, p) {
                         parentTag === HostComponent ||
                         parentTag === HostText
                       ) {
-                        node = ancestorInst = parentNode;
+                        node2 = ancestorInst = parentNode;
                         continue mainLoop;
                       }
                       container2 = container2.parentNode;
                     }
                   }
-                  node = node.return;
+                  node2 = node2.return;
                 }
               }
             }
@@ -14436,15 +14454,16 @@ window.pannellum = (function (E, g, p) {
             dispatchQueue,
             leaveEvent,
             enterEvent,
-            from,
+            from2,
             to,
           ) {
-            var common = from && to ? getLowestCommonAncestor(from, to) : null;
-            if (from !== null) {
+            var common =
+              from2 && to ? getLowestCommonAncestor(from2, to) : null;
+            if (from2 !== null) {
               accumulateEnterLeaveListenersForEvent(
                 dispatchQueue,
                 leaveEvent,
-                from,
+                from2,
                 common,
                 false,
               );
@@ -14613,8 +14632,8 @@ window.pannellum = (function (E, g, p) {
               : rootContainerElement.ownerDocument;
           }
           function noop2() {}
-          function trapClickOnNonInteractiveElement(node) {
-            node.onclick = noop2;
+          function trapClickOnNonInteractiveElement(node2) {
+            node2.onclick = noop2;
           }
           function setInitialDOMProperties(
             tag,
@@ -14679,9 +14698,9 @@ window.pannellum = (function (E, g, p) {
             wasCustomComponentTag,
             isCustomComponentTag,
           ) {
-            for (var i = 0; i < updatePayload.length; i += 2) {
-              var propKey = updatePayload[i];
-              var propValue = updatePayload[i + 1];
+            for (var i2 = 0; i2 < updatePayload.length; i2 += 2) {
+              var propKey = updatePayload[i2];
+              var propValue = updatePayload[i2 + 1];
               if (propKey === STYLE) {
                 setValueForStyles(domElement, propValue);
               } else if (propKey === DANGEROUSLY_SET_INNER_HTML) {
@@ -14734,11 +14753,11 @@ window.pannellum = (function (E, g, p) {
               } else {
                 domElement = ownerDocument.createElement(type);
                 if (type === 'select') {
-                  var node = domElement;
+                  var node2 = domElement;
                   if (props.multiple) {
-                    node.multiple = true;
+                    node2.multiple = true;
                   } else if (props.size) {
-                    node.size = props.size;
+                    node2.size = props.size;
                   }
                 }
               }
@@ -14793,8 +14812,8 @@ window.pannellum = (function (E, g, p) {
                 break;
               case 'video':
               case 'audio':
-                for (var i = 0; i < mediaEventTypes.length; i++) {
-                  listenToNonDelegatedEvent(mediaEventTypes[i], domElement);
+                for (var i2 = 0; i2 < mediaEventTypes.length; i2++) {
+                  listenToNonDelegatedEvent(mediaEventTypes[i2], domElement);
                 }
                 props = rawProps;
                 break;
@@ -15114,8 +15133,8 @@ window.pannellum = (function (E, g, p) {
                 break;
               case 'video':
               case 'audio':
-                for (var i = 0; i < mediaEventTypes.length; i++) {
-                  listenToNonDelegatedEvent(mediaEventTypes[i], domElement);
+                for (var i2 = 0; i2 < mediaEventTypes.length; i2++) {
+                  listenToNonDelegatedEvent(mediaEventTypes[i2], domElement);
                 }
                 break;
               case 'source':
@@ -15545,7 +15564,7 @@ window.pannellum = (function (E, g, p) {
               dlItemTagAutoclosing: null,
             };
             updatedAncestorInfo = function (oldInfo, tag) {
-              var ancestorInfo = assign({}, oldInfo || emptyAncestorInfo);
+              var ancestorInfo = assign2({}, oldInfo || emptyAncestorInfo);
               var info = {
                 tag,
               };
@@ -16113,11 +16132,11 @@ window.pannellum = (function (E, g, p) {
             }
           }
           function clearSuspenseBoundary(parentInstance, suspenseInstance) {
-            var node = suspenseInstance;
+            var node2 = suspenseInstance;
             var depth = 0;
             do {
-              var nextNode = node.nextSibling;
-              parentInstance.removeChild(node);
+              var nextNode = node2.nextSibling;
+              parentInstance.removeChild(node2);
               if (nextNode && nextNode.nodeType === COMMENT_NODE) {
                 var data = nextNode.data;
                 if (data === SUSPENSE_END_DATA) {
@@ -16136,8 +16155,8 @@ window.pannellum = (function (E, g, p) {
                   depth++;
                 }
               }
-              node = nextNode;
-            } while (node);
+              node2 = nextNode;
+            } while (node2);
             retryIfBlockedOn(suspenseInstance);
           }
           function clearSuspenseBoundaryFromContainer(
@@ -16234,14 +16253,14 @@ window.pannellum = (function (E, g, p) {
           function registerSuspenseInstanceRetry(instance, callback) {
             instance._reactRetry = callback;
           }
-          function getNextHydratable(node) {
-            for (; node != null; node = node.nextSibling) {
-              var nodeType = node.nodeType;
+          function getNextHydratable(node2) {
+            for (; node2 != null; node2 = node2.nextSibling) {
+              var nodeType = node2.nodeType;
               if (nodeType === ELEMENT_NODE || nodeType === TEXT_NODE) {
                 break;
               }
               if (nodeType === COMMENT_NODE) {
-                var nodeData = node.data;
+                var nodeData = node2.data;
                 if (
                   nodeData === SUSPENSE_START_DATA ||
                   nodeData === SUSPENSE_FALLBACK_START_DATA ||
@@ -16254,7 +16273,7 @@ window.pannellum = (function (E, g, p) {
                 }
               }
             }
-            return node;
+            return node2;
           }
           function getNextHydratableSibling(instance) {
             return getNextHydratable(instance.nextSibling);
@@ -16318,14 +16337,14 @@ window.pannellum = (function (E, g, p) {
           function getNextHydratableInstanceAfterSuspenseInstance(
             suspenseInstance,
           ) {
-            var node = suspenseInstance.nextSibling;
+            var node2 = suspenseInstance.nextSibling;
             var depth = 0;
-            while (node) {
-              if (node.nodeType === COMMENT_NODE) {
-                var data = node.data;
+            while (node2) {
+              if (node2.nodeType === COMMENT_NODE) {
+                var data = node2.data;
                 if (data === SUSPENSE_END_DATA) {
                   if (depth === 0) {
-                    return getNextHydratableSibling(node);
+                    return getNextHydratableSibling(node2);
                   } else {
                     depth--;
                   }
@@ -16337,23 +16356,23 @@ window.pannellum = (function (E, g, p) {
                   depth++;
                 }
               }
-              node = node.nextSibling;
+              node2 = node2.nextSibling;
             }
             return null;
           }
           function getParentSuspenseInstance(targetInstance) {
-            var node = targetInstance.previousSibling;
+            var node2 = targetInstance.previousSibling;
             var depth = 0;
-            while (node) {
-              if (node.nodeType === COMMENT_NODE) {
-                var data = node.data;
+            while (node2) {
+              if (node2.nodeType === COMMENT_NODE) {
+                var data = node2.data;
                 if (
                   data === SUSPENSE_START_DATA ||
                   data === SUSPENSE_FALLBACK_START_DATA ||
                   data === SUSPENSE_PENDING_START_DATA
                 ) {
                   if (depth === 0) {
-                    return node;
+                    return node2;
                   } else {
                     depth--;
                   }
@@ -16361,7 +16380,7 @@ window.pannellum = (function (E, g, p) {
                   depth++;
                 }
               }
-              node = node.previousSibling;
+              node2 = node2.previousSibling;
             }
             return null;
           }
@@ -16546,24 +16565,24 @@ window.pannellum = (function (E, g, p) {
           var internalEventHandlerListenersKey =
             '__reactListeners$' + randomKey;
           var internalEventHandlesSetKey = '__reactHandles$' + randomKey;
-          function detachDeletedInstance(node) {
-            delete node[internalInstanceKey];
-            delete node[internalPropsKey];
-            delete node[internalEventHandlersKey];
-            delete node[internalEventHandlerListenersKey];
-            delete node[internalEventHandlesSetKey];
+          function detachDeletedInstance(node2) {
+            delete node2[internalInstanceKey];
+            delete node2[internalPropsKey];
+            delete node2[internalEventHandlersKey];
+            delete node2[internalEventHandlerListenersKey];
+            delete node2[internalEventHandlesSetKey];
           }
-          function precacheFiberNode(hostInst, node) {
-            node[internalInstanceKey] = hostInst;
+          function precacheFiberNode(hostInst, node2) {
+            node2[internalInstanceKey] = hostInst;
           }
-          function markContainerAsRoot(hostRoot, node) {
-            node[internalContainerInstanceKey] = hostRoot;
+          function markContainerAsRoot(hostRoot, node2) {
+            node2[internalContainerInstanceKey] = hostRoot;
           }
-          function unmarkContainerAsRoot(node) {
-            node[internalContainerInstanceKey] = null;
+          function unmarkContainerAsRoot(node2) {
+            node2[internalContainerInstanceKey] = null;
           }
-          function isContainerMarkedAsRoot(node) {
-            return !!node[internalContainerInstanceKey];
+          function isContainerMarkedAsRoot(node2) {
+            return !!node2[internalContainerInstanceKey];
           }
           function getClosestInstanceFromNode(targetNode) {
             var targetInst = targetNode[internalInstanceKey];
@@ -16599,9 +16618,9 @@ window.pannellum = (function (E, g, p) {
             }
             return null;
           }
-          function getInstanceFromNode(node) {
+          function getInstanceFromNode(node2) {
             var inst =
-              node[internalInstanceKey] || node[internalContainerInstanceKey];
+              node2[internalInstanceKey] || node2[internalContainerInstanceKey];
             if (inst) {
               if (
                 inst.tag === HostComponent ||
@@ -16622,16 +16641,16 @@ window.pannellum = (function (E, g, p) {
             }
             throw new Error('getNodeFromInstance: Invalid argument.');
           }
-          function getFiberCurrentPropsFromNode(node) {
-            return node[internalPropsKey] || null;
+          function getFiberCurrentPropsFromNode(node2) {
+            return node2[internalPropsKey] || null;
           }
-          function updateFiberProps(node, props) {
-            node[internalPropsKey] = props;
+          function updateFiberProps(node2, props) {
+            node2[internalPropsKey] = props;
           }
-          function getEventListenerSet(node) {
-            var elementListenerSet = node[internalEventHandlersKey];
+          function getEventListenerSet(node2) {
+            var elementListenerSet = node2[internalEventHandlersKey];
             if (elementListenerSet === void 0) {
-              elementListenerSet = node[internalEventHandlersKey] =
+              elementListenerSet = node2[internalEventHandlersKey] =
                 /* @__PURE__ */ new Set();
             }
             return elementListenerSet;
@@ -16657,7 +16676,7 @@ window.pannellum = (function (E, g, p) {
           function checkPropTypes(
             typeSpecs,
             values2,
-            location2,
+            location,
             componentName,
             element,
           ) {
@@ -16671,7 +16690,7 @@ window.pannellum = (function (E, g, p) {
                       var err2 = Error(
                         (componentName || 'React class') +
                           ': ' +
-                          location2 +
+                          location +
                           ' type `' +
                           typeSpecName +
                           '` is invalid; it must be a function, usually from the `prop-types` package, but received `' +
@@ -16685,7 +16704,7 @@ window.pannellum = (function (E, g, p) {
                       values2,
                       typeSpecName,
                       componentName,
-                      location2,
+                      location,
                       null,
                       'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED',
                     );
@@ -16697,7 +16716,7 @@ window.pannellum = (function (E, g, p) {
                     error(
                       '%s: type specification of %s `%s` is invalid; the type checker function must return `null` or an `Error` but returned a %s. You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument).',
                       componentName || 'React class',
-                      location2,
+                      location,
                       typeSpecName,
                       typeof error$1,
                     );
@@ -16709,7 +16728,7 @@ window.pannellum = (function (E, g, p) {
                   ) {
                     loggedTypeFailures[error$1.message] = true;
                     setCurrentlyValidatingElement(element);
-                    error('Failed %s type: %s', location2, error$1.message);
+                    error('Failed %s type: %s', location, error$1.message);
                     setCurrentlyValidatingElement(null);
                   }
                 }
@@ -16893,7 +16912,7 @@ window.pannellum = (function (E, g, p) {
                   name,
                 );
               }
-              return assign({}, parentContext, childContext);
+              return assign2({}, parentContext, childContext);
             }
           }
           function pushContextProvider(workInProgress2) {
@@ -16950,22 +16969,22 @@ window.pannellum = (function (E, g, p) {
                   'Expected subtree parent to be a mounted class component. This error is likely caused by a bug in React. Please file an issue.',
                 );
               }
-              var node = fiber;
+              var node2 = fiber;
               do {
-                switch (node.tag) {
+                switch (node2.tag) {
                   case HostRoot:
-                    return node.stateNode.context;
+                    return node2.stateNode.context;
                   case ClassComponent: {
-                    var Component = node.type;
+                    var Component = node2.type;
                     if (isContextProvider(Component)) {
-                      return node.stateNode
+                      return node2.stateNode
                         .__reactInternalMemoizedMergedChildContext;
                     }
                     break;
                   }
                 }
-                node = node.return;
-              } while (node !== null);
+                node2 = node2.return;
+              } while (node2 !== null);
               throw new Error(
                 'Found unexpected detached subtree parent. This error is likely caused by a bug in React. Please file an issue.',
               );
@@ -16995,14 +17014,14 @@ window.pannellum = (function (E, g, p) {
           function flushSyncCallbacks() {
             if (!isFlushingSyncQueue && syncQueue !== null) {
               isFlushingSyncQueue = true;
-              var i = 0;
+              var i2 = 0;
               var previousUpdatePriority = getCurrentUpdatePriority();
               try {
                 var isSync = true;
                 var queue = syncQueue;
                 setCurrentUpdatePriority(DiscreteEventPriority);
-                for (; i < queue.length; i++) {
-                  var callback = queue[i];
+                for (; i2 < queue.length; i2++) {
+                  var callback = queue[i2];
                   do {
                     callback = callback(isSync);
                   } while (callback !== null);
@@ -17011,7 +17030,7 @@ window.pannellum = (function (E, g, p) {
                 includesLegacySyncCallbacks = false;
               } catch (error2) {
                 if (syncQueue !== null) {
-                  syncQueue = syncQueue.slice(i + 1);
+                  syncQueue = syncQueue.slice(i2 + 1);
                 }
                 scheduleCallback(ImmediatePriority, flushSyncCallbacks);
                 throw error2;
@@ -17063,8 +17082,8 @@ window.pannellum = (function (E, g, p) {
             var baseLength = getBitLength(baseIdWithLeadingBit) - 1;
             var baseId = baseIdWithLeadingBit & ~(1 << baseLength);
             var slot = index2 + 1;
-            var length = getBitLength(totalChildren) + baseLength;
-            if (length > 30) {
+            var length2 = getBitLength(totalChildren) + baseLength;
+            if (length2 > 30) {
               var numberOfOverflowBits = baseLength - (baseLength % 5);
               var newOverflowBits = (1 << numberOfOverflowBits) - 1;
               var newOverflow = (baseId & newOverflowBits).toString(32);
@@ -17080,7 +17099,7 @@ window.pannellum = (function (E, g, p) {
               var newBits = slot << baseLength;
               var _id = newBits | baseId;
               var _overflow = baseOverflow;
-              treeContextId = (1 << length) | _id;
+              treeContextId = (1 << length2) | _id;
               treeContextOverflow = _overflow;
             }
           }
@@ -17629,12 +17648,12 @@ window.pannellum = (function (E, g, p) {
           {
             var findStrictRoot = function (fiber) {
               var maybeStrictRoot = null;
-              var node = fiber;
-              while (node !== null) {
-                if (node.mode & StrictLegacyMode) {
-                  maybeStrictRoot = node;
+              var node2 = fiber;
+              while (node2 !== null) {
+                if (node2.mode & StrictLegacyMode) {
+                  maybeStrictRoot = node2;
                 }
-                node = node.return;
+                node2 = node2.return;
               }
               return maybeStrictRoot;
             };
@@ -17899,7 +17918,7 @@ window.pannellum = (function (E, g, p) {
           }
           function resolveDefaultProps(Component, baseProps) {
             if (Component && Component.defaultProps) {
-              var props = assign({}, baseProps);
+              var props = assign2({}, baseProps);
               var defaultProps = Component.defaultProps;
               for (var propName in defaultProps) {
                 if (props[propName] === void 0) {
@@ -17969,11 +17988,11 @@ window.pannellum = (function (E, g, p) {
             renderLanes2,
             propagationRoot,
           ) {
-            var node = parent;
-            while (node !== null) {
-              var alternate = node.alternate;
-              if (!isSubsetOfLanes(node.childLanes, renderLanes2)) {
-                node.childLanes = mergeLanes(node.childLanes, renderLanes2);
+            var node2 = parent;
+            while (node2 !== null) {
+              var alternate = node2.alternate;
+              if (!isSubsetOfLanes(node2.childLanes, renderLanes2)) {
+                node2.childLanes = mergeLanes(node2.childLanes, renderLanes2);
                 if (alternate !== null) {
                   alternate.childLanes = mergeLanes(
                     alternate.childLanes,
@@ -17989,13 +18008,13 @@ window.pannellum = (function (E, g, p) {
                   renderLanes2,
                 );
               }
-              if (node === propagationRoot) {
+              if (node2 === propagationRoot) {
                 break;
               }
-              node = node.return;
+              node2 = node2.return;
             }
             {
-              if (node !== propagationRoot) {
+              if (node2 !== propagationRoot) {
                 error(
                   'Expected to find the propagation root when scheduling context work. This error is likely caused by a bug in React. Please file an issue.',
                 );
@@ -18177,8 +18196,8 @@ window.pannellum = (function (E, g, p) {
           }
           function finishQueueingConcurrentUpdates() {
             if (concurrentQueues !== null) {
-              for (var i = 0; i < concurrentQueues.length; i++) {
-                var queue = concurrentQueues[i];
+              for (var i2 = 0; i2 < concurrentQueues.length; i2++) {
+                var queue = concurrentQueues[i2];
                 var lastInterleavedUpdate = queue.interleaved;
                 if (lastInterleavedUpdate !== null) {
                   queue.interleaved = null;
@@ -18254,7 +18273,7 @@ window.pannellum = (function (E, g, p) {
                 warnAboutUpdateOnNotYetMountedFiberInDEV(sourceFiber);
               }
             }
-            var node = sourceFiber;
+            var node2 = sourceFiber;
             var parent = sourceFiber.return;
             while (parent !== null) {
               parent.childLanes = mergeLanes(parent.childLanes, lane);
@@ -18268,11 +18287,11 @@ window.pannellum = (function (E, g, p) {
                   }
                 }
               }
-              node = parent;
+              node2 = parent;
               parent = parent.return;
             }
-            if (node.tag === HostRoot) {
-              var root3 = node.stateNode;
+            if (node2.tag === HostRoot) {
+              var root3 = node2.stateNode;
               return root3;
             } else {
               return null;
@@ -18494,7 +18513,7 @@ window.pannellum = (function (E, g, p) {
                 if (partialState === null || partialState === void 0) {
                   return prevState;
                 }
-                return assign({}, prevState, partialState);
+                return assign2({}, prevState, partialState);
               }
               case ForceUpdate: {
                 hasForceUpdate = true;
@@ -18664,8 +18683,8 @@ window.pannellum = (function (E, g, p) {
             var effects = finishedQueue.effects;
             finishedQueue.effects = null;
             if (effects !== null) {
-              for (var i = 0; i < effects.length; i++) {
-                var effect = effects[i];
+              for (var i2 = 0; i2 < effects.length; i2++) {
+                var effect = effects[i2];
                 var callback = effect.callback;
                 if (callback !== null) {
                   effect.callback = null;
@@ -18762,7 +18781,7 @@ window.pannellum = (function (E, g, p) {
             var memoizedState =
               partialState === null || partialState === void 0
                 ? prevState
-                : assign({}, prevState, partialState);
+                : assign2({}, prevState, partialState);
             workInProgress2.memoizedState = memoizedState;
             if (workInProgress2.lanes === NoLanes) {
               var updateQueue = workInProgress2.updateQueue;
@@ -19994,7 +20013,7 @@ window.pannellum = (function (E, g, p) {
               lanes,
               key,
             ) {
-              if (current2 === null || current2.tag !== Fragment) {
+              if (current2 === null || current2.tag !== Fragment4) {
                 var created = createFiberFromFragment(
                   fragment,
                   returnFiber.mode,
@@ -20261,8 +20280,8 @@ window.pannellum = (function (E, g, p) {
             ) {
               {
                 var knownKeys = null;
-                for (var i = 0; i < newChildren.length; i++) {
-                  var child = newChildren[i];
+                for (var i2 = 0; i2 < newChildren.length; i2++) {
+                  var child = newChildren[i2];
                   knownKeys = warnOnInvalidKey(child, knownKeys, returnFiber);
                 }
               }
@@ -20591,7 +20610,7 @@ window.pannellum = (function (E, g, p) {
                 if (child.key === key) {
                   var elementType = element.type;
                   if (elementType === REACT_FRAGMENT_TYPE) {
-                    if (child.tag === Fragment) {
+                    if (child.tag === Fragment4) {
                       deleteRemainingChildren(returnFiber, child.sibling);
                       var existing = useFiber(child, element.props.children);
                       existing.return = returnFiber;
@@ -20812,13 +20831,13 @@ window.pannellum = (function (E, g, p) {
           var contextStackCursor$1 = createCursor(NO_CONTEXT);
           var contextFiberStackCursor = createCursor(NO_CONTEXT);
           var rootInstanceStackCursor = createCursor(NO_CONTEXT);
-          function requiredContext(c) {
-            if (c === NO_CONTEXT) {
+          function requiredContext(c2) {
+            if (c2 === NO_CONTEXT) {
               throw new Error(
                 'Expected host context to exist. This error is likely caused by a bug in React. Please file an issue.',
               );
             }
-            return c;
+            return c2;
           }
           function getRootHostContainer() {
             var rootInstance = requiredContext(rootInstanceStackCursor.current);
@@ -20897,10 +20916,10 @@ window.pannellum = (function (E, g, p) {
             }
           }
           function findFirstSuspended(row) {
-            var node = row;
-            while (node !== null) {
-              if (node.tag === SuspenseComponent) {
-                var state = node.memoizedState;
+            var node2 = row;
+            while (node2 !== null) {
+              if (node2.tag === SuspenseComponent) {
+                var state = node2.memoizedState;
                 if (state !== null) {
                   var dehydrated = state.dehydrated;
                   if (
@@ -20908,34 +20927,34 @@ window.pannellum = (function (E, g, p) {
                     isSuspenseInstancePending(dehydrated) ||
                     isSuspenseInstanceFallback(dehydrated)
                   ) {
-                    return node;
+                    return node2;
                   }
                 }
               } else if (
-                node.tag === SuspenseListComponent && // revealOrder undefined can't be trusted because it don't
+                node2.tag === SuspenseListComponent && // revealOrder undefined can't be trusted because it don't
                 // keep track of whether it suspended or not.
-                node.memoizedProps.revealOrder !== void 0
+                node2.memoizedProps.revealOrder !== void 0
               ) {
-                var didSuspend = (node.flags & DidCapture) !== NoFlags;
+                var didSuspend = (node2.flags & DidCapture) !== NoFlags;
                 if (didSuspend) {
-                  return node;
+                  return node2;
                 }
-              } else if (node.child !== null) {
-                node.child.return = node;
-                node = node.child;
+              } else if (node2.child !== null) {
+                node2.child.return = node2;
+                node2 = node2.child;
                 continue;
               }
-              if (node === row) {
+              if (node2 === row) {
                 return null;
               }
-              while (node.sibling === null) {
-                if (node.return === null || node.return === row) {
+              while (node2.sibling === null) {
+                if (node2.return === null || node2.return === row) {
                   return null;
                 }
-                node = node.return;
+                node2 = node2.return;
               }
-              node.sibling.return = node.return;
-              node = node.sibling;
+              node2.sibling.return = node2.return;
+              node2 = node2.sibling;
             }
             return null;
           }
@@ -20956,8 +20975,8 @@ window.pannellum = (function (E, g, p) {
             8;
           var workInProgressSources = [];
           function resetWorkInProgressVersions() {
-            for (var i = 0; i < workInProgressSources.length; i++) {
-              var mutableSource = workInProgressSources[i];
+            for (var i2 = 0; i2 < workInProgressSources.length; i2++) {
+              var mutableSource = workInProgressSources[i2];
               {
                 mutableSource._workInProgressVersionPrimary = null;
               }
@@ -21040,13 +21059,13 @@ window.pannellum = (function (E, g, p) {
                 if (hookTypesDev !== null) {
                   var table = '';
                   var secondColumnStart = 30;
-                  for (var i = 0; i <= hookTypesUpdateIndexDev; i++) {
-                    var oldHookName = hookTypesDev[i];
+                  for (var i2 = 0; i2 <= hookTypesUpdateIndexDev; i2++) {
+                    var oldHookName = hookTypesDev[i2];
                     var newHookName =
-                      i === hookTypesUpdateIndexDev
+                      i2 === hookTypesUpdateIndexDev
                         ? currentHookName
                         : oldHookName;
-                    var row = i + 1 + '. ' + oldHookName;
+                    var row = i2 + 1 + '. ' + oldHookName;
                     while (row.length < secondColumnStart) {
                       row += ' ';
                     }
@@ -21092,8 +21111,12 @@ window.pannellum = (function (E, g, p) {
                 );
               }
             }
-            for (var i = 0; i < prevDeps.length && i < nextDeps.length; i++) {
-              if (objectIs(nextDeps[i], prevDeps[i])) {
+            for (
+              var i2 = 0;
+              i2 < prevDeps.length && i2 < nextDeps.length;
+              i2++
+            ) {
+              if (objectIs(nextDeps[i2], prevDeps[i2])) {
                 continue;
               }
               return false;
@@ -23408,16 +23431,16 @@ window.pannellum = (function (E, g, p) {
             }
           }
           function getNearestSuspenseBoundaryToCapture(returnFiber) {
-            var node = returnFiber;
+            var node2 = returnFiber;
             do {
               if (
-                node.tag === SuspenseComponent &&
-                shouldCaptureSuspense(node)
+                node2.tag === SuspenseComponent &&
+                shouldCaptureSuspense(node2)
               ) {
-                return node;
+                return node2;
               }
-              node = node.return;
-            } while (node !== null);
+              node2 = node2.return;
+            } while (node2 !== null);
             return null;
           }
           function markSuspenseBoundaryShouldCapture(
@@ -23838,7 +23861,7 @@ window.pannellum = (function (E, g, p) {
                   var init = lazyComponent._init;
                   try {
                     outerMemoType = init(payload);
-                  } catch (x) {
+                  } catch (x2) {
                     outerMemoType = null;
                   }
                   var outerPropTypes = outerMemoType && outerMemoType.propTypes;
@@ -24360,10 +24383,10 @@ window.pannellum = (function (E, g, p) {
                   renderLanes2,
                 );
                 workInProgress2.child = child;
-                var node = child;
-                while (node) {
-                  node.flags = (node.flags & ~Placement) | Hydrating;
-                  node = node.sibling;
+                var node2 = child;
+                while (node2) {
+                  node2.flags = (node2.flags & ~Placement) | Hydrating;
+                  node2 = node2.sibling;
                 }
               }
             } else {
@@ -25403,39 +25426,39 @@ window.pannellum = (function (E, g, p) {
             firstChild,
             renderLanes2,
           ) {
-            var node = firstChild;
-            while (node !== null) {
-              if (node.tag === SuspenseComponent) {
-                var state = node.memoizedState;
+            var node2 = firstChild;
+            while (node2 !== null) {
+              if (node2.tag === SuspenseComponent) {
+                var state = node2.memoizedState;
                 if (state !== null) {
                   scheduleSuspenseWorkOnFiber(
-                    node,
+                    node2,
                     renderLanes2,
                     workInProgress2,
                   );
                 }
-              } else if (node.tag === SuspenseListComponent) {
+              } else if (node2.tag === SuspenseListComponent) {
                 scheduleSuspenseWorkOnFiber(
-                  node,
+                  node2,
                   renderLanes2,
                   workInProgress2,
                 );
-              } else if (node.child !== null) {
-                node.child.return = node;
-                node = node.child;
+              } else if (node2.child !== null) {
+                node2.child.return = node2;
+                node2 = node2.child;
                 continue;
               }
-              if (node === workInProgress2) {
+              if (node2 === workInProgress2) {
                 return;
               }
-              while (node.sibling === null) {
-                if (node.return === null || node.return === workInProgress2) {
+              while (node2.sibling === null) {
+                if (node2.return === null || node2.return === workInProgress2) {
                   return;
                 }
-                node = node.return;
+                node2 = node2.return;
               }
-              node.sibling.return = node.return;
-              node = node.sibling;
+              node2.sibling.return = node2.return;
+              node2 = node2.sibling;
             }
           }
           function findLastContentRow(firstChild) {
@@ -25549,8 +25572,8 @@ window.pannellum = (function (E, g, p) {
                 children !== false
               ) {
                 if (isArray2(children)) {
-                  for (var i = 0; i < children.length; i++) {
-                    if (!validateSuspenseListNestedChild(children[i], i)) {
+                  for (var i2 = 0; i2 < children.length; i2++) {
+                    if (!validateSuspenseListNestedChild(children[i2], i2)) {
                       return;
                     }
                   }
@@ -26243,7 +26266,7 @@ window.pannellum = (function (E, g, p) {
                   renderLanes2,
                 );
               }
-              case Fragment:
+              case Fragment4:
                 return updateFragment(current2, workInProgress2, renderLanes2);
               case Mode:
                 return updateMode(current2, workInProgress2, renderLanes2);
@@ -26362,27 +26385,30 @@ window.pannellum = (function (E, g, p) {
               needsVisibilityToggle,
               isHidden,
             ) {
-              var node = workInProgress2.child;
-              while (node !== null) {
-                if (node.tag === HostComponent || node.tag === HostText) {
-                  appendInitialChild(parent, node.stateNode);
-                } else if (node.tag === HostPortal);
-                else if (node.child !== null) {
-                  node.child.return = node;
-                  node = node.child;
+              var node2 = workInProgress2.child;
+              while (node2 !== null) {
+                if (node2.tag === HostComponent || node2.tag === HostText) {
+                  appendInitialChild(parent, node2.stateNode);
+                } else if (node2.tag === HostPortal);
+                else if (node2.child !== null) {
+                  node2.child.return = node2;
+                  node2 = node2.child;
                   continue;
                 }
-                if (node === workInProgress2) {
+                if (node2 === workInProgress2) {
                   return;
                 }
-                while (node.sibling === null) {
-                  if (node.return === null || node.return === workInProgress2) {
+                while (node2.sibling === null) {
+                  if (
+                    node2.return === null ||
+                    node2.return === workInProgress2
+                  ) {
                     return;
                   }
-                  node = node.return;
+                  node2 = node2.return;
                 }
-                node.sibling.return = node.return;
-                node = node.sibling;
+                node2.sibling.return = node2.return;
+                node2 = node2.sibling;
               }
             };
             updateHostContainer = function (current2, workInProgress2) {};
@@ -26611,7 +26637,7 @@ window.pannellum = (function (E, g, p) {
               case SimpleMemoComponent:
               case FunctionComponent:
               case ForwardRef:
-              case Fragment:
+              case Fragment4:
               case Mode:
               case Profiler:
               case ContextConsumer:
@@ -26953,11 +26979,11 @@ window.pannellum = (function (E, g, p) {
                   }
                 }
                 if (renderState.tail !== null) {
-                  var next = renderState.tail;
-                  renderState.rendering = next;
-                  renderState.tail = next.sibling;
+                  var next2 = renderState.tail;
+                  renderState.rendering = next2;
+                  renderState.tail = next2.sibling;
                   renderState.renderingStartTime = now();
-                  next.sibling = null;
+                  next2.sibling = null;
                   var suspenseContext = suspenseStackCursor.current;
                   if (didSuspendAlready) {
                     suspenseContext = setShallowSuspenseContext(
@@ -26969,7 +26995,7 @@ window.pannellum = (function (E, g, p) {
                       setDefaultShallowSuspenseContext(suspenseContext);
                   }
                   pushSuspenseContext(workInProgress2, suspenseContext);
-                  return next;
+                  return next2;
                 }
                 bubbleProperties(workInProgress2);
                 return null;
@@ -27833,36 +27859,39 @@ window.pannellum = (function (E, g, p) {
               }
             }
           }
-          function reappearLayoutEffectsOnFiber(node) {
-            switch (node.tag) {
+          function reappearLayoutEffectsOnFiber(node2) {
+            switch (node2.tag) {
               case FunctionComponent:
               case ForwardRef:
               case SimpleMemoComponent: {
-                if (node.mode & ProfileMode) {
+                if (node2.mode & ProfileMode) {
                   try {
                     startLayoutEffectTimer();
                     safelyCallCommitHookLayoutEffectListMount(
-                      node,
-                      node.return,
+                      node2,
+                      node2.return,
                     );
                   } finally {
-                    recordLayoutEffectDuration(node);
+                    recordLayoutEffectDuration(node2);
                   }
                 } else {
-                  safelyCallCommitHookLayoutEffectListMount(node, node.return);
+                  safelyCallCommitHookLayoutEffectListMount(
+                    node2,
+                    node2.return,
+                  );
                 }
                 break;
               }
               case ClassComponent: {
-                var instance = node.stateNode;
+                var instance = node2.stateNode;
                 if (typeof instance.componentDidMount === 'function') {
-                  safelyCallComponentDidMount(node, node.return, instance);
+                  safelyCallComponentDidMount(node2, node2.return, instance);
                 }
-                safelyAttachRef(node, node.return);
+                safelyAttachRef(node2, node2.return);
                 break;
               }
               case HostComponent: {
-                safelyAttachRef(node, node.return);
+                safelyAttachRef(node2, node2.return);
                 break;
               }
             }
@@ -27870,17 +27899,17 @@ window.pannellum = (function (E, g, p) {
           function hideOrUnhideAllChildren(finishedWork, isHidden) {
             var hostSubtreeRoot = null;
             {
-              var node = finishedWork;
+              var node2 = finishedWork;
               while (true) {
-                if (node.tag === HostComponent) {
+                if (node2.tag === HostComponent) {
                   if (hostSubtreeRoot === null) {
-                    hostSubtreeRoot = node;
+                    hostSubtreeRoot = node2;
                     try {
-                      var instance = node.stateNode;
+                      var instance = node2.stateNode;
                       if (isHidden) {
                         hideInstance(instance);
                       } else {
-                        unhideInstance(node.stateNode, node.memoizedProps);
+                        unhideInstance(node2.stateNode, node2.memoizedProps);
                       }
                     } catch (error2) {
                       captureCommitPhaseError(
@@ -27890,14 +27919,14 @@ window.pannellum = (function (E, g, p) {
                       );
                     }
                   }
-                } else if (node.tag === HostText) {
+                } else if (node2.tag === HostText) {
                   if (hostSubtreeRoot === null) {
                     try {
-                      var _instance3 = node.stateNode;
+                      var _instance3 = node2.stateNode;
                       if (isHidden) {
                         hideTextInstance(_instance3);
                       } else {
-                        unhideTextInstance(_instance3, node.memoizedProps);
+                        unhideTextInstance(_instance3, node2.memoizedProps);
                       }
                     } catch (error2) {
                       captureCommitPhaseError(
@@ -27908,33 +27937,33 @@ window.pannellum = (function (E, g, p) {
                     }
                   }
                 } else if (
-                  (node.tag === OffscreenComponent ||
-                    node.tag === LegacyHiddenComponent) &&
-                  node.memoizedState !== null &&
-                  node !== finishedWork
+                  (node2.tag === OffscreenComponent ||
+                    node2.tag === LegacyHiddenComponent) &&
+                  node2.memoizedState !== null &&
+                  node2 !== finishedWork
                 );
-                else if (node.child !== null) {
-                  node.child.return = node;
-                  node = node.child;
+                else if (node2.child !== null) {
+                  node2.child.return = node2;
+                  node2 = node2.child;
                   continue;
                 }
-                if (node === finishedWork) {
+                if (node2 === finishedWork) {
                   return;
                 }
-                while (node.sibling === null) {
-                  if (node.return === null || node.return === finishedWork) {
+                while (node2.sibling === null) {
+                  if (node2.return === null || node2.return === finishedWork) {
                     return;
                   }
-                  if (hostSubtreeRoot === node) {
+                  if (hostSubtreeRoot === node2) {
                     hostSubtreeRoot = null;
                   }
-                  node = node.return;
+                  node2 = node2.return;
                 }
-                if (hostSubtreeRoot === node) {
+                if (hostSubtreeRoot === node2) {
                   hostSubtreeRoot = null;
                 }
-                node.sibling.return = node.return;
-                node = node.sibling;
+                node2.sibling.return = node2.return;
+                node2 = node2.sibling;
               }
             }
           }
@@ -28041,33 +28070,33 @@ window.pannellum = (function (E, g, p) {
             );
           }
           function getHostSibling(fiber) {
-            var node = fiber;
+            var node2 = fiber;
             siblings: while (true) {
-              while (node.sibling === null) {
-                if (node.return === null || isHostParent(node.return)) {
+              while (node2.sibling === null) {
+                if (node2.return === null || isHostParent(node2.return)) {
                   return null;
                 }
-                node = node.return;
+                node2 = node2.return;
               }
-              node.sibling.return = node.return;
-              node = node.sibling;
+              node2.sibling.return = node2.return;
+              node2 = node2.sibling;
               while (
-                node.tag !== HostComponent &&
-                node.tag !== HostText &&
-                node.tag !== DehydratedFragment
+                node2.tag !== HostComponent &&
+                node2.tag !== HostText &&
+                node2.tag !== DehydratedFragment
               ) {
-                if (node.flags & Placement) {
+                if (node2.flags & Placement) {
                   continue siblings;
                 }
-                if (node.child === null || node.tag === HostPortal) {
+                if (node2.child === null || node2.tag === HostPortal) {
                   continue siblings;
                 } else {
-                  node.child.return = node;
-                  node = node.child;
+                  node2.child.return = node2;
+                  node2 = node2.child;
                 }
               }
-              if (!(node.flags & Placement)) {
-                return node.stateNode;
+              if (!(node2.flags & Placement)) {
+                return node2.stateNode;
               }
             }
           }
@@ -28102,14 +28131,14 @@ window.pannellum = (function (E, g, p) {
             }
           }
           function insertOrAppendPlacementNodeIntoContainer(
-            node,
+            node2,
             before,
             parent,
           ) {
-            var tag = node.tag;
+            var tag = node2.tag;
             var isHost = tag === HostComponent || tag === HostText;
             if (isHost) {
-              var stateNode = node.stateNode;
+              var stateNode = node2.stateNode;
               if (before) {
                 insertInContainerBefore(parent, stateNode, before);
               } else {
@@ -28117,7 +28146,7 @@ window.pannellum = (function (E, g, p) {
               }
             } else if (tag === HostPortal);
             else {
-              var child = node.child;
+              var child = node2.child;
               if (child !== null) {
                 insertOrAppendPlacementNodeIntoContainer(child, before, parent);
                 var sibling = child.sibling;
@@ -28132,11 +28161,11 @@ window.pannellum = (function (E, g, p) {
               }
             }
           }
-          function insertOrAppendPlacementNode(node, before, parent) {
-            var tag = node.tag;
+          function insertOrAppendPlacementNode(node2, before, parent) {
+            var tag = node2.tag;
             var isHost = tag === HostComponent || tag === HostText;
             if (isHost) {
-              var stateNode = node.stateNode;
+              var stateNode = node2.stateNode;
               if (before) {
                 insertBefore(parent, stateNode, before);
               } else {
@@ -28144,7 +28173,7 @@ window.pannellum = (function (E, g, p) {
               }
             } else if (tag === HostPortal);
             else {
-              var child = node.child;
+              var child = node2.child;
               if (child !== null) {
                 insertOrAppendPlacementNode(child, before, parent);
                 var sibling = child.sibling;
@@ -28464,8 +28493,8 @@ window.pannellum = (function (E, g, p) {
           ) {
             var deletions = parentFiber.deletions;
             if (deletions !== null) {
-              for (var i = 0; i < deletions.length; i++) {
-                var childToDelete = deletions[i];
+              for (var i2 = 0; i2 < deletions.length; i2++) {
+                var childToDelete = deletions[i2];
                 try {
                   commitDeletionEffects(root3, parentFiber, childToDelete);
                 } catch (error2) {
@@ -29122,8 +29151,8 @@ window.pannellum = (function (E, g, p) {
               if ((nextEffect.flags & ChildDeletion) !== NoFlags) {
                 var deletions = fiber.deletions;
                 if (deletions !== null) {
-                  for (var i = 0; i < deletions.length; i++) {
-                    var fiberToDelete = deletions[i];
+                  for (var i2 = 0; i2 < deletions.length; i2++) {
+                    var fiberToDelete = deletions[i2];
                     nextEffect = fiberToDelete;
                     commitPassiveUnmountEffectsInsideOfDeletedTree_begin(
                       fiberToDelete,
@@ -29922,15 +29951,15 @@ window.pannellum = (function (E, g, p) {
             }
           }
           function isRenderConsistentWithExternalStores(finishedWork) {
-            var node = finishedWork;
+            var node2 = finishedWork;
             while (true) {
-              if (node.flags & StoreConsistency) {
-                var updateQueue = node.updateQueue;
+              if (node2.flags & StoreConsistency) {
+                var updateQueue = node2.updateQueue;
                 if (updateQueue !== null) {
                   var checks = updateQueue.stores;
                   if (checks !== null) {
-                    for (var i = 0; i < checks.length; i++) {
-                      var check = checks[i];
+                    for (var i2 = 0; i2 < checks.length; i2++) {
+                      var check = checks[i2];
                       var getSnapshot = check.getSnapshot;
                       var renderedValue = check.value;
                       try {
@@ -29944,23 +29973,23 @@ window.pannellum = (function (E, g, p) {
                   }
                 }
               }
-              var child = node.child;
-              if (node.subtreeFlags & StoreConsistency && child !== null) {
-                child.return = node;
-                node = child;
+              var child = node2.child;
+              if (node2.subtreeFlags & StoreConsistency && child !== null) {
+                child.return = node2;
+                node2 = child;
                 continue;
               }
-              if (node === finishedWork) {
+              if (node2 === finishedWork) {
                 return true;
               }
-              while (node.sibling === null) {
-                if (node.return === null || node.return === finishedWork) {
+              while (node2.sibling === null) {
+                if (node2.return === null || node2.return === finishedWork) {
                   return true;
                 }
-                node = node.return;
+                node2 = node2.return;
               }
-              node.sibling.return = node.return;
-              node = node.sibling;
+              node2.sibling.return = node2.return;
+              node2 = node2.sibling;
             }
             return true;
           }
@@ -30033,11 +30062,11 @@ window.pannellum = (function (E, g, p) {
               }
             }
           }
-          function batchedUpdates$1(fn, a) {
+          function batchedUpdates$1(fn, a2) {
             var prevExecutionContext = executionContext;
             executionContext |= BatchedContext;
             try {
-              return fn(a);
+              return fn(a2);
             } finally {
               executionContext = prevExecutionContext;
               if (
@@ -30049,13 +30078,13 @@ window.pannellum = (function (E, g, p) {
               }
             }
           }
-          function discreteUpdates(fn, a, b, c, d) {
+          function discreteUpdates(fn, a2, b2, c2, d) {
             var previousPriority = getCurrentUpdatePriority();
             var prevTransition = ReactCurrentBatchConfig$3.transition;
             try {
               ReactCurrentBatchConfig$3.transition = null;
               setCurrentUpdatePriority(DiscreteEventPriority);
-              return fn(a, b, c, d);
+              return fn(a2, b2, c2, d);
             } finally {
               setCurrentUpdatePriority(previousPriority);
               ReactCurrentBatchConfig$3.transition = prevTransition;
@@ -30382,20 +30411,20 @@ window.pannellum = (function (E, g, p) {
           function performUnitOfWork(unitOfWork) {
             var current2 = unitOfWork.alternate;
             setCurrentFiber(unitOfWork);
-            var next;
+            var next2;
             if ((unitOfWork.mode & ProfileMode) !== NoMode) {
               startProfilerTimer(unitOfWork);
-              next = beginWork$1(current2, unitOfWork, subtreeRenderLanes);
+              next2 = beginWork$1(current2, unitOfWork, subtreeRenderLanes);
               stopProfilerTimerIfRunningAndRecordDelta(unitOfWork, true);
             } else {
-              next = beginWork$1(current2, unitOfWork, subtreeRenderLanes);
+              next2 = beginWork$1(current2, unitOfWork, subtreeRenderLanes);
             }
             resetCurrentFiber();
             unitOfWork.memoizedProps = unitOfWork.pendingProps;
-            if (next === null) {
+            if (next2 === null) {
               completeUnitOfWork(unitOfWork);
             } else {
-              workInProgress = next;
+              workInProgress = next2;
             }
             ReactCurrentOwner$2.current = null;
           }
@@ -30406,16 +30435,16 @@ window.pannellum = (function (E, g, p) {
               var returnFiber = completedWork.return;
               if ((completedWork.flags & Incomplete) === NoFlags) {
                 setCurrentFiber(completedWork);
-                var next = void 0;
+                var next2 = void 0;
                 if ((completedWork.mode & ProfileMode) === NoMode) {
-                  next = completeWork(
+                  next2 = completeWork(
                     current2,
                     completedWork,
                     subtreeRenderLanes,
                   );
                 } else {
                   startProfilerTimer(completedWork);
-                  next = completeWork(
+                  next2 = completeWork(
                     current2,
                     completedWork,
                     subtreeRenderLanes,
@@ -30426,8 +30455,8 @@ window.pannellum = (function (E, g, p) {
                   );
                 }
                 resetCurrentFiber();
-                if (next !== null) {
-                  workInProgress = next;
+                if (next2 !== null) {
+                  workInProgress = next2;
                   return;
                 }
               } else {
@@ -30636,8 +30665,8 @@ window.pannellum = (function (E, g, p) {
             ensureRootIsScheduled(root3, now());
             if (recoverableErrors !== null) {
               var onRecoverableError = root3.onRecoverableError;
-              for (var i = 0; i < recoverableErrors.length; i++) {
-                var recoverableError = recoverableErrors[i];
+              for (var i2 = 0; i2 < recoverableErrors.length; i2++) {
+                var recoverableError = recoverableErrors[i2];
                 var componentStack = recoverableError.stack;
                 var digest = recoverableError.digest;
                 onRecoverableError(recoverableError.value, {
@@ -30744,8 +30773,8 @@ window.pannellum = (function (E, g, p) {
             {
               var profilerEffects = pendingPassiveProfilerEffects;
               pendingPassiveProfilerEffects = [];
-              for (var i = 0; i < profilerEffects.length; i++) {
-                var _fiber = profilerEffects[i];
+              for (var i2 = 0; i2 < profilerEffects.length; i2++) {
+                var _fiber = profilerEffects[i2];
                 commitPassiveEffectDurations(root3, _fiber);
               }
             }
@@ -31587,23 +31616,23 @@ window.pannellum = (function (E, g, p) {
               if (foundHostInstances) {
                 return;
               }
-              var node = fiber;
+              var node2 = fiber;
               while (true) {
-                switch (node.tag) {
+                switch (node2.tag) {
                   case HostComponent:
-                    hostInstances.add(node.stateNode);
+                    hostInstances.add(node2.stateNode);
                     return;
                   case HostPortal:
-                    hostInstances.add(node.stateNode.containerInfo);
+                    hostInstances.add(node2.stateNode.containerInfo);
                     return;
                   case HostRoot:
-                    hostInstances.add(node.stateNode.containerInfo);
+                    hostInstances.add(node2.stateNode.containerInfo);
                     return;
                 }
-                if (node.return === null) {
+                if (node2.return === null) {
                   throw new Error('Expected to reach root first.');
                 }
-                node = node.return;
+                node2 = node2.return;
               }
             }
           }
@@ -31612,28 +31641,28 @@ window.pannellum = (function (E, g, p) {
             hostInstances,
           ) {
             {
-              var node = fiber;
+              var node2 = fiber;
               var foundHostInstances = false;
               while (true) {
-                if (node.tag === HostComponent) {
+                if (node2.tag === HostComponent) {
                   foundHostInstances = true;
-                  hostInstances.add(node.stateNode);
-                } else if (node.child !== null) {
-                  node.child.return = node;
-                  node = node.child;
+                  hostInstances.add(node2.stateNode);
+                } else if (node2.child !== null) {
+                  node2.child.return = node2;
+                  node2 = node2.child;
                   continue;
                 }
-                if (node === fiber) {
+                if (node2 === fiber) {
                   return foundHostInstances;
                 }
-                while (node.sibling === null) {
-                  if (node.return === null || node.return === fiber) {
+                while (node2.sibling === null) {
+                  if (node2.return === null || node2.return === fiber) {
                     return foundHostInstances;
                   }
-                  node = node.return;
+                  node2 = node2.return;
                 }
-                node.sibling.return = node.return;
-                node = node.sibling;
+                node2.sibling.return = node2.return;
+                node2 = node2.sibling;
               }
             }
             return false;
@@ -32023,7 +32052,7 @@ window.pannellum = (function (E, g, p) {
             return fiber;
           }
           function createFiberFromFragment(elements, mode, lanes, key) {
-            var fiber = createFiber(Fragment, elements, key, mode);
+            var fiber = createFiber(Fragment4, elements, key, mode);
             fiber.lanes = lanes;
             return fiber;
           }
@@ -32558,7 +32587,7 @@ window.pannellum = (function (E, g, p) {
           {
             var copyWithDeleteImpl = function (obj, path, index2) {
               var key = path[index2];
-              var updated = isArray2(obj) ? obj.slice() : assign({}, obj);
+              var updated = isArray2(obj) ? obj.slice() : assign2({}, obj);
               if (index2 + 1 === path.length) {
                 if (isArray2(updated)) {
                   updated.splice(key, 1);
@@ -32575,7 +32604,7 @@ window.pannellum = (function (E, g, p) {
             };
             var copyWithRenameImpl = function (obj, oldPath, newPath, index2) {
               var oldKey = oldPath[index2];
-              var updated = isArray2(obj) ? obj.slice() : assign({}, obj);
+              var updated = isArray2(obj) ? obj.slice() : assign2({}, obj);
               if (index2 + 1 === oldPath.length) {
                 var newKey = newPath[index2];
                 updated[newKey] = updated[oldKey];
@@ -32600,8 +32629,8 @@ window.pannellum = (function (E, g, p) {
                 warn('copyWithRename() expects paths of the same length');
                 return;
               } else {
-                for (var i = 0; i < newPath.length - 1; i++) {
-                  if (oldPath[i] !== newPath[i]) {
+                for (var i2 = 0; i2 < newPath.length - 1; i2++) {
+                  if (oldPath[i2] !== newPath[i2]) {
                     warn(
                       'copyWithRename() expects paths to be the same except for the deepest key',
                     );
@@ -32616,7 +32645,7 @@ window.pannellum = (function (E, g, p) {
                 return value;
               }
               var key = path[index2];
-              var updated = isArray2(obj) ? obj.slice() : assign({}, obj);
+              var updated = isArray2(obj) ? obj.slice() : assign2({}, obj);
               updated[key] = copyWithSetImpl(obj[key], path, index2 + 1, value);
               return updated;
             };
@@ -32637,7 +32666,7 @@ window.pannellum = (function (E, g, p) {
                 var newState = copyWithSet(hook.memoizedState, path, value);
                 hook.memoizedState = newState;
                 hook.baseState = newState;
-                fiber.memoizedProps = assign({}, fiber.memoizedProps);
+                fiber.memoizedProps = assign2({}, fiber.memoizedProps);
                 var root3 = enqueueConcurrentRenderForLane(fiber, SyncLane);
                 if (root3 !== null) {
                   scheduleUpdateOnFiber(root3, fiber, SyncLane, NoTimestamp);
@@ -32650,7 +32679,7 @@ window.pannellum = (function (E, g, p) {
                 var newState = copyWithDelete(hook.memoizedState, path);
                 hook.memoizedState = newState;
                 hook.baseState = newState;
-                fiber.memoizedProps = assign({}, fiber.memoizedProps);
+                fiber.memoizedProps = assign2({}, fiber.memoizedProps);
                 var root3 = enqueueConcurrentRenderForLane(fiber, SyncLane);
                 if (root3 !== null) {
                   scheduleUpdateOnFiber(root3, fiber, SyncLane, NoTimestamp);
@@ -32672,7 +32701,7 @@ window.pannellum = (function (E, g, p) {
                 );
                 hook.memoizedState = newState;
                 hook.baseState = newState;
-                fiber.memoizedProps = assign({}, fiber.memoizedProps);
+                fiber.memoizedProps = assign2({}, fiber.memoizedProps);
                 var root3 = enqueueConcurrentRenderForLane(fiber, SyncLane);
                 if (root3 !== null) {
                   scheduleUpdateOnFiber(root3, fiber, SyncLane, NoTimestamp);
@@ -32967,30 +32996,30 @@ window.pannellum = (function (E, g, p) {
             markContainerAsRoot(root3.current, container2);
             listenToAllSupportedEvents(container2);
             if (mutableSources) {
-              for (var i = 0; i < mutableSources.length; i++) {
-                var mutableSource = mutableSources[i];
+              for (var i2 = 0; i2 < mutableSources.length; i2++) {
+                var mutableSource = mutableSources[i2];
                 registerMutableSourceForHydration(root3, mutableSource);
               }
             }
             return new ReactDOMHydrationRoot(root3);
           }
-          function isValidContainer(node) {
+          function isValidContainer(node2) {
             return !!(
-              node &&
-              (node.nodeType === ELEMENT_NODE ||
-                node.nodeType === DOCUMENT_NODE ||
-                node.nodeType === DOCUMENT_FRAGMENT_NODE ||
+              node2 &&
+              (node2.nodeType === ELEMENT_NODE ||
+                node2.nodeType === DOCUMENT_NODE ||
+                node2.nodeType === DOCUMENT_FRAGMENT_NODE ||
                 !disableCommentsAsDOMContainers)
             );
           }
-          function isValidContainerLegacy(node) {
+          function isValidContainerLegacy(node2) {
             return !!(
-              node &&
-              (node.nodeType === ELEMENT_NODE ||
-                node.nodeType === DOCUMENT_NODE ||
-                node.nodeType === DOCUMENT_FRAGMENT_NODE ||
-                (node.nodeType === COMMENT_NODE &&
-                  node.nodeValue === ' react-mount-point-unstable '))
+              node2 &&
+              (node2.nodeType === ELEMENT_NODE ||
+                node2.nodeType === DOCUMENT_NODE ||
+                node2.nodeType === DOCUMENT_FRAGMENT_NODE ||
+                (node2.nodeType === COMMENT_NODE &&
+                  node2.nodeValue === ' react-mount-point-unstable '))
             );
           }
           function warnIfReactDOMContainerInDEV(container2) {
@@ -33539,25 +33568,74 @@ window.pannellum = (function (E, g, p) {
         exports.createRoot = m.createRoot;
         exports.hydrateRoot = m.hydrateRoot;
       } else {
-        i = m.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
-        exports.createRoot = function (c, o) {
-          i.usingClientEntryPoint = true;
+        i2 = m.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+        exports.createRoot = function (c2, o2) {
+          i2.usingClientEntryPoint = true;
           try {
-            return m.createRoot(c, o);
+            return m.createRoot(c2, o2);
           } finally {
-            i.usingClientEntryPoint = false;
+            i2.usingClientEntryPoint = false;
           }
         };
-        exports.hydrateRoot = function (c, h, o) {
-          i.usingClientEntryPoint = true;
+        exports.hydrateRoot = function (c2, h, o2) {
+          i2.usingClientEntryPoint = true;
           try {
-            return m.hydrateRoot(c, h, o);
+            return m.hydrateRoot(c2, h, o2);
           } finally {
-            i.usingClientEntryPoint = false;
+            i2.usingClientEntryPoint = false;
           }
         };
       }
-      var i;
+      var i2;
+    },
+  });
+
+  // node_modules/shallowequal/index.js
+  var require_shallowequal = __commonJS({
+    'node_modules/shallowequal/index.js'(exports, module) {
+      module.exports = function shallowEqual(
+        objA,
+        objB,
+        compare,
+        compareContext,
+      ) {
+        var ret = compare ? compare.call(compareContext, objA, objB) : void 0;
+        if (ret !== void 0) {
+          return !!ret;
+        }
+        if (objA === objB) {
+          return true;
+        }
+        if (
+          typeof objA !== 'object' ||
+          !objA ||
+          typeof objB !== 'object' ||
+          !objB
+        ) {
+          return false;
+        }
+        var keysA = Object.keys(objA);
+        var keysB = Object.keys(objB);
+        if (keysA.length !== keysB.length) {
+          return false;
+        }
+        var bHasOwnProperty = Object.prototype.hasOwnProperty.bind(objB);
+        for (var idx = 0; idx < keysA.length; idx++) {
+          var key = keysA[idx];
+          if (!bHasOwnProperty(key)) {
+            return false;
+          }
+          var valueA = objA[key];
+          var valueB = objB[key];
+          ret = compare
+            ? compare.call(compareContext, valueA, valueB, key)
+            : void 0;
+          if (ret === false || (ret === void 0 && valueA !== valueB)) {
+            return false;
+          }
+        }
+        return true;
+      };
     },
   });
 
@@ -33746,7 +33824,7 @@ window.pannellum = (function (E, g, p) {
                   var init = lazyComponent._init;
                   try {
                     return getComponentNameFromType(init(payload));
-                  } catch (x) {
+                  } catch (x2) {
                     return null;
                   }
                 }
@@ -33754,7 +33832,7 @@ window.pannellum = (function (E, g, p) {
             }
             return null;
           }
-          var assign = Object.assign;
+          var assign2 = Object.assign;
           var disabledDepth = 0;
           var prevLog;
           var prevInfo;
@@ -33804,25 +33882,25 @@ window.pannellum = (function (E, g, p) {
                   writable: true,
                 };
                 Object.defineProperties(console, {
-                  log: assign({}, props, {
+                  log: assign2({}, props, {
                     value: prevLog,
                   }),
-                  info: assign({}, props, {
+                  info: assign2({}, props, {
                     value: prevInfo,
                   }),
-                  warn: assign({}, props, {
+                  warn: assign2({}, props, {
                     value: prevWarn,
                   }),
-                  error: assign({}, props, {
+                  error: assign2({}, props, {
                     value: prevError,
                   }),
-                  group: assign({}, props, {
+                  group: assign2({}, props, {
                     value: prevGroup,
                   }),
-                  groupCollapsed: assign({}, props, {
+                  groupCollapsed: assign2({}, props, {
                     value: prevGroupCollapsed,
                   }),
-                  groupEnd: assign({}, props, {
+                  groupEnd: assign2({}, props, {
                     value: prevGroupEnd,
                   }),
                 });
@@ -33836,18 +33914,18 @@ window.pannellum = (function (E, g, p) {
           }
           var ReactCurrentDispatcher =
             ReactSharedInternals.ReactCurrentDispatcher;
-          var prefix;
+          var prefix2;
           function describeBuiltInComponentFrame(name, source, ownerFn) {
             {
-              if (prefix === void 0) {
+              if (prefix2 === void 0) {
                 try {
                   throw Error();
-                } catch (x) {
-                  var match = x.stack.trim().match(/\n( *(at )?)/);
-                  prefix = (match && match[1]) || '';
+                } catch (x2) {
+                  var match2 = x2.stack.trim().match(/\n( *(at )?)/);
+                  prefix2 = (match2 && match2[1]) || '';
                 }
               }
-              return '\n' + prefix + name;
+              return '\n' + prefix2 + name;
             }
           }
           var reentry = false;
@@ -33889,23 +33967,23 @@ window.pannellum = (function (E, g, p) {
                 if (typeof Reflect === 'object' && Reflect.construct) {
                   try {
                     Reflect.construct(Fake, []);
-                  } catch (x) {
-                    control = x;
+                  } catch (x2) {
+                    control = x2;
                   }
                   Reflect.construct(fn, [], Fake);
                 } else {
                   try {
                     Fake.call();
-                  } catch (x) {
-                    control = x;
+                  } catch (x2) {
+                    control = x2;
                   }
                   fn.call(Fake.prototype);
                 }
               } else {
                 try {
                   throw Error();
-                } catch (x) {
-                  control = x;
+                } catch (x2) {
+                  control = x2;
                 }
                 fn();
               }
@@ -33913,20 +33991,24 @@ window.pannellum = (function (E, g, p) {
               if (sample && control && typeof sample.stack === 'string') {
                 var sampleLines = sample.stack.split('\n');
                 var controlLines = control.stack.split('\n');
-                var s = sampleLines.length - 1;
-                var c = controlLines.length - 1;
-                while (s >= 1 && c >= 0 && sampleLines[s] !== controlLines[c]) {
-                  c--;
+                var s2 = sampleLines.length - 1;
+                var c2 = controlLines.length - 1;
+                while (
+                  s2 >= 1 &&
+                  c2 >= 0 &&
+                  sampleLines[s2] !== controlLines[c2]
+                ) {
+                  c2--;
                 }
-                for (; s >= 1 && c >= 0; s--, c--) {
-                  if (sampleLines[s] !== controlLines[c]) {
-                    if (s !== 1 || c !== 1) {
+                for (; s2 >= 1 && c2 >= 0; s2--, c2--) {
+                  if (sampleLines[s2] !== controlLines[c2]) {
+                    if (s2 !== 1 || c2 !== 1) {
                       do {
-                        s--;
-                        c--;
-                        if (c < 0 || sampleLines[s] !== controlLines[c]) {
+                        s2--;
+                        c2--;
+                        if (c2 < 0 || sampleLines[s2] !== controlLines[c2]) {
                           var _frame =
-                            '\n' + sampleLines[s].replace(' at new ', ' at ');
+                            '\n' + sampleLines[s2].replace(' at new ', ' at ');
                           if (
                             fn.displayName &&
                             _frame.includes('<anonymous>')
@@ -33943,7 +34025,7 @@ window.pannellum = (function (E, g, p) {
                           }
                           return _frame;
                         }
-                      } while (s >= 1 && c >= 0);
+                      } while (s2 >= 1 && c2 >= 0);
                     }
                     break;
                   }
@@ -34018,7 +34100,7 @@ window.pannellum = (function (E, g, p) {
                       source,
                       ownerFn,
                     );
-                  } catch (x) {}
+                  } catch (x2) {}
                 }
               }
             }
@@ -34046,7 +34128,7 @@ window.pannellum = (function (E, g, p) {
           function checkPropTypes(
             typeSpecs,
             values2,
-            location2,
+            location,
             componentName,
             element,
           ) {
@@ -34060,7 +34142,7 @@ window.pannellum = (function (E, g, p) {
                       var err2 = Error(
                         (componentName || 'React class') +
                           ': ' +
-                          location2 +
+                          location +
                           ' type `' +
                           typeSpecName +
                           '` is invalid; it must be a function, usually from the `prop-types` package, but received `' +
@@ -34074,7 +34156,7 @@ window.pannellum = (function (E, g, p) {
                       values2,
                       typeSpecName,
                       componentName,
-                      location2,
+                      location,
                       null,
                       'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED',
                     );
@@ -34086,7 +34168,7 @@ window.pannellum = (function (E, g, p) {
                     error(
                       '%s: type specification of %s `%s` is invalid; the type checker function must return `null` or an `Error` but returned a %s. You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument).',
                       componentName || 'React class',
-                      location2,
+                      location,
                       typeSpecName,
                       typeof error$1,
                     );
@@ -34098,7 +34180,7 @@ window.pannellum = (function (E, g, p) {
                   ) {
                     loggedTypeFailures[error$1.message] = true;
                     setCurrentlyValidatingElement(element);
-                    error('Failed %s type: %s', location2, error$1.message);
+                    error('Failed %s type: %s', location, error$1.message);
                     setCurrentlyValidatingElement(null);
                   }
                 }
@@ -34106,8 +34188,8 @@ window.pannellum = (function (E, g, p) {
             }
           }
           var isArrayImpl = Array.isArray;
-          function isArray2(a) {
-            return isArrayImpl(a);
+          function isArray2(a2) {
+            return isArrayImpl(a2);
           }
           function typeName(value) {
             {
@@ -34456,27 +34538,27 @@ window.pannellum = (function (E, g, p) {
               setCurrentlyValidatingElement$1(null);
             }
           }
-          function validateChildKeys(node, parentType) {
+          function validateChildKeys(node2, parentType) {
             {
-              if (typeof node !== 'object') {
+              if (typeof node2 !== 'object') {
                 return;
               }
-              if (isArray2(node)) {
-                for (var i = 0; i < node.length; i++) {
-                  var child = node[i];
+              if (isArray2(node2)) {
+                for (var i2 = 0; i2 < node2.length; i2++) {
+                  var child = node2[i2];
                   if (isValidElement(child)) {
                     validateExplicitKey(child, parentType);
                   }
                 }
-              } else if (isValidElement(node)) {
-                if (node._store) {
-                  node._store.validated = true;
+              } else if (isValidElement(node2)) {
+                if (node2._store) {
+                  node2._store.validated = true;
                 }
-              } else if (node) {
-                var iteratorFn = getIteratorFn(node);
+              } else if (node2) {
+                var iteratorFn = getIteratorFn(node2);
                 if (typeof iteratorFn === 'function') {
-                  if (iteratorFn !== node.entries) {
-                    var iterator = iteratorFn.call(node);
+                  if (iteratorFn !== node2.entries) {
+                    var iterator = iteratorFn.call(node2);
                     var step;
                     while (!(step = iterator.next()).done) {
                       if (isValidElement(step.value)) {
@@ -34538,8 +34620,8 @@ window.pannellum = (function (E, g, p) {
           function validateFragmentProps(fragment) {
             {
               var keys5 = Object.keys(fragment.props);
-              for (var i = 0; i < keys5.length; i++) {
-                var key = keys5[i];
+              for (var i2 = 0; i2 < keys5.length; i2++) {
+                var key = keys5[i2];
                 if (key !== 'children' && key !== 'key') {
                   setCurrentlyValidatingElement$1(fragment);
                   error(
@@ -34617,8 +34699,8 @@ window.pannellum = (function (E, g, p) {
                 if (children !== void 0) {
                   if (isStaticChildren) {
                     if (isArray2(children)) {
-                      for (var i = 0; i < children.length; i++) {
-                        validateChildKeys(children[i], type);
+                      for (var i2 = 0; i2 < children.length; i2++) {
+                        validateChildKeys(children[i2], type);
                       }
                       if (Object.freeze) {
                         Object.freeze(children);
@@ -34651,10 +34733,10 @@ window.pannellum = (function (E, g, p) {
               return jsxWithValidation(type, props, key, false);
             }
           }
-          var jsx3 = jsxWithValidationDynamic;
+          var jsx5 = jsxWithValidationDynamic;
           var jsxs2 = jsxWithValidationStatic;
           exports.Fragment = REACT_FRAGMENT_TYPE;
-          exports.jsx = jsx3;
+          exports.jsx = jsx5;
           exports.jsxs = jsxs2;
         })();
       }
@@ -34677,7 +34759,7 @@ window.pannellum = (function (E, g, p) {
   var import_client = __toESM(require_client(), 1);
 
   // src/components/ViewerApp.tsx
-  var import_react5 = __toESM(require_react(), 1);
+  var import_react6 = __toESM(require_react(), 1);
 
   // node_modules/recoil/es/index.js
   var import_react = __toESM(require_react());
@@ -34687,19 +34769,19 @@ window.pannellum = (function (E, g, p) {
     if (error.stack === void 0) {
       try {
         throw error;
-      } catch (_) {}
+      } catch (_2) {}
     }
     return error;
   }
   var err_1 = err;
   var Recoil_err = err_1;
-  function isPromise(p) {
-    return !!p && typeof p.then === 'function';
+  function isPromise(p2) {
+    return !!p2 && typeof p2.then === 'function';
   }
   var Recoil_isPromise = isPromise;
-  function nullthrows(x, message) {
-    if (x != null) {
-      return x;
+  function nullthrows(x2, message) {
+    if (x2 != null) {
+      return x2;
     }
     throw Recoil_err(
       message !== null && message !== void 0
@@ -34782,12 +34864,12 @@ window.pannellum = (function (E, g, p) {
     }
     map(map) {
       try {
-        const next = map(this.contents);
-        return Recoil_isPromise(next)
-          ? loadableWithPromise(next)
-          : isLoadable(next)
-          ? next
-          : loadableWithValue(next);
+        const next2 = map(this.contents);
+        return Recoil_isPromise(next2)
+          ? loadableWithPromise(next2)
+          : isLoadable(next2)
+          ? next2
+          : loadableWithValue(next2);
       } catch (e) {
         return Recoil_isPromise(e)
           ? // If we "suspended", then try again.
@@ -34856,9 +34938,9 @@ window.pannellum = (function (E, g, p) {
       return loadableWithPromise(
         this.contents
           .then((value) => {
-            const next = map(value);
-            if (isLoadable(next)) {
-              const nextLoadable = next;
+            const next2 = map(value);
+            if (isLoadable(next2)) {
+              const nextLoadable = next2;
               switch (nextLoadable.state) {
                 case 'hasValue':
                   return nextLoadable.contents;
@@ -34868,7 +34950,7 @@ window.pannellum = (function (E, g, p) {
                   return nextLoadable.contents;
               }
             }
-            return next;
+            return next2;
           })
           .catch((e) => {
             if (Recoil_isPromise(e)) {
@@ -34892,27 +34974,27 @@ window.pannellum = (function (E, g, p) {
     return Object.freeze(new LoadingLoadable(new Promise(() => {})));
   }
   function loadableAllArray(inputs) {
-    return inputs.every((i) => i.state === 'hasValue')
-      ? loadableWithValue(inputs.map((i) => i.contents))
-      : inputs.some((i) => i.state === 'hasError')
+    return inputs.every((i2) => i2.state === 'hasValue')
+      ? loadableWithValue(inputs.map((i2) => i2.contents))
+      : inputs.some((i2) => i2.state === 'hasError')
       ? loadableWithError(
           Recoil_nullthrows(
-            inputs.find((i) => i.state === 'hasError'),
+            inputs.find((i2) => i2.state === 'hasError'),
             'Invalid loadable passed to loadableAll',
           ).contents,
         )
-      : loadableWithPromise(Promise.all(inputs.map((i) => i.contents)));
+      : loadableWithPromise(Promise.all(inputs.map((i2) => i2.contents)));
   }
   function loadableAll(inputs) {
     const unwrapedInputs = Array.isArray(inputs)
       ? inputs
       : Object.getOwnPropertyNames(inputs).map((key) => inputs[key]);
-    const normalizedInputs = unwrapedInputs.map((x) =>
-      isLoadable(x)
-        ? x
-        : Recoil_isPromise(x)
-        ? loadableWithPromise(x)
-        : loadableWithValue(x),
+    const normalizedInputs = unwrapedInputs.map((x2) =>
+      isLoadable(x2)
+        ? x2
+        : Recoil_isPromise(x2)
+        ? loadableWithPromise(x2)
+        : loadableWithValue(x2),
     );
     const output = loadableAllArray(normalizedInputs);
     return Array.isArray(inputs)
@@ -34931,8 +35013,8 @@ window.pannellum = (function (E, g, p) {
           ),
         );
   }
-  function isLoadable(x) {
-    return x instanceof BaseLoadable;
+  function isLoadable(x2) {
+    return x2 instanceof BaseLoadable;
   }
   var LoadableStaticInterface = {
     of: (value) =>
@@ -35188,8 +35270,8 @@ window.pannellum = (function (E, g, p) {
   };
   var RecoilState = class extends AbstractRecoilValue {};
   var RecoilValueReadOnly = class extends AbstractRecoilValue {};
-  function isRecoilValue(x) {
-    return x instanceof RecoilState || x instanceof RecoilValueReadOnly;
+  function isRecoilValue(x2) {
+    return x2 instanceof RecoilState || x2 instanceof RecoilValueReadOnly;
   }
   var Recoil_RecoilValue = {
     AbstractRecoilValue,
@@ -35256,27 +35338,27 @@ window.pannellum = (function (E, g, p) {
       }
     }
   }
-  function registerNode(node) {
+  function registerNode(node2) {
     if (Recoil_RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED) {
-      checkForDuplicateAtomKey(node.key);
+      checkForDuplicateAtomKey(node2.key);
     }
-    nodes.set(node.key, node);
+    nodes.set(node2.key, node2);
     const recoilValue =
-      node.set == null
-        ? new Recoil_RecoilValue$1.RecoilValueReadOnly(node.key)
-        : new Recoil_RecoilValue$1.RecoilState(node.key);
-    recoilValues.set(node.key, recoilValue);
+      node2.set == null
+        ? new Recoil_RecoilValue$1.RecoilValueReadOnly(node2.key)
+        : new Recoil_RecoilValue$1.RecoilState(node2.key);
+    recoilValues.set(node2.key, recoilValue);
     return recoilValue;
   }
   var NodeMissingError = class extends Error {};
   function getNode(key) {
-    const node = nodes.get(key);
-    if (node == null) {
+    const node2 = nodes.get(key);
+    if (node2 == null) {
       throw new NodeMissingError(
         `Missing definition for RecoilValue: "${key}""`,
       );
     }
-    return node;
+    return node2;
   }
   function getNodeMaybe(key) {
     return nodes.get(key);
@@ -35287,13 +35369,13 @@ window.pannellum = (function (E, g, p) {
     if (!Recoil_gkx('recoil_memory_managament_2020')) {
       return;
     }
-    const node = nodes.get(key);
+    const node2 = nodes.get(key);
     if (
-      node !== null &&
-      node !== void 0 &&
-      (_node$shouldDeleteCon = node.shouldDeleteConfigOnRelease) !== null &&
+      node2 !== null &&
+      node2 !== void 0 &&
+      (_node$shouldDeleteCon = node2.shouldDeleteConfigOnRelease) !== null &&
       _node$shouldDeleteCon !== void 0 &&
-      _node$shouldDeleteCon.call(node)
+      _node$shouldDeleteCon.call(node2)
     ) {
       var _getConfigDeletionHan;
       nodes.delete(key);
@@ -35331,8 +35413,8 @@ window.pannellum = (function (E, g, p) {
     DefaultValue,
     DEFAULT_VALUE,
   };
-  function enqueueExecution(s, f) {
-    f();
+  function enqueueExecution(s2, f2) {
+    f2();
   }
   var Recoil_Queue = {
     enqueueExecution,
@@ -35363,92 +35445,92 @@ window.pannellum = (function (E, g, p) {
     var MAX_INDEX_NODE = BUCKET_SIZE / 2;
     var MIN_ARRAY_NODE = BUCKET_SIZE / 4;
     var nothing = {};
-    var constant = function constant2(x) {
+    var constant = function constant2(x2) {
       return function () {
-        return x;
+        return x2;
       };
     };
-    var hash = (hamt.hash = function (str) {
+    var hash2 = (hamt.hash = function (str) {
       var type = typeof str === 'undefined' ? 'undefined' : _typeof(str);
       if (type === 'number') return str;
       if (type !== 'string') str += '';
-      var hash2 = 0;
-      for (var i = 0, len = str.length; i < len; ++i) {
-        var c = str.charCodeAt(i);
-        hash2 = ((hash2 << 5) - hash2 + c) | 0;
+      var hash3 = 0;
+      for (var i2 = 0, len = str.length; i2 < len; ++i2) {
+        var c2 = str.charCodeAt(i2);
+        hash3 = ((hash3 << 5) - hash3 + c2) | 0;
       }
-      return hash2;
+      return hash3;
     });
-    var popcount = function popcount2(x) {
-      x -= (x >> 1) & 1431655765;
-      x = (x & 858993459) + ((x >> 2) & 858993459);
-      x = (x + (x >> 4)) & 252645135;
-      x += x >> 8;
-      x += x >> 16;
-      return x & 127;
+    var popcount = function popcount2(x2) {
+      x2 -= (x2 >> 1) & 1431655765;
+      x2 = (x2 & 858993459) + ((x2 >> 2) & 858993459);
+      x2 = (x2 + (x2 >> 4)) & 252645135;
+      x2 += x2 >> 8;
+      x2 += x2 >> 16;
+      return x2 & 127;
     };
     var hashFragment = function hashFragment2(shift, h) {
       return (h >>> shift) & MASK;
     };
-    var toBitmap = function toBitmap2(x) {
-      return 1 << x;
+    var toBitmap = function toBitmap2(x2) {
+      return 1 << x2;
     };
     var fromBitmap = function fromBitmap2(bitmap, bit) {
       return popcount(bitmap & (bit - 1));
     };
-    var arrayUpdate = function arrayUpdate2(mutate2, at, v, arr) {
+    var arrayUpdate = function arrayUpdate2(mutate2, at, v2, arr) {
       var out = arr;
       if (!mutate2) {
         var len = arr.length;
         out = new Array(len);
-        for (var i = 0; i < len; ++i) {
-          out[i] = arr[i];
+        for (var i2 = 0; i2 < len; ++i2) {
+          out[i2] = arr[i2];
         }
       }
-      out[at] = v;
+      out[at] = v2;
       return out;
     };
     var arraySpliceOut = function arraySpliceOut2(mutate2, at, arr) {
       var newLen = arr.length - 1;
-      var i = 0;
+      var i2 = 0;
       var g = 0;
       var out = arr;
       if (mutate2) {
-        i = g = at;
+        i2 = g = at;
       } else {
         out = new Array(newLen);
-        while (i < at) {
-          out[g++] = arr[i++];
+        while (i2 < at) {
+          out[g++] = arr[i2++];
         }
       }
-      ++i;
-      while (i <= newLen) {
-        out[g++] = arr[i++];
+      ++i2;
+      while (i2 <= newLen) {
+        out[g++] = arr[i2++];
       }
       if (mutate2) {
         out.length = newLen;
       }
       return out;
     };
-    var arraySpliceIn = function arraySpliceIn2(mutate2, at, v, arr) {
+    var arraySpliceIn = function arraySpliceIn2(mutate2, at, v2, arr) {
       var len = arr.length;
       if (mutate2) {
         var _i = len;
         while (_i >= at) {
           arr[_i--] = arr[_i];
         }
-        arr[at] = v;
+        arr[at] = v2;
         return arr;
       }
-      var i = 0,
+      var i2 = 0,
         g = 0;
       var out = new Array(len + 1);
-      while (i < at) {
-        out[g++] = arr[i++];
+      while (i2 < at) {
+        out[g++] = arr[i2++];
       }
-      out[at] = v;
-      while (i < len) {
-        out[++g] = arr[i++];
+      out[at] = v2;
+      while (i2 < len) {
+        out[++g] = arr[i2++];
       }
       return out;
     };
@@ -35459,24 +35541,24 @@ window.pannellum = (function (E, g, p) {
     var empty = {
       __hamt_isEmpty: true,
     };
-    var isEmptyNode = function isEmptyNode2(x) {
-      return x === empty || (x && x.__hamt_isEmpty);
+    var isEmptyNode = function isEmptyNode2(x2) {
+      return x2 === empty || (x2 && x2.__hamt_isEmpty);
     };
-    var Leaf = function Leaf2(edit, hash2, key, value) {
+    var Leaf = function Leaf2(edit, hash3, key, value) {
       return {
         type: LEAF,
         edit,
-        hash: hash2,
+        hash: hash3,
         key,
         value,
         _modify: Leaf__modify,
       };
     };
-    var Collision = function Collision2(edit, hash2, children) {
+    var Collision = function Collision2(edit, hash3, children) {
       return {
         type: COLLISION,
         edit,
-        hash: hash2,
+        hash: hash3,
         children,
         _modify: Collision__modify,
       };
@@ -35499,15 +35581,15 @@ window.pannellum = (function (E, g, p) {
         _modify: ArrayNode__modify,
       };
     };
-    var isLeaf = function isLeaf2(node) {
-      return node === empty || node.type === LEAF || node.type === COLLISION;
+    var isLeaf = function isLeaf2(node2) {
+      return node2 === empty || node2.type === LEAF || node2.type === COLLISION;
     };
     var expand = function expand2(edit, frag, child, bitmap, subNodes) {
       var arr = [];
       var bit = bitmap;
       var count2 = 0;
-      for (var i = 0; bit; ++i) {
-        if (bit & 1) arr[i] = subNodes[count2++];
+      for (var i2 = 0; bit; ++i2) {
+        if (bit & 1) arr[i2] = subNodes[count2++];
         bit >>>= 1;
       }
       arr[frag] = child;
@@ -35517,12 +35599,12 @@ window.pannellum = (function (E, g, p) {
       var children = new Array(count2 - 1);
       var g = 0;
       var bitmap = 0;
-      for (var i = 0, len = elements.length; i < len; ++i) {
-        if (i !== removed) {
-          var elem = elements[i];
+      for (var i2 = 0, len = elements.length; i2 < len; ++i2) {
+        if (i2 !== removed) {
+          var elem = elements[i2];
           if (elem && !isEmptyNode(elem)) {
             children[g++] = elem;
-            bitmap |= 1 << i;
+            bitmap |= 1 << i2;
           }
         }
       }
@@ -35548,43 +35630,43 @@ window.pannellum = (function (E, g, p) {
       keyEq,
       h,
       list,
-      f,
-      k,
+      f2,
+      k2,
       size,
     ) {
       var len = list.length;
-      for (var i = 0; i < len; ++i) {
-        var child = list[i];
-        if (keyEq(k, child.key)) {
+      for (var i2 = 0; i2 < len; ++i2) {
+        var child = list[i2];
+        if (keyEq(k2, child.key)) {
           var value = child.value;
-          var _newValue = f(value);
+          var _newValue = f2(value);
           if (_newValue === value) return list;
           if (_newValue === nothing) {
             --size.value;
-            return arraySpliceOut(mutate2, i, list);
+            return arraySpliceOut(mutate2, i2, list);
           }
-          return arrayUpdate(mutate2, i, Leaf(edit, h, k, _newValue), list);
+          return arrayUpdate(mutate2, i2, Leaf(edit, h, k2, _newValue), list);
         }
       }
-      var newValue = f();
+      var newValue = f2();
       if (newValue === nothing) return list;
       ++size.value;
-      return arrayUpdate(mutate2, len, Leaf(edit, h, k, newValue), list);
+      return arrayUpdate(mutate2, len, Leaf(edit, h, k2, newValue), list);
     };
-    var canEditNode = function canEditNode2(edit, node) {
-      return edit === node.edit;
+    var canEditNode = function canEditNode2(edit, node2) {
+      return edit === node2.edit;
     };
     var Leaf__modify = function Leaf__modify2(
       edit,
       keyEq,
       shift,
-      f,
+      f2,
       h,
-      k,
+      k2,
       size,
     ) {
-      if (keyEq(k, this.key)) {
-        var _v = f(this.value);
+      if (keyEq(k2, this.key)) {
+        var _v = f2(this.value);
         if (_v === this.value) return this;
         else if (_v === nothing) {
           --size.value;
@@ -35594,20 +35676,27 @@ window.pannellum = (function (E, g, p) {
           this.value = _v;
           return this;
         }
-        return Leaf(edit, h, k, _v);
+        return Leaf(edit, h, k2, _v);
       }
-      var v = f();
-      if (v === nothing) return this;
+      var v2 = f2();
+      if (v2 === nothing) return this;
       ++size.value;
-      return mergeLeaves(edit, shift, this.hash, this, h, Leaf(edit, h, k, v));
+      return mergeLeaves(
+        edit,
+        shift,
+        this.hash,
+        this,
+        h,
+        Leaf(edit, h, k2, v2),
+      );
     };
     var Collision__modify = function Collision__modify2(
       edit,
       keyEq,
       shift,
-      f,
+      f2,
       h,
-      k,
+      k2,
       size,
     ) {
       if (h === this.hash) {
@@ -35618,25 +35707,32 @@ window.pannellum = (function (E, g, p) {
           keyEq,
           this.hash,
           this.children,
-          f,
-          k,
+          f2,
+          k2,
           size,
         );
         if (list === this.children) return this;
         return list.length > 1 ? Collision(edit, this.hash, list) : list[0];
       }
-      var v = f();
-      if (v === nothing) return this;
+      var v2 = f2();
+      if (v2 === nothing) return this;
       ++size.value;
-      return mergeLeaves(edit, shift, this.hash, this, h, Leaf(edit, h, k, v));
+      return mergeLeaves(
+        edit,
+        shift,
+        this.hash,
+        this,
+        h,
+        Leaf(edit, h, k2, v2),
+      );
     };
     var IndexedNode__modify = function IndexedNode__modify2(
       edit,
       keyEq,
       shift,
-      f,
+      f2,
       h,
-      k,
+      k2,
       size,
     ) {
       var mask = this.mask;
@@ -35646,7 +35742,7 @@ window.pannellum = (function (E, g, p) {
       var indx = fromBitmap(mask, bit);
       var exists = mask & bit;
       var current = exists ? children[indx] : empty;
-      var child = current._modify(edit, keyEq, shift + SIZE, f, h, k, size);
+      var child = current._modify(edit, keyEq, shift + SIZE, f2, h, k2, size);
       if (current === child) return this;
       var canEdit = canEditNode(edit, this);
       var bitmap = mask;
@@ -35676,9 +35772,9 @@ window.pannellum = (function (E, g, p) {
       edit,
       keyEq,
       shift,
-      f,
+      f2,
       h,
-      k,
+      k2,
       size,
     ) {
       var count2 = this.size;
@@ -35689,9 +35785,9 @@ window.pannellum = (function (E, g, p) {
         edit,
         keyEq,
         shift + SIZE,
-        f,
+        f2,
         h,
-        k,
+        k2,
         size,
       );
       if (child === newChild) return this;
@@ -35714,11 +35810,11 @@ window.pannellum = (function (E, g, p) {
       }
       return ArrayNode(edit, count2, newChildren);
     };
-    empty._modify = function (edit, keyEq, shift, f, h, k, size) {
-      var v = f();
-      if (v === nothing) return empty;
+    empty._modify = function (edit, keyEq, shift, f2, h, k2, size) {
+      var v2 = f2();
+      if (v2 === nothing) return empty;
       ++size.value;
-      return Leaf(edit, h, k, v);
+      return Leaf(edit, h, k2, v2);
     };
     function Map2(editable, edit, config, root2, size) {
       this._editable = editable;
@@ -35737,38 +35833,38 @@ window.pannellum = (function (E, g, p) {
         ? this
         : new Map2(this._editable, this._edit, this._config, newRoot, newSize);
     };
-    var tryGetHash = (hamt.tryGetHash = function (alt, hash2, key, map) {
-      var node = map._root;
+    var tryGetHash = (hamt.tryGetHash = function (alt, hash3, key, map) {
+      var node2 = map._root;
       var shift = 0;
       var keyEq = map._config.keyEq;
       while (true) {
-        switch (node.type) {
+        switch (node2.type) {
           case LEAF: {
-            return keyEq(key, node.key) ? node.value : alt;
+            return keyEq(key, node2.key) ? node2.value : alt;
           }
           case COLLISION: {
-            if (hash2 === node.hash) {
-              var children = node.children;
-              for (var i = 0, len = children.length; i < len; ++i) {
-                var child = children[i];
+            if (hash3 === node2.hash) {
+              var children = node2.children;
+              for (var i2 = 0, len = children.length; i2 < len; ++i2) {
+                var child = children[i2];
                 if (keyEq(key, child.key)) return child.value;
               }
             }
             return alt;
           }
           case INDEX: {
-            var frag = hashFragment(shift, hash2);
+            var frag = hashFragment(shift, hash3);
             var bit = toBitmap(frag);
-            if (node.mask & bit) {
-              node = node.children[fromBitmap(node.mask, bit)];
+            if (node2.mask & bit) {
+              node2 = node2.children[fromBitmap(node2.mask, bit)];
               shift += SIZE;
               break;
             }
             return alt;
           }
           case ARRAY: {
-            node = node.children[hashFragment(shift, hash2)];
-            if (node) {
+            node2 = node2.children[hashFragment(shift, hash3)];
+            if (node2) {
               shift += SIZE;
               break;
             }
@@ -35779,8 +35875,8 @@ window.pannellum = (function (E, g, p) {
         }
       }
     });
-    Map2.prototype.tryGetHash = function (alt, hash2, key) {
-      return tryGetHash(alt, hash2, key, this);
+    Map2.prototype.tryGetHash = function (alt, hash3, key) {
+      return tryGetHash(alt, hash3, key, this);
     };
     var tryGet = (hamt.tryGet = function (alt, key, map) {
       return tryGetHash(alt, map._config.hash(key), key, map);
@@ -35788,11 +35884,11 @@ window.pannellum = (function (E, g, p) {
     Map2.prototype.tryGet = function (alt, key) {
       return tryGet(alt, key, this);
     };
-    var getHash = (hamt.getHash = function (hash2, key, map) {
-      return tryGetHash(void 0, hash2, key, map);
+    var getHash = (hamt.getHash = function (hash3, key, map) {
+      return tryGetHash(void 0, hash3, key, map);
     });
-    Map2.prototype.getHash = function (hash2, key) {
-      return getHash(hash2, key, this);
+    Map2.prototype.getHash = function (hash3, key) {
+      return getHash(hash3, key, this);
     };
     var get = (hamt.get = function (key, map) {
       return tryGetHash(void 0, map._config.hash(key), key, map);
@@ -35800,11 +35896,11 @@ window.pannellum = (function (E, g, p) {
     Map2.prototype.get = function (key, alt) {
       return tryGet(alt, key, this);
     };
-    var hasHash = (hamt.has = function (hash2, key, map) {
-      return tryGetHash(nothing, hash2, key, map) !== nothing;
+    var hasHash = (hamt.has = function (hash3, key, map) {
+      return tryGetHash(nothing, hash3, key, map) !== nothing;
     });
-    Map2.prototype.hasHash = function (hash2, key) {
-      return hasHash(hash2, key, this);
+    Map2.prototype.hasHash = function (hash3, key) {
+      return hasHash(hash3, key, this);
     };
     var has = (hamt.has = function (key, map) {
       return hasHash(map._config.hash(key), key, map);
@@ -35812,8 +35908,8 @@ window.pannellum = (function (E, g, p) {
     Map2.prototype.has = function (key) {
       return has(key, this);
     };
-    var defKeyCompare = function defKeyCompare2(x, y) {
-      return x === y;
+    var defKeyCompare = function defKeyCompare2(x2, y2) {
+      return x2 === y2;
     };
     hamt.make = function (config) {
       return new Map2(
@@ -35821,7 +35917,7 @@ window.pannellum = (function (E, g, p) {
         0,
         {
           keyEq: (config && config.keyEq) || defKeyCompare,
-          hash: (config && config.hash) || hash,
+          hash: (config && config.hash) || hash2,
         },
         empty,
         0,
@@ -35834,7 +35930,7 @@ window.pannellum = (function (E, g, p) {
     Map2.prototype.isEmpty = function () {
       return isEmpty(this);
     };
-    var modifyHash = (hamt.modifyHash = function (f, hash2, key, map) {
+    var modifyHash = (hamt.modifyHash = function (f2, hash3, key, map) {
       var size = {
         value: map._size,
       };
@@ -35842,27 +35938,27 @@ window.pannellum = (function (E, g, p) {
         map._editable ? map._edit : NaN,
         map._config.keyEq,
         0,
-        f,
-        hash2,
+        f2,
+        hash3,
         key,
         size,
       );
       return map.setTree(newRoot, size.value);
     });
-    Map2.prototype.modifyHash = function (hash2, key, f) {
-      return modifyHash(f, hash2, key, this);
+    Map2.prototype.modifyHash = function (hash3, key, f2) {
+      return modifyHash(f2, hash3, key, this);
     };
-    var modify = (hamt.modify = function (f, key, map) {
-      return modifyHash(f, map._config.hash(key), key, map);
+    var modify = (hamt.modify = function (f2, key, map) {
+      return modifyHash(f2, map._config.hash(key), key, map);
     });
-    Map2.prototype.modify = function (key, f) {
-      return modify(f, key, this);
+    Map2.prototype.modify = function (key, f2) {
+      return modify(f2, key, this);
     };
-    var setHash = (hamt.setHash = function (hash2, key, value, map) {
-      return modifyHash(constant(value), hash2, key, map);
+    var setHash = (hamt.setHash = function (hash3, key, value, map) {
+      return modifyHash(constant(value), hash3, key, map);
     });
-    Map2.prototype.setHash = function (hash2, key, value) {
-      return setHash(hash2, key, value, this);
+    Map2.prototype.setHash = function (hash3, key, value) {
+      return setHash(hash3, key, value, this);
     };
     var set = (hamt.set = function (key, value, map) {
       return setHash(map._config.hash(key), key, value, map);
@@ -35871,14 +35967,14 @@ window.pannellum = (function (E, g, p) {
       return set(key, value, this);
     };
     var del = constant(nothing);
-    var removeHash = (hamt.removeHash = function (hash2, key, map) {
-      return modifyHash(del, hash2, key, map);
+    var removeHash = (hamt.removeHash = function (hash3, key, map) {
+      return modifyHash(del, hash3, key, map);
     });
     Map2.prototype.removeHash = Map2.prototype.deleteHash = function (
-      hash2,
+      hash3,
       key,
     ) {
-      return removeHash(hash2, key, this);
+      return removeHash(hash3, key, this);
     };
     var remove = (hamt.remove = function (key, map) {
       return removeHash(map._config.hash(key), key, map);
@@ -35905,52 +36001,52 @@ window.pannellum = (function (E, g, p) {
     Map2.prototype.endMutation = function () {
       return endMutation(this);
     };
-    var mutate = (hamt.mutate = function (f, map) {
+    var mutate = (hamt.mutate = function (f2, map) {
       var transient = beginMutation(map);
-      f(transient);
+      f2(transient);
       return endMutation(transient);
     });
-    Map2.prototype.mutate = function (f) {
-      return mutate(f, this);
+    Map2.prototype.mutate = function (f2) {
+      return mutate(f2, this);
     };
-    var appk = function appk2(k) {
-      return k && lazyVisitChildren(k[0], k[1], k[2], k[3], k[4]);
+    var appk = function appk2(k2) {
+      return k2 && lazyVisitChildren(k2[0], k2[1], k2[2], k2[3], k2[4]);
     };
     var lazyVisitChildren = function lazyVisitChildren2(
       len,
       children,
-      i,
-      f,
-      k,
+      i2,
+      f2,
+      k2,
     ) {
-      while (i < len) {
-        var child = children[i++];
+      while (i2 < len) {
+        var child = children[i2++];
         if (child && !isEmptyNode(child))
-          return lazyVisit(child, f, [len, children, i, f, k]);
+          return lazyVisit(child, f2, [len, children, i2, f2, k2]);
       }
-      return appk(k);
+      return appk(k2);
     };
-    var lazyVisit = function lazyVisit2(node, f, k) {
-      switch (node.type) {
+    var lazyVisit = function lazyVisit2(node2, f2, k2) {
+      switch (node2.type) {
         case LEAF:
           return {
-            value: f(node),
-            rest: k,
+            value: f2(node2),
+            rest: k2,
           };
         case COLLISION:
         case ARRAY:
         case INDEX:
-          var children = node.children;
-          return lazyVisitChildren(children.length, children, 0, f, k);
+          var children = node2.children;
+          return lazyVisitChildren(children.length, children, 0, f2, k2);
         default:
-          return appk(k);
+          return appk(k2);
       }
     };
     var DONE = {
       done: true,
     };
-    function MapIterator(v) {
-      this.v = v;
+    function MapIterator(v2) {
+      this.v = v2;
     }
     MapIterator.prototype.next = function () {
       if (!this.v) return DONE;
@@ -35961,11 +36057,11 @@ window.pannellum = (function (E, g, p) {
     MapIterator.prototype[Symbol.iterator] = function () {
       return this;
     };
-    var visit = function visit2(map, f) {
-      return new MapIterator(lazyVisit(map._root, f));
+    var visit = function visit2(map, f2) {
+      return new MapIterator(lazyVisit(map._root, f2));
     };
-    var buildPairs = function buildPairs2(x) {
-      return [x.key, x.value];
+    var buildPairs = function buildPairs2(x2) {
+      return [x2.key, x2.value];
     };
     var entries3 = (hamt.entries = function (map) {
       return visit(map, buildPairs);
@@ -35973,8 +36069,8 @@ window.pannellum = (function (E, g, p) {
     Map2.prototype.entries = Map2.prototype[Symbol.iterator] = function () {
       return entries3(this);
     };
-    var buildKeys = function buildKeys2(x) {
-      return x.key;
+    var buildKeys = function buildKeys2(x2) {
+      return x2.key;
     };
     var keys5 = (hamt.keys = function (map) {
       return visit(map, buildKeys);
@@ -35982,8 +36078,8 @@ window.pannellum = (function (E, g, p) {
     Map2.prototype.keys = function () {
       return keys5(this);
     };
-    var buildValues = function buildValues2(x) {
-      return x.value;
+    var buildValues = function buildValues2(x2) {
+      return x2.value;
     };
     var values2 =
       (hamt.values =
@@ -35994,36 +36090,36 @@ window.pannellum = (function (E, g, p) {
     Map2.prototype.values = function () {
       return values2(this);
     };
-    var fold = (hamt.fold = function (f, z, m) {
+    var fold = (hamt.fold = function (f2, z2, m) {
       var root2 = m._root;
-      if (root2.type === LEAF) return f(z, root2.value, root2.key);
+      if (root2.type === LEAF) return f2(z2, root2.value, root2.key);
       var toVisit = [root2.children];
       var children = void 0;
       while ((children = toVisit.pop())) {
-        for (var i = 0, len = children.length; i < len; ) {
-          var child = children[i++];
+        for (var i2 = 0, len = children.length; i2 < len; ) {
+          var child = children[i2++];
           if (child && child.type) {
-            if (child.type === LEAF) z = f(z, child.value, child.key);
+            if (child.type === LEAF) z2 = f2(z2, child.value, child.key);
             else toVisit.push(child.children);
           }
         }
       }
-      return z;
+      return z2;
     });
-    Map2.prototype.fold = function (f, z) {
-      return fold(f, z, this);
+    Map2.prototype.fold = function (f2, z2) {
+      return fold(f2, z2, this);
     };
-    var forEach = (hamt.forEach = function (f, map) {
+    var forEach = (hamt.forEach = function (f2, map) {
       return fold(
-        function (_, value, key) {
-          return f(value, key, map);
+        function (_2, value, key) {
+          return f2(value, key, map);
         },
         null,
         map,
       );
     });
-    Map2.prototype.forEach = function (f) {
-      return forEach(f, this);
+    Map2.prototype.forEach = function (f2) {
+      return forEach(f2, this);
     };
     var count = (hamt.count = function (map) {
       return map._size;
@@ -36053,18 +36149,18 @@ window.pannellum = (function (E, g, p) {
     entries() {
       return this._map.entries();
     }
-    get(k) {
-      return this._map.get(k);
+    get(k2) {
+      return this._map.get(k2);
     }
-    has(k) {
-      return this._map.has(k);
+    has(k2) {
+      return this._map.has(k2);
     }
-    set(k, v) {
-      this._map.set(k, v);
+    set(k2, v2) {
+      this._map.set(k2, v2);
       return this;
     }
-    delete(k) {
-      this._map.delete(k);
+    delete(k2) {
+      this._map.delete(k2);
       return this;
     }
     clone() {
@@ -36085,8 +36181,8 @@ window.pannellum = (function (E, g, p) {
         existing._hamt = h.beginMutation();
         this._hamt = h.beginMutation();
       } else if (existing) {
-        for (const [k, v] of existing.entries()) {
-          this._hamt.set(k, v);
+        for (const [k2, v2] of existing.entries()) {
+          this._hamt.set(k2, v2);
         }
       }
     }
@@ -36096,18 +36192,18 @@ window.pannellum = (function (E, g, p) {
     entries() {
       return this._hamt.entries();
     }
-    get(k) {
-      return this._hamt.get(k);
+    get(k2) {
+      return this._hamt.get(k2);
     }
-    has(k) {
-      return this._hamt.has(k);
+    has(k2) {
+      return this._hamt.has(k2);
     }
-    set(k, v) {
-      this._hamt.set(k, v);
+    set(k2, v2) {
+      this._hamt.set(k2, v2);
       return this;
     }
-    delete(k) {
-      this._hamt.delete(k);
+    delete(k2) {
+      this._hamt.delete(k2);
       return this;
     }
     clone() {
@@ -36161,10 +36257,10 @@ window.pannellum = (function (E, g, p) {
   }
   function cloneGraph(graph2) {
     return {
-      nodeDeps: Recoil_mapMap(graph2.nodeDeps, (s) => new Set(s)),
+      nodeDeps: Recoil_mapMap(graph2.nodeDeps, (s2) => new Set(s2)),
       nodeToNodeSubscriptions: Recoil_mapMap(
         graph2.nodeToNodeSubscriptions,
-        (s) => new Set(s),
+        (s2) => new Set(s2),
       ),
     };
   }
@@ -36324,35 +36420,35 @@ window.pannellum = (function (E, g, p) {
     RetentionZone,
     retentionZone,
   };
-  function setByAddingToSet(set, v) {
-    const next = new Set(set);
-    next.add(v);
-    return next;
+  function setByAddingToSet(set, v2) {
+    const next2 = new Set(set);
+    next2.add(v2);
+    return next2;
   }
-  function setByDeletingFromSet(set, v) {
-    const next = new Set(set);
-    next.delete(v);
-    return next;
+  function setByDeletingFromSet(set, v2) {
+    const next2 = new Set(set);
+    next2.delete(v2);
+    return next2;
   }
-  function mapBySettingInMap(map, k, v) {
-    const next = new Map(map);
-    next.set(k, v);
-    return next;
+  function mapBySettingInMap(map, k2, v2) {
+    const next2 = new Map(map);
+    next2.set(k2, v2);
+    return next2;
   }
-  function mapByUpdatingInMap(map, k, updater) {
-    const next = new Map(map);
-    next.set(k, updater(next.get(k)));
-    return next;
+  function mapByUpdatingInMap(map, k2, updater) {
+    const next2 = new Map(map);
+    next2.set(k2, updater(next2.get(k2)));
+    return next2;
   }
-  function mapByDeletingFromMap(map, k) {
-    const next = new Map(map);
-    next.delete(k);
-    return next;
+  function mapByDeletingFromMap(map, k2) {
+    const next2 = new Map(map);
+    next2.delete(k2);
+    return next2;
   }
   function mapByDeletingMultipleFromMap(map, ks) {
-    const next = new Map(map);
-    ks.forEach((k) => next.delete(k));
-    return next;
+    const next2 = new Map(map);
+    ks.forEach((k2) => next2.delete(k2));
+    return next2;
   }
   var Recoil_CopyOnWrite = {
     setByAddingToSet,
@@ -36443,13 +36539,13 @@ window.pannellum = (function (E, g, p) {
     if (storeState.nodeCleanupFunctions.has(key)) {
       return;
     }
-    const node = getNode$1(key);
+    const node2 = getNode$1(key);
     const retentionCleanup = initializeRetentionForNode(
       store,
       key,
-      node.retainedBy,
+      node2.retainedBy,
     );
-    const nodeCleanup = node.init(store, treeState, trigger);
+    const nodeCleanup = node2.init(store, treeState, trigger);
     storeState.nodeCleanupFunctions.set(key, () => {
       nodeCleanup();
       retentionCleanup();
@@ -36481,13 +36577,13 @@ window.pannellum = (function (E, g, p) {
   }
   function setUnvalidatedAtomValue_DEPRECATED(state, key, newValue) {
     var _node$invalidate;
-    const node = getNodeMaybe$1(key);
-    node === null || node === void 0
+    const node2 = getNodeMaybe$1(key);
+    node2 === null || node2 === void 0
       ? void 0
-      : (_node$invalidate = node.invalidate) === null ||
+      : (_node$invalidate = node2.invalidate) === null ||
         _node$invalidate === void 0
       ? void 0
-      : _node$invalidate.call(node, state);
+      : _node$invalidate.call(node2, state);
     return {
       ...state,
       atomValues: state.atomValues.clone().delete(key),
@@ -36496,13 +36592,13 @@ window.pannellum = (function (E, g, p) {
     };
   }
   function setNodeValue(store, state, key, newValue) {
-    const node = getNode$1(key);
-    if (node.set == null) {
+    const node2 = getNode$1(key);
+    if (node2.set == null) {
       throw new ReadOnlyRecoilValueError(
         `Attempt to set read-only RecoilValue: ${key}`,
       );
     }
-    const set = node.set;
+    const set = node2.set;
     initializeNodeIfNewToStore(store, state, key, 'set');
     return set(store, state, newValue);
   }
@@ -36662,11 +36758,11 @@ window.pannellum = (function (E, g, p) {
   }
   function applyAtomValueWrites(atomValues, writes) {
     const result = atomValues.clone();
-    writes.forEach((v, k) => {
-      if (v.state === 'hasValue' && v.contents instanceof DefaultValue$1) {
-        result.delete(k);
+    writes.forEach((v2, k2) => {
+      if (v2.state === 'hasValue' && v2.contents instanceof DefaultValue$1) {
+        result.delete(k2);
       } else {
-        result.set(k, v);
+        result.set(k2, v2);
       }
     });
     return result;
@@ -36716,13 +36812,13 @@ window.pannellum = (function (E, g, p) {
         recoilValue: { key },
         unvalidatedValue,
       } = action;
-      const node = getNodeMaybe$2(key);
-      node === null || node === void 0
+      const node2 = getNodeMaybe$2(key);
+      node2 === null || node2 === void 0
         ? void 0
-        : (_node$invalidate = node.invalidate) === null ||
+        : (_node$invalidate = node2.invalidate) === null ||
           _node$invalidate === void 0
         ? void 0
-        : _node$invalidate.call(node, state);
+        : _node$invalidate.call(node2, state);
       state.atomValues.delete(key);
       state.nonvalidatedAtoms.set(key, unvalidatedValue);
       state.dirtyAtoms.add(key);
@@ -36882,10 +36978,11 @@ window.pannellum = (function (E, g, p) {
   function refreshRecoilValue(store, recoilValue) {
     var _node$clearCache;
     const { currentTree } = store.getState();
-    const node = getNode$2(recoilValue.key);
-    (_node$clearCache = node.clearCache) === null || _node$clearCache === void 0
+    const node2 = getNode$2(recoilValue.key);
+    (_node$clearCache = node2.clearCache) === null ||
+    _node$clearCache === void 0
       ? void 0
-      : _node$clearCache.call(node, store, currentTree);
+      : _node$clearCache.call(node2, store, currentTree);
   }
   var Recoil_RecoilValueInterface = {
     RecoilValueReadOnly: RecoilValueReadOnly$1,
@@ -36937,18 +37034,18 @@ window.pannellum = (function (E, g, p) {
       return;
     }
     const nodes2 = /* @__PURE__ */ new Set();
-    for (const r of retainables) {
-      if (r instanceof RetentionZone$2) {
-        for (const n of nodesRetainedByZone(storeState, r)) {
+    for (const r2 of retainables) {
+      if (r2 instanceof RetentionZone$2) {
+        for (const n of nodesRetainedByZone(storeState, r2)) {
           nodes2.add(n);
         }
       } else {
-        nodes2.add(r);
+        nodes2.add(r2);
       }
     }
     const releasableNodes = findReleasableNodes(store, nodes2);
-    for (const node of releasableNodes) {
-      releaseNode(store, treeState, node);
+    for (const node2 of releasableNodes) {
+      releaseNode(store, treeState, node2);
     }
   }
   function findReleasableNodes(store, searchFromNodes) {
@@ -36970,45 +37067,45 @@ window.pannellum = (function (E, g, p) {
         nonReleasableNodes,
         // don't descend into these
       );
-      for (const node of downstreams) {
+      for (const node2 of downstreams) {
         var _storeState$retention;
-        if (getNode$3(node).retainedBy === 'recoilRoot') {
-          nonReleasableNodes.add(node);
+        if (getNode$3(node2).retainedBy === 'recoilRoot') {
+          nonReleasableNodes.add(node2);
           continue;
         }
         if (
           ((_storeState$retention =
-            storeState.retention.referenceCounts.get(node)) !== null &&
+            storeState.retention.referenceCounts.get(node2)) !== null &&
           _storeState$retention !== void 0
             ? _storeState$retention
             : 0) > 0
         ) {
-          nonReleasableNodes.add(node);
+          nonReleasableNodes.add(node2);
           continue;
         }
         if (
-          zonesThatCouldRetainNode(node).some((z) =>
-            storeState.retention.referenceCounts.get(z),
+          zonesThatCouldRetainNode(node2).some((z2) =>
+            storeState.retention.referenceCounts.get(z2),
           )
         ) {
-          nonReleasableNodes.add(node);
+          nonReleasableNodes.add(node2);
           continue;
         }
-        const nodeChildren = graph2.nodeToNodeSubscriptions.get(node);
+        const nodeChildren = graph2.nodeToNodeSubscriptions.get(node2);
         if (
           nodeChildren &&
           Recoil_someSet(nodeChildren, (child) => nonReleasableNodes.has(child))
         ) {
-          nonReleasableNodes.add(node);
+          nonReleasableNodes.add(node2);
           continue;
         }
-        releasableNodes.add(node);
-        releasableNodesFoundThisIteration.add(node);
+        releasableNodes.add(node2);
+        releasableNodesFoundThisIteration.add(node2);
       }
       const parents = /* @__PURE__ */ new Set();
-      for (const node of releasableNodesFoundThisIteration) {
+      for (const node2 of releasableNodesFoundThisIteration) {
         for (const parent of (_graph$nodeDeps$get =
-          graph2.nodeDeps.get(node)) !== null && _graph$nodeDeps$get !== void 0
+          graph2.nodeDeps.get(node2)) !== null && _graph$nodeDeps$get !== void 0
           ? _graph$nodeDeps$get
           : emptySet$1) {
           var _graph$nodeDeps$get;
@@ -37036,63 +37133,63 @@ window.pannellum = (function (E, g, p) {
       visit(Recoil_nullthrows(nodes2.values().next().value));
     }
     return answer;
-    function visit(node) {
-      if (doNotDescendInto1.has(node) || doNotDescendInto2.has(node)) {
-        nodes2.delete(node);
+    function visit(node2) {
+      if (doNotDescendInto1.has(node2) || doNotDescendInto2.has(node2)) {
+        nodes2.delete(node2);
         return;
       }
-      if (visited.has(node)) {
+      if (visited.has(node2)) {
         return;
       }
-      const children = graph2.nodeToNodeSubscriptions.get(node);
+      const children = graph2.nodeToNodeSubscriptions.get(node2);
       if (children) {
         for (const child of children) {
           visit(child);
         }
       }
-      visited.add(node);
-      nodes2.delete(node);
-      answer.push(node);
+      visited.add(node2);
+      nodes2.delete(node2);
+      answer.push(node2);
     }
   }
-  function releaseNode(store, treeState, node) {
+  function releaseNode(store, treeState, node2) {
     if (!Recoil_gkx('recoil_memory_managament_2020')) {
       return;
     }
-    cleanUpNode$1(store, node);
+    cleanUpNode$1(store, node2);
     const storeState = store.getState();
-    storeState.knownAtoms.delete(node);
-    storeState.knownSelectors.delete(node);
-    storeState.nodeTransactionSubscriptions.delete(node);
-    storeState.retention.referenceCounts.delete(node);
-    const zones = zonesThatCouldRetainNode(node);
+    storeState.knownAtoms.delete(node2);
+    storeState.knownSelectors.delete(node2);
+    storeState.nodeTransactionSubscriptions.delete(node2);
+    storeState.retention.referenceCounts.delete(node2);
+    const zones = zonesThatCouldRetainNode(node2);
     for (const zone of zones) {
       var _storeState$retention2;
       (_storeState$retention2 =
         storeState.retention.nodesRetainedByZone.get(zone)) === null ||
       _storeState$retention2 === void 0
         ? void 0
-        : _storeState$retention2.delete(node);
+        : _storeState$retention2.delete(node2);
     }
-    treeState.atomValues.delete(node);
-    treeState.dirtyAtoms.delete(node);
-    treeState.nonvalidatedAtoms.delete(node);
+    treeState.atomValues.delete(node2);
+    treeState.dirtyAtoms.delete(node2);
+    treeState.nonvalidatedAtoms.delete(node2);
     const graph2 = storeState.graphsByVersion.get(treeState.version);
     if (graph2) {
-      const deps = graph2.nodeDeps.get(node);
+      const deps = graph2.nodeDeps.get(node2);
       if (deps !== void 0) {
-        graph2.nodeDeps.delete(node);
+        graph2.nodeDeps.delete(node2);
         for (const dep of deps) {
           var _graph$nodeToNodeSubs;
           (_graph$nodeToNodeSubs = graph2.nodeToNodeSubscriptions.get(dep)) ===
             null || _graph$nodeToNodeSubs === void 0
             ? void 0
-            : _graph$nodeToNodeSubs.delete(node);
+            : _graph$nodeToNodeSubs.delete(node2);
         }
       }
-      graph2.nodeToNodeSubscriptions.delete(node);
+      graph2.nodeToNodeSubscriptions.delete(node2);
     }
-    deleteNodeConfigIfPossible$1(node);
+    deleteNodeConfigIfPossible$1(node2);
   }
   function nodesRetainedByZone(storeState, zone) {
     var _storeState$retention3;
@@ -37102,8 +37199,8 @@ window.pannellum = (function (E, g, p) {
       ? _storeState$retention3
       : emptySet$1;
   }
-  function zonesThatCouldRetainNode(node) {
-    const retainedBy = getNode$3(node).retainedBy;
+  function zonesThatCouldRetainNode(node2) {
+    const retainedBy = getNode$3(node2).retainedBy;
     if (
       retainedBy === void 0 ||
       retainedBy === 'components' ||
@@ -37162,8 +37259,8 @@ window.pannellum = (function (E, g, p) {
     );
     state.retention.retainablesToCheckForRelease.clear();
   }
-  function retainedByOptionWithDefault(r) {
-    return r === void 0 ? 'recoilRoot' : r;
+  function retainedByOptionWithDefault(r2) {
+    return r2 === void 0 ? 'recoilRoot' : r2;
   }
   var Recoil_Retention = {
     SUSPENSE_TIMEOUT_MS,
@@ -37621,12 +37718,12 @@ This is currently a DEV-only warning but will become a thrown exception in the n
           this.checkRefCount_INTERNAL();
           const store = this.getStore_INTERNAL();
           batchUpdates$1(() => {
-            for (const [k, v] of values2.entries()) {
-              updateRetainCount$1(store, k, 1);
+            for (const [k2, v2] of values2.entries()) {
+              updateRetainCount$1(store, k2, 1);
               setUnvalidatedRecoilValue$1(
                 store,
-                new AbstractRecoilValue$2(k),
-                v,
+                new AbstractRecoilValue$2(k2),
+                v2,
               );
             }
           });
@@ -37786,12 +37883,12 @@ This is currently a DEV-only warning but will become a thrown exception in the n
         subscriptions,
       ] of storeState.nodeTransactionSubscriptions) {
         if (dirtyAtoms.has(key)) {
-          for (const [_, subscription] of subscriptions) {
+          for (const [_2, subscription] of subscriptions) {
             subscription(store);
           }
         }
       }
-      for (const [_, subscription] of storeState.transactionSubscriptions) {
+      for (const [_2, subscription] of storeState.transactionSubscriptions) {
         subscription(store);
       }
       if (
@@ -37883,11 +37980,11 @@ This is currently a DEV-only warning but will become a thrown exception in the n
         };
       },
       setUnvalidatedAtomValues: (atomValues) => {
-        atomValues.forEach((v, k) => {
+        atomValues.forEach((v2, k2) => {
           initial.currentTree = setUnvalidatedAtomValue_DEPRECATED$1(
             initial.currentTree,
-            k,
-            v,
+            k2,
+            v2,
           );
         });
       },
@@ -37955,10 +38052,10 @@ This is currently a DEV-only warning but will become a thrown exception in the n
     };
     const addTransactionMetadata = (metadata) => {
       startNextTreeIfNeeded(storeRef.current);
-      for (const k of Object.keys(metadata)) {
+      for (const k2 of Object.keys(metadata)) {
         Recoil_nullthrows(
           storeRef.current.getState().nextTree,
-        ).transactionMetadata[k] = metadata[k];
+        ).transactionMetadata[k2] = metadata[k2];
       }
     };
     const replaceState = (replacer) => {
@@ -37987,8 +38084,8 @@ This is currently a DEV-only warning but will become a thrown exception in the n
     };
     const notifyBatcherOfChange = useRef$1(null);
     const setNotifyBatcherOfChange = useCallback(
-      (x) => {
-        notifyBatcherOfChange.current = x;
+      (x2) => {
+        notifyBatcherOfChange.current = x2;
       },
       [notifyBatcherOfChange],
     );
@@ -38077,15 +38174,15 @@ This is currently a DEV-only warning but will become a thrown exception in the n
     notifyComponents_FOR_TESTING: notifyComponents,
     sendEndOfBatchNotifications_FOR_TESTING: sendEndOfBatchNotifications,
   };
-  function shallowArrayEqual(a, b) {
-    if (a === b) {
+  function shallowArrayEqual(a2, b2) {
+    if (a2 === b2) {
       return true;
     }
-    if (a.length !== b.length) {
+    if (a2.length !== b2.length) {
       return false;
     }
-    for (let i = 0, l = a.length; i < l; i++) {
-      if (a[i] !== b[i]) {
+    for (let i2 = 0, l2 = a2.length; i2 < l2; i2++) {
+      if (a2[i2] !== b2[i2]) {
         return false;
       }
     }
@@ -38115,8 +38212,8 @@ This is currently a DEV-only warning but will become a thrown exception in the n
   }
   function useRetain_ACTUAL(toRetain) {
     const array = Array.isArray(toRetain) ? toRetain : [toRetain];
-    const retainables = array.map((a) =>
-      a instanceof RetentionZone$3 ? a : a.key,
+    const retainables = array.map((a2) =>
+      a2 instanceof RetentionZone$3 ? a2 : a2.key,
     );
     const storeRef = useStoreRef$1();
     useEffect$2(() => {
@@ -38128,13 +38225,13 @@ This is currently a DEV-only warning but will become a thrown exception in the n
         window.clearTimeout(timeoutID.current);
         timeoutID.current = null;
       } else {
-        for (const r of retainables) {
-          updateRetainCount$2(store, r, 1);
+        for (const r2 of retainables) {
+          updateRetainCount$2(store, r2, 1);
         }
       }
       return () => {
-        for (const r of retainables) {
-          updateRetainCount$2(store, r, -1);
+        for (const r2 of retainables) {
+          updateRetainCount$2(store, r2, -1);
         }
       };
     }, [storeRef, ...retainables]);
@@ -38146,12 +38243,12 @@ This is currently a DEV-only warning but will become a thrown exception in the n
         !Recoil_shallowArrayEqual(previousRetainables, retainables))
     ) {
       const store = storeRef.current;
-      for (const r of retainables) {
-        updateRetainCount$2(store, r, 1);
+      for (const r2 of retainables) {
+        updateRetainCount$2(store, r2, 1);
       }
       if (previousRetainables) {
-        for (const r of previousRetainables) {
-          updateRetainCount$2(store, r, -1);
+        for (const r2 of previousRetainables) {
+          updateRetainCount$2(store, r2, -1);
         }
       }
       if (timeoutID.current) {
@@ -38159,8 +38256,8 @@ This is currently a DEV-only warning but will become a thrown exception in the n
       }
       timeoutID.current = window.setTimeout(() => {
         timeoutID.current = null;
-        for (const r of retainables) {
-          updateRetainCount$2(store, r, -1);
+        for (const r2 of retainables) {
+          updateRetainCount$2(store, r2, -1);
         }
       }, SUSPENSE_TIMEOUT_MS$1);
     }
@@ -38304,7 +38401,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
         currentSubscriptions.set(key, sub);
       });
       return () =>
-        currentSubscriptions.forEach((_, key) => unsubscribeFrom(key));
+        currentSubscriptions.forEach((_2, key) => unsubscribeFrom(key));
     }, [componentName, storeRef, unsubscribeFrom, updateState]);
     return useMemo$1(() => {
       function useSetRecoilState2(recoilState) {
@@ -38794,11 +38891,11 @@ This is currently a DEV-only warning but will become a thrown exception in the n
   var Recoil_filterSet = filterSet;
   function mergeMaps(...maps) {
     const result = /* @__PURE__ */ new Map();
-    for (let i = 0; i < maps.length; i++) {
-      const iterator = maps[i].keys();
+    for (let i2 = 0; i2 < maps.length; i2++) {
+      const iterator = maps[i2].keys();
       let nextKey;
       while (!(nextKey = iterator.next()).done) {
-        result.set(nextKey.value, maps[i].get(nextKey.value));
+        result.set(nextKey.value, maps[i2].get(nextKey.value));
       }
     }
     return result;
@@ -38834,16 +38931,16 @@ This is currently a DEV-only warning but will become a thrown exception in the n
   function externallyVisibleAtomValuesInState(state) {
     const atomValues = state.atomValues.toMap();
     const persistedAtomContentsValues = Recoil_mapMap(
-      Recoil_filterMap(atomValues, (v, k) => {
-        const node = getNode$4(k);
-        const persistence = node.persistence_UNSTABLE;
+      Recoil_filterMap(atomValues, (v2, k2) => {
+        const node2 = getNode$4(k2);
+        const persistence = node2.persistence_UNSTABLE;
         return (
           persistence != null &&
           persistence.type !== 'none' &&
-          v.state === 'hasValue'
+          v2.state === 'hasValue'
         );
       }),
-      (v) => v.contents,
+      (v2) => v2.contents,
     );
     return Recoil_mergeMaps(
       state.nonvalidatedAtoms.toMap(),
@@ -38865,7 +38962,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
           const atomValues = externallyVisibleAtomValuesInState(currentTree);
           const previousAtomValues =
             externallyVisibleAtomValuesInState(previousTree);
-          const atomInfo = Recoil_mapMap(nodes$1, (node) => {
+          const atomInfo = Recoil_mapMap(nodes$1, (node2) => {
             var _node$persistence_UNS,
               _node$persistence_UNS2,
               _node$persistence_UNS3,
@@ -38874,7 +38971,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
               persistence_UNSTABLE: {
                 type:
                   (_node$persistence_UNS =
-                    (_node$persistence_UNS2 = node.persistence_UNSTABLE) ===
+                    (_node$persistence_UNS2 = node2.persistence_UNSTABLE) ===
                       null || _node$persistence_UNS2 === void 0
                       ? void 0
                       : _node$persistence_UNS2.type) !== null &&
@@ -38883,7 +38980,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
                     : 'none',
                 backButton:
                   (_node$persistence_UNS3 =
-                    (_node$persistence_UNS4 = node.persistence_UNSTABLE) ===
+                    (_node$persistence_UNS4 = node2.persistence_UNSTABLE) ===
                       null || _node$persistence_UNS4 === void 0
                       ? void 0
                       : _node$persistence_UNS4.backButton) !== null &&
@@ -38895,7 +38992,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
           });
           const modifiedAtoms = Recoil_filterSet(
             currentTree.dirtyAtoms,
-            (k) => atomValues.has(k) || previousAtomValues.has(k),
+            (k2) => atomValues.has(k2) || previousAtomValues.has(k2),
           );
           callback({
             atomValues,
@@ -38980,23 +39077,23 @@ This is currently a DEV-only warning but will become a thrown exception in the n
   function gotoSnapshot(store, snapshot) {
     var _storeState$nextTree;
     const storeState = store.getState();
-    const prev =
+    const prev2 =
       (_storeState$nextTree = storeState.nextTree) !== null &&
       _storeState$nextTree !== void 0
         ? _storeState$nextTree
         : storeState.currentTree;
-    const next = snapshot.getStore_INTERNAL().getState().currentTree;
+    const next2 = snapshot.getStore_INTERNAL().getState().currentTree;
     batchUpdates$3(() => {
       const keysToUpdate = /* @__PURE__ */ new Set();
-      for (const keys5 of [prev.atomValues.keys(), next.atomValues.keys()]) {
+      for (const keys5 of [prev2.atomValues.keys(), next2.atomValues.keys()]) {
         for (const key of keys5) {
           var _prev$atomValues$get, _next$atomValues$get;
           if (
-            ((_prev$atomValues$get = prev.atomValues.get(key)) === null ||
+            ((_prev$atomValues$get = prev2.atomValues.get(key)) === null ||
             _prev$atomValues$get === void 0
               ? void 0
               : _prev$atomValues$get.contents) !==
-              ((_next$atomValues$get = next.atomValues.get(key)) === null ||
+              ((_next$atomValues$get = next2.atomValues.get(key)) === null ||
               _next$atomValues$get === void 0
                 ? void 0
                 : _next$atomValues$get.contents) &&
@@ -39010,8 +39107,8 @@ This is currently a DEV-only warning but will become a thrown exception in the n
         setRecoilValueLoadable$1(
           store,
           new AbstractRecoilValue$4(key),
-          next.atomValues.has(key)
-            ? Recoil_nullthrows(next.atomValues.get(key))
+          next2.atomValues.has(key)
+            ? Recoil_nullthrows(next2.atomValues.get(key))
             : DEFAULT_VALUE$3,
         );
       });
@@ -39142,8 +39239,8 @@ This is currently a DEV-only warning but will become a thrown exception in the n
         return this._treeState;
       }
       const newState = copyTreeState$1(this._treeState);
-      for (const [k, v] of this._changes) {
-        writeLoadableToTreeState$1(newState, k, loadableWithValue$1(v));
+      for (const [k2, v2] of this._changes) {
+        writeLoadableToTreeState$1(newState, k2, loadableWithValue$1(v2));
       }
       invalidateDownstreams$1(this._store, newState);
       return newState;
@@ -39202,11 +39299,11 @@ This is currently a DEV-only warning but will become a thrown exception in the n
             : {}),
           // flowlint-line unclear-type:off
           // $FlowFixMe[missing-local-annot]
-          set: (node, newValue) => setRecoilValue$3(store, node, newValue),
+          set: (node2, newValue) => setRecoilValue$3(store, node2, newValue),
           // $FlowFixMe[missing-local-annot]
-          reset: (node) => setRecoilValue$3(store, node, DEFAULT_VALUE$5),
+          reset: (node2) => setRecoilValue$3(store, node2, DEFAULT_VALUE$5),
           // $FlowFixMe[missing-local-annot]
-          refresh: (node) => refreshRecoilValue$1(store, node),
+          refresh: (node2) => refreshRecoilValue$1(store, node2),
           gotoSnapshot: (snapshot) => gotoSnapshot$1(store, snapshot),
           transact_UNSTABLE: (transaction) =>
             atomicUpdater$1(store)(transaction),
@@ -39360,24 +39457,24 @@ This is currently a DEV-only warning but will become a thrown exception in the n
       if (this._root == null) {
         return void 0;
       }
-      let node = this._root;
-      while (node) {
+      let node2 = this._root;
+      while (node2) {
         handlers === null || handlers === void 0
           ? void 0
-          : handlers.onNodeVisit(node);
-        if (node.type === 'leaf') {
-          this._onHit(node);
-          return node;
+          : handlers.onNodeVisit(node2);
+        if (node2.type === 'leaf') {
+          this._onHit(node2);
+          return node2;
         }
-        const nodeValue = this._mapNodeValue(getNodeValue(node.nodeKey));
-        node = node.branches.get(nodeValue);
+        const nodeValue = this._mapNodeValue(getNodeValue(node2.nodeKey));
+        node2 = node2.branches.get(nodeValue);
       }
       return void 0;
     }
     set(route, value, handlers) {
       const addLeaf = () => {
         var _node2, _node3, _this$_root2, _handlers$onNodeVisit2;
-        let node;
+        let node2;
         let branchKey;
         for (const [nodeKey, nodeValue] of route) {
           var _node, _handlers$onNodeVisit, _this$_root;
@@ -39388,10 +39485,10 @@ This is currently a DEV-only warning but will become a thrown exception in the n
           ) {
             throw this.invalidCacheError();
           }
-          const parent = node;
-          node = parent ? parent.branches.get(branchKey) : root2;
-          node =
-            (_node = node) !== null && _node !== void 0
+          const parent = node2;
+          node2 = parent ? parent.branches.get(branchKey) : root2;
+          node2 =
+            (_node = node2) !== null && _node !== void 0
               ? _node
               : {
                   type: 'branch',
@@ -39400,26 +39497,26 @@ This is currently a DEV-only warning but will become a thrown exception in the n
                   branches: /* @__PURE__ */ new Map(),
                   branchKey,
                 };
-          if (node.type !== 'branch' || node.nodeKey !== nodeKey) {
+          if (node2.type !== 'branch' || node2.nodeKey !== nodeKey) {
             throw this.invalidCacheError();
           }
           parent === null || parent === void 0
             ? void 0
-            : parent.branches.set(branchKey, node);
+            : parent.branches.set(branchKey, node2);
           handlers === null || handlers === void 0
             ? void 0
             : (_handlers$onNodeVisit = handlers.onNodeVisit) === null ||
               _handlers$onNodeVisit === void 0
             ? void 0
-            : _handlers$onNodeVisit.call(handlers, node);
+            : _handlers$onNodeVisit.call(handlers, node2);
           branchKey = this._mapNodeValue(nodeValue);
           this._root =
             (_this$_root = this._root) !== null && _this$_root !== void 0
               ? _this$_root
-              : node;
+              : node2;
         }
-        const oldLeaf = node
-          ? (_node2 = node) === null || _node2 === void 0
+        const oldLeaf = node2
+          ? (_node2 = node2) === null || _node2 === void 0
             ? void 0
             : _node2.branches.get(branchKey)
           : this._root;
@@ -39432,10 +39529,10 @@ This is currently a DEV-only warning but will become a thrown exception in the n
         const leafNode = {
           type: 'leaf',
           value,
-          parent: node,
+          parent: node2,
           branchKey,
         };
-        (_node3 = node) === null || _node3 === void 0
+        (_node3 = node2) === null || _node3 === void 0
           ? void 0
           : _node3.branches.set(branchKey, leafNode);
         this._root =
@@ -39473,13 +39570,13 @@ This is currently a DEV-only warning but will become a thrown exception in the n
         this._numLeafs = 0;
         return true;
       }
-      let node = leaf.parent;
+      let node2 = leaf.parent;
       let branchKey = leaf.branchKey;
-      while (node) {
+      while (node2) {
         var _node4;
-        node.branches.delete(branchKey);
-        if (node === root2) {
-          if (node.branches.size === 0) {
+        node2.branches.delete(branchKey);
+        if (node2 === root2) {
+          if (node2.branches.size === 0) {
             this._root = null;
             this._numLeafs = 0;
           } else {
@@ -39487,17 +39584,17 @@ This is currently a DEV-only warning but will become a thrown exception in the n
           }
           return true;
         }
-        if (node.branches.size > 0) {
+        if (node2.branches.size > 0) {
           break;
         }
         branchKey =
-          (_node4 = node) === null || _node4 === void 0
+          (_node4 = node2) === null || _node4 === void 0
             ? void 0
             : _node4.branchKey;
-        node = node.parent;
+        node2 = node2.parent;
       }
-      for (; node !== root2; node = node.parent) {
-        if (node == null) {
+      for (; node2 !== root2; node2 = node2.parent) {
+        if (node2 == null) {
           return false;
         }
       }
@@ -39545,7 +39642,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
         (_options$mapKey = options.mapKey) !== null &&
         _options$mapKey !== void 0
           ? _options$mapKey
-          : (v) => v;
+          : (v2) => v2;
     }
     head() {
       return this._head;
@@ -39564,12 +39661,12 @@ This is currently a DEV-only warning but will become a thrown exception in the n
     }
     get(key) {
       const mappedKey = this._keyMapper(key);
-      const node = this._map.get(mappedKey);
-      if (!node) {
+      const node2 = this._map.get(mappedKey);
+      if (!node2) {
         return void 0;
       }
-      this.set(key, node.value);
-      return node.value;
+      this.set(key, node2.value);
+      return node2.value;
     }
     set(key, val) {
       const mappedKey = this._keyMapper(key);
@@ -39578,19 +39675,19 @@ This is currently a DEV-only warning but will become a thrown exception in the n
         this.delete(key);
       }
       const head = this.head();
-      const node = {
+      const node2 = {
         key,
         right: head,
         left: null,
         value: val,
       };
       if (head) {
-        head.left = node;
+        head.left = node2;
       } else {
-        this._tail = node;
+        this._tail = node2;
       }
-      this._map.set(mappedKey, node);
-      this._head = node;
+      this._map.set(mappedKey, node2);
+      this._head = node2;
       this._size++;
       this._maybeDeleteLRU();
     }
@@ -39610,19 +39707,19 @@ This is currently a DEV-only warning but will become a thrown exception in the n
       if (!this._size || !this._map.has(mappedKey)) {
         return;
       }
-      const node = Recoil_nullthrows(this._map.get(mappedKey));
-      const right = node.right;
-      const left = node.left;
+      const node2 = Recoil_nullthrows(this._map.get(mappedKey));
+      const right = node2.right;
+      const left = node2.left;
       if (right) {
-        right.left = node.left;
+        right.left = node2.left;
       }
       if (left) {
-        left.right = node.right;
+        left.right = node2.right;
       }
-      if (node === this.head()) {
+      if (node2 === this.head()) {
         this._head = right;
       }
-      if (node === this.tail()) {
+      if (node2 === this.tail()) {
         this._tail = left;
       }
       this._map.delete(mappedKey);
@@ -39645,19 +39742,19 @@ This is currently a DEV-only warning but will become a thrown exception in the n
   });
   var { LRUCache: LRUCache$1 } = Recoil_LRUCache$1;
   var { TreeCache: TreeCache$1 } = Recoil_TreeCache$1;
-  function treeCacheLRU({ name, maxSize, mapNodeValue = (v) => v }) {
+  function treeCacheLRU({ name, maxSize, mapNodeValue = (v2) => v2 }) {
     const lruCache = new LRUCache$1({
       maxSize,
     });
     const cache = new TreeCache$1({
       name,
       mapNodeValue,
-      onHit: (node) => {
-        lruCache.set(node, true);
+      onHit: (node2) => {
+        lruCache.set(node2, true);
       },
-      onSet: (node) => {
+      onSet: (node2) => {
         const lruNode = lruCache.tail();
-        lruCache.set(node, true);
+        lruCache.set(node2, true);
         if (lruNode && cache.size() > maxSize) {
           cache.delete(lruNode.key);
         }
@@ -39667,20 +39764,20 @@ This is currently a DEV-only warning but will become a thrown exception in the n
   }
   var Recoil_treeCacheLRU = treeCacheLRU;
   var TIME_WARNING_THRESHOLD_MS = 15;
-  function stringify(x, opt, key) {
-    if (typeof x === 'string' && !x.includes('"') && !x.includes('\\')) {
-      return `"${x}"`;
+  function stringify(x2, opt, key) {
+    if (typeof x2 === 'string' && !x2.includes('"') && !x2.includes('\\')) {
+      return `"${x2}"`;
     }
-    switch (typeof x) {
+    switch (typeof x2) {
       case 'undefined':
         return '';
       case 'boolean':
-        return x ? 'true' : 'false';
+        return x2 ? 'true' : 'false';
       case 'number':
       case 'symbol':
-        return String(x);
+        return String(x2);
       case 'string':
-        return JSON.stringify(x);
+        return JSON.stringify(x2);
       case 'function':
         if (
           (opt === null || opt === void 0 ? void 0 : opt.allowFunctions) !==
@@ -39690,39 +39787,39 @@ This is currently a DEV-only warning but will become a thrown exception in the n
             'Attempt to serialize function in a Recoil cache key',
           );
         }
-        return `__FUNCTION(${x.name})__`;
+        return `__FUNCTION(${x2.name})__`;
     }
-    if (x === null) {
+    if (x2 === null) {
       return 'null';
     }
-    if (typeof x !== 'object') {
+    if (typeof x2 !== 'object') {
       var _JSON$stringify;
-      return (_JSON$stringify = JSON.stringify(x)) !== null &&
+      return (_JSON$stringify = JSON.stringify(x2)) !== null &&
         _JSON$stringify !== void 0
         ? _JSON$stringify
         : '';
     }
-    if (Recoil_isPromise(x)) {
+    if (Recoil_isPromise(x2)) {
       return '__PROMISE__';
     }
-    if (Array.isArray(x)) {
-      return `[${x.map((v, i) => stringify(v, opt, i.toString()))}]`;
+    if (Array.isArray(x2)) {
+      return `[${x2.map((v2, i2) => stringify(v2, opt, i2.toString()))}]`;
     }
-    if (typeof x.toJSON === 'function') {
-      return stringify(x.toJSON(key), opt, key);
+    if (typeof x2.toJSON === 'function') {
+      return stringify(x2.toJSON(key), opt, key);
     }
-    if (x instanceof Map) {
+    if (x2 instanceof Map) {
       const obj = {};
-      for (const [k, v] of x) {
-        obj[typeof k === 'string' ? k : stringify(k, opt)] = v;
+      for (const [k2, v2] of x2) {
+        obj[typeof k2 === 'string' ? k2 : stringify(k2, opt)] = v2;
       }
       return stringify(obj, opt, key);
     }
-    if (x instanceof Set) {
+    if (x2 instanceof Set) {
       return stringify(
         // $FlowFixMe[missing-local-annot]
-        Array.from(x).sort((a, b) =>
-          stringify(a, opt).localeCompare(stringify(b, opt)),
+        Array.from(x2).sort((a2, b2) =>
+          stringify(a2, opt).localeCompare(stringify(b2, opt)),
         ),
         opt,
         key,
@@ -39730,19 +39827,19 @@ This is currently a DEV-only warning but will become a thrown exception in the n
     }
     if (
       Symbol !== void 0 &&
-      x[Symbol.iterator] != null &&
-      typeof x[Symbol.iterator] === 'function'
+      x2[Symbol.iterator] != null &&
+      typeof x2[Symbol.iterator] === 'function'
     ) {
-      return stringify(Array.from(x), opt, key);
+      return stringify(Array.from(x2), opt, key);
     }
-    return `{${Object.keys(x)
-      .filter((k) => x[k] !== void 0)
+    return `{${Object.keys(x2)
+      .filter((k2) => x2[k2] !== void 0)
       .sort()
-      .map((k) => `${stringify(k, opt)}:${stringify(x[k], opt, k)}`)
+      .map((k2) => `${stringify(k2, opt)}:${stringify(x2[k2], opt, k2)}`)
       .join(',')}}`;
   }
   function stableStringify(
-    x,
+    x2,
     opt = {
       allowFunctions: false,
     },
@@ -39750,19 +39847,19 @@ This is currently a DEV-only warning but will become a thrown exception in the n
     if (true) {
       if (typeof window !== 'undefined') {
         const startTime = window.performance ? window.performance.now() : 0;
-        const str = stringify(x, opt);
+        const str = stringify(x2, opt);
         const endTime = window.performance ? window.performance.now() : 0;
         if (endTime - startTime > TIME_WARNING_THRESHOLD_MS) {
           console.groupCollapsed(
             `Recoil: Spent ${endTime - startTime}ms computing a cache key`,
           );
-          console.warn(x, str);
+          console.warn(x2, str);
           console.groupEnd();
         }
         return str;
       }
     }
-    return stringify(x, opt);
+    return stringify(x2, opt);
   }
   var Recoil_stableStringify = stableStringify;
   var { TreeCache: TreeCache$2 } = Recoil_TreeCache$1;
@@ -40311,9 +40408,9 @@ This is currently a DEV-only warning but will become a thrown exception in the n
             return getNodeLoadable$2(store, state, nodeKey).contents;
           },
           {
-            onNodeVisit: (node) => {
-              if (node.type === 'branch' && node.nodeKey !== key) {
-                depsAfterCacheLookup.add(node.nodeKey);
+            onNodeVisit: (node2) => {
+              if (node2.type === 'branch' && node2.nodeKey !== key) {
+                depsAfterCacheLookup.add(node2.nodeKey);
               }
             },
           },
@@ -40381,7 +40478,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
           ? [Recoil_nullthrows(executionInfoMap.get(store))]
           : [],
         Recoil_mapIterable(
-          Recoil_filterIterable(executionInfoMap, ([s]) => s !== store),
+          Recoil_filterIterable(executionInfoMap, ([s2]) => s2 !== store),
           ([, execInfo]) => execInfo,
         ),
       ]);
@@ -40521,11 +40618,11 @@ This is currently a DEV-only warning but will become a thrown exception in the n
         : void 0;
       for (const nodeKey of discoveredDependencyNodeKeys) {
         var _node$clearCache;
-        const node = getNode$6(nodeKey);
-        (_node$clearCache = node.clearCache) === null ||
+        const node2 = getNode$6(nodeKey);
+        (_node$clearCache = node2.clearCache) === null ||
         _node$clearCache === void 0
           ? void 0
-          : _node$clearCache.call(node, store, treeState);
+          : _node$clearCache.call(node2, store, treeState);
       }
       discoveredDependencyNodeKeys.clear();
       invalidateSelector(treeState);
@@ -40572,7 +40669,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
             recoilState.key,
             setValue,
           );
-          upstreamWrites.forEach((v, k) => writes.set(k, v));
+          upstreamWrites.forEach((v2, k2) => writes.set(k2, v2));
         }
         function resetRecoilState(recoilState) {
           setRecoilState(recoilState, DEFAULT_VALUE$6);
@@ -40651,7 +40748,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
   } = Recoil_RecoilValueInterface;
   var { retainedByOptionWithDefault: retainedByOptionWithDefault$2 } =
     Recoil_Retention;
-  var unwrap = (x) => (x instanceof WrappedValue$2 ? x.value : x);
+  var unwrap = (x2) => (x2 instanceof WrappedValue$2 ? x2.value : x2);
   function baseAtom(options) {
     const { key, persistence_UNSTABLE: persistence } = options;
     const retainedBy = retainedByOptionWithDefault$2(
@@ -40713,7 +40810,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
               ? void 0
               : _state$atomValues$get.contents) === wrappedPromise
           ) {
-            setRecoilValue$4(store, node, value);
+            setRecoilValue$4(store, node2, value);
           }
           return value;
         })
@@ -40730,7 +40827,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
               ? void 0
               : _state$atomValues$get2.contents) === wrappedPromise
           ) {
-            setRecoilValueLoadable$2(store, node, loadableWithError$2(error));
+            setRecoilValueLoadable$2(store, node2, loadableWithError$2(error));
           }
           throw error;
         });
@@ -40758,7 +40855,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
               ? _store$getState$nextT3
               : store.getState().currentTree;
           if (!state.atomValues.has(key)) {
-            markRecoilValueModified$2(store, node);
+            markRecoilValueModified$2(store, node2);
           }
         };
         defaultLoadable.contents.finally(notifyDefaultSubscribers);
@@ -40776,11 +40873,11 @@ This is currently a DEV-only warning but will become a thrown exception in the n
                 ? peekAtom(store, initState)
                 : Recoil_isPromise(retValue)
                 ? loadableWithPromise$2(
-                    retValue.then((v) =>
-                      v instanceof DefaultValue$2
+                    retValue.then((v2) =>
+                      v2 instanceof DefaultValue$2
                         ? // Cast T to S
                           defaultLoadable.toPromise()
-                        : v,
+                        : v2,
                     ),
                   )
                 : // $FlowFixMe[incompatible-call]
@@ -40817,7 +40914,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
         let pendingSetSelf = null;
         const setSelf = (effect) => (valueOrUpdater) => {
           if (isDuringInit) {
-            const currentLoadable = getLoadable(node);
+            const currentLoadable = getLoadable(node2);
             const currentValue =
               currentLoadable.state === 'hasValue'
                 ? currentLoadable.contents
@@ -40850,7 +40947,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
             }
             setRecoilValue$4(
               store,
-              node,
+              node2,
               typeof valueOrUpdater === 'function'
                 ? (currentValue) => {
                     const newValue = unwrap(
@@ -40932,7 +41029,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
         for (const effect of effects) {
           try {
             const cleanup = effect({
-              node,
+              node: node2,
               storeID: store.storeID,
               parentStoreID_UNSTABLE: store.parentStoreID,
               trigger,
@@ -41037,7 +41134,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
     function shouldDeleteConfigOnReleaseAtom() {
       return getConfigDeletionHandler$2(key) !== void 0 && liveStoresCount <= 0;
     }
-    const node = registerNode$2({
+    const node2 = registerNode$2({
       key,
       nodeType: 'atom',
       peek: peekAtom,
@@ -41056,7 +41153,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
       shouldRestoreFromSnapshots: true,
       retainedBy,
     });
-    return node;
+    return node2;
   }
   function atom(options) {
     if (true) {
@@ -41148,7 +41245,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
           options === null || options === void 0 ? void 0 : options.mapKey) !==
           null && _options$mapKey !== void 0
           ? _options$mapKey
-          : (v) => v;
+          : (v2) => v2;
     }
     size() {
       return this._map.size;
@@ -41394,11 +41491,11 @@ This is currently a DEV-only warning but will become a thrown exception in the n
   function concurrentRequests(getRecoilValue, deps) {
     const results = Array(deps.length).fill(void 0);
     const exceptions = Array(deps.length).fill(void 0);
-    for (const [i, dep] of deps.entries()) {
+    for (const [i2, dep] of deps.entries()) {
       try {
-        results[i] = getRecoilValue(dep);
+        results[i2] = getRecoilValue(dep);
       } catch (e) {
-        exceptions[i] = e;
+        exceptions[i2] = e;
       }
     }
     return [results, exceptions];
@@ -41469,16 +41566,16 @@ This is currently a DEV-only warning but will become a thrown exception in the n
           return wrapLoadables(dependencies, results, exceptions);
         }
         return new Promise((resolve) => {
-          for (const [i, exp] of exceptions.entries()) {
+          for (const [i2, exp] of exceptions.entries()) {
             if (Recoil_isPromise(exp)) {
               exp
                 .then((result) => {
-                  results[i] = result;
-                  exceptions[i] = void 0;
+                  results[i2] = result;
+                  exceptions[i2] = void 0;
                   resolve(wrapLoadables(dependencies, results, exceptions));
                 })
                 .catch((error) => {
-                  exceptions[i] = error;
+                  exceptions[i2] = error;
                   resolve(wrapLoadables(dependencies, results, exceptions));
                 });
             }
@@ -41521,16 +41618,16 @@ This is currently a DEV-only warning but will become a thrown exception in the n
           return wrapLoadables(dependencies, results, exceptions);
         }
         return Promise.all(
-          exceptions.map((exp, i) =>
+          exceptions.map((exp, i2) =>
             Recoil_isPromise(exp)
               ? exp
                   .then((result) => {
-                    results[i] = result;
-                    exceptions[i] = void 0;
+                    results[i2] = result;
+                    exceptions[i2] = void 0;
                   })
                   .catch((error) => {
-                    results[i] = void 0;
-                    exceptions[i] = error;
+                    results[i2] = void 0;
+                    exceptions[i2] = error;
                   })
               : null,
           ),
@@ -41794,12 +41891,12 @@ This is currently a DEV-only warning but will become a thrown exception in the n
     isDigitCodePoint(codePoint) ||
     isCapitalHexLatinCodePoint(codePoint) ||
     isSmallHexLatinCodePoint(codePoint);
-  var isLeadingSurrogateCodePoint = (x) => 55296 <= x && x <= 56319;
-  var isTrailingSurrogateCodePoint = (x) => 56320 <= x && x <= 57343;
-  var isSurrogateCodePoint = (x) => 55296 <= x && x <= 57343;
+  var isLeadingSurrogateCodePoint = (x2) => 55296 <= x2 && x2 <= 56319;
+  var isTrailingSurrogateCodePoint = (x2) => 56320 <= x2 && x2 <= 57343;
+  var isSurrogateCodePoint = (x2) => 55296 <= x2 && x2 <= 57343;
   var listCodePoints = function* (input, fromIndex = 0) {
-    const { length } = input;
-    for (let index = fromIndex; index < length; index++) {
+    const { length: length2 } = input;
+    for (let index = fromIndex; index < length2; index++) {
       let codeUnit = input.charCodeAt(index);
       if (isSurrogateCodePoint(codeUnit)) {
         const nextCodeUnit = input.charCodeAt(index + 1);
@@ -42023,11 +42120,11 @@ This is currently a DEV-only warning but will become a thrown exception in the n
     definitions,
     indent,
     ancestors,
-    prefix,
+    prefix2,
     open = '{',
     close = '}',
   ) {
-    yield `${indent}${prefix} ${open}
+    yield `${indent}${prefix2} ${open}
 `;
     const itemIndent = `${indent}  `;
     const nextAncestors = concat(ancestors, definitions);
@@ -42131,8 +42228,8 @@ ${stringifyError(error)}`,
     return null;
   };
   var checkArrayDefinitionError = (input, definition2, path) => {
-    const { length } = input;
-    for (let index = 0; index < length; index++) {
+    const { length: length2 } = input;
+    for (let index = 0; index < length2; index++) {
       const error = getTypeError(input[index], definition2, `${path}.${index}`);
       if (error) {
         return error;
@@ -42244,31 +42341,31 @@ ${stringifyError(error)}`,
   // node_modules/@nlib/typing/esm/parseIpv4Address.mjs
   var listIpv4Octets = function* (input, fromIndex = 0) {
     let start = fromIndex;
-    let length = 0;
+    let length2 = 0;
     let value = 0;
     for (const codePoint of listCodePoints(input, fromIndex)) {
       if (isDigitCodePoint(codePoint)) {
-        if (0 < length && value === 0) {
-          throw new Error(`InvalidIpv4Octet: ${input.substr(start, length)}`);
+        if (0 < length2 && value === 0) {
+          throw new Error(`InvalidIpv4Octet: ${input.substr(start, length2)}`);
         }
         value = value * 10 + codePoint - DIGIT_ZERO;
-        length += 1;
-        if (255 < value || 3 < length) {
-          throw new Error(`InvalidIpv4Octet: ${input.substr(start, length)}`);
+        length2 += 1;
+        if (255 < value || 3 < length2) {
+          throw new Error(`InvalidIpv4Octet: ${input.substr(start, length2)}`);
         }
       } else {
-        if (0 < length) {
-          yield { value, start, end: start + length };
+        if (0 < length2) {
+          yield { value, start, end: start + length2 };
         }
-        start += length + 1;
-        length = value = 0;
+        start += length2 + 1;
+        length2 = value = 0;
         if (codePoint !== FULL_STOP) {
           break;
         }
       }
     }
-    if (0 < length) {
-      yield { value, start, end: start + length };
+    if (0 < length2) {
+      yield { value, start, end: start + length2 };
     }
   };
   var parseIpv4Address = (input, start = 0) => {
@@ -42297,17 +42394,17 @@ ${stringifyError(error)}`,
   };
   var listIpv6Groups = function* (input, fromIndex = 0) {
     let start = fromIndex;
-    let length = 0;
+    let length2 = 0;
     let value = 0;
     for (const codePoint of listCodePoints(input, fromIndex)) {
       if (isHexCodePoint(codePoint)) {
         value = value * 16 + toNumber(codePoint);
-        length += 1;
-        if (4 < length) {
-          throw new Error(`InvalidIpv6Group: ${input.substr(start, length)}`);
+        length2 += 1;
+        if (4 < length2) {
+          throw new Error(`InvalidIpv6Group: ${input.substr(start, length2)}`);
         }
       } else if (codePoint === FULL_STOP) {
-        length = value = 0;
+        length2 = value = 0;
         let octetIndex = 0;
         for (const octet of listIpv4Octets(input, start)) {
           if (octetIndex % 2 === 0) {
@@ -42324,22 +42421,22 @@ ${stringifyError(error)}`,
         }
         break;
       } else {
-        if (0 < length || fromIndex < start) {
+        if (0 < length2 || fromIndex < start) {
           yield {
-            value: 0 < length ? value : null,
+            value: 0 < length2 ? value : null,
             start,
-            end: start + length,
+            end: start + length2,
           };
         }
-        start += length + 1;
-        length = value = 0;
+        start += length2 + 1;
+        length2 = value = 0;
         if (codePoint !== COLON) {
           break;
         }
       }
     }
-    if (0 < length) {
-      yield { value, start, end: start + length };
+    if (0 < length2) {
+      yield { value, start, end: start + length2 };
     }
   };
   var parseIpv6Address = (input, start = 0) => {
@@ -42362,15 +42459,15 @@ ${stringifyError(error)}`,
         }
       } else {
         end = group.end;
-        const length = groups.push(value);
-        if (0 <= compressorIndex && length === 7) {
+        const length2 = groups.push(value);
+        if (0 <= compressorIndex && length2 === 7) {
           groups.splice(compressorIndex, 0, 0);
           return {
             groups,
             start,
             end,
           };
-        } else if (length === 8) {
+        } else if (length2 === 8) {
           return {
             groups,
             start,
@@ -42511,8 +42608,8 @@ ${stringifyError(error)}`,
       if (!isString(input)) {
         return false;
       }
-      const { length } = input;
-      if (length === 0 || 64 < length) {
+      const { length: length2 } = input;
+      if (length2 === 0 || 64 < length2) {
         return false;
       }
       let lastCodePoint = FULL_STOP;
@@ -42870,13 +42967,2408 @@ ${stringifyError(error)}`,
     isViewerConfig,
   );
 
-  // src/components/SyncHotSpots.tsx
-  var import_react4 = __toESM(require_react(), 1);
+  // node_modules/tslib/tslib.es6.mjs
+  var __assign = function () {
+    __assign =
+      Object.assign ||
+      function __assign2(t) {
+        for (var s2, i2 = 1, n = arguments.length; i2 < n; i2++) {
+          s2 = arguments[i2];
+          for (var p2 in s2)
+            if (Object.prototype.hasOwnProperty.call(s2, p2)) t[p2] = s2[p2];
+        }
+        return t;
+      };
+    return __assign.apply(this, arguments);
+  };
+  function __spreadArray(to, from2, pack) {
+    if (pack || arguments.length === 2)
+      for (var i2 = 0, l2 = from2.length, ar; i2 < l2; i2++) {
+        if (ar || !(i2 in from2)) {
+          if (!ar) ar = Array.prototype.slice.call(from2, 0, i2);
+          ar[i2] = from2[i2];
+        }
+      }
+    return to.concat(ar || Array.prototype.slice.call(from2));
+  }
+
+  // node_modules/@emotion/memoize/dist/emotion-memoize.esm.js
+  function memoize(fn) {
+    var cache = /* @__PURE__ */ Object.create(null);
+    return function (arg) {
+      if (cache[arg] === void 0) cache[arg] = fn(arg);
+      return cache[arg];
+    };
+  }
+
+  // node_modules/@emotion/is-prop-valid/dist/emotion-is-prop-valid.esm.js
+  var reactPropsRegex =
+    /^((children|dangerouslySetInnerHTML|key|ref|autoFocus|defaultValue|defaultChecked|innerHTML|suppressContentEditableWarning|suppressHydrationWarning|valueLink|abbr|accept|acceptCharset|accessKey|action|allow|allowUserMedia|allowPaymentRequest|allowFullScreen|allowTransparency|alt|async|autoComplete|autoPlay|capture|cellPadding|cellSpacing|challenge|charSet|checked|cite|classID|className|cols|colSpan|content|contentEditable|contextMenu|controls|controlsList|coords|crossOrigin|data|dateTime|decoding|default|defer|dir|disabled|disablePictureInPicture|download|draggable|encType|enterKeyHint|form|formAction|formEncType|formMethod|formNoValidate|formTarget|frameBorder|headers|height|hidden|high|href|hrefLang|htmlFor|httpEquiv|id|inputMode|integrity|is|keyParams|keyType|kind|label|lang|list|loading|loop|low|marginHeight|marginWidth|max|maxLength|media|mediaGroup|method|min|minLength|multiple|muted|name|nonce|noValidate|open|optimum|pattern|placeholder|playsInline|poster|preload|profile|radioGroup|readOnly|referrerPolicy|rel|required|reversed|role|rows|rowSpan|sandbox|scope|scoped|scrolling|seamless|selected|shape|size|sizes|slot|span|spellCheck|src|srcDoc|srcLang|srcSet|start|step|style|summary|tabIndex|target|title|translate|type|useMap|value|width|wmode|wrap|about|datatype|inlist|prefix|property|resource|typeof|vocab|autoCapitalize|autoCorrect|autoSave|color|incremental|fallback|inert|itemProp|itemScope|itemType|itemID|itemRef|on|option|results|security|unselectable|accentHeight|accumulate|additive|alignmentBaseline|allowReorder|alphabetic|amplitude|arabicForm|ascent|attributeName|attributeType|autoReverse|azimuth|baseFrequency|baselineShift|baseProfile|bbox|begin|bias|by|calcMode|capHeight|clip|clipPathUnits|clipPath|clipRule|colorInterpolation|colorInterpolationFilters|colorProfile|colorRendering|contentScriptType|contentStyleType|cursor|cx|cy|d|decelerate|descent|diffuseConstant|direction|display|divisor|dominantBaseline|dur|dx|dy|edgeMode|elevation|enableBackground|end|exponent|externalResourcesRequired|fill|fillOpacity|fillRule|filter|filterRes|filterUnits|floodColor|floodOpacity|focusable|fontFamily|fontSize|fontSizeAdjust|fontStretch|fontStyle|fontVariant|fontWeight|format|from|fr|fx|fy|g1|g2|glyphName|glyphOrientationHorizontal|glyphOrientationVertical|glyphRef|gradientTransform|gradientUnits|hanging|horizAdvX|horizOriginX|ideographic|imageRendering|in|in2|intercept|k|k1|k2|k3|k4|kernelMatrix|kernelUnitLength|kerning|keyPoints|keySplines|keyTimes|lengthAdjust|letterSpacing|lightingColor|limitingConeAngle|local|markerEnd|markerMid|markerStart|markerHeight|markerUnits|markerWidth|mask|maskContentUnits|maskUnits|mathematical|mode|numOctaves|offset|opacity|operator|order|orient|orientation|origin|overflow|overlinePosition|overlineThickness|panose1|paintOrder|pathLength|patternContentUnits|patternTransform|patternUnits|pointerEvents|points|pointsAtX|pointsAtY|pointsAtZ|preserveAlpha|preserveAspectRatio|primitiveUnits|r|radius|refX|refY|renderingIntent|repeatCount|repeatDur|requiredExtensions|requiredFeatures|restart|result|rotate|rx|ry|scale|seed|shapeRendering|slope|spacing|specularConstant|specularExponent|speed|spreadMethod|startOffset|stdDeviation|stemh|stemv|stitchTiles|stopColor|stopOpacity|strikethroughPosition|strikethroughThickness|string|stroke|strokeDasharray|strokeDashoffset|strokeLinecap|strokeLinejoin|strokeMiterlimit|strokeOpacity|strokeWidth|surfaceScale|systemLanguage|tableValues|targetX|targetY|textAnchor|textDecoration|textRendering|textLength|to|transform|u1|u2|underlinePosition|underlineThickness|unicode|unicodeBidi|unicodeRange|unitsPerEm|vAlphabetic|vHanging|vIdeographic|vMathematical|values|vectorEffect|version|vertAdvY|vertOriginX|vertOriginY|viewBox|viewTarget|visibility|widths|wordSpacing|writingMode|x|xHeight|x1|x2|xChannelSelector|xlinkActuate|xlinkArcrole|xlinkHref|xlinkRole|xlinkShow|xlinkTitle|xlinkType|xmlBase|xmlns|xmlnsXlink|xmlLang|xmlSpace|y|y1|y2|yChannelSelector|z|zoomAndPan|for|class|autofocus)|(([Dd][Aa][Tt][Aa]|[Aa][Rr][Ii][Aa]|x)-.*))$/;
+  var isPropValid = /* @__PURE__ */ memoize(
+    function (prop) {
+      return (
+        reactPropsRegex.test(prop) ||
+        (prop.charCodeAt(0) === 111 &&
+          prop.charCodeAt(1) === 110 &&
+          prop.charCodeAt(2) < 91)
+      );
+    },
+    /* Z+1 */
+  );
+
+  // node_modules/styled-components/dist/styled-components.browser.esm.js
+  var import_react3 = __toESM(require_react());
+  var import_shallowequal = __toESM(require_shallowequal());
+
+  // node_modules/stylis/src/Enum.js
+  var MS = '-ms-';
+  var MOZ = '-moz-';
+  var WEBKIT = '-webkit-';
+  var COMMENT = 'comm';
+  var RULESET = 'rule';
+  var DECLARATION = 'decl';
+  var IMPORT = '@import';
+  var KEYFRAMES = '@keyframes';
+  var LAYER = '@layer';
+
+  // node_modules/stylis/src/Utility.js
+  var abs = Math.abs;
+  var from = String.fromCharCode;
+  var assign = Object.assign;
+  function hash(value, length2) {
+    return charat(value, 0) ^ 45
+      ? (((((((length2 << 2) ^ charat(value, 0)) << 2) ^ charat(value, 1)) <<
+          2) ^
+          charat(value, 2)) <<
+          2) ^
+          charat(value, 3)
+      : 0;
+  }
+  function trim(value) {
+    return value.trim();
+  }
+  function match(value, pattern) {
+    return (value = pattern.exec(value)) ? value[0] : value;
+  }
+  function replace(value, pattern, replacement) {
+    return value.replace(pattern, replacement);
+  }
+  function indexof(value, search) {
+    return value.indexOf(search);
+  }
+  function charat(value, index) {
+    return value.charCodeAt(index) | 0;
+  }
+  function substr(value, begin, end) {
+    return value.slice(begin, end);
+  }
+  function strlen(value) {
+    return value.length;
+  }
+  function sizeof(value) {
+    return value.length;
+  }
+  function append(value, array) {
+    return array.push(value), value;
+  }
+  function combine(array, callback) {
+    return array.map(callback).join('');
+  }
+  function filter(array, pattern) {
+    return array.filter(function (value) {
+      return !match(value, pattern);
+    });
+  }
+
+  // node_modules/stylis/src/Tokenizer.js
+  var line = 1;
+  var column = 1;
+  var length = 0;
+  var position = 0;
+  var character = 0;
+  var characters = '';
+  function node(
+    value,
+    root2,
+    parent,
+    type,
+    props,
+    children,
+    length2,
+    siblings,
+  ) {
+    return {
+      value,
+      root: root2,
+      parent,
+      type,
+      props,
+      children,
+      line,
+      column,
+      length: length2,
+      return: '',
+      siblings,
+    };
+  }
+  function copy(root2, props) {
+    return assign(
+      node('', null, null, '', null, null, 0, root2.siblings),
+      root2,
+      { length: -root2.length },
+      props,
+    );
+  }
+  function lift(root2) {
+    while (root2.root) root2 = copy(root2.root, { children: [root2] });
+    append(root2, root2.siblings);
+  }
+  function char() {
+    return character;
+  }
+  function prev() {
+    character = position > 0 ? charat(characters, --position) : 0;
+    if ((column--, character === 10)) (column = 1), line--;
+    return character;
+  }
+  function next() {
+    character = position < length ? charat(characters, position++) : 0;
+    if ((column++, character === 10)) (column = 1), line++;
+    return character;
+  }
+  function peek() {
+    return charat(characters, position);
+  }
+  function caret() {
+    return position;
+  }
+  function slice(begin, end) {
+    return substr(characters, begin, end);
+  }
+  function token(type) {
+    switch (type) {
+      case 0:
+      case 9:
+      case 10:
+      case 13:
+      case 32:
+        return 5;
+      case 33:
+      case 43:
+      case 44:
+      case 47:
+      case 62:
+      case 64:
+      case 126:
+      case 59:
+      case 123:
+      case 125:
+        return 4;
+      case 58:
+        return 3;
+      case 34:
+      case 39:
+      case 40:
+      case 91:
+        return 2;
+      case 41:
+      case 93:
+        return 1;
+    }
+    return 0;
+  }
+  function alloc(value) {
+    return (
+      (line = column = 1),
+      (length = strlen((characters = value))),
+      (position = 0),
+      []
+    );
+  }
+  function dealloc(value) {
+    return (characters = ''), value;
+  }
+  function delimit(type) {
+    return trim(
+      slice(
+        position - 1,
+        delimiter(type === 91 ? type + 2 : type === 40 ? type + 1 : type),
+      ),
+    );
+  }
+  function whitespace(type) {
+    while ((character = peek()))
+      if (character < 33) next();
+      else break;
+    return token(type) > 2 || token(character) > 3 ? '' : ' ';
+  }
+  function escaping(index, count) {
+    while (--count && next())
+      if (
+        character < 48 ||
+        character > 102 ||
+        (character > 57 && character < 65) ||
+        (character > 70 && character < 97)
+      )
+        break;
+    return slice(index, caret() + (count < 6 && peek() == 32 && next() == 32));
+  }
+  function delimiter(type) {
+    while (next())
+      switch (character) {
+        case type:
+          return position;
+        case 34:
+        case 39:
+          if (type !== 34 && type !== 39) delimiter(character);
+          break;
+        case 40:
+          if (type === 41) delimiter(type);
+          break;
+        case 92:
+          next();
+          break;
+      }
+    return position;
+  }
+  function commenter(type, index) {
+    while (next())
+      if (type + character === 47 + 10) break;
+      else if (type + character === 42 + 42 && peek() === 47) break;
+    return (
+      '/*' +
+      slice(index, position - 1) +
+      '*' +
+      from(type === 47 ? type : next())
+    );
+  }
+  function identifier(index) {
+    while (!token(peek())) next();
+    return slice(index, position);
+  }
+
+  // node_modules/stylis/src/Parser.js
+  function compile(value) {
+    return dealloc(
+      parse('', null, null, null, [''], (value = alloc(value)), 0, [0], value),
+    );
+  }
+  function parse(
+    value,
+    root2,
+    parent,
+    rule,
+    rules,
+    rulesets,
+    pseudo,
+    points,
+    declarations,
+  ) {
+    var index = 0;
+    var offset = 0;
+    var length2 = pseudo;
+    var atrule = 0;
+    var property = 0;
+    var previous = 0;
+    var variable = 1;
+    var scanning = 1;
+    var ampersand = 1;
+    var character2 = 0;
+    var type = '';
+    var props = rules;
+    var children = rulesets;
+    var reference = rule;
+    var characters2 = type;
+    while (scanning)
+      switch (((previous = character2), (character2 = next()))) {
+        case 40:
+          if (previous != 108 && charat(characters2, length2 - 1) == 58) {
+            if (
+              indexof(
+                (characters2 += replace(delimit(character2), '&', '&\f')),
+                '&\f',
+              ) != -1
+            )
+              ampersand = -1;
+            break;
+          }
+        case 34:
+        case 39:
+        case 91:
+          characters2 += delimit(character2);
+          break;
+        case 9:
+        case 10:
+        case 13:
+        case 32:
+          characters2 += whitespace(previous);
+          break;
+        case 92:
+          characters2 += escaping(caret() - 1, 7);
+          continue;
+        case 47:
+          switch (peek()) {
+            case 42:
+            case 47:
+              append(
+                comment(
+                  commenter(next(), caret()),
+                  root2,
+                  parent,
+                  declarations,
+                ),
+                declarations,
+              );
+              break;
+            default:
+              characters2 += '/';
+          }
+          break;
+        case 123 * variable:
+          points[index++] = strlen(characters2) * ampersand;
+        case 125 * variable:
+        case 59:
+        case 0:
+          switch (character2) {
+            case 0:
+            case 125:
+              scanning = 0;
+            case 59 + offset:
+              if (ampersand == -1)
+                characters2 = replace(characters2, /\f/g, '');
+              if (property > 0 && strlen(characters2) - length2)
+                append(
+                  property > 32
+                    ? declaration(
+                        characters2 + ';',
+                        rule,
+                        parent,
+                        length2 - 1,
+                        declarations,
+                      )
+                    : declaration(
+                        replace(characters2, ' ', '') + ';',
+                        rule,
+                        parent,
+                        length2 - 2,
+                        declarations,
+                      ),
+                  declarations,
+                );
+              break;
+            case 59:
+              characters2 += ';';
+            default:
+              append(
+                (reference = ruleset(
+                  characters2,
+                  root2,
+                  parent,
+                  index,
+                  offset,
+                  rules,
+                  points,
+                  type,
+                  (props = []),
+                  (children = []),
+                  length2,
+                  rulesets,
+                )),
+                rulesets,
+              );
+              if (character2 === 123)
+                if (offset === 0)
+                  parse(
+                    characters2,
+                    root2,
+                    reference,
+                    reference,
+                    props,
+                    rulesets,
+                    length2,
+                    points,
+                    children,
+                  );
+                else
+                  switch (
+                    atrule === 99 && charat(characters2, 3) === 110
+                      ? 100
+                      : atrule
+                  ) {
+                    case 100:
+                    case 108:
+                    case 109:
+                    case 115:
+                      parse(
+                        value,
+                        reference,
+                        reference,
+                        rule &&
+                          append(
+                            ruleset(
+                              value,
+                              reference,
+                              reference,
+                              0,
+                              0,
+                              rules,
+                              points,
+                              type,
+                              rules,
+                              (props = []),
+                              length2,
+                              children,
+                            ),
+                            children,
+                          ),
+                        rules,
+                        children,
+                        length2,
+                        points,
+                        rule ? props : children,
+                      );
+                      break;
+                    default:
+                      parse(
+                        characters2,
+                        reference,
+                        reference,
+                        reference,
+                        [''],
+                        children,
+                        0,
+                        points,
+                        children,
+                      );
+                  }
+          }
+          (index = offset = property = 0),
+            (variable = ampersand = 1),
+            (type = characters2 = ''),
+            (length2 = pseudo);
+          break;
+        case 58:
+          (length2 = 1 + strlen(characters2)), (property = previous);
+        default:
+          if (variable < 1) {
+            if (character2 == 123) --variable;
+            else if (character2 == 125 && variable++ == 0 && prev() == 125)
+              continue;
+          }
+          switch (((characters2 += from(character2)), character2 * variable)) {
+            case 38:
+              ampersand = offset > 0 ? 1 : ((characters2 += '\f'), -1);
+              break;
+            case 44:
+              (points[index++] = (strlen(characters2) - 1) * ampersand),
+                (ampersand = 1);
+              break;
+            case 64:
+              if (peek() === 45) characters2 += delimit(next());
+              (atrule = peek()),
+                (offset = length2 =
+                  strlen((type = characters2 += identifier(caret())))),
+                character2++;
+              break;
+            case 45:
+              if (previous === 45 && strlen(characters2) == 2) variable = 0;
+          }
+      }
+    return rulesets;
+  }
+  function ruleset(
+    value,
+    root2,
+    parent,
+    index,
+    offset,
+    rules,
+    points,
+    type,
+    props,
+    children,
+    length2,
+    siblings,
+  ) {
+    var post = offset - 1;
+    var rule = offset === 0 ? rules : [''];
+    var size = sizeof(rule);
+    for (var i2 = 0, j2 = 0, k2 = 0; i2 < index; ++i2)
+      for (
+        var x2 = 0,
+          y2 = substr(value, post + 1, (post = abs((j2 = points[i2])))),
+          z2 = value;
+        x2 < size;
+        ++x2
+      )
+        if (
+          (z2 = trim(
+            j2 > 0 ? rule[x2] + ' ' + y2 : replace(y2, /&\f/g, rule[x2]),
+          ))
+        )
+          props[k2++] = z2;
+    return node(
+      value,
+      root2,
+      parent,
+      offset === 0 ? RULESET : type,
+      props,
+      children,
+      length2,
+      siblings,
+    );
+  }
+  function comment(value, root2, parent, siblings) {
+    return node(
+      value,
+      root2,
+      parent,
+      COMMENT,
+      from(char()),
+      substr(value, 2, -2),
+      0,
+      siblings,
+    );
+  }
+  function declaration(value, root2, parent, length2, siblings) {
+    return node(
+      value,
+      root2,
+      parent,
+      DECLARATION,
+      substr(value, 0, length2),
+      substr(value, length2 + 1, -1),
+      length2,
+      siblings,
+    );
+  }
+
+  // node_modules/stylis/src/Prefixer.js
+  function prefix(value, length2, children) {
+    switch (hash(value, length2)) {
+      case 5103:
+        return WEBKIT + 'print-' + value + value;
+      case 5737:
+      case 4201:
+      case 3177:
+      case 3433:
+      case 1641:
+      case 4457:
+      case 2921:
+      case 5572:
+      case 6356:
+      case 5844:
+      case 3191:
+      case 6645:
+      case 3005:
+      case 6391:
+      case 5879:
+      case 5623:
+      case 6135:
+      case 4599:
+      case 4855:
+      case 4215:
+      case 6389:
+      case 5109:
+      case 5365:
+      case 5621:
+      case 3829:
+        return WEBKIT + value + value;
+      case 4789:
+        return MOZ + value + value;
+      case 5349:
+      case 4246:
+      case 4810:
+      case 6968:
+      case 2756:
+        return WEBKIT + value + MOZ + value + MS + value + value;
+      case 5936:
+        switch (charat(value, length2 + 11)) {
+          case 114:
+            return (
+              WEBKIT +
+              value +
+              MS +
+              replace(value, /[svh]\w+-[tblr]{2}/, 'tb') +
+              value
+            );
+          case 108:
+            return (
+              WEBKIT +
+              value +
+              MS +
+              replace(value, /[svh]\w+-[tblr]{2}/, 'tb-rl') +
+              value
+            );
+          case 45:
+            return (
+              WEBKIT +
+              value +
+              MS +
+              replace(value, /[svh]\w+-[tblr]{2}/, 'lr') +
+              value
+            );
+        }
+      case 6828:
+      case 4268:
+      case 2903:
+        return WEBKIT + value + MS + value + value;
+      case 6165:
+        return WEBKIT + value + MS + 'flex-' + value + value;
+      case 5187:
+        return (
+          WEBKIT +
+          value +
+          replace(
+            value,
+            /(\w+).+(:[^]+)/,
+            WEBKIT + 'box-$1$2' + MS + 'flex-$1$2',
+          ) +
+          value
+        );
+      case 5443:
+        return (
+          WEBKIT +
+          value +
+          MS +
+          'flex-item-' +
+          replace(value, /flex-|-self/g, '') +
+          (!match(value, /flex-|baseline/)
+            ? MS + 'grid-row-' + replace(value, /flex-|-self/g, '')
+            : '') +
+          value
+        );
+      case 4675:
+        return (
+          WEBKIT +
+          value +
+          MS +
+          'flex-line-pack' +
+          replace(value, /align-content|flex-|-self/g, '') +
+          value
+        );
+      case 5548:
+        return (
+          WEBKIT + value + MS + replace(value, 'shrink', 'negative') + value
+        );
+      case 5292:
+        return (
+          WEBKIT +
+          value +
+          MS +
+          replace(value, 'basis', 'preferred-size') +
+          value
+        );
+      case 6060:
+        return (
+          WEBKIT +
+          'box-' +
+          replace(value, '-grow', '') +
+          WEBKIT +
+          value +
+          MS +
+          replace(value, 'grow', 'positive') +
+          value
+        );
+      case 4554:
+        return (
+          WEBKIT +
+          replace(value, /([^-])(transform)/g, '$1' + WEBKIT + '$2') +
+          value
+        );
+      case 6187:
+        return (
+          replace(
+            replace(
+              replace(value, /(zoom-|grab)/, WEBKIT + '$1'),
+              /(image-set)/,
+              WEBKIT + '$1',
+            ),
+            value,
+            '',
+          ) + value
+        );
+      case 5495:
+      case 3959:
+        return replace(value, /(image-set\([^]*)/, WEBKIT + '$1$`$1');
+      case 4968:
+        return (
+          replace(
+            replace(
+              value,
+              /(.+:)(flex-)?(.*)/,
+              WEBKIT + 'box-pack:$3' + MS + 'flex-pack:$3',
+            ),
+            /s.+-b[^;]+/,
+            'justify',
+          ) +
+          WEBKIT +
+          value +
+          value
+        );
+      case 4200:
+        if (!match(value, /flex-|baseline/))
+          return MS + 'grid-column-align' + substr(value, length2) + value;
+        break;
+      case 2592:
+      case 3360:
+        return MS + replace(value, 'template-', '') + value;
+      case 4384:
+      case 3616:
+        if (
+          children &&
+          children.some(function (element, index) {
+            return (length2 = index), match(element.props, /grid-\w+-end/);
+          })
+        ) {
+          return ~indexof(value + (children = children[length2].value), 'span')
+            ? value
+            : MS +
+                replace(value, '-start', '') +
+                value +
+                MS +
+                'grid-row-span:' +
+                (~indexof(children, 'span')
+                  ? match(children, /\d+/)
+                  : +match(children, /\d+/) - +match(value, /\d+/)) +
+                ';';
+        }
+        return MS + replace(value, '-start', '') + value;
+      case 4896:
+      case 4128:
+        return children &&
+          children.some(function (element) {
+            return match(element.props, /grid-\w+-start/);
+          })
+          ? value
+          : MS + replace(replace(value, '-end', '-span'), 'span ', '') + value;
+      case 4095:
+      case 3583:
+      case 4068:
+      case 2532:
+        return replace(value, /(.+)-inline(.+)/, WEBKIT + '$1$2') + value;
+      case 8116:
+      case 7059:
+      case 5753:
+      case 5535:
+      case 5445:
+      case 5701:
+      case 4933:
+      case 4677:
+      case 5533:
+      case 5789:
+      case 5021:
+      case 4765:
+        if (strlen(value) - 1 - length2 > 6)
+          switch (charat(value, length2 + 1)) {
+            case 109:
+              if (charat(value, length2 + 4) !== 45) break;
+            case 102:
+              return (
+                replace(
+                  value,
+                  /(.+:)(.+)-([^]+)/,
+                  '$1' +
+                    WEBKIT +
+                    '$2-$3$1' +
+                    MOZ +
+                    (charat(value, length2 + 3) == 108 ? '$3' : '$2-$3'),
+                ) + value
+              );
+            case 115:
+              return ~indexof(value, 'stretch')
+                ? prefix(
+                    replace(value, 'stretch', 'fill-available'),
+                    length2,
+                    children,
+                  ) + value
+                : value;
+          }
+        break;
+      case 5152:
+      case 5920:
+        return replace(
+          value,
+          /(.+?):(\d+)(\s*\/\s*(span)?\s*(\d+))?(.*)/,
+          function (_2, a2, b2, c2, d, e, f2) {
+            return (
+              MS +
+              a2 +
+              ':' +
+              b2 +
+              f2 +
+              (c2 ? MS + a2 + '-span:' + (d ? e : +e - +b2) + f2 : '') +
+              value
+            );
+          },
+        );
+      case 4949:
+        if (charat(value, length2 + 6) === 121)
+          return replace(value, ':', ':' + WEBKIT) + value;
+        break;
+      case 6444:
+        switch (charat(value, charat(value, 14) === 45 ? 18 : 11)) {
+          case 120:
+            return (
+              replace(
+                value,
+                /(.+:)([^;\s!]+)(;|(\s+)?!.+)?/,
+                '$1' +
+                  WEBKIT +
+                  (charat(value, 14) === 45 ? 'inline-' : '') +
+                  'box$3$1' +
+                  WEBKIT +
+                  '$2$3$1' +
+                  MS +
+                  '$2box$3',
+              ) + value
+            );
+          case 100:
+            return replace(value, ':', ':' + MS) + value;
+        }
+        break;
+      case 5719:
+      case 2647:
+      case 2135:
+      case 3927:
+      case 2391:
+        return replace(value, 'scroll-', 'scroll-snap-') + value;
+    }
+    return value;
+  }
+
+  // node_modules/stylis/src/Serializer.js
+  function serialize(children, callback) {
+    var output = '';
+    for (var i2 = 0; i2 < children.length; i2++)
+      output += callback(children[i2], i2, children, callback) || '';
+    return output;
+  }
+  function stringify3(element, index, children, callback) {
+    switch (element.type) {
+      case LAYER:
+        if (element.children.length) break;
+      case IMPORT:
+      case DECLARATION:
+        return (element.return = element.return || element.value);
+      case COMMENT:
+        return '';
+      case KEYFRAMES:
+        return (element.return =
+          element.value + '{' + serialize(element.children, callback) + '}');
+      case RULESET:
+        if (!strlen((element.value = element.props.join(',')))) return '';
+    }
+    return strlen((children = serialize(element.children, callback)))
+      ? (element.return = element.value + '{' + children + '}')
+      : '';
+  }
+
+  // node_modules/stylis/src/Middleware.js
+  function middleware(collection) {
+    var length2 = sizeof(collection);
+    return function (element, index, children, callback) {
+      var output = '';
+      for (var i2 = 0; i2 < length2; i2++)
+        output += collection[i2](element, index, children, callback) || '';
+      return output;
+    };
+  }
+  function rulesheet(callback) {
+    return function (element) {
+      if (!element.root) {
+        if ((element = element.return)) callback(element);
+      }
+    };
+  }
+  function prefixer(element, index, children, callback) {
+    if (element.length > -1) {
+      if (!element.return)
+        switch (element.type) {
+          case DECLARATION:
+            element.return = prefix(element.value, element.length, children);
+            return;
+          case KEYFRAMES:
+            return serialize(
+              [
+                copy(element, {
+                  value: replace(element.value, '@', '@' + WEBKIT),
+                }),
+              ],
+              callback,
+            );
+          case RULESET:
+            if (element.length)
+              return combine((children = element.props), function (value) {
+                switch (match(value, (callback = /(::plac\w+|:read-\w+)/))) {
+                  case ':read-only':
+                  case ':read-write':
+                    lift(
+                      copy(element, {
+                        props: [
+                          replace(value, /:(read-\w+)/, ':' + MOZ + '$1'),
+                        ],
+                      }),
+                    );
+                    lift(copy(element, { props: [value] }));
+                    assign(element, { props: filter(children, callback) });
+                    break;
+                  case '::placeholder':
+                    lift(
+                      copy(element, {
+                        props: [
+                          replace(
+                            value,
+                            /:(plac\w+)/,
+                            ':' + WEBKIT + 'input-$1',
+                          ),
+                        ],
+                      }),
+                    );
+                    lift(
+                      copy(element, {
+                        props: [replace(value, /:(plac\w+)/, ':' + MOZ + '$1')],
+                      }),
+                    );
+                    lift(
+                      copy(element, {
+                        props: [replace(value, /:(plac\w+)/, MS + 'input-$1')],
+                      }),
+                    );
+                    lift(copy(element, { props: [value] }));
+                    assign(element, { props: filter(children, callback) });
+                    break;
+                }
+                return '';
+              });
+        }
+    }
+  }
+
+  // node_modules/@emotion/unitless/dist/emotion-unitless.esm.js
+  var unitlessKeys = {
+    animationIterationCount: 1,
+    aspectRatio: 1,
+    borderImageOutset: 1,
+    borderImageSlice: 1,
+    borderImageWidth: 1,
+    boxFlex: 1,
+    boxFlexGroup: 1,
+    boxOrdinalGroup: 1,
+    columnCount: 1,
+    columns: 1,
+    flex: 1,
+    flexGrow: 1,
+    flexPositive: 1,
+    flexShrink: 1,
+    flexNegative: 1,
+    flexOrder: 1,
+    gridRow: 1,
+    gridRowEnd: 1,
+    gridRowSpan: 1,
+    gridRowStart: 1,
+    gridColumn: 1,
+    gridColumnEnd: 1,
+    gridColumnSpan: 1,
+    gridColumnStart: 1,
+    msGridRow: 1,
+    msGridRowSpan: 1,
+    msGridColumn: 1,
+    msGridColumnSpan: 1,
+    fontWeight: 1,
+    lineHeight: 1,
+    opacity: 1,
+    order: 1,
+    orphans: 1,
+    tabSize: 1,
+    widows: 1,
+    zIndex: 1,
+    zoom: 1,
+    WebkitLineClamp: 1,
+    // SVG-related properties
+    fillOpacity: 1,
+    floodOpacity: 1,
+    stopOpacity: 1,
+    strokeDasharray: 1,
+    strokeDashoffset: 1,
+    strokeMiterlimit: 1,
+    strokeOpacity: 1,
+    strokeWidth: 1,
+  };
+
+  // node_modules/styled-components/dist/styled-components.browser.esm.js
+  var f =
+    ('undefined' != typeof process &&
+      void 0 !== process.env &&
+      (process.env.REACT_APP_SC_ATTR || process.env.SC_ATTR)) ||
+    'data-styled';
+  var y = 'undefined' != typeof window && 'HTMLElement' in window;
+  var v = Boolean(
+    'boolean' == typeof SC_DISABLE_SPEEDY
+      ? SC_DISABLE_SPEEDY
+      : 'undefined' != typeof process &&
+        void 0 !== process.env &&
+        void 0 !== process.env.REACT_APP_SC_DISABLE_SPEEDY &&
+        '' !== process.env.REACT_APP_SC_DISABLE_SPEEDY
+      ? 'false' !== process.env.REACT_APP_SC_DISABLE_SPEEDY &&
+        process.env.REACT_APP_SC_DISABLE_SPEEDY
+      : 'undefined' != typeof process &&
+        void 0 !== process.env &&
+        void 0 !== process.env.SC_DISABLE_SPEEDY &&
+        '' !== process.env.SC_DISABLE_SPEEDY
+      ? 'false' !== process.env.SC_DISABLE_SPEEDY &&
+        process.env.SC_DISABLE_SPEEDY
+      : true,
+  );
+  var S = /invalid hook call/i;
+  var w = /* @__PURE__ */ new Set();
+  var b = function (t, n) {
+    if (true) {
+      var o2 = n ? ' with the id of "'.concat(n, '"') : '',
+        s2 =
+          'The component '
+            .concat(t)
+            .concat(o2, ' has been created dynamically.\n') +
+          "You may see this warning because you've called styled inside another component.\nTo resolve this only create new StyledComponents outside of any render method and function component.",
+        i2 = console.error;
+      try {
+        var a2 = true;
+        (console.error = function (t2) {
+          for (var n2 = [], o3 = 1; o3 < arguments.length; o3++)
+            n2[o3 - 1] = arguments[o3];
+          S.test(t2)
+            ? ((a2 = false), w.delete(s2))
+            : i2.apply(void 0, __spreadArray([t2], n2, false));
+        }),
+          (0, import_react3.useRef)(),
+          a2 && !w.has(s2) && (console.warn(s2), w.add(s2));
+      } catch (e) {
+        S.test(e.message) && w.delete(s2);
+      } finally {
+        console.error = i2;
+      }
+    }
+  };
+  var E = Object.freeze([]);
+  var N = Object.freeze({});
+  function P(e, t, n) {
+    return (
+      void 0 === n && (n = N), (e.theme !== n.theme && e.theme) || t || n.theme
+    );
+  }
+  var _ = /* @__PURE__ */ new Set([
+    'a',
+    'abbr',
+    'address',
+    'area',
+    'article',
+    'aside',
+    'audio',
+    'b',
+    'base',
+    'bdi',
+    'bdo',
+    'big',
+    'blockquote',
+    'body',
+    'br',
+    'button',
+    'canvas',
+    'caption',
+    'cite',
+    'code',
+    'col',
+    'colgroup',
+    'data',
+    'datalist',
+    'dd',
+    'del',
+    'details',
+    'dfn',
+    'dialog',
+    'div',
+    'dl',
+    'dt',
+    'em',
+    'embed',
+    'fieldset',
+    'figcaption',
+    'figure',
+    'footer',
+    'form',
+    'h1',
+    'h2',
+    'h3',
+    'h4',
+    'h5',
+    'h6',
+    'head',
+    'header',
+    'hgroup',
+    'hr',
+    'html',
+    'i',
+    'iframe',
+    'img',
+    'input',
+    'ins',
+    'kbd',
+    'keygen',
+    'label',
+    'legend',
+    'li',
+    'link',
+    'main',
+    'map',
+    'mark',
+    'menu',
+    'menuitem',
+    'meta',
+    'meter',
+    'nav',
+    'noscript',
+    'object',
+    'ol',
+    'optgroup',
+    'option',
+    'output',
+    'p',
+    'param',
+    'picture',
+    'pre',
+    'progress',
+    'q',
+    'rp',
+    'rt',
+    'ruby',
+    's',
+    'samp',
+    'script',
+    'section',
+    'select',
+    'small',
+    'source',
+    'span',
+    'strong',
+    'style',
+    'sub',
+    'summary',
+    'sup',
+    'table',
+    'tbody',
+    'td',
+    'textarea',
+    'tfoot',
+    'th',
+    'thead',
+    'time',
+    'title',
+    'tr',
+    'track',
+    'u',
+    'ul',
+    'use',
+    'var',
+    'video',
+    'wbr',
+    'circle',
+    'clipPath',
+    'defs',
+    'ellipse',
+    'foreignObject',
+    'g',
+    'image',
+    'line',
+    'linearGradient',
+    'marker',
+    'mask',
+    'path',
+    'pattern',
+    'polygon',
+    'polyline',
+    'radialGradient',
+    'rect',
+    'stop',
+    'svg',
+    'text',
+    'tspan',
+  ]);
+  var C = /[!"#$%&'()*+,./:;<=>?@[\\\]^`{|}~-]+/g;
+  var I = /(^-|-$)/g;
+  function A(e) {
+    return e.replace(C, '-').replace(I, '');
+  }
+  var O = /(a)(d)/gi;
+  var D = function (e) {
+    return String.fromCharCode(e + (e > 25 ? 39 : 97));
+  };
+  function R(e) {
+    var t,
+      n = '';
+    for (t = Math.abs(e); t > 52; t = (t / 52) | 0) n = D(t % 52) + n;
+    return (D(t % 52) + n).replace(O, '$1-$2');
+  }
+  var T;
+  var k = function (e, t) {
+    for (var n = t.length; n; ) e = (33 * e) ^ t.charCodeAt(--n);
+    return e;
+  };
+  var j = function (e) {
+    return k(5381, e);
+  };
+  function x(e) {
+    return R(j(e) >>> 0);
+  }
+  function V(e) {
+    return (
+      ('string' == typeof e && e) || e.displayName || e.name || 'Component'
+    );
+  }
+  function M(e) {
+    return 'string' == typeof e && e.charAt(0) === e.charAt(0).toLowerCase();
+  }
+  var F = 'function' == typeof Symbol && Symbol.for;
+  var $ = F ? Symbol.for('react.memo') : 60115;
+  var z = F ? Symbol.for('react.forward_ref') : 60112;
+  var B = {
+    childContextTypes: true,
+    contextType: true,
+    contextTypes: true,
+    defaultProps: true,
+    displayName: true,
+    getDefaultProps: true,
+    getDerivedStateFromError: true,
+    getDerivedStateFromProps: true,
+    mixins: true,
+    propTypes: true,
+    type: true,
+  };
+  var L = {
+    name: true,
+    length: true,
+    prototype: true,
+    caller: true,
+    callee: true,
+    arguments: true,
+    arity: true,
+  };
+  var G = {
+    $$typeof: true,
+    compare: true,
+    defaultProps: true,
+    displayName: true,
+    propTypes: true,
+    type: true,
+  };
+  var Y =
+    (((T = {})[z] = {
+      $$typeof: true,
+      render: true,
+      defaultProps: true,
+      displayName: true,
+      propTypes: true,
+    }),
+    (T[$] = G),
+    T);
+  function W(e) {
+    return ('type' in (t = e) && t.type.$$typeof) === $
+      ? G
+      : '$$typeof' in e
+      ? Y[e.$$typeof]
+      : B;
+    var t;
+  }
+  var q = Object.defineProperty;
+  var H = Object.getOwnPropertyNames;
+  var U = Object.getOwnPropertySymbols;
+  var J = Object.getOwnPropertyDescriptor;
+  var X = Object.getPrototypeOf;
+  var Z = Object.prototype;
+  function K(e, t, n) {
+    if ('string' != typeof t) {
+      if (Z) {
+        var o2 = X(t);
+        o2 && o2 !== Z && K(e, o2, n);
+      }
+      var r2 = H(t);
+      U && (r2 = r2.concat(U(t)));
+      for (var s2 = W(e), i2 = W(t), a2 = 0; a2 < r2.length; ++a2) {
+        var c2 = r2[a2];
+        if (
+          !(c2 in L || (n && n[c2]) || (i2 && c2 in i2) || (s2 && c2 in s2))
+        ) {
+          var l2 = J(t, c2);
+          try {
+            q(e, c2, l2);
+          } catch (e2) {}
+        }
+      }
+    }
+    return e;
+  }
+  function Q(e) {
+    return 'function' == typeof e;
+  }
+  function ee(e) {
+    return 'object' == typeof e && 'styledComponentId' in e;
+  }
+  function te(e, t) {
+    return e && t ? ''.concat(e, ' ').concat(t) : e || t || '';
+  }
+  function ne(e, t) {
+    if (0 === e.length) return '';
+    for (var n = e[0], o2 = 1; o2 < e.length; o2++) n += t ? t + e[o2] : e[o2];
+    return n;
+  }
+  function oe(e) {
+    return (
+      null !== e &&
+      'object' == typeof e &&
+      e.constructor.name === Object.name &&
+      !('props' in e && e.$$typeof)
+    );
+  }
+  function re(e, t, n) {
+    if ((void 0 === n && (n = false), !n && !oe(e) && !Array.isArray(e)))
+      return t;
+    if (Array.isArray(t))
+      for (var o2 = 0; o2 < t.length; o2++) e[o2] = re(e[o2], t[o2]);
+    else if (oe(t)) for (var o2 in t) e[o2] = re(e[o2], t[o2]);
+    return e;
+  }
+  function se(e, t) {
+    Object.defineProperty(e, 'toString', { value: t });
+  }
+  var ie = true
+    ? {
+        1: 'Cannot create styled-component for component: %s.\n\n',
+        2: "Can't collect styles once you've consumed a `ServerStyleSheet`'s styles! `ServerStyleSheet` is a one off instance for each server-side render cycle.\n\n- Are you trying to reuse it across renders?\n- Are you accidentally calling collectStyles twice?\n\n",
+        3: 'Streaming SSR is only supported in a Node.js environment; Please do not try to call this method in the browser.\n\n',
+        4: 'The `StyleSheetManager` expects a valid target or sheet prop!\n\n- Does this error occur on the client and is your target falsy?\n- Does this error occur on the server and is the sheet falsy?\n\n',
+        5: 'The clone method cannot be used on the client!\n\n- Are you running in a client-like environment on the server?\n- Are you trying to run SSR on the client?\n\n',
+        6: "Trying to insert a new style tag, but the given Node is unmounted!\n\n- Are you using a custom target that isn't mounted?\n- Does your document not have a valid head element?\n- Have you accidentally removed a style tag manually?\n\n",
+        7: 'ThemeProvider: Please return an object from your "theme" prop function, e.g.\n\n```js\ntheme={() => ({})}\n```\n\n',
+        8: 'ThemeProvider: Please make your "theme" prop an object.\n\n',
+        9: 'Missing document `<head>`\n\n',
+        10: 'Cannot find a StyleSheet instance. Usually this happens if there are multiple copies of styled-components loaded at once. Check out this issue for how to troubleshoot and fix the common cases where this situation can happen: https://github.com/styled-components/styled-components/issues/1941#issuecomment-417862021\n\n',
+        11: '_This error was replaced with a dev-time warning, it will be deleted for v4 final._ [createGlobalStyle] received children which will not be rendered. Please use the component without passing children elements.\n\n',
+        12: 'It seems you are interpolating a keyframe declaration (%s) into an untagged string. This was supported in styled-components v3, but is not longer supported in v4 as keyframes are now injected on-demand. Please wrap your string in the css\\`\\` helper which ensures the styles are injected correctly. See https://www.styled-components.com/docs/api#css\n\n',
+        13: '%s is not a styled component and cannot be referred to via component selector. See https://www.styled-components.com/docs/advanced#referring-to-other-components for more details.\n\n',
+        14: 'ThemeProvider: "theme" prop is required.\n\n',
+        15: "A stylis plugin has been supplied that is not named. We need a name for each plugin to be able to prevent styling collisions between different stylis configurations within the same app. Before you pass your plugin to `<StyleSheetManager stylisPlugins={[]}>`, please make sure each plugin is uniquely-named, e.g.\n\n```js\nObject.defineProperty(importedPlugin, 'name', { value: 'some-unique-name' });\n```\n\n",
+        16: "Reached the limit of how many styled components may be created at group %s.\nYou may only create up to 1,073,741,824 components. If you're creating components dynamically,\nas for instance in your render method then you may be running into this limitation.\n\n",
+        17: "CSSStyleSheet could not be found on HTMLStyleElement.\nHas styled-components' style tag been unmounted or altered by another script?\n",
+        18: 'ThemeProvider: Please make sure your useTheme hook is within a `<ThemeProvider>`',
+      }
+    : {};
+  function ae() {
+    for (var e = [], t = 0; t < arguments.length; t++) e[t] = arguments[t];
+    for (var n = e[0], o2 = [], r2 = 1, s2 = e.length; r2 < s2; r2 += 1)
+      o2.push(e[r2]);
+    return (
+      o2.forEach(function (e2) {
+        n = n.replace(/%[a-z]/, e2);
+      }),
+      n
+    );
+  }
+  function ce(t) {
+    for (var n = [], o2 = 1; o2 < arguments.length; o2++)
+      n[o2 - 1] = arguments[o2];
+    return false
+      ? new Error(
+          'An error occurred. See https://github.com/styled-components/styled-components/blob/main/packages/styled-components/src/utils/errors.md#'
+            .concat(t, ' for more information.')
+            .concat(n.length > 0 ? ' Args: '.concat(n.join(', ')) : ''),
+        )
+      : new Error(ae.apply(void 0, __spreadArray([ie[t]], n, false)).trim());
+  }
+  var le = (function () {
+    function e(e2) {
+      (this.groupSizes = new Uint32Array(512)),
+        (this.length = 512),
+        (this.tag = e2);
+    }
+    return (
+      (e.prototype.indexOfGroup = function (e2) {
+        for (var t = 0, n = 0; n < e2; n++) t += this.groupSizes[n];
+        return t;
+      }),
+      (e.prototype.insertRules = function (e2, t) {
+        if (e2 >= this.groupSizes.length) {
+          for (var n = this.groupSizes, o2 = n.length, r2 = o2; e2 >= r2; )
+            if ((r2 <<= 1) < 0) throw ce(16, ''.concat(e2));
+          (this.groupSizes = new Uint32Array(r2)),
+            this.groupSizes.set(n),
+            (this.length = r2);
+          for (var s2 = o2; s2 < r2; s2++) this.groupSizes[s2] = 0;
+        }
+        for (
+          var i2 = this.indexOfGroup(e2 + 1), a2 = ((s2 = 0), t.length);
+          s2 < a2;
+          s2++
+        )
+          this.tag.insertRule(i2, t[s2]) && (this.groupSizes[e2]++, i2++);
+      }),
+      (e.prototype.clearGroup = function (e2) {
+        if (e2 < this.length) {
+          var t = this.groupSizes[e2],
+            n = this.indexOfGroup(e2),
+            o2 = n + t;
+          this.groupSizes[e2] = 0;
+          for (var r2 = n; r2 < o2; r2++) this.tag.deleteRule(n);
+        }
+      }),
+      (e.prototype.getGroup = function (e2) {
+        var t = '';
+        if (e2 >= this.length || 0 === this.groupSizes[e2]) return t;
+        for (
+          var n = this.groupSizes[e2],
+            o2 = this.indexOfGroup(e2),
+            r2 = o2 + n,
+            s2 = o2;
+          s2 < r2;
+          s2++
+        )
+          t += ''.concat(this.tag.getRule(s2)).concat('/*!sc*/\n');
+        return t;
+      }),
+      e
+    );
+  })();
+  var ue = /* @__PURE__ */ new Map();
+  var pe = /* @__PURE__ */ new Map();
+  var de = 1;
+  var he = function (e) {
+    if (ue.has(e)) return ue.get(e);
+    for (; pe.has(de); ) de++;
+    var t = de++;
+    if ((0 | t) < 0 || t > 1073741824) throw ce(16, ''.concat(t));
+    return ue.set(e, t), pe.set(t, e), t;
+  };
+  var fe = function (e, t) {
+    ue.set(e, t), pe.set(t, e);
+  };
+  var me = 'style['
+    .concat(f, '][')
+    .concat('data-styled-version', '="')
+    .concat('6.0.7', '"]');
+  var ye = new RegExp(
+    '^'.concat(f, '\\.g(\\d+)\\[id="([\\w\\d-]+)"\\].*?"([^"]*)'),
+  );
+  var ve = function (e, t, n) {
+    for (var o2, r2 = n.split(','), s2 = 0, i2 = r2.length; s2 < i2; s2++)
+      (o2 = r2[s2]) && e.registerName(t, o2);
+  };
+  var ge = function (e, t) {
+    for (
+      var n,
+        o2 = (null !== (n = t.textContent) && void 0 !== n ? n : '').split(
+          '/*!sc*/\n',
+        ),
+        r2 = [],
+        s2 = 0,
+        i2 = o2.length;
+      s2 < i2;
+      s2++
+    ) {
+      var a2 = o2[s2].trim();
+      if (a2) {
+        var c2 = a2.match(ye);
+        if (c2) {
+          var l2 = 0 | parseInt(c2[1], 10),
+            u2 = c2[2];
+          0 !== l2 &&
+            (fe(u2, l2), ve(e, u2, c2[3]), e.getTag().insertRules(l2, r2)),
+            (r2.length = 0);
+        } else r2.push(a2);
+      }
+    }
+  };
+  function Se() {
+    return 'undefined' != typeof __webpack_nonce__ ? __webpack_nonce__ : null;
+  }
+  var we = function (e) {
+    var t = document.head,
+      n = e || t,
+      o2 = document.createElement('style'),
+      r2 = (function (e2) {
+        var t2 = Array.from(e2.querySelectorAll('style['.concat(f, ']')));
+        return t2[t2.length - 1];
+      })(n),
+      s2 = void 0 !== r2 ? r2.nextSibling : null;
+    o2.setAttribute(f, 'active'),
+      o2.setAttribute('data-styled-version', '6.0.7');
+    var i2 = Se();
+    return i2 && o2.setAttribute('nonce', i2), n.insertBefore(o2, s2), o2;
+  };
+  var be = (function () {
+    function e(e2) {
+      (this.element = we(e2)),
+        this.element.appendChild(document.createTextNode('')),
+        (this.sheet = (function (e3) {
+          if (e3.sheet) return e3.sheet;
+          for (
+            var t = document.styleSheets, n = 0, o2 = t.length;
+            n < o2;
+            n++
+          ) {
+            var r2 = t[n];
+            if (r2.ownerNode === e3) return r2;
+          }
+          throw ce(17);
+        })(this.element)),
+        (this.length = 0);
+    }
+    return (
+      (e.prototype.insertRule = function (e2, t) {
+        try {
+          return this.sheet.insertRule(t, e2), this.length++, true;
+        } catch (e3) {
+          return false;
+        }
+      }),
+      (e.prototype.deleteRule = function (e2) {
+        this.sheet.deleteRule(e2), this.length--;
+      }),
+      (e.prototype.getRule = function (e2) {
+        var t = this.sheet.cssRules[e2];
+        return t && t.cssText ? t.cssText : '';
+      }),
+      e
+    );
+  })();
+  var Ee = (function () {
+    function e(e2) {
+      (this.element = we(e2)),
+        (this.nodes = this.element.childNodes),
+        (this.length = 0);
+    }
+    return (
+      (e.prototype.insertRule = function (e2, t) {
+        if (e2 <= this.length && e2 >= 0) {
+          var n = document.createTextNode(t);
+          return (
+            this.element.insertBefore(n, this.nodes[e2] || null),
+            this.length++,
+            true
+          );
+        }
+        return false;
+      }),
+      (e.prototype.deleteRule = function (e2) {
+        this.element.removeChild(this.nodes[e2]), this.length--;
+      }),
+      (e.prototype.getRule = function (e2) {
+        return e2 < this.length ? this.nodes[e2].textContent : '';
+      }),
+      e
+    );
+  })();
+  var Ne = (function () {
+    function e(e2) {
+      (this.rules = []), (this.length = 0);
+    }
+    return (
+      (e.prototype.insertRule = function (e2, t) {
+        return (
+          e2 <= this.length &&
+          (this.rules.splice(e2, 0, t), this.length++, true)
+        );
+      }),
+      (e.prototype.deleteRule = function (e2) {
+        this.rules.splice(e2, 1), this.length--;
+      }),
+      (e.prototype.getRule = function (e2) {
+        return e2 < this.length ? this.rules[e2] : '';
+      }),
+      e
+    );
+  })();
+  var Pe = y;
+  var _e = { isServer: !y, useCSSOMInjection: !v };
+  var Ce = (function () {
+    function e(e2, n, o2) {
+      void 0 === e2 && (e2 = N), void 0 === n && (n = {});
+      var r2 = this;
+      (this.options = __assign(__assign({}, _e), e2)),
+        (this.gs = n),
+        (this.names = new Map(o2)),
+        (this.server = !!e2.isServer),
+        !this.server &&
+          y &&
+          Pe &&
+          ((Pe = false),
+          (function (e3) {
+            for (
+              var t = document.querySelectorAll(me), n2 = 0, o3 = t.length;
+              n2 < o3;
+              n2++
+            ) {
+              var r3 = t[n2];
+              r3 &&
+                'active' !== r3.getAttribute(f) &&
+                (ge(e3, r3), r3.parentNode && r3.parentNode.removeChild(r3));
+            }
+          })(this)),
+        se(this, function () {
+          return (function (e3) {
+            for (
+              var t = e3.getTag(),
+                n2 = t.length,
+                o3 = '',
+                r3 = function (n3) {
+                  var r4 = (function (e4) {
+                    return pe.get(e4);
+                  })(n3);
+                  if (void 0 === r4) return 'continue';
+                  var s3 = e3.names.get(r4),
+                    i2 = t.getGroup(n3);
+                  if (void 0 === s3 || 0 === i2.length) return 'continue';
+                  var a2 = ''
+                      .concat(f, '.g')
+                      .concat(n3, '[id="')
+                      .concat(r4, '"]'),
+                    c2 = '';
+                  void 0 !== s3 &&
+                    s3.forEach(function (e4) {
+                      e4.length > 0 && (c2 += ''.concat(e4, ','));
+                    }),
+                    (o3 += ''
+                      .concat(i2)
+                      .concat(a2, '{content:"')
+                      .concat(c2, '"}')
+                      .concat('/*!sc*/\n'));
+                },
+                s2 = 0;
+              s2 < n2;
+              s2++
+            )
+              r3(s2);
+            return o3;
+          })(r2);
+        });
+    }
+    return (
+      (e.registerId = function (e2) {
+        return he(e2);
+      }),
+      (e.prototype.reconstructWithOptions = function (n, o2) {
+        return (
+          void 0 === o2 && (o2 = true),
+          new e(
+            __assign(__assign({}, this.options), n),
+            this.gs,
+            (o2 && this.names) || void 0,
+          )
+        );
+      }),
+      (e.prototype.allocateGSInstance = function (e2) {
+        return (this.gs[e2] = (this.gs[e2] || 0) + 1);
+      }),
+      (e.prototype.getTag = function () {
+        return (
+          this.tag ||
+          (this.tag =
+            ((e2 = (function (e3) {
+              var t = e3.useCSSOMInjection,
+                n = e3.target;
+              return e3.isServer ? new Ne(n) : t ? new be(n) : new Ee(n);
+            })(this.options)),
+            new le(e2)))
+        );
+        var e2;
+      }),
+      (e.prototype.hasNameForId = function (e2, t) {
+        return this.names.has(e2) && this.names.get(e2).has(t);
+      }),
+      (e.prototype.registerName = function (e2, t) {
+        if ((he(e2), this.names.has(e2))) this.names.get(e2).add(t);
+        else {
+          var n = /* @__PURE__ */ new Set();
+          n.add(t), this.names.set(e2, n);
+        }
+      }),
+      (e.prototype.insertRules = function (e2, t, n) {
+        this.registerName(e2, t), this.getTag().insertRules(he(e2), n);
+      }),
+      (e.prototype.clearNames = function (e2) {
+        this.names.has(e2) && this.names.get(e2).clear();
+      }),
+      (e.prototype.clearRules = function (e2) {
+        this.getTag().clearGroup(he(e2)), this.clearNames(e2);
+      }),
+      (e.prototype.clearTag = function () {
+        this.tag = void 0;
+      }),
+      e
+    );
+  })();
+  var Ie = /&/g;
+  var Ae = /^\s*\/\/.*$/gm;
+  function Oe(e, t) {
+    return e.map(function (e2) {
+      return (
+        'rule' === e2.type &&
+          ((e2.value = ''.concat(t, ' ').concat(e2.value)),
+          (e2.value = e2.value.replaceAll(',', ','.concat(t, ' '))),
+          (e2.props = e2.props.map(function (e3) {
+            return ''.concat(t, ' ').concat(e3);
+          }))),
+        Array.isArray(e2.children) &&
+          '@keyframes' !== e2.type &&
+          (e2.children = Oe(e2.children, t)),
+        e2
+      );
+    });
+  }
+  function De(e) {
+    var t,
+      n,
+      o2,
+      r2 = void 0 === e ? N : e,
+      s2 = r2.options,
+      i2 = void 0 === s2 ? N : s2,
+      a2 = r2.plugins,
+      c2 = void 0 === a2 ? E : a2,
+      l2 = function (e2, o3, r3) {
+        return r3 === n ||
+          (r3.startsWith(n) &&
+            r3.endsWith(n) &&
+            r3.replaceAll(n, '').length > 0)
+          ? '.'.concat(t)
+          : e2;
+      },
+      u2 = c2.slice();
+    u2.push(function (e2) {
+      e2.type === RULESET &&
+        e2.value.includes('&') &&
+        (e2.props[0] = e2.props[0].replace(Ie, n).replace(o2, l2));
+    }),
+      i2.prefix && u2.push(prefixer),
+      u2.push(stringify3);
+    var p2 = function (e2, r3, s3, a3) {
+      void 0 === r3 && (r3 = ''),
+        void 0 === s3 && (s3 = ''),
+        void 0 === a3 && (a3 = '&'),
+        (t = a3),
+        (n = r3),
+        (o2 = new RegExp('\\'.concat(n, '\\b'), 'g'));
+      var c3 = e2.replace(Ae, ''),
+        l3 = compile(
+          s3 || r3 ? ''.concat(s3, ' ').concat(r3, ' { ').concat(c3, ' }') : c3,
+        );
+      i2.namespace && (l3 = Oe(l3, i2.namespace));
+      var p3 = [];
+      return (
+        serialize(
+          l3,
+          middleware(
+            u2.concat(
+              rulesheet(function (e3) {
+                return p3.push(e3);
+              }),
+            ),
+          ),
+        ),
+        p3
+      );
+    };
+    return (
+      (p2.hash = c2.length
+        ? c2
+            .reduce(function (e2, t2) {
+              return t2.name || ce(15), k(e2, t2.name);
+            }, 5381)
+            .toString()
+        : ''),
+      p2
+    );
+  }
+  var Re = new Ce();
+  var Te = De();
+  var ke = import_react3.default.createContext({
+    shouldForwardProp: void 0,
+    styleSheet: Re,
+    stylis: Te,
+  });
+  var je = ke.Consumer;
+  var xe = import_react3.default.createContext(void 0);
+  function Ve() {
+    return (0, import_react3.useContext)(ke);
+  }
+  function Me(e) {
+    var t = (0, import_react3.useState)(e.stylisPlugins),
+      n = t[0],
+      r2 = t[1],
+      c2 = Ve().styleSheet,
+      l2 = (0, import_react3.useMemo)(
+        function () {
+          var t2 = c2;
+          return (
+            e.sheet
+              ? (t2 = e.sheet)
+              : e.target &&
+                (t2 = t2.reconstructWithOptions({ target: e.target }, false)),
+            e.disableCSSOMInjection &&
+              (t2 = t2.reconstructWithOptions({ useCSSOMInjection: false })),
+            t2
+          );
+        },
+        [e.disableCSSOMInjection, e.sheet, e.target, c2],
+      ),
+      u2 = (0, import_react3.useMemo)(
+        function () {
+          return De({
+            options: { namespace: e.namespace, prefix: e.enableVendorPrefixes },
+            plugins: n,
+          });
+        },
+        [e.enableVendorPrefixes, e.namespace, n],
+      );
+    return (
+      (0, import_react3.useEffect)(
+        function () {
+          (0, import_shallowequal.default)(n, e.stylisPlugins) ||
+            r2(e.stylisPlugins);
+        },
+        [e.stylisPlugins],
+      ),
+      import_react3.default.createElement(
+        ke.Provider,
+        {
+          value: {
+            shouldForwardProp: e.shouldForwardProp,
+            styleSheet: l2,
+            stylis: u2,
+          },
+        },
+        import_react3.default.createElement(
+          xe.Provider,
+          { value: u2 },
+          e.children,
+        ),
+      )
+    );
+  }
+  var Fe = (function () {
+    function e(e2, t) {
+      var n = this;
+      (this.inject = function (e3, t2) {
+        void 0 === t2 && (t2 = Te);
+        var o2 = n.name + t2.hash;
+        e3.hasNameForId(n.id, o2) ||
+          e3.insertRules(n.id, o2, t2(n.rules, o2, '@keyframes'));
+      }),
+        (this.name = e2),
+        (this.id = 'sc-keyframes-'.concat(e2)),
+        (this.rules = t),
+        se(this, function () {
+          throw ce(12, String(n.name));
+        });
+    }
+    return (
+      (e.prototype.getName = function (e2) {
+        return void 0 === e2 && (e2 = Te), this.name + e2.hash;
+      }),
+      e
+    );
+  })();
+  var $e = function (e) {
+    return e >= 'A' && e <= 'Z';
+  };
+  function ze(e) {
+    for (var t = '', n = 0; n < e.length; n++) {
+      var o2 = e[n];
+      if (1 === n && '-' === o2 && '-' === e[0]) return e;
+      $e(o2) ? (t += '-' + o2.toLowerCase()) : (t += o2);
+    }
+    return t.startsWith('ms-') ? '-' + t : t;
+  }
+  var Be = function (e) {
+    return null == e || false === e || '' === e;
+  };
+  var Le = function (t) {
+    var n,
+      o2,
+      r2 = [];
+    for (var s2 in t) {
+      var i2 = t[s2];
+      t.hasOwnProperty(s2) &&
+        !Be(i2) &&
+        ((Array.isArray(i2) && i2.isCss) || Q(i2)
+          ? r2.push(''.concat(ze(s2), ':'), i2, ';')
+          : oe(i2)
+          ? r2.push.apply(
+              r2,
+              __spreadArray(
+                __spreadArray([''.concat(s2, ' {')], Le(i2), false),
+                ['}'],
+                false,
+              ),
+            )
+          : r2.push(
+              ''
+                .concat(ze(s2), ': ')
+                .concat(
+                  ((n = s2),
+                  null == (o2 = i2) || 'boolean' == typeof o2 || '' === o2
+                    ? ''
+                    : 'number' != typeof o2 ||
+                      0 === o2 ||
+                      n in unitlessKeys ||
+                      n.startsWith('--')
+                    ? String(o2).trim()
+                    : ''.concat(o2, 'px')),
+                  ';',
+                ),
+            ));
+    }
+    return r2;
+  };
+  function Ge(e, t, n, o2) {
+    if (Be(e)) return [];
+    if (ee(e)) return ['.'.concat(e.styledComponentId)];
+    if (Q(e)) {
+      if (!Q((s2 = e)) || (s2.prototype && s2.prototype.isReactComponent) || !t)
+        return [e];
+      var r2 = e(t);
+      return (
+        'object' != typeof r2 ||
+          Array.isArray(r2) ||
+          r2 instanceof Fe ||
+          oe(r2) ||
+          null === r2 ||
+          console.error(
+            ''.concat(
+              V(e),
+              ' is not a styled component and cannot be referred to via component selector. See https://www.styled-components.com/docs/advanced#referring-to-other-components for more details.',
+            ),
+          ),
+        Ge(r2, t, n, o2)
+      );
+    }
+    var s2;
+    return e instanceof Fe
+      ? n
+        ? (e.inject(n, o2), [e.getName(o2)])
+        : [e]
+      : oe(e)
+      ? Le(e)
+      : Array.isArray(e)
+      ? Array.prototype.concat.apply(
+          E,
+          e.map(function (e2) {
+            return Ge(e2, t, n, o2);
+          }),
+        )
+      : [e.toString()];
+  }
+  function Ye(e) {
+    for (var t = 0; t < e.length; t += 1) {
+      var n = e[t];
+      if (Q(n) && !ee(n)) return false;
+    }
+    return true;
+  }
+  var We = j('6.0.7');
+  var qe = (function () {
+    function e(e2, t, n) {
+      (this.rules = e2),
+        (this.staticRulesId = ''),
+        (this.isStatic = false),
+        (this.componentId = t),
+        (this.baseHash = k(We, t)),
+        (this.baseStyle = n),
+        Ce.registerId(t);
+    }
+    return (
+      (e.prototype.generateAndInjectStyles = function (e2, t, n) {
+        var o2 = this.baseStyle
+          ? this.baseStyle.generateAndInjectStyles(e2, t, n)
+          : '';
+        if (this.isStatic && !n.hash)
+          if (
+            this.staticRulesId &&
+            t.hasNameForId(this.componentId, this.staticRulesId)
+          )
+            o2 = te(o2, this.staticRulesId);
+          else {
+            var r2 = ne(Ge(this.rules, e2, t, n)),
+              s2 = R(k(this.baseHash, r2) >>> 0);
+            if (!t.hasNameForId(this.componentId, s2)) {
+              var i2 = n(r2, '.'.concat(s2), void 0, this.componentId);
+              t.insertRules(this.componentId, s2, i2);
+            }
+            (o2 = te(o2, s2)), (this.staticRulesId = s2);
+          }
+        else {
+          for (
+            var a2 = k(this.baseHash, n.hash), c2 = '', l2 = 0;
+            l2 < this.rules.length;
+            l2++
+          ) {
+            var u2 = this.rules[l2];
+            if ('string' == typeof u2) (c2 += u2), (a2 = k(a2, u2));
+            else if (u2) {
+              var p2 = ne(Ge(u2, e2, t, n));
+              (a2 = k(a2, p2)), (c2 += p2);
+            }
+          }
+          if (c2) {
+            var d = R(a2 >>> 0);
+            t.hasNameForId(this.componentId, d) ||
+              t.insertRules(
+                this.componentId,
+                d,
+                n(c2, '.'.concat(d), void 0, this.componentId),
+              ),
+              (o2 = te(o2, d));
+          }
+        }
+        return o2;
+      }),
+      e
+    );
+  })();
+  var He = import_react3.default.createContext(void 0);
+  var Ue = He.Consumer;
+  var Ze = {};
+  var Ke = /* @__PURE__ */ new Set();
+  function Qe(e, r2, s2) {
+    var i2 = ee(e),
+      a2 = e,
+      c2 = !M(e),
+      p2 = r2.attrs,
+      d = void 0 === p2 ? E : p2,
+      h = r2.componentId,
+      f2 =
+        void 0 === h
+          ? (function (e2, t) {
+              var n = 'string' != typeof e2 ? 'sc' : A(e2);
+              Ze[n] = (Ze[n] || 0) + 1;
+              var o2 = ''.concat(n, '-').concat(x('6.0.7' + n + Ze[n]));
+              return t ? ''.concat(t, '-').concat(o2) : o2;
+            })(r2.displayName, r2.parentComponentId)
+          : h,
+      m = r2.displayName,
+      y2 =
+        void 0 === m
+          ? (function (e2) {
+              return M(e2)
+                ? 'styled.'.concat(e2)
+                : 'Styled('.concat(V(e2), ')');
+            })(e)
+          : m,
+      v2 =
+        r2.displayName && r2.componentId
+          ? ''.concat(A(r2.displayName), '-').concat(r2.componentId)
+          : r2.componentId || f2,
+      g = i2 && a2.attrs ? a2.attrs.concat(d).filter(Boolean) : d,
+      S2 = r2.shouldForwardProp;
+    if (i2 && a2.shouldForwardProp) {
+      var w2 = a2.shouldForwardProp;
+      if (r2.shouldForwardProp) {
+        var C2 = r2.shouldForwardProp;
+        S2 = function (e2, t) {
+          return w2(e2, t) && C2(e2, t);
+        };
+      } else S2 = w2;
+    }
+    var I2 = new qe(s2, v2, i2 ? a2.componentStyle : void 0);
+    function O2(e2, r3) {
+      return (function (e3, r4, s3) {
+        var i3 = e3.attrs,
+          a3 = e3.componentStyle,
+          c3 = e3.defaultProps,
+          p3 = e3.foldedComponentIds,
+          d2 = e3.styledComponentId,
+          h2 = e3.target,
+          f3 = import_react3.default.useContext(He),
+          m2 = Ve(),
+          y3 = e3.shouldForwardProp || m2.shouldForwardProp;
+        (0, import_react3.useDebugValue)(d2);
+        var v3 = (function (e4, n, o2) {
+            for (
+              var r5,
+                s4 = __assign(__assign({}, n), {
+                  className: void 0,
+                  theme: o2,
+                }),
+                i4 = 0;
+              i4 < e4.length;
+              i4 += 1
+            ) {
+              var a4 = Q((r5 = e4[i4])) ? r5(s4) : r5;
+              for (var c4 in a4)
+                s4[c4] =
+                  'className' === c4
+                    ? te(s4[c4], a4[c4])
+                    : 'style' === c4
+                    ? __assign(__assign({}, s4[c4]), a4[c4])
+                    : a4[c4];
+            }
+            return (
+              n.className && (s4.className = te(s4.className, n.className)), s4
+            );
+          })(i3, r4, P(r4, f3, c3) || N),
+          g2 = v3.as || h2,
+          S3 = {};
+        for (var w3 in v3)
+          void 0 === v3[w3] ||
+            '$' === w3[0] ||
+            'as' === w3 ||
+            'theme' === w3 ||
+            ('forwardedAs' === w3
+              ? (S3.as = v3.forwardedAs)
+              : (y3 && !y3(w3, g2)) ||
+                ((S3[w3] = v3[w3]),
+                y3 ||
+                  false ||
+                  isPropValid(w3) ||
+                  Ke.has(w3) ||
+                  !_.has(g2) ||
+                  (Ke.add(w3),
+                  console.warn(
+                    'styled-components: it looks like an unknown prop "'.concat(
+                      w3,
+                      '" is being sent through to the DOM, which will likely trigger a React console error. If you would like automatic filtering of unknown props, you can opt-into that behavior via `<StyleSheetManager shouldForwardProp={...}>` (connect an API like `@emotion/is-prop-valid`) or consider using transient props (`$` prefix for automatic filtering.)',
+                    ),
+                  ))));
+        var b2 = (function (e4, t) {
+          var n = Ve(),
+            o2 = e4.generateAndInjectStyles(t, n.styleSheet, n.stylis);
+          return (0, import_react3.useDebugValue)(o2), o2;
+        })(a3, v3);
+        e3.warnTooManyClasses && e3.warnTooManyClasses(b2);
+        var E2 = te(p3, d2);
+        return (
+          b2 && (E2 += ' ' + b2),
+          v3.className && (E2 += ' ' + v3.className),
+          (S3[M(g2) && !_.has(g2) ? 'class' : 'className'] = E2),
+          (S3.ref = s3),
+          (0, import_react3.createElement)(g2, S3)
+        );
+      })(D2, e2, r3);
+    }
+    O2.displayName = y2;
+    var D2 = import_react3.default.forwardRef(O2);
+    return (
+      (D2.attrs = g),
+      (D2.componentStyle = I2),
+      (D2.shouldForwardProp = S2),
+      (D2.displayName = y2),
+      (D2.foldedComponentIds = i2
+        ? te(a2.foldedComponentIds, a2.styledComponentId)
+        : ''),
+      (D2.styledComponentId = v2),
+      (D2.target = i2 ? a2.target : e),
+      Object.defineProperty(D2, 'defaultProps', {
+        get: function () {
+          return this._foldedDefaultProps;
+        },
+        set: function (e2) {
+          this._foldedDefaultProps = i2
+            ? (function (e3) {
+                for (var t = [], n = 1; n < arguments.length; n++)
+                  t[n - 1] = arguments[n];
+                for (var o2 = 0, r3 = t; o2 < r3.length; o2++)
+                  re(e3, r3[o2], true);
+                return e3;
+              })({}, a2.defaultProps, e2)
+            : e2;
+        },
+      }),
+      b(y2, v2),
+      (D2.warnTooManyClasses = (function (e2, t) {
+        var n = {},
+          o2 = false;
+        return function (r3) {
+          if (!o2 && ((n[r3] = true), Object.keys(n).length >= 200)) {
+            var s3 = t ? ' with the id of "'.concat(t, '"') : '';
+            console.warn(
+              'Over '
+                .concat(200, ' classes were generated for component ')
+                .concat(e2)
+                .concat(s3, '.\n') +
+                'Consider using the attrs method, together with a style object for frequently changed styles.\nExample:\n  const Component = styled.div.attrs(props => ({\n    style: {\n      background: props.background,\n    },\n  }))`width: 100%;`\n\n  <Component />',
+            ),
+              (o2 = true),
+              (n = {});
+          }
+        };
+      })(y2, v2)),
+      se(D2, function () {
+        return '.'.concat(D2.styledComponentId);
+      }),
+      c2 &&
+        K(D2, e, {
+          attrs: true,
+          componentStyle: true,
+          displayName: true,
+          foldedComponentIds: true,
+          shouldForwardProp: true,
+          styledComponentId: true,
+          target: true,
+        }),
+      D2
+    );
+  }
+  function et(e, t) {
+    for (var n = [e[0]], o2 = 0, r2 = t.length; o2 < r2; o2 += 1)
+      n.push(t[o2], e[o2 + 1]);
+    return n;
+  }
+  var tt = function (e) {
+    return Object.assign(e, { isCss: true });
+  };
+  function nt(t) {
+    for (var n = [], o2 = 1; o2 < arguments.length; o2++)
+      n[o2 - 1] = arguments[o2];
+    if (Q(t) || oe(t)) {
+      var r2 = t;
+      return tt(Ge(et(E, __spreadArray([r2], n, true))));
+    }
+    var s2 = t;
+    return 0 === n.length && 1 === s2.length && 'string' == typeof s2[0]
+      ? Ge(s2)
+      : tt(Ge(et(s2, n)));
+  }
+  function ot(n, o2, r2) {
+    if ((void 0 === r2 && (r2 = N), !o2)) throw ce(1, o2);
+    var s2 = function (t) {
+      for (var s3 = [], i2 = 1; i2 < arguments.length; i2++)
+        s3[i2 - 1] = arguments[i2];
+      return n(o2, r2, nt.apply(void 0, __spreadArray([t], s3, false)));
+    };
+    return (
+      (s2.attrs = function (e) {
+        return ot(
+          n,
+          o2,
+          __assign(__assign({}, r2), {
+            attrs: Array.prototype.concat(r2.attrs, e).filter(Boolean),
+          }),
+        );
+      }),
+      (s2.withConfig = function (e) {
+        return ot(n, o2, __assign(__assign({}, r2), e));
+      }),
+      s2
+    );
+  }
+  var rt = function (e) {
+    return ot(Qe, e);
+  };
+  var st = rt;
+  _.forEach(function (e) {
+    st[e] = rt(e);
+  });
+  var it = (function () {
+    function e(e2, t) {
+      (this.rules = e2),
+        (this.componentId = t),
+        (this.isStatic = Ye(e2)),
+        Ce.registerId(this.componentId + 1);
+    }
+    return (
+      (e.prototype.createStyles = function (e2, t, n, o2) {
+        var r2 = o2(ne(Ge(this.rules, t, n, o2)), ''),
+          s2 = this.componentId + e2;
+        n.insertRules(s2, s2, r2);
+      }),
+      (e.prototype.removeStyles = function (e2, t) {
+        t.clearRules(this.componentId + e2);
+      }),
+      (e.prototype.renderStyles = function (e2, t, n, o2) {
+        e2 > 2 && Ce.registerId(this.componentId + e2),
+          this.removeStyles(e2, n),
+          this.createStyles(e2, t, n, o2);
+      }),
+      e
+    );
+  })();
+  var ut = (function () {
+    function e() {
+      var e2 = this;
+      (this._emitSheetCSS = function () {
+        var t = e2.instance.toString(),
+          n = Se(),
+          o2 = ne(
+            [
+              n && 'nonce="'.concat(n, '"'),
+              ''.concat(f, '="true"'),
+              ''.concat('data-styled-version', '="').concat('6.0.7', '"'),
+            ].filter(Boolean),
+            ' ',
+          );
+        return '<style '.concat(o2, '>').concat(t, '</style>');
+      }),
+        (this.getStyleTags = function () {
+          if (e2.sealed) throw ce(2);
+          return e2._emitSheetCSS();
+        }),
+        (this.getStyleElement = function () {
+          var n;
+          if (e2.sealed) throw ce(2);
+          var r2 =
+              (((n = {})[f] = ''),
+              (n['data-styled-version'] = '6.0.7'),
+              (n.dangerouslySetInnerHTML = { __html: e2.instance.toString() }),
+              n),
+            s2 = Se();
+          return (
+            s2 && (r2.nonce = s2),
+            [
+              import_react3.default.createElement(
+                'style',
+                __assign({}, r2, { key: 'sc-0-0' }),
+              ),
+            ]
+          );
+        }),
+        (this.seal = function () {
+          e2.sealed = true;
+        }),
+        (this.instance = new Ce({ isServer: true })),
+        (this.sealed = false);
+    }
+    return (
+      (e.prototype.collectStyles = function (e2) {
+        if (this.sealed) throw ce(2);
+        return import_react3.default.createElement(
+          Me,
+          { sheet: this.instance },
+          e2,
+        );
+      }),
+      (e.prototype.interleaveWithNodeStream = function (e2) {
+        throw ce(3);
+      }),
+      e
+    );
+  })();
+  'undefined' != typeof navigator &&
+    'ReactNative' === navigator.product &&
+    console.warn(
+      "It looks like you've imported 'styled-components' on React Native.\nPerhaps you're looking to import 'styled-components/native'?\nRead more about this at https://www.styled-components.com/docs/basics#react-native",
+    );
+  var dt = '__sc-'.concat(f, '__');
+  'undefined' != typeof window &&
+    (window[dt] || (window[dt] = 0),
+    1 === window[dt] &&
+      console.warn(
+        "It looks like there are several instances of 'styled-components' initialized in this application. This may cause dynamic styles to not render properly, errors during the rehydration process, a missing theme prop, and makes your application bigger without good reason.\n\nSee https://s-c.sh/2BAXzed for more info.",
+      ),
+    (window[dt] += 1));
+
+  // src/components/HotSpots.tsx
+  var import_react5 = __toESM(require_react(), 1);
 
   // src/use/ContextValue.ts
-  var import_react3 = __toESM(require_react(), 1);
+  var import_react4 = __toESM(require_react(), 1);
   var useContextValue = (context) => {
-    const value = (0, import_react3.useContext)(context);
+    const value = (0, import_react4.useContext)(context);
     if (value === null) {
       throw Object.assign(
         new Error(`${context.displayName || 'context'} is null`),
@@ -42886,256 +45378,131 @@ ${stringifyError(error)}`,
     return value;
   };
 
-  // src/util/dom.mts
-  var setAttributes = (node, attrs) => {
-    if (attrs) {
-      for (const [name, value] of Object.entries(attrs)) {
-        switch (typeof value) {
-          case 'boolean':
-            if (value) {
-              node.setAttribute(name, '');
-            }
-            break;
-          case 'number':
-            node.setAttribute(name, `${value}`);
-            break;
-          case 'string':
-            node.setAttribute(name, value);
-            break;
-          default:
-        }
-      }
-    }
-    return node;
-  };
-  var setChildren = (node, children) => {
-    for (const child of children) {
-      if (typeof child === 'function') {
-        node.append(...child(node));
-      } else if (typeof child === 'string') {
-        node.append(document.createTextNode(child));
-      } else if (child instanceof Node) {
-        node.append(child);
-      }
-    }
-    return node;
-  };
-  var SVGNS = 'http://www.w3.org/2000/svg';
-  var svg = (tagName, attrs, ...children) => {
-    const node = document.createElementNS(SVGNS, tagName);
-    return setChildren(setAttributes(node, attrs), children);
-  };
-  var dom = (tagName, attrs, ...children) => {
-    const node = document.createElement(tagName);
-    return setChildren(setAttributes(node, attrs), children);
-  };
-
-  // src/util/createMarker.mts
-  var createMarker = function* (wrappee) {
-    const backdrop = dom('div', { class: 'hotspot-marker-backdrop' });
-    yield backdrop;
-    yield svg('svg', { class: 'hotspot-marker' }, function* (svgElement) {
-      const lw = 1;
-      const aw2 = 4;
-      const ah = 6;
-      const path = svg('path', { style: `stroke-width:${lw}px` });
-      const observer = new ResizeObserver(([{ target }]) => {
-        const rect = target.getBoundingClientRect();
-        const pRect = target.parentElement?.getBoundingClientRect();
-        if (pRect) {
-          Object.assign(backdrop.style, {
-            left: `${rect.left - pRect.left}px`,
-            top: `${rect.top - pRect.top}px`,
-            width: `${rect.width}px`,
-            height: `${rect.height}px`,
-          });
-        }
-        const w2 = rect.width / 2;
-        const h = rect.height;
-        {
-          const ww = w2 * 2 + lw * 2;
-          const hh = h + ah + lw * 2;
-          svgElement.style.width = `${ww}px`;
-          svgElement.style.height = `${hh}px`;
-          const viewBox = `${ww / -2} ${-hh + ah + lw} ${ww} ${hh}`;
-          svgElement.setAttribute('viewBox', viewBox);
-        }
-        const d = `M${-aw2} 0L0 ${ah}L${aw2} 0Z`;
-        path.setAttribute('d', d);
-      });
-      observer.observe(wrappee);
-      wrappee.style.marginBottom = `${ah + lw / 2}px`;
-      yield path;
-    });
-  };
-
-  // src/util/syncMarkersList.mts
-  var buttonText = '\u73FE\u5728\u4F4D\u7F6E\u306B\u8FFD\u52A0\u3059\u308B';
-  var alertText =
-    '\u8FFD\u52A0\u3059\u308B\u306B\u306F\u300C\u753B\u9762\u4E2D\u5FC3\u306E\u5EA7\u6A19\u3092\u8868\u793A\u300D\u3092\u6709\u52B9\u306B\u3057\u3066\u8FFD\u52A0\u4F4D\u7F6E\u3092\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002';
-  var syncMarkersList = () => {
-    const viewer = globalThis.viewerApp.getCurrentViewer();
-    if (!viewer) {
-      return;
-    }
-    const container2 = viewer.getContainer();
-    const listElement = container2.querySelector('.marker-list');
-    if (!listElement) {
-      return;
-    }
-    while (listElement.firstChild) {
-      listElement.firstChild.remove();
-    }
-    const current = viewer.getConfig();
-    const markers = current.hotSpots.slice();
-    markers.forEach((marker, index) => {
-      const dd = dom('dd', null, marker.text);
-      dd.addEventListener('click', () => focusMarker(marker.id));
-      listElement.append(dom('dt', null, `(${index + 1})`), dd);
-    });
-    const button = dom('button', null, buttonText);
-    listElement.append(button);
-    if (container2.querySelector('#show-coordinate')?.checked) {
-      button.addEventListener('click', () => {
-        const yaw = Number(viewer.getYaw().toFixed(3));
-        const pitch = Number(viewer.getPitch().toFixed(3));
-        const text = prompt(
-          `(${yaw.toFixed(2)},${pitch.toFixed(
-            2,
-          )}) \u306B\u30DE\u30FC\u30AB\u30FC\u3092\u8FFD\u52A0\u3059\u308B`,
-          '',
-        );
-        setMarker({ pitch, yaw, text });
-      });
-    } else {
-      button.classList.add('disabled');
-      button.title = alertText;
-      button.addEventListener('click', () => alert(alertText));
-    }
-    const a = container2.querySelector('#export-json');
-    if (a) {
-      const { title, author } = current;
-      const data = JSON.stringify(
-        {
-          title,
-          author,
-          hotSpots: markers.map(({ pitch, yaw, text }) => ({
-            pitch,
-            yaw,
-            text,
-          })),
-        },
-        null,
-        2,
-      );
-      const BOM = new Uint8Array([239, 187, 191]);
-      const blob = new Blob([BOM, data], { type: 'application/json' });
-      URL.revokeObjectURL(a.href);
-      a.href = URL.createObjectURL(blob);
-      const name = isLocalFile ? title : current.panorama;
-      a.setAttribute('download', name.replace(/(\.[^.]*?)?$/, '.json'));
-    }
-  };
-
-  // src/util/setMarker.mts
-  var setMarker = (newMarker) => {
-    const viewer = globalThis.viewerApp.getCurrentViewer();
-    if (!viewer) {
-      return false;
-    }
-    if (newMarker.id) {
-      for (const marker of viewer.getConfig().hotSpots) {
-        if (marker.id === newMarker.id) {
-          viewer.removeHotSpot(marker.id);
-        }
-      }
-    } else {
-      newMarker.id = Date.now().toString(16);
-    }
-    let result = false;
-    if (newMarker.text) {
-      result = true;
-      viewer.addHotSpot(fillHotSpot(newMarker));
-    }
-    syncMarkersList();
-    return result;
-  };
-
-  // src/util/focusMarker.mts
-  var focusMarker = (id) => {
-    const viewer = globalThis.viewerApp.getCurrentViewer();
-    if (!viewer) {
-      return;
-    }
-    const marker = viewer.getConfig().hotSpots.find((hs) => hs.id === id);
-    if (marker) {
-      const { pitch, yaw } = marker;
-      const d = Math.hypot(yaw - viewer.getYaw(), pitch - viewer.getPitch());
-      if (1e-3 < d) {
-        location.hash = `#${marker.id}`;
-        viewer.setYaw(yaw);
-        viewer.setPitch(pitch);
-        coordinateMonitor.track();
-      } else {
-        const newText = prompt(
-          `(${yaw.toFixed(2)},${pitch.toFixed(
-            2,
-          )}) \u306E\u30DE\u30FC\u30AB\u30FC\u306E\u30C6\u30AD\u30B9\u30C8\u3092\u4FEE\u6B63\u3059\u308B\uFF08\u7A7A\u306B\u3059\u308B\u3068\u524A\u9664\u3057\u307E\u3059\uFF09`,
-          marker.text,
-        );
-        if (newText === null) {
-          return;
-        }
-        setMarker({ ...marker, text: newText });
-      }
-    }
-  };
-
-  // src/util/createTooltip.mts
-  var createTooltip = (markerDiv, marker) => {
-    markerDiv.dataset.hotspot = marker.id;
-    markerDiv.style.backgroundImage = 'none';
-    const tooltip = dom('div', { class: 'hotspot-tooltip' }, marker.text);
-    markerDiv.append(...createMarker(tooltip), tooltip);
-    markerDiv.addEventListener('click', () => {
-      focusMarker(marker.id);
-    });
-  };
-
-  // src/util/fillHotSpot.mts
-  var fillHotSpot = (hotSpot) => ({
-    ...hotSpot,
-    createTooltipFunc: createTooltip,
-    createTooltipArgs: hotSpot,
-  });
-
   // src/recoil/HotSpots.mts
+  var hotSpotElementMap = /* @__PURE__ */ new WeakMap();
+  var createTooltipFunc = (element, hotSpot) => {
+    hotSpotElementMap.set(hotSpot, element);
+  };
   var rcHotSpots = Recoil_index_8({
     key: 'HotSpots',
-    default: viewerConfig.hotSpots.map(fillHotSpot),
+    default: viewerConfig.hotSpots.map((hotSpot) => ({
+      ...hotSpot,
+      createTooltipFunc,
+      createTooltipArgs: hotSpot,
+    })),
+    effects: [
+      ({ onSet }) => {
+        onSet((hotSpots) => {
+          for (const hotSpot of hotSpots) {
+            hotSpot.createTooltipFunc = createTooltipFunc;
+            hotSpot.createTooltipArgs = hotSpot;
+          }
+        });
+      },
+    ],
+  });
+  var rcHotSpot = Recoil_index_11({
+    key: 'HotSpot',
+    get:
+      (id) =>
+      ({ get }) => {
+        const hotSpots = get(rcHotSpots);
+        const hotSpot = hotSpots.find((hs) => hs.id === id);
+        if (!hotSpot) {
+          throw new Error(`NoSuchHotSpot:${id}`);
+        }
+        return hotSpot;
+      },
   });
 
-  // src/components/SyncHotSpots.tsx
-  var SyncHotSpots = () => {
+  // src/components/HotSpots.tsx
+  var import_jsx_runtime = __toESM(require_jsx_runtime(), 1);
+  var HotSpots = () => {
     const viewer = useContextValue(ViewerContext);
     const hotSpots = Recoil_index_20(rcHotSpots);
-    (0, import_react4.useEffect)(() => {
+    (0, import_react5.useEffect)(() => {
       for (const hotSpot of viewer.getConfig().hotSpots.slice()) {
         viewer.removeHotSpot(hotSpot.id);
       }
       for (const hotSpot of hotSpots) {
-        viewer.addHotSpot(fillHotSpot(hotSpot));
+        viewer.addHotSpot({ ...hotSpot });
       }
     }, [viewer, hotSpots]);
-    return null;
+    return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+      import_jsx_runtime.Fragment,
+      {
+        children: hotSpots.map(({ id }) =>
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)(HotSpot, { id }, id),
+        ),
+      },
+    );
+  };
+  var HotSpot = ({ id }) => {
+    const hotSpot = Recoil_index_20(rcHotSpot(id));
+    const [element, setElement] = (0, import_react5.useState)(null);
+    (0, import_react5.useEffect)(() => {
+      const timer = setInterval(() => {
+        const hotSpotElement = hotSpotElementMap.get(hotSpot) || null;
+        console.info(hotSpot.id, hotSpotElement);
+        setElement(hotSpotElement);
+      }, 50);
+      return () => {
+        clearInterval(timer);
+        setElement(null);
+      };
+    }, [hotSpot]);
+    return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(HotSpotDiv, {
+      children: hotSpot.text,
+    });
+  };
+  var HotSpotDiv = st.div`
+  position: absolute;
+`;
+
+  // src/components/Overlay.tsx
+  var import_jsx_runtime2 = __toESM(require_jsx_runtime(), 1);
+  var OverLay = () => {
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+      import_jsx_runtime2.Fragment,
+      { children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(HotSpots, {}) },
+    );
   };
 
   // src/components/ViewerApp.tsx
-  var import_jsx_runtime = __toESM(require_jsx_runtime(), 1);
+  var import_jsx_runtime3 = __toESM(require_jsx_runtime(), 1);
   var ViewerApp = () => {
-    const [container2, setContainer] = (0, import_react5.useState)(null);
-    const [viewer, setViewer] = (0, import_react5.useState)(null);
-    (0, import_react5.useEffect)(() => {
+    const [container2, setContainer] = (0, import_react6.useState)(null);
+    const viewer = useViewerSetup(container2);
+    const loading = useLoading(viewer);
+    return /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)(
+      import_jsx_runtime3.Fragment,
+      {
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)('div', {
+            ref: setContainer,
+          }),
+          viewer &&
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
+              ViewerContext.Provider,
+              {
+                value: viewer,
+                children:
+                  !loading &&
+                  /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(Recoil_index_5, {
+                    children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
+                      OverLay,
+                      {},
+                    ),
+                  }),
+              },
+            ),
+        ],
+      },
+    );
+  };
+  var useViewerSetup = (container2) => {
+    const [viewer, setViewer] = (0, import_react6.useState)(null);
+    (0, import_react6.useEffect)(() => {
       if (!container2) {
         return noop;
       }
@@ -43155,31 +45522,27 @@ ${stringifyError(error)}`,
         setViewer(null);
       };
     }, [container2]);
-    return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Recoil_index_5, {
-      children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)('div', {
-          ref: setContainer,
-        }),
-        viewer &&
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ViewerContext.Provider, {
-            value: viewer,
-            children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
-              SyncHotSpots,
-              {},
-            ),
-          }),
-      ],
-    });
+    return viewer;
+  };
+  var useLoading = (viewer) => {
+    const [loading, setLoading] = (0, import_react6.useState)(true);
+    (0, import_react6.useEffect)(() => {
+      if (viewer) {
+        viewer.on('load', () => setLoading(false));
+      }
+      return () => setLoading(true);
+    }, [viewer]);
+    return loading;
   };
 
   // src/viewer.tsx
-  var import_jsx_runtime2 = __toESM(require_jsx_runtime(), 1);
+  var import_jsx_runtime4 = __toESM(require_jsx_runtime(), 1);
   var container = document.querySelector('#panorama');
   if (!container) {
     throw new Error('NoContainer: #panorama');
   }
   var root = (0, import_client.createRoot)(container);
-  root.render(/* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ViewerApp, {}));
+  root.render(/* @__PURE__ */ (0, import_jsx_runtime4.jsx)(ViewerApp, {}));
 })();
 /*! Bundled license information:
 

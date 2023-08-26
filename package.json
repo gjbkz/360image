@@ -10,7 +10,7 @@
     "build:main": "tsx build/main.mts",
     "start": "run-p start:*",
     "start:watch": "tsx build/main.mts --watch",
-    "start:server": "sable docs",
+    "start:server": "tsx build/server.mts",
     "postversion": "run-s postversion:*",
     "postversion:changelog": "npx @nlib/changelog -- --output CHANGELOG.md",
     "postversion:add": "git add .",
@@ -38,6 +38,7 @@
     "recoil": "^0.7.7",
     "sable": "^0.5.14",
     "sass": "^1.66.1",
+    "styled-components": "^6.0.7",
     "tsx": "^3.12.7",
     "typescript": "^5.1.6"
   },

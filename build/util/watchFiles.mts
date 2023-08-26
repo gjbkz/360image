@@ -2,6 +2,7 @@ import * as fs from 'node:fs';
 
 interface WatchProps {
   files: Array<URL>;
+  include?: (filename: string) => boolean;
   onChange: () => Promise<void> | void;
   debounceMs?: number;
   signal?: AbortSignal;
@@ -9,6 +10,7 @@ interface WatchProps {
 
 export const watchFiles = async ({
   files,
+  include = () => true,
   onChange,
   debounceMs = 20,
   signal,
@@ -23,7 +25,10 @@ export const watchFiles = async ({
     signal.addEventListener('abort', stopTimer);
   }
   const onEvent = (event: fs.promises.FileChangeInfo<string>) => {
-    console.info(`watchFiles(${event.eventType}): ${event.filename}`, event);
+    if (event.filename && !include(event.filename)) {
+      return;
+    }
+    console.info(`watchFiles(${event.eventType}): ${event.filename}`);
     stopTimer();
     timerId = setTimeout(() => {
       Promise.resolve(onChange()).catch(console.error);

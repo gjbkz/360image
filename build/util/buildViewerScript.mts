@@ -17,7 +17,7 @@ export const buildViewerScript = async ({ watch, signal }: Options = {}) => {
     await esbuild.build({
       absWorkingDir: fileURLToPath(rootDir),
       entryPoints: ['src/viewer.tsx'],
-      resolveExtensions: ['.tsx', '.ts', '.js'],
+      resolveExtensions: ['.tsx', '.ts', '.mts'],
       outfile: 'docs/viewer.js',
       bundle: true,
       minify: false,
@@ -27,11 +27,8 @@ export const buildViewerScript = async ({ watch, signal }: Options = {}) => {
   };
   if (watch) {
     await watchFiles({
-      files: [
-        new URL('viewer.tsx', srcDir),
-        new URL('components', srcDir),
-        new URL('util', srcDir),
-      ],
+      files: [srcDir],
+      include: (filename) => /\.m?[jt]sx?$/.test(filename),
       onChange: build,
       signal,
     });

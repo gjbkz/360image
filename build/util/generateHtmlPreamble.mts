@@ -10,10 +10,10 @@ interface PageProps {
 export const generateHtmlPreamble = function* ({
   title,
 }: PageProps): Generator<string> {
-  yield '<!doctype html>';
-  yield '<meta charset="utf-8" />';
-  yield '<meta name="viewport" content="width=device-width,initial-scale=1" />';
-  yield `<title>${sanitize(`${title} | ${siteTitle}`)}</title>`;
-  yield `<meta name="theme-color" content="${themeColor}" />`;
-  yield '<link rel="stylesheet" href="/app.css" />';
+  yield '<!doctype html>\n';
+  yield '<meta charset="utf-8"/>\n';
+  yield '<meta name="viewport" content="width=device-width,initial-scale=1"/>\n';
+  yield `<title>${sanitize(`${title} | ${siteTitle}`)}</title>\n`;
+  yield `<meta name="theme-color" content="${themeColor}"/>\n`;
+  yield '<link rel="stylesheet" href="/app.css"/>\n';
 };

@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client';
-import { ViewerApp } from './components/ViewerApp';
+import { ViewerApp } from './components/ViewerApp.js';
 
 const container = document.querySelector('#panorama');
 if (!container) {
