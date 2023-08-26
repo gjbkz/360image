@@ -6,11 +6,11 @@ import { Collapsable } from './Collapsable.js';
 import { Settings } from './Settings.js';
 
 export const Menu = () => {
-  const [opened, setOpened] = useState(true);
+  const [opened, setOpened] = useState(false);
   const toggle = useCallback(() => setOpened((v) => !v), []);
   return (
     <MenuDiv>
-      <Header className={opened ? 'opened' : undefined}>
+      <Header>
         <Toggle onClick={toggle} />
         <Title>{viewerConfig.title}</Title>
       </Header>
@@ -23,12 +23,15 @@ export const Menu = () => {
 
 const MenuDiv = styled.div`
   --border-radius: 4px;
+  --inset: 10px;
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: var(--inset);
+  left: var(--inset);
   display: grid;
-  grid-auto-flow: row;
-  max-inline-size: calc(100% - 20px);
+  grid-template-columns: 1fr;
+  grid-template-rows: max-content 1fr;
+  max-inline-size: calc(100% - 2 * var(--inset));
+  max-block-size: calc(100% - 2 * var(--inset));
   border-radius: var(--border-radius);
   color: #ffffff;
   overflow: hidden;
@@ -41,16 +44,6 @@ const Header = styled.div`
   display: grid;
   grid-template-columns: max-content 1fr;
   align-items: center;
-  background-image: linear-gradient(0deg, currentColor, currentColor);
-  background-position: var(--padding) 100%;
-  background-size: 0 1px;
-  transition-property: background-size;
-  transition-duration: 0.1s;
-  transition-timing-function: ease-in-out;
-  &.opened {
-    transition-duration: 0.2s;
-    background-size: calc(100% - 2 * var(--padding)) 1px;
-  }
 `;
 
 const Title = styled.div`

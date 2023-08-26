@@ -49,6 +49,7 @@ const generateIndexHtml = async function* (imageTree: ImageTree) {
   yield '<main>\n';
   yield '<h1>画像一覧</h1>\n';
   for (const [node, leaves] of imageTree.groupLeaves()) {
+    yield '<section>\n';
     yield `<h2>${sanitize(node ? node.title : 'その他')}</h2>\n`;
     yield '<ul>\n';
     for (const leaf of leaves) {
@@ -60,7 +61,6 @@ const generateIndexHtml = async function* (imageTree: ImageTree) {
         for (const marker of markers) {
           const href = `${leaf.htmlPath}#${encodeURIComponent(marker.id)}`;
           yield `<li><a target="_blank" href="${href}">`;
-          yield '<svg viewBox="-1 -1 14 14" class="icon"><use href="#external-link"/></svg>';
           yield `${sanitize(marker.text)}</a></li>`;
         }
         yield '</ol>';
@@ -68,6 +68,7 @@ const generateIndexHtml = async function* (imageTree: ImageTree) {
       yield '</li>\n';
     }
     yield '</ul>\n';
+    yield '</section>\n';
   }
   yield* pipeFile(new URL('usage.html', srcDir));
   yield '</main>\n';

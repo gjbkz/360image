@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import type { CSSProperties, PropsWithChildren } from 'react';
+import { noop } from '../util/noop.mjs';
 
 export interface CollapsableProps {
   opened?: boolean;
@@ -12,56 +13,61 @@ export const Collapsable = ({
   opened,
   children,
 }: PropsWithChildren<CollapsableProps>) => {
-  const [outerDiv, setOuterDiv] = useState<HTMLDivElement | null>(null);
-  const [innerDiv, setInnerDiv] = useState<HTMLDivElement | null>(null);
+  const [container, setContainer] = useState<HTMLDivElement | null>(null);
   const [style, setStyle] = useState<CSSProperties>(defaultStyle);
   useEffect(() => {
-    if (innerDiv && outerDiv) {
-      if (opened) {
-        const w = outerDiv.style.width;
-        outerDiv.style.width = 'auto';
-        const outerWidth = outerDiv.scrollWidth;
-        outerDiv.style.width = w;
-        setStyle({
-          width: Math.max(innerDiv.scrollWidth, outerWidth),
-          height: innerDiv.scrollHeight,
-        });
-      } else {
-        setStyle(defaultStyle);
-      }
+    if (!container) {
+      return noop;
     }
-  }, [opened, outerDiv, innerDiv]);
+    const rect = getNatualRect(container);
+    setStyle({
+      width: Math.max(container.scrollWidth, rect.width),
+      height: Math.min(container.scrollHeight, rect.height),
+    });
+    if (opened) {
+      return noop;
+    }
+    const timerId = setTimeout(() => setStyle(defaultStyle));
+    return () => clearTimeout(timerId);
+  }, [opened, container]);
+  useEffect(() => {
+    if (style === defaultStyle) {
+      return noop;
+    }
+    const timer = setTimeout(() => setStyle({}), 300);
+    return () => clearTimeout(timer);
+  }, [style]);
   return (
-    <Outer ref={setOuterDiv} style={style} className={opened ? 'opened' : ''}>
-      <Inner
-        ref={setInnerDiv}
-        className={style === defaultStyle ? '' : 'opened'}
-      >
-        {children}
-      </Inner>
-    </Outer>
+    <Container
+      ref={setContainer}
+      style={style}
+      className={opened ? 'opened' : ''}
+    >
+      {children}
+    </Container>
   );
 };
 
-const Outer = styled.div`
+const getNatualRect = (element: HTMLElement) => {
+  const { style } = element;
+  const { width, height } = style;
+  style.width = style.height = '';
+  const rect = element.getBoundingClientRect();
+  style.width = width;
+  style.height = height;
+  return rect;
+};
+
+const Container = styled.div`
   overflow: hidden;
-  transition-property: width, height;
-  transition-timing-function: ease-in-out, ease-in-out;
-  transition-duration: 0.2s, 0.2s;
-  transition-delay: 0.2s, 0s;
-  &.opened {
-    transition-delay: 0s, 0.2s;
-  }
-`;
-const Inner = styled.div`
-  width: auto;
-  min-width: max-content;
+  transition-property: width, height, opacity;
+  transition-timing-function: ease-in-out, ease-in-out, linear;
+  transition-duration: 0.2s, 0.2s, 0.2s;
+  transition-delay: 0.2s, 0.2s, 0s;
   opacity: 0;
-  transition-property: opacity;
-  transition-duration: 0.2s;
-  transition-delay: 0s;
+  overflow: auto;
   &.opened {
+    transition-delay: 0s, 0s, 0.2s;
     opacity: 1;
-    transition-delay: 0.4s;
   }
 `;
