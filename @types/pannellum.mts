@@ -65,6 +65,10 @@ export interface Viewer {
     callback: (event: APIEvent[T]) => void,
   ) => void;
   toggleFullscreen: () => void;
+  startOrientation: () => void;
+  stopOrientation: () => void;
+  isOrientationSupported: () => boolean;
+  isOrientationActive: () => boolean;
 }
 
 declare global {

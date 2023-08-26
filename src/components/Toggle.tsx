@@ -11,9 +11,9 @@ export const Toggle = ({ state, ...props }: ToggleProps) => (
 );
 
 const ToggleButton = styled.button`
-  --width: 60px;
-  --height: 30px;
-  --margin: 4px;
+  --width: 56px;
+  --height: 24px;
+  --margin: 1px;
   --knobHeight: calc(var(--height) - 2 * var(--margin));
   --knobWidth: 36px;
   width: var(--width);
@@ -63,6 +63,11 @@ const ToggleButton = styled.button`
     &::after {
       content: 'ON';
       left: calc(var(--width) - var(--margin) - var(--knobWidth));
+    }
+  }
+  &[disabled] {
+    &::after {
+      content: 'N/A';
     }
   }
 `;

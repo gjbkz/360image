@@ -108,8 +108,10 @@ const EditMarker = ({ marker }: { marker: Marker }) => {
 
 const Toggles = () => (
   <TogglesDiv>
+    <HideMarkerToggle />
     <VerticalToggle />
     <FullScreenToggle />
+    <OrientationToggle />
   </TogglesDiv>
 );
 
@@ -122,6 +124,24 @@ const TogglesDiv = styled.div`
   column-gap: 6px;
   row-gap: 6px;
 `;
+
+const HideMarkerToggle = () => {
+  const { value, toggle } = useBoolean(false, 'nomarker');
+  const viewer = useContextValue(ViewerContext);
+  useEffect(() => {
+    const selector = '.pnlm-render-container';
+    const container = viewer.getContainer().querySelector(selector);
+    if (container) {
+      container.dataset.nomarker = value ? '1' : '0';
+    }
+  }, [value, viewer]);
+  return (
+    <>
+      <div>マーカーを表示する</div>
+      <Toggle state={!value} onClick={toggle} />
+    </>
+  );
+};
 
 const VerticalToggle = () => {
   const { value, toggle } = useBoolean(true, 'vertical');
@@ -160,7 +180,7 @@ const FullScreenToggle = () => {
       }
     }
     return () => abc.abort();
-  }, [value, viewer]);
+  }, [value]);
   return (
     <>
       <div>全画面で表示する</div>
@@ -168,6 +188,33 @@ const FullScreenToggle = () => {
         state={value}
         onClick={toggle}
         disabled={!fullscreenIsAvailable}
+      />
+    </>
+  );
+};
+
+const OrientationToggle = () => {
+  const viewer = useContextValue(ViewerContext);
+  const { value, toggle } = useBoolean(viewer.isOrientationActive());
+  const element = useMemo(() => viewer.getContainer().parentElement, [viewer]);
+  useEffect(() => {
+    const abc = new AbortController();
+    if (element) {
+      if (value) {
+        viewer.startOrientation();
+      } else if (document.fullscreenElement) {
+        viewer.stopOrientation();
+      }
+    }
+    return () => abc.abort();
+  }, [value, viewer]);
+  return (
+    <>
+      <div>加速度センサーで操作する</div>
+      <Toggle
+        state={value}
+        onClick={toggle}
+        disabled={!viewer.isOrientationSupported()}
       />
     </>
   );

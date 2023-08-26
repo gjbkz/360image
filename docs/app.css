@@ -186,6 +186,10 @@ main#panorama {
   bottom: 10px;
   writing-mode: horizontal-tb;
 }
+.pnlm-render-container[data-nomarker='1'] > .pnlm-hotspot {
+  opacity: 0;
+  pointer-events: none;
+}
 .pnlm-hotspot > svg {
   position: absolute;
   bottom: 0;
