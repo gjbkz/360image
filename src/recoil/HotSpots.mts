@@ -1,11 +1,10 @@
 import { atom, selectorFamily } from 'recoil';
-import type * as app from '@gjbkz/360image';
-import type * as pannellum from 'pannellum';
+import type * as app from '../../@types/app.mjs';
+import type * as pannellum from '../../@types/pannellum.mjs';
 import { viewerConfig } from '../util/viewerConfig.mjs';
 
-export const hotSpotElementMap = new WeakMap<app.HotSpot, HTMLElement>();
 const createTooltipFunc = (element: HTMLElement, hotSpot: app.HotSpot) => {
-  hotSpotElementMap.set(hotSpot, element);
+  element.dataset.id = hotSpot.id;
 };
 
 export const rcHotSpots = atom<Array<pannellum.HotSpot<app.HotSpot>>>({

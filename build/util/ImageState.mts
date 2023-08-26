@@ -1,4 +1,4 @@
-import type * as app from '@gjbkz/360image';
+import type * as app from '../../@types/app.mjs';
 import type { ImageTree } from './ImageTree.mjs';
 import { imagesDir } from './files.mjs';
 import { loadViewerConfig } from './loadViewerConfig.mjs';

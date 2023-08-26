@@ -1,9 +1,9 @@
 import * as fs from 'node:fs';
 import { ensure, isArray, isFiniteNumber, isString } from '@nlib/typing';
-import type * as app from '@gjbkz/360image';
+import type { HotSpot, ViewerConfig } from '../../@types/app.mjs';
 import { imagesDir } from './files.mjs';
 
-export const loadViewerConfig = (jsonFileUrl: URL): app.ViewerConfig => {
+export const loadViewerConfig = (jsonFileUrl: URL): ViewerConfig => {
   const json = fs.readFileSync(jsonFileUrl, 'utf8');
   const parsed = ensure(JSON.parse(json), {
     title: isString,
@@ -26,7 +26,7 @@ export const loadViewerConfig = (jsonFileUrl: URL): app.ViewerConfig => {
 
 const filterHotSpots = function* (
   hotSpots?: Iterable<unknown> | null,
-): Generator<app.HotSpot> {
+): Generator<HotSpot> {
   if (hotSpots) {
     let count = 0;
     for (const item of hotSpots) {

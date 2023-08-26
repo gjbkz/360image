@@ -155,12 +155,18 @@ main#panorama {
   background-color: currentColor;
 }
 .pnlm-hotspot-base {
+  visibility: hidden;
   position: absolute;
   top: 0;
 }
 .pnlm-hotspot {
-  --size: 16px;
-  inline-size: var(--size);
-  block-size: var(--size);
-  border: solid 3px red;
+  inline-size: 0;
+  block-size: 0;
+  /* box-shadow: 0 0 0 3px red; */
+}
+.pnlm-grab {
+  cursor: grab;
+}
+.pnlm-grabbing {
+  cursor: grabbing;
 }

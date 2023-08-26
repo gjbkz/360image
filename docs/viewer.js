@@ -5810,7 +5810,7 @@ window.pannellum = (function (E, g, p) {
           var HostPortal = 4;
           var HostComponent = 5;
           var HostText = 6;
-          var Fragment4 = 7;
+          var Fragment3 = 7;
           var Mode = 8;
           var ContextConsumer = 9;
           var ContextProvider = 10;
@@ -7138,7 +7138,7 @@ window.pannellum = (function (E, g, p) {
                 return 'DehydratedFragment';
               case ForwardRef:
                 return getWrappedName$1(type, type.render, 'ForwardRef');
-              case Fragment4:
+              case Fragment3:
                 return 'Fragment';
               case HostComponent:
                 return type;
@@ -20013,7 +20013,7 @@ window.pannellum = (function (E, g, p) {
               lanes,
               key,
             ) {
-              if (current2 === null || current2.tag !== Fragment4) {
+              if (current2 === null || current2.tag !== Fragment3) {
                 var created = createFiberFromFragment(
                   fragment,
                   returnFiber.mode,
@@ -20610,7 +20610,7 @@ window.pannellum = (function (E, g, p) {
                 if (child.key === key) {
                   var elementType = element.type;
                   if (elementType === REACT_FRAGMENT_TYPE) {
-                    if (child.tag === Fragment4) {
+                    if (child.tag === Fragment3) {
                       deleteRemainingChildren(returnFiber, child.sibling);
                       var existing = useFiber(child, element.props.children);
                       existing.return = returnFiber;
@@ -26266,7 +26266,7 @@ window.pannellum = (function (E, g, p) {
                   renderLanes2,
                 );
               }
-              case Fragment4:
+              case Fragment3:
                 return updateFragment(current2, workInProgress2, renderLanes2);
               case Mode:
                 return updateMode(current2, workInProgress2, renderLanes2);
@@ -26637,7 +26637,7 @@ window.pannellum = (function (E, g, p) {
               case SimpleMemoComponent:
               case FunctionComponent:
               case ForwardRef:
-              case Fragment4:
+              case Fragment3:
               case Mode:
               case Profiler:
               case ContextConsumer:
@@ -32052,7 +32052,7 @@ window.pannellum = (function (E, g, p) {
             return fiber;
           }
           function createFiberFromFragment(elements, mode, lanes, key) {
-            var fiber = createFiber(Fragment4, elements, key, mode);
+            var fiber = createFiber(Fragment3, elements, key, mode);
             fiber.lanes = lanes;
             return fiber;
           }
@@ -34734,10 +34734,10 @@ window.pannellum = (function (E, g, p) {
             }
           }
           var jsx5 = jsxWithValidationDynamic;
-          var jsxs2 = jsxWithValidationStatic;
+          var jsxs3 = jsxWithValidationStatic;
           exports.Fragment = REACT_FRAGMENT_TYPE;
           exports.jsx = jsx5;
-          exports.jsxs = jsxs2;
+          exports.jsxs = jsxs3;
         })();
       }
     },
@@ -45379,9 +45379,8 @@ ${stringifyError(error)}`,
   };
 
   // src/recoil/HotSpots.mts
-  var hotSpotElementMap = /* @__PURE__ */ new WeakMap();
   var createTooltipFunc = (element, hotSpot) => {
-    hotSpotElementMap.set(hotSpot, element);
+    element.dataset.id = hotSpot.id;
   };
   var rcHotSpots = Recoil_index_8({
     key: 'HotSpots',
@@ -45428,34 +45427,104 @@ ${stringifyError(error)}`,
         viewer.addHotSpot({ ...hotSpot });
       }
     }, [viewer, hotSpots]);
-    return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
-      import_jsx_runtime.Fragment,
-      {
-        children: hotSpots.map(({ id }) =>
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)(HotSpot, { id }, id),
-        ),
-      },
-    );
+    return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(HotSpotsDiv, {
+      children: hotSpots.map(({ id }) =>
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)(HotSpot, { id }, id),
+      ),
+    });
   };
+  var HotSpotsDiv = st.div`
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+`;
   var HotSpot = ({ id }) => {
+    const [tooltip, setTooltip] = (0, import_react5.useState)(null);
     const hotSpot = Recoil_index_20(rcHotSpot(id));
-    const [, setElement] = (0, import_react5.useState)(null);
+    const hotSpotElement = useHotSpotElement(id);
+    (0, import_react5.useEffect)(() => {
+      if (!tooltip || !hotSpotElement) {
+        return noop;
+      }
+      const sync = () => {
+        const visibility = (tooltip.style.visibility =
+          hotSpotElement.style.visibility);
+        if (visibility === 'visible') {
+          const rect = hotSpotElement.getBoundingClientRect();
+          tooltip.style.left = `${(rect.left + rect.right) / 2}px`;
+          tooltip.style.top = `${(rect.top + rect.bottom) / 2}px`;
+        }
+      };
+      const observer = new MutationObserver(sync);
+      observer.observe(hotSpotElement, { attributes: true });
+      sync();
+      return () => observer.disconnect();
+    }, [tooltip, hotSpotElement]);
+    return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(HotSpotDiv, {
+      ref: setTooltip,
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ToolipText, {
+          children: hotSpot.text,
+        }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Arrow, {}),
+      ],
+    });
+  };
+  var ToolipText = st.div`
+  inline-size: 200px;
+  writing-mode: vertical-rl;
+  text-shadow: 0 0 4px #000000;
+  text-align: end;
+  font-weight: 700;
+`;
+  var Arrow = () =>
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)('svg', {
+      viewBox: '-9 -1 18 9',
+      children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowPath, {
+        d: 'M-4 0L0 6L4 0Z',
+      }),
+    });
+  var ArrowPath = st.path`
+  fill: currentColor;
+  stroke: currentColor;
+  stroke-width: 1px;
+  filter: drop-shadow(0 0 2px #000000);
+`;
+  var useHotSpotElement = (id) => {
+    const [hotSpotElement, setHotSpotElement] = (0, import_react5.useState)(
+      null,
+    );
     (0, import_react5.useEffect)(() => {
       const timer = setInterval(() => {
-        const hotSpotElement = hotSpotElementMap.get(hotSpot) || null;
-        setElement(hotSpotElement);
+        const selector3 = `.pnlm-hotspot[data-id="${id}"]`;
+        const element = document.body.querySelector(selector3);
+        if (element) {
+          setHotSpotElement(element);
+          clearInterval(timer);
+        }
       }, 50);
       return () => {
         clearInterval(timer);
-        setElement(null);
+        setHotSpotElement(null);
       };
-    }, [hotSpot]);
-    return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(HotSpotDiv, {
-      children: hotSpot.text,
-    });
+    }, [id]);
+    return hotSpotElement;
   };
   var HotSpotDiv = st.div`
+  inline-size: 0;
+  block-size: 0;
+  visibility: hidden;
   position: absolute;
+  display: grid;
+  overflow: visible;
+  display: grid;
+  grid-template-columns: max-content;
+  grid-template-rows: 1fr max-content;
+  row-gap: 0.5em;
+  align-content: end;
+  justify-content: center;
+  color: #ffffff;
 `;
 
   // src/components/Overlay.tsx

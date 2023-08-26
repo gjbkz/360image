@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { RecoilRoot } from 'recoil';
-import type { Viewer } from 'pannellum';
+import type { Viewer } from '../../@types/pannellum.mjs';
 import { ViewerContext } from '../context/Viewer.mjs';
 import { noop } from '../util/noop.mjs';
 import { viewerConfig } from '../util/viewerConfig.mjs';

@@ -4,7 +4,7 @@ import {
   isFiniteNumber,
   isString,
 } from '@nlib/typing';
-import type { HotSpot, ViewerConfig } from '@gjbkz/360image';
+import type { HotSpot, ViewerConfig } from '../../@types/app.mjs';
 
 const isHotSpot = createTypeChecker<HotSpot>('HotSpot', {
   pitch: isFiniteNumber,
