@@ -4215,7 +4215,7 @@ window.pannellum = (function (E, g, p) {
             }
             return dispatcher.useContext(Context);
           }
-          function useState4(initialState) {
+          function useState5(initialState) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState);
           }
@@ -4227,7 +4227,7 @@ window.pannellum = (function (E, g, p) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
-          function useEffect4(create, deps) {
+          function useEffect5(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useEffect(create, deps);
           }
@@ -4239,7 +4239,7 @@ window.pannellum = (function (E, g, p) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useLayoutEffect(create, deps);
           }
-          function useCallback2(callback, deps) {
+          function useCallback3(callback, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useCallback(callback, deps);
           }
@@ -5186,11 +5186,11 @@ window.pannellum = (function (E, g, p) {
           exports.memo = memo;
           exports.startTransition = startTransition;
           exports.unstable_act = act;
-          exports.useCallback = useCallback2;
+          exports.useCallback = useCallback3;
           exports.useContext = useContext3;
           exports.useDebugValue = useDebugValue;
           exports.useDeferredValue = useDeferredValue;
-          exports.useEffect = useEffect4;
+          exports.useEffect = useEffect5;
           exports.useId = useId;
           exports.useImperativeHandle = useImperativeHandle;
           exports.useInsertionEffect = useInsertionEffect;
@@ -5198,7 +5198,7 @@ window.pannellum = (function (E, g, p) {
           exports.useMemo = useMemo2;
           exports.useReducer = useReducer;
           exports.useRef = useRef2;
-          exports.useState = useState4;
+          exports.useState = useState5;
           exports.useSyncExternalStore = useSyncExternalStore2;
           exports.useTransition = useTransition;
           exports.version = ReactVersion;
@@ -34733,11 +34733,11 @@ window.pannellum = (function (E, g, p) {
               return jsxWithValidation(type, props, key, false);
             }
           }
-          var jsx5 = jsxWithValidationDynamic;
-          var jsxs3 = jsxWithValidationStatic;
+          var jsx7 = jsxWithValidationDynamic;
+          var jsxs4 = jsxWithValidationStatic;
           exports.Fragment = REACT_FRAGMENT_TYPE;
-          exports.jsx = jsx5;
-          exports.jsxs = jsxs3;
+          exports.jsx = jsx7;
+          exports.jsxs = jsxs4;
         })();
       }
     },
@@ -34759,7 +34759,7 @@ window.pannellum = (function (E, g, p) {
   var import_client = __toESM(require_client(), 1);
 
   // src/components/ViewerApp.tsx
-  var import_react6 = __toESM(require_react(), 1);
+  var import_react8 = __toESM(require_react(), 1);
 
   // node_modules/recoil/es/index.js
   var import_react = __toESM(require_react());
@@ -42967,6 +42967,9 @@ ${stringifyError(error)}`,
     isViewerConfig,
   );
 
+  // src/components/Menu.tsx
+  var import_react5 = __toESM(require_react(), 1);
+
   // node_modules/tslib/tslib.es6.mjs
   var __assign = function () {
     __assign =
@@ -45362,25 +45365,211 @@ ${stringifyError(error)}`,
       ),
     (window[dt] += 1));
 
-  // src/components/HotSpots.tsx
-  var import_react5 = __toESM(require_react(), 1);
-
-  // src/use/ContextValue.ts
+  // src/components/Collapsable.tsx
   var import_react4 = __toESM(require_react(), 1);
-  var useContextValue = (context) => {
-    const value = (0, import_react4.useContext)(context);
-    if (value === null) {
-      throw Object.assign(
-        new Error(`${context.displayName || 'context'} is null`),
-        { context },
-      );
+  var import_jsx_runtime = __toESM(require_jsx_runtime(), 1);
+  var Collapsable = ({ opened, children }) => {
+    const [contentDiv, setContentDiv] = (0, import_react4.useState)(null);
+    const [style, setStyle] = (0, import_react4.useState)({
+      width: 0,
+      height: 0,
+    });
+    (0, import_react4.useEffect)(() => {
+      if (contentDiv) {
+        if (opened) {
+          setStyle({
+            width: contentDiv.scrollWidth,
+            height: contentDiv.scrollHeight,
+          });
+        } else {
+          setStyle({ width: 0, height: 0 });
+        }
+      }
+    }, [opened, contentDiv]);
+    return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Outer, {
+      style,
+      className: opened ? 'opened' : '',
+      children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Inner, {
+        ref: setContentDiv,
+        className: opened ? 'opened' : '',
+        children,
+      }),
+    });
+  };
+  var Outer = st.div`
+  overflow: hidden;
+  transition-property: width, height;
+  transition-timing-function: ease-in-out, ease-in-out;
+  transition-duration: 0.2s, 0.2s;
+  transition-delay: 0.2s, 0s;
+  &.opened {
+    transition-delay: 0s, 0.2s;
+  }
+`;
+  var Inner = st.div`
+  width: max-content;
+  opacity: 0;
+  transition-property: opacity;
+  transition-duration: 0.2s;
+  transition-delay: 0s;
+  &.opened {
+    opacity: 1;
+    transition-delay: 0.4s;
+  }
+`;
+
+  // src/components/Settings.tsx
+  var import_jsx_runtime2 = __toESM(require_jsx_runtime(), 1);
+  var Settings = () => {
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Container, {
+      children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)('p', {
+        children: 'Not implemented',
+      }),
+    });
+  };
+  var Container = st.div`
+  display: grid;
+  grid-auto-flow: row;
+  padding-block-end: 4px;
+  padding-inline: 6px;
+  max-inline-size: 90vw;
+  max-block-size: 90vh;
+`;
+
+  // src/components/Menu.tsx
+  var import_jsx_runtime3 = __toESM(require_jsx_runtime(), 1);
+  var Menu = () => {
+    const [opened, setOpened] = (0, import_react5.useState)(false);
+    const toggle = (0, import_react5.useCallback)(
+      () => setOpened((v2) => !v2),
+      [],
+    );
+    return /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)(MenuDiv, {
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)(Header, {
+          children: [
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(Toggle, {
+              onClick: toggle,
+            }),
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(Title, {
+              children: viewerConfig.title,
+            }),
+          ],
+        }),
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(Collapsable, {
+          opened,
+          children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(Settings, {}),
+        }),
+      ],
+    });
+  };
+  var MenuDiv = st.div`
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: grid;
+  grid-auto-flow: row;
+  max-inline-size: calc(100% - 20px);
+  border-radius: 4px;
+  color: #ffffff;
+  overflow: hidden;
+  background-color: var(--ui-background);
+  backdrop-filter: blur(2px);
+`;
+  var Header = st.div`
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  align-items: center;
+`;
+  var Title = st.div`
+  padding-inline-start: 4px;
+  padding-inline-end: 11px;
+  padding-block: 6px;
+  line-height: 1.2;
+`;
+  var Toggle = (props) =>
+    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(ToggleButton, {
+      ...props,
+      children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(ToggleIcon, {
+        viewBox: '0 0 24 24',
+        children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(ToggleIconPath, {
+          d: 'M3 4H21M3 12H21M3 20H21',
+        }),
+      }),
+    });
+  var ToggleButton = st.button`
+  display: grid;
+  place-content: center;
+  padding: 4px;
+  margin: 2px;
+`;
+  var ToggleIcon = st.svg`
+  inline-size: 20px;
+  /* border: solid 1px red; */
+`;
+  var ToggleIconPath = st.path`
+  stroke: currentColor;
+  stroke-width: 3;
+`;
+
+  // src/components/HotSpots.tsx
+  var import_react7 = __toESM(require_react(), 1);
+
+  // src/util/dom.mts
+  var setAttributes = (node2, attrs) => {
+    if (attrs) {
+      for (const [name, value] of Object.entries(attrs)) {
+        switch (typeof value) {
+          case 'boolean':
+            if (value) {
+              node2.setAttribute(name, '');
+            }
+            break;
+          case 'number':
+            node2.setAttribute(name, `${value}`);
+            break;
+          case 'string':
+            node2.setAttribute(name, value);
+            break;
+          default:
+        }
+      }
     }
-    return value;
+    return node2;
+  };
+  var setChildren = (node2, children) => {
+    for (const child of children) {
+      if (typeof child === 'function') {
+        node2.append(...child(node2));
+      } else if (typeof child === 'string') {
+        node2.append(document.createTextNode(child));
+      } else if (child instanceof Node) {
+        node2.append(child);
+      }
+    }
+    return node2;
+  };
+  var SVGNS = 'http://www.w3.org/2000/svg';
+  var svg = (tagName, attrs, ...children) => {
+    const node2 = document.createElementNS(SVGNS, tagName);
+    return setChildren(setAttributes(node2, attrs), children);
+  };
+  var dom = (tagName, attrs, ...children) => {
+    const node2 = document.createElement(tagName);
+    return setChildren(setAttributes(node2, attrs), children);
   };
 
   // src/recoil/HotSpots.mts
   var createTooltipFunc = (element, hotSpot) => {
     element.dataset.id = hotSpot.id;
+    element.append(
+      dom('div', null, hotSpot.text),
+      svg(
+        'svg',
+        { viewBox: '-5 -1 10 7' },
+        svg('path', { d: 'M-4 0L0 6L4 0Z' }),
+      ),
+    );
   };
   var rcHotSpots = Recoil_index_8({
     key: 'HotSpots',
@@ -45414,12 +45603,24 @@ ${stringifyError(error)}`,
       },
   });
 
+  // src/use/ContextValue.ts
+  var import_react6 = __toESM(require_react(), 1);
+  var useContextValue = (context) => {
+    const value = (0, import_react6.useContext)(context);
+    if (value === null) {
+      throw Object.assign(
+        new Error(`${context.displayName || 'context'} is null`),
+        { context },
+      );
+    }
+    return value;
+  };
+
   // src/components/HotSpots.tsx
-  var import_jsx_runtime = __toESM(require_jsx_runtime(), 1);
   var HotSpots = () => {
     const viewer = useContextValue(ViewerContext);
     const hotSpots = Recoil_index_20(rcHotSpots);
-    (0, import_react5.useEffect)(() => {
+    (0, import_react7.useEffect)(() => {
       for (const hotSpot of viewer.getConfig().hotSpots.slice()) {
         viewer.removeHotSpot(hotSpot.id);
       }
@@ -45427,137 +45628,45 @@ ${stringifyError(error)}`,
         viewer.addHotSpot({ ...hotSpot });
       }
     }, [viewer, hotSpots]);
-    return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(HotSpotsDiv, {
-      children: hotSpots.map(({ id }) =>
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)(HotSpot, { id }, id),
-      ),
-    });
+    return null;
   };
-  var HotSpotsDiv = st.div`
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-`;
-  var HotSpot = ({ id }) => {
-    const [tooltip, setTooltip] = (0, import_react5.useState)(null);
-    const hotSpot = Recoil_index_20(rcHotSpot(id));
-    const hotSpotElement = useHotSpotElement(id);
-    (0, import_react5.useEffect)(() => {
-      if (!tooltip || !hotSpotElement) {
-        return noop;
-      }
-      const sync = () => {
-        const visibility = (tooltip.style.visibility =
-          hotSpotElement.style.visibility);
-        if (visibility === 'visible') {
-          const rect = hotSpotElement.getBoundingClientRect();
-          tooltip.style.left = `${(rect.left + rect.right) / 2}px`;
-          tooltip.style.top = `${(rect.top + rect.bottom) / 2}px`;
-        }
-      };
-      const observer = new MutationObserver(sync);
-      observer.observe(hotSpotElement, { attributes: true });
-      sync();
-      return () => observer.disconnect();
-    }, [tooltip, hotSpotElement]);
-    return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(HotSpotDiv, {
-      ref: setTooltip,
-      children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ToolipText, {
-          children: hotSpot.text,
-        }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Arrow, {}),
-      ],
-    });
-  };
-  var ToolipText = st.div`
-  inline-size: 200px;
-  writing-mode: vertical-rl;
-  text-shadow: 0 0 4px #000000;
-  text-align: end;
-  font-weight: 700;
-`;
-  var Arrow = () =>
-    /* @__PURE__ */ (0, import_jsx_runtime.jsx)('svg', {
-      viewBox: '-9 -1 18 9',
-      children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowPath, {
-        d: 'M-4 0L0 6L4 0Z',
-      }),
-    });
-  var ArrowPath = st.path`
-  fill: currentColor;
-  stroke: currentColor;
-  stroke-width: 1px;
-  filter: drop-shadow(0 0 2px #000000);
-`;
-  var useHotSpotElement = (id) => {
-    const [hotSpotElement, setHotSpotElement] = (0, import_react5.useState)(
-      null,
-    );
-    (0, import_react5.useEffect)(() => {
-      const timer = setInterval(() => {
-        const selector3 = `.pnlm-hotspot[data-id="${id}"]`;
-        const element = document.body.querySelector(selector3);
-        if (element) {
-          setHotSpotElement(element);
-          clearInterval(timer);
-        }
-      }, 50);
-      return () => {
-        clearInterval(timer);
-        setHotSpotElement(null);
-      };
-    }, [id]);
-    return hotSpotElement;
-  };
-  var HotSpotDiv = st.div`
-  inline-size: 0;
-  block-size: 0;
-  visibility: hidden;
-  position: absolute;
-  display: grid;
-  overflow: visible;
-  display: grid;
-  grid-template-columns: max-content;
-  grid-template-rows: 1fr max-content;
-  row-gap: 0.5em;
-  align-content: end;
-  justify-content: center;
-  color: #ffffff;
-`;
 
   // src/components/Overlay.tsx
-  var import_jsx_runtime2 = __toESM(require_jsx_runtime(), 1);
+  var import_jsx_runtime4 = __toESM(require_jsx_runtime(), 1);
   var OverLay = () => {
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-      import_jsx_runtime2.Fragment,
-      { children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(HotSpots, {}) },
+    return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(
+      import_jsx_runtime4.Fragment,
+      {
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(HotSpots, {}),
+          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Menu, {}),
+        ],
+      },
     );
   };
 
   // src/components/ViewerApp.tsx
-  var import_jsx_runtime3 = __toESM(require_jsx_runtime(), 1);
+  var import_jsx_runtime5 = __toESM(require_jsx_runtime(), 1);
   var ViewerApp = () => {
-    const [container2, setContainer] = (0, import_react6.useState)(null);
+    const [container2, setContainer] = (0, import_react8.useState)(null);
     const viewer = useViewerSetup(container2);
     const loading = useLoading(viewer);
-    return /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)(
-      import_jsx_runtime3.Fragment,
+    return /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
+      import_jsx_runtime5.Fragment,
       {
         children: [
-          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)('div', {
+          /* @__PURE__ */ (0, import_jsx_runtime5.jsx)('div', {
             ref: setContainer,
           }),
           viewer &&
-            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
+            /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
               ViewerContext.Provider,
               {
                 value: viewer,
                 children:
                   !loading &&
-                  /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(Recoil_index_5, {
-                    children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
+                  /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Recoil_index_5, {
+                    children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
                       OverLay,
                       {},
                     ),
@@ -45569,8 +45678,8 @@ ${stringifyError(error)}`,
     );
   };
   var useViewerSetup = (container2) => {
-    const [viewer, setViewer] = (0, import_react6.useState)(null);
-    (0, import_react6.useEffect)(() => {
+    const [viewer, setViewer] = (0, import_react8.useState)(null);
+    (0, import_react8.useEffect)(() => {
       if (!container2) {
         return noop;
       }
@@ -45593,8 +45702,8 @@ ${stringifyError(error)}`,
     return viewer;
   };
   var useLoading = (viewer) => {
-    const [loading, setLoading] = (0, import_react6.useState)(true);
-    (0, import_react6.useEffect)(() => {
+    const [loading, setLoading] = (0, import_react8.useState)(true);
+    (0, import_react8.useEffect)(() => {
       if (viewer) {
         viewer.on('load', () => setLoading(false));
       }
@@ -45604,13 +45713,13 @@ ${stringifyError(error)}`,
   };
 
   // src/viewer.tsx
-  var import_jsx_runtime4 = __toESM(require_jsx_runtime(), 1);
+  var import_jsx_runtime6 = __toESM(require_jsx_runtime(), 1);
   var container = document.querySelector('#panorama');
   if (!container) {
     throw new Error('NoContainer: #panorama');
   }
   var root = (0, import_client.createRoot)(container);
-  root.render(/* @__PURE__ */ (0, import_jsx_runtime4.jsx)(ViewerApp, {}));
+  root.render(/* @__PURE__ */ (0, import_jsx_runtime6.jsx)(ViewerApp, {}));
 })();
 /*! Bundled license information:
 

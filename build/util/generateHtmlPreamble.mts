@@ -1,3 +1,5 @@
+import { srcDir } from './files.mjs';
+import { pipeFile } from './pipeFile.mjs';
 import { sanitize } from './sanitize.mjs';
 
 export const siteTitle = '360度パノラマ画像ライブラリ';
@@ -7,13 +9,14 @@ interface PageProps {
   title: string;
 }
 
-export const generateHtmlPreamble = function* ({
+export const generateHtmlPreamble = async function* ({
   title,
-}: PageProps): Generator<string> {
+}: PageProps): AsyncGenerator<string> {
   yield '<!doctype html>\n';
   yield '<meta charset="utf-8"/>\n';
   yield '<meta name="viewport" content="width=device-width,initial-scale=1"/>\n';
   yield `<title>${sanitize(`${title} | ${siteTitle}`)}</title>\n`;
   yield `<meta name="theme-color" content="${themeColor}"/>\n`;
   yield '<link rel="stylesheet" href="/app.css"/>\n';
+  yield* pipeFile(new URL('icons.html', srcDir));
 };

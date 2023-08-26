@@ -2,9 +2,14 @@ import { atom, selectorFamily } from 'recoil';
 import type * as app from '../../@types/app.mjs';
 import type * as pannellum from '../../@types/pannellum.mjs';
 import { viewerConfig } from '../util/viewerConfig.mjs';
+import { dom, svg } from '../util/dom.mjs';
 
 const createTooltipFunc = (element: HTMLElement, hotSpot: app.HotSpot) => {
   element.dataset.id = hotSpot.id;
+  element.append(
+    dom('div', null, hotSpot.text),
+    svg('svg', { viewBox: '-5 -1 10 7' }, svg('path', { d: 'M-4 0L0 6L4 0Z' })),
+  );
 };
 
 export const rcHotSpots = atom<Array<pannellum.HotSpot<app.HotSpot>>>({

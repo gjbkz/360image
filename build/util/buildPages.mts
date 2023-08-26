@@ -46,7 +46,6 @@ const buildIndexPage = async () => {
 const generateIndexHtml = async function* (imageTree: ImageTree) {
   yield* generateHtmlPreamble({ title: '画像一覧' });
   yield `<header><h1>${sanitize(siteTitle)}</h1></header>\n`;
-  yield* pipeFile(new URL('icons.html', srcDir));
   yield '<main>\n';
   yield '<h1>画像一覧</h1>\n';
   for (const [node, leaves] of imageTree.groupLeaves()) {

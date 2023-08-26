@@ -112,17 +112,18 @@ figure {
 figcaption::before {
   content: '図' counter(figure) ' ';
 }
-svg {
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1;
+button {
+  cursor: pointer;
 }
 main#panorama {
+  --ui-background: rgba(0, 0, 0, 0.4);
   position: absolute;
   inset: 0;
   padding: 0;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
+  font-size: 13px;
+  font-weight: 700;
 }
 .pnlm-container {
   display: grid;
@@ -162,11 +163,61 @@ main#panorama {
 .pnlm-hotspot {
   inline-size: 0;
   block-size: 0;
-  /* box-shadow: 0 0 0 3px red; */
+  position: absolute;
+  overflow: visible;
+  color: #ffffff;
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  filter: drop-shadow(0 0 2px #000000);
+}
+.pnlm-hotspot > div {
+  position: absolute;
+  bottom: 14px;
+  inline-size: max-content;
+  max-inline-size: 14em;
+  writing-mode: vertical-rl;
+  transform: translateX(-50%);
+}
+.pnlm-hotspot > svg {
+  position: absolute;
+  bottom: 0;
+  width: 12px;
+  transform: translateX(-50%);
+}
+.pnlm-hotspot > svg > path {
+  fill: currentColor;
 }
 .pnlm-grab {
   cursor: grab;
 }
 .pnlm-grabbing {
   cursor: grabbing;
+}
+.markers-list {
+  display: flex;
+  flex-wrap: wrap;
+  padding-inline-start: 0;
+  list-style: none;
+}
+.markers-list > li {
+  display: grid;
+  block-size: 1.6em;
+  max-inline-size: 16em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  justify-content: center;
+  align-content: center;
+  margin-inline-end: 1em;
+  font-size: 90%;
+  line-height: 1;
+}
+.markers-list > li > a {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
+  align-items: center;
+  column-gap: 0.3em;
+}
+svg.icon {
+  inline-size: 0.9em;
+  block-size: 0.9em;
 }
