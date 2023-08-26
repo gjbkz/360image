@@ -7,14 +7,17 @@ export interface CollapsableProps {
   opened?: boolean;
 }
 
-const defaultStyle: CSSProperties = { width: 0, height: 0 };
+const closedStyle: CSSProperties = { width: 0, height: 0 };
+const openedStyle: CSSProperties = {};
 
 export const Collapsable = ({
   opened,
   children,
 }: PropsWithChildren<CollapsableProps>) => {
   const [container, setContainer] = useState<HTMLDivElement | null>(null);
-  const [style, setStyle] = useState<CSSProperties>(defaultStyle);
+  const [style, setStyle] = useState<CSSProperties>(
+    opened ? openedStyle : closedStyle,
+  );
   useEffect(() => {
     if (!container) {
       return noop;
@@ -27,21 +30,21 @@ export const Collapsable = ({
     if (opened) {
       return noop;
     }
-    const timerId = setTimeout(() => setStyle(defaultStyle));
+    const timerId = setTimeout(() => setStyle(closedStyle), 10);
     return () => clearTimeout(timerId);
   }, [opened, container]);
   useEffect(() => {
-    if (style === defaultStyle) {
+    if (style === closedStyle) {
       return noop;
     }
-    const timer = setTimeout(() => setStyle({}), 300);
+    const timer = setTimeout(() => setStyle(openedStyle), 300);
     return () => clearTimeout(timer);
   }, [style]);
   return (
     <Container
       ref={setContainer}
       style={style}
-      className={opened ? 'opened' : ''}
+      className={opened ? '' : 'closed'}
     >
       {children}
     </Container>
@@ -59,15 +62,14 @@ const getNatualRect = (element: HTMLElement) => {
 };
 
 const Container = styled.div`
-  overflow: hidden;
+  overflow: auto;
   transition-property: width, height, opacity;
   transition-timing-function: ease-in-out, ease-in-out, linear;
   transition-duration: 0.2s, 0.2s, 0.2s;
-  transition-delay: 0.2s, 0.2s, 0s;
-  opacity: 0;
-  overflow: auto;
-  &.opened {
-    transition-delay: 0s, 0s, 0.2s;
-    opacity: 1;
+  transition-delay: 0s, 0s, 0.2s;
+  opacity: 1;
+  &.closed {
+    transition-delay: 0.2s, 0.2s, 0s;
+    opacity: 0;
   }
 `;

@@ -1,17 +1,22 @@
 import { useRecoilCallback, useRecoilValue } from 'recoil';
 import { styled } from 'styled-components';
-import { Fragment, useCallback } from 'react';
+import { Fragment, useCallback, useEffect, useMemo } from 'react';
 import { isString } from '@nlib/typing';
 import type { Marker } from '../../@types/app.mjs';
 import { rcMarker, rcMarkers } from '../recoil/Markers.mjs';
-import { useContextValue } from '../use/ContextValue.js';
+import { useContextValue } from '../use/ContextValue.mjs';
 import { ViewerContext } from '../context/Viewer.mjs';
+import { useBoolean } from '../use/Boolean.mjs';
+import { fullscreenIsAvailable } from '../util/fullscreen.mjs';
 import { TextButton } from './TextButton.js';
+import { Toggle } from './Toggle.js';
 
 export const Settings = () => {
   return (
     <Container>
       <Markers />
+      <hr />
+      <Toggles />
       <hr />
       <Back href="/">一覧に戻る</Back>
     </Container>
@@ -71,6 +76,7 @@ const MarkersDiv = styled.div`
   display: grid;
   grid-template-columns: max-content 1fr max-content;
   justify-items: start;
+  align-items: center;
   column-gap: 6px;
 `;
 
@@ -98,4 +104,71 @@ const EditMarker = ({ marker }: { marker: Marker }) => {
     [marker],
   );
   return <TextButton onClick={onClick}>編集</TextButton>;
+};
+
+const Toggles = () => (
+  <TogglesDiv>
+    <VerticalToggle />
+    <FullScreenToggle />
+  </TogglesDiv>
+);
+
+const TogglesDiv = styled.div`
+  justify-self: stretch;
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  justify-items: start;
+  align-items: center;
+  column-gap: 6px;
+  row-gap: 6px;
+`;
+
+const VerticalToggle = () => {
+  const { value, toggle } = useBoolean(true, 'vertical');
+  const viewer = useContextValue(ViewerContext);
+  useEffect(() => {
+    const selector = '.pnlm-render-container';
+    const container = viewer.getContainer().querySelector(selector);
+    if (container) {
+      container.dataset.vertical = value ? '1' : '0';
+    }
+  }, [value, viewer]);
+  return (
+    <>
+      <div>マーカーを縦書き表示する</div>
+      <Toggle state={value} onClick={toggle} />
+    </>
+  );
+};
+
+const FullScreenToggle = () => {
+  const { value, toggle, setValue } = useBoolean(false);
+  const viewer = useContextValue(ViewerContext);
+  const element = useMemo(() => viewer.getContainer().parentElement, [viewer]);
+  useEffect(() => {
+    const abc = new AbortController();
+    if (element) {
+      element.addEventListener(
+        'fullscreenchange',
+        () => setValue(Boolean(document.fullscreenElement)),
+        { signal: abc.signal },
+      );
+      if (value) {
+        element.requestFullscreen().catch(alert);
+      } else if (document.fullscreenElement) {
+        document.exitFullscreen().catch(alert);
+      }
+    }
+    return () => abc.abort();
+  }, [value, viewer]);
+  return (
+    <>
+      <div>全画面で表示する</div>
+      <Toggle
+        state={value}
+        onClick={toggle}
+        disabled={!fullscreenIsAvailable}
+      />
+    </>
+  );
 };

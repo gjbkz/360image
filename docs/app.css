@@ -36,6 +36,7 @@
   --footer-baseline: 6px;
   --border-radius: 5px;
   --ui-background: rgba(0, 0, 0, 0.4);
+  --col-text: #0f172a;
   block-size: 100%;
   font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN',
     'Hiragino Sans', 'BIZ UDPGothic', Meiryo, sans-serif;
@@ -56,7 +57,7 @@ body {
   block-size: 100%;
   display: grid;
   grid-template-rows: max-content 1fr;
-  color: #0f172a;
+  color: var(--col-text);
   background-color: var(--col-100);
 }
 header,
@@ -114,6 +115,10 @@ figcaption::before {
 }
 button {
   cursor: pointer;
+}
+[disabled] {
+  opacity: 0.6;
+  pointer-events: none;
 }
 main#panorama {
   --ui-background: rgba(0, 0, 0, 0.4);
@@ -176,6 +181,10 @@ main#panorama {
   max-inline-size: 14em;
   writing-mode: vertical-rl;
   transform: translateX(-50%);
+}
+.pnlm-render-container[data-vertical='0'] > .pnlm-hotspot > div {
+  bottom: 10px;
+  writing-mode: horizontal-tb;
 }
 .pnlm-hotspot > svg {
   position: absolute;

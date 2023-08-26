@@ -21,18 +21,19 @@ export interface Config {
 }
 
 /** https://pannellum.org/documentation/reference/#api-events */
-export type APIEventType =
-  | 'animatefinished'
-  | 'error'
-  | 'errorcleared'
-  | 'fullscreenchange'
-  | 'load'
-  | 'mousedown'
-  | 'mouseup'
-  | 'scenechange'
-  | 'touchend'
-  | 'touchstart'
-  | 'zoomchange';
+export interface APIEvent {
+  animatefinished: unknown;
+  error: unknown;
+  errorcleared: unknown;
+  fullscreenchange: boolean;
+  load: unknown;
+  mousedown: unknown;
+  mouseup: unknown;
+  scenechange: unknown;
+  touchend: unknown;
+  touchstart: unknown;
+  zoomchange: unknown;
+}
 
 export interface Viewer {
   getConfig: () => Config;
@@ -55,8 +56,15 @@ export interface Viewer {
   setHfov: (hfov: number) => Viewer;
   removeHotSpot: (id: string) => boolean;
   addHotSpot: <T>(hotSpot: HotSpot<T>, sceneId?: string) => boolean;
-  on: (type: APIEventType, callback: (event: unknown) => void) => void;
-  off: (type: APIEventType, callback: (event: unknown) => void) => void;
+  on: <T extends keyof APIEvent>(
+    type: T,
+    callback: (event: APIEvent[T]) => void,
+  ) => void;
+  off: <T extends keyof APIEvent>(
+    type: T,
+    callback: (event: APIEvent[T]) => void,
+  ) => void;
+  toggleFullscreen: () => void;
 }
 
 declare global {

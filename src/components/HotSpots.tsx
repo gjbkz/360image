@@ -3,7 +3,7 @@ import { useRecoilValue } from 'recoil';
 import type { Marker } from '../../@types/app.mjs';
 import { ViewerContext } from '../context/Viewer.mjs';
 import { rcMarkers } from '../recoil/Markers.mjs';
-import { useContextValue } from '../use/ContextValue.js';
+import { useContextValue } from '../use/ContextValue.mjs';
 import { dom, svg } from '../util/dom.mjs';
 
 export const HotSpots = () => {

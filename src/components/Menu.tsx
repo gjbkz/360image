@@ -1,13 +1,12 @@
-import { useCallback, useState } from 'react';
 import { styled } from 'styled-components';
 import type { HTMLAttributes } from 'react';
+import { useBoolean } from '../use/Boolean.mjs';
 import { viewerConfig } from '../util/viewerConfig.mjs';
 import { Collapsable } from './Collapsable.js';
 import { Settings } from './Settings.js';
 
 export const Menu = () => {
-  const [opened, setOpened] = useState(false);
-  const toggle = useCallback(() => setOpened((v) => !v), []);
+  const { value: opened, toggle } = useBoolean(false, 'menu');
   return (
     <MenuDiv>
       <Header>
