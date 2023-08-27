@@ -1,0 +1,46 @@
+{
+  "title": "センターピボット (Williams County, ND, USA)",
+  "map": "https://goo.gl/maps/G5ofjemBjYMc4uov9",
+  "markers": [
+    {
+      "pitch": 0.084,
+      "yaw": -138.718,
+      "text": "西"
+    },
+    {
+      "pitch": -23.171,
+      "yaw": -53.695,
+      "text": "石油貯蔵タンク"
+    },
+    {
+      "pitch": 0.033,
+      "yaw": -49.193000000000005,
+      "text": "北"
+    },
+    {
+      "pitch": -12.606,
+      "yaw": 1.315,
+      "text": "センターピボット"
+    },
+    {
+      "pitch": 0.059,
+      "yaw": 42.451,
+      "text": "東"
+    },
+    {
+      "pitch": 0.102,
+      "yaw": 132.198,
+      "text": "南"
+    },
+    {
+      "pitch": -0.945,
+      "yaw": 168.751,
+      "text": "ミズーリ川"
+    },
+    {
+      "pitch": -52.187,
+      "yaw": 169.041,
+      "text": "製油所"
+    }
+  ]
+}

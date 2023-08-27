@@ -1,10 +1,105 @@
 {
-    "private": true,
-    "scripts": {
-        "build": "node build.mjs",
-        "start": "sable ."
+  "private": true,
+  "name": "@gjbkz/360image",
+  "type": "module",
+  "scripts": {
+    "lint": "eslint src build",
+    "test": "run-s test:*",
+    "test:type": "tsc --noEmit",
+    "build": "run-s build:*",
+    "build:main": "tsx build/main.mts",
+    "start": "run-p start:*",
+    "start:watch": "tsx build/main.mts --watch",
+    "start:server": "sable docs",
+    "postversion": "run-s postversion:*",
+    "postversion:changelog": "npx @nlib/changelog -- --output CHANGELOG.md",
+    "postversion:add": "git add .",
+    "postversion:commit": "git commit --amend --no-edit"
+  },
+  "devDependencies": {
+    "@nlib/eslint-config": "^3.20.1",
+    "@nlib/githooks": "^0.2.0",
+    "@nlib/typing": "^1.0.0",
+    "@types/node": "^20.5.4",
+    "@types/react": "^18.2.21",
+    "@types/react-dom": "^18.2.7",
+    "@typescript-eslint/eslint-plugin": "^6.4.1",
+    "@typescript-eslint/parser": "^6.4.1",
+    "esbuild": "^0.19.2",
+    "eslint": "^8.47.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "lint-staged": "^14.0.1",
+    "npm-run-all": "^4.1.5",
+    "pannellum": "^2.5.6",
+    "prettier": "^3.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "recoil": "^0.7.7",
+    "sable": "^0.5.14",
+    "sass": "^1.66.1",
+    "styled-components": "^6.0.7",
+    "tsx": "^3.12.7",
+    "typescript": "^5.1.6"
+  },
+  "eslintConfig": {
+    "extends": [
+      "@nlib/eslint-config",
+      "plugin:react-hooks/recommended"
+    ],
+    "rules": {
+      "import/order": [
+        "error",
+        {
+          "groups": [
+            "builtin",
+            "external",
+            "type",
+            "internal",
+            "parent",
+            "sibling",
+            "object",
+            "index"
+          ]
+        }
+      ],
+      "import/no-relative-parent-imports": "off",
+      "import/no-cycle": "off"
     },
-    "devDependencies": {
-        "sable": "^0.5.14"
-    }
+    "overrides": [
+      {
+        "files": [
+          "src/**/*"
+        ],
+        "env": {
+          "browser": true
+        },
+        "rules": {
+          "no-alert": "off"
+        }
+      },
+      {
+        "files": [
+          "build/**/*"
+        ],
+        "env": {
+          "node": true
+        },
+        "rules": {
+          "no-console": "off"
+        }
+      }
+    ],
+    "ignorePatterns": [
+      "docs/**/*"
+    ]
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown",
+    "**/*.*(m|c)+(j|t)s*(x)": "eslint"
+  },
+  "renovate": {
+    "extends": [
+      "github>nlibjs/renovate-config"
+    ]
+  }
 }
