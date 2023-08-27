@@ -39,7 +39,7 @@ const Header = styled.div`
   display: grid;
   grid-template-columns: max-content 1fr;
   align-items: center;
-  justify-items: center;
+  justify-items: start;
 `;
 
 const Title = () => {

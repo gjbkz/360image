@@ -8,11 +8,12 @@ export const writeFile = async (
   stream: AsyncIterable<Buffer | string>,
 ) => {
   const cacheFile = getCacheFile(dest);
-  const [hash, data] = await Promise.all([
+  const [hash, data, stats] = await Promise.all([
     fs.readFile(cacheFile, 'utf8').catch(ignoreENOENT),
     readData(stream),
+    fs.stat(dest).catch(ignoreENOENT),
   ]);
-  if (hash === data.hash) {
+  if (hash === data.hash && stats && stats.size === data.buffer.length) {
     return false;
   }
   await fs.mkdir(new URL('.', dest), { recursive: true });

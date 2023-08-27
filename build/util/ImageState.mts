@@ -7,7 +7,7 @@ export class ImageState {
   public readonly parent: ImageTree;
   public readonly name: string;
   public config: Readonly<ViewerConfig> | null = null;
-  private image = false;
+  private imageExt: string | null = null;
 
   public constructor(parent: ImageTree, name: string) {
     this.parent = parent;
@@ -23,13 +23,22 @@ export class ImageState {
     return result;
   }
 
+  public get imagePath(): string {
+    const { fullPath } = this.parent;
+    let result = `${this.name}${this.imageExt}`;
+    if (fullPath) {
+      result = `${fullPath}/${result}`;
+    }
+    return result;
+  }
+
   public get filled(): FilledImageState | null {
-    return this.image && this.config ? (this as FilledImageState) : null;
+    return this.imageExt && this.config ? (this as FilledImageState) : null;
   }
 
   public add(basePath: string, ext: string) {
     if (ext === '.jpg') {
-      this.image = true;
+      this.imageExt = ext;
     } else if (ext === '.json') {
       this.config = loadViewerConfig(new URL(`${basePath}${ext}`, imagesDir));
     } else {

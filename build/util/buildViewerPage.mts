@@ -1,5 +1,6 @@
+import fs from 'node:fs/promises';
 import type { FilledImageState } from './ImageState.mjs';
-import { docsDir, srcDir } from './files.mjs';
+import { docsDir, imagesDir, srcDir } from './files.mjs';
 import { generateHtmlPreamble } from './generateHtmlPreamble.mjs';
 import { getElapsedMs } from './getElapsedMs.mjs';
 import { pipeFile } from './pipeFile.mjs';
@@ -13,6 +14,10 @@ export const buildViewerPage = async (image: FilledImageState) => {
       `buildViewerPage:${image.htmlPath}:done (${getElapsedMs(startedPageAt)})`,
     );
   }
+  await fs.copyFile(
+    new URL(image.imagePath, imagesDir),
+    new URL(image.imagePath, docsDir),
+  );
 };
 
 const generateViewerHtml = async function* ({ config }: FilledImageState) {
