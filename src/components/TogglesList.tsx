@@ -5,7 +5,7 @@ import {
   rcOrientation,
   rcOrientationAvailabilty,
 } from '../recoil/Orientation.mjs';
-import { rcShowCoordinates } from '../recoil/ShowCoordinates.mjs';
+import { rcShowCoordinates } from '../recoil/Coordinates.mjs';
 import { rcShowMarkers } from '../recoil/ShowMarkers.mjs';
 import { rcVerticalMarker } from '../recoil/VerticalMarker.mjs';
 import { useRecoilBooleanState } from '../use/RecoilBooleanState.mjs';

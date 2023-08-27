@@ -3,7 +3,7 @@ import { useRecoilCallback, useRecoilValue, useSetRecoilState } from 'recoil';
 import { styled } from 'styled-components';
 import type { Marker } from '../util/app.mjs';
 import { rcFocusedMarker, rcMarker, rcMarkers } from '../recoil/Markers.mjs';
-import { rcShowCoordinates } from '../recoil/ShowCoordinates.mjs';
+import { rcShowCoordinates } from '../recoil/Coordinates.mjs';
 import { rcViewer } from '../recoil/Viewer.mjs';
 import { TextButton } from './TextButton.js';
 import { OutlinedButton } from './OutlinedButton.js';

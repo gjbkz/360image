@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import {
-  rcCoordinates,
-  rcShowCoordinates,
-} from '../recoil/ShowCoordinates.mjs';
+import { rcCoordinates, rcShowCoordinates } from '../recoil/Coordinates.mjs';
 import { rcRenderContainer } from '../recoil/Viewer.mjs';
 import { dom } from '../util/dom.mjs';
 import { createMarkerIcon } from '../util/icons.mjs';

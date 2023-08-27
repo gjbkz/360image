@@ -1,4 +1,5 @@
 import { styled } from 'styled-components';
+import { indexPagePath } from '../util/setup.mjs';
 import { MarkersList } from './MarkersList.js';
 import { TogglesList } from './TogglesList.js';
 import { DownloadButton } from './DownloadButton.js';
@@ -9,7 +10,7 @@ export const Settings = () => {
       <MarkersList />
       <TogglesList />
       <DownloadButton />
-      <Back href="/">一覧に戻る</Back>
+      <Back href={indexPagePath}>一覧に戻る</Back>
     </Container>
   );
 };
