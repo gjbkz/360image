@@ -20,10 +20,14 @@ export const buildViewerPage = async (image: FilledImageState) => {
   );
 };
 
-const generateViewerHtml = async function* ({ config }: FilledImageState) {
-  yield* generateHtmlPreamble({ title: config.title });
+const generateViewerHtml = async function* ({
+  config,
+  rootPath,
+}: FilledImageState) {
+  yield* generateHtmlPreamble({ title: config.title, rootPath });
   yield '<script id="viewer-config" type="application/json">\n';
   yield JSON.stringify(config, null, 2);
   yield '\n</script>\n';
   yield* pipeFile(new URL('viewer.html', srcDir));
+  yield `<script src="${rootPath}viewer.js"></script>`;
 };

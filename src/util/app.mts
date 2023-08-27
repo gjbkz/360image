@@ -16,7 +16,7 @@ const isMarker = createTypeChecker<Marker>('Marker', {
 });
 
 export interface ViewerConfig {
-  path: string;
+  filename: string;
   title: string;
   author?: string;
   markers: Array<Marker>;
@@ -28,7 +28,7 @@ export interface ViewerConfig {
 }
 
 export const isViewerConfig = createTypeChecker<ViewerConfig>('ViewerConfig', {
-  path: isString,
+  filename: isString,
   title: isString,
   author: isString.optional,
   markers: isMarker.array,

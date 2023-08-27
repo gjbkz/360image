@@ -138,6 +138,10 @@ export class ImageTree {
     }
     return result.trim();
   }
+
+  public get depth(): number {
+    return this.parent ? this.parent.depth + 1 : 0;
+  }
 }
 
 export interface FilledImageNode extends ImageTree {

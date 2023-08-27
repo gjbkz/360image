@@ -1,11 +1,10 @@
 import { siteTitle } from '../../src/util/site.mjs';
 import { ImageTree } from './ImageTree.mjs';
 import { buildViewerPage } from './buildViewerPage.mjs';
-import { imagesDir, indexHtmlPath, srcDir } from './files.mjs';
+import { imagesDir, indexHtmlPath } from './files.mjs';
 import { generateHtmlPreamble } from './generateHtmlPreamble.mjs';
 import { getElapsedMs } from './getElapsedMs.mjs';
 import { listFiles } from './listFiles.mjs';
-import { pipeFile } from './pipeFile.mjs';
 import { sanitize } from './sanitize.mjs';
 import { watchFiles } from './watchFiles.mjs';
 import { writeFile } from './writeFile.mjs';
@@ -18,7 +17,7 @@ interface Options {
 export const buildPages = async ({ watch, signal }: Options = {}) => {
   if (watch) {
     await watchFiles({
-      files: [imagesDir, new URL('usage.html', srcDir)],
+      files: [imagesDir],
       onChange: buildIndexPage,
       signal,
     });
@@ -43,8 +42,8 @@ const buildIndexPage = async () => {
   }
 };
 
-const generateIndexHtml = async function* (imageTree: ImageTree) {
-  yield* generateHtmlPreamble({ title: '画像一覧' });
+const generateIndexHtml = function* (imageTree: ImageTree) {
+  yield* generateHtmlPreamble({ title: '画像一覧', rootPath: './' });
   yield `<header><h1>${sanitize(siteTitle)}</h1></header>\n`;
   yield '<main>\n';
   yield '<h1>画像一覧</h1>\n';
@@ -70,6 +69,5 @@ const generateIndexHtml = async function* (imageTree: ImageTree) {
     yield '</ul>\n';
     yield '</section>\n';
   }
-  yield* pipeFile(new URL('usage.html', srcDir));
   yield '</main>\n';
 };

@@ -10,7 +10,7 @@ export const initialViewerConfig = ensure(
 );
 export const viewerPromise = new Promise<Viewer>((resolve) => {
   const viewer = globalThis.pannellum.viewer(panoramaContainer, {
-    panorama: `/${initialViewerConfig.path}.jpg`,
+    panorama: initialViewerConfig.filename,
     hotSpots: [],
     autoLoad: true,
     keyboardZoom: false,

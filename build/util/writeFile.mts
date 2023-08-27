@@ -5,7 +5,7 @@ import { ignoreENOENT } from './ignoreENOENT.mjs';
 
 export const writeFile = async (
   dest: URL,
-  stream: AsyncIterable<Buffer | string>,
+  stream: AsyncIterable<Buffer | string> | Iterable<Buffer | string>,
 ) => {
   const cacheFile = getCacheFile(dest);
   const [hash, data, stats] = await Promise.all([
@@ -28,7 +28,9 @@ const getCacheFile = (dest: URL) => {
   return new URL(`writeFile/${relativePath}`, cacheDir);
 };
 
-const readData = async (data: AsyncIterable<Buffer | string>) => {
+const readData = async (
+  data: AsyncIterable<Buffer | string> | Iterable<Buffer | string>,
+) => {
   const chunks: Array<Buffer> = [];
   const hash = crypto.createHash('sha256');
   let totalLength = 0;
