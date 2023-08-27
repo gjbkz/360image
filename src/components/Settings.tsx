@@ -1,14 +1,14 @@
 import { styled } from 'styled-components';
 import { MarkersList } from './MarkersList.js';
 import { TogglesList } from './TogglesList.js';
+import { DownloadButton } from './DownloadButton.js';
 
 export const Settings = () => {
   return (
     <Container>
       <MarkersList />
-      <hr />
       <TogglesList />
-      <hr />
+      <DownloadButton />
       <Back href="/">一覧に戻る</Back>
     </Container>
   );
@@ -16,7 +16,7 @@ export const Settings = () => {
 
 const Container = styled.section`
   --padding-h: 8px;
-  --padding-v: 8px;
+  --padding-v: 12px;
   display: grid;
   grid-auto-flow: row;
   row-gap: var(--padding-v);

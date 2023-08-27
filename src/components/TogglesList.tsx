@@ -44,7 +44,7 @@ const ShowCoordinatesToggle = () => {
   const id = 'toggle-coordinates';
   return (
     <>
-      <ToggleLabel htmlFor={id}>中心の座標を表示する</ToggleLabel>
+      <ToggleLabel htmlFor={id}>中心の座標を表示</ToggleLabel>
       <Toggle id={id} state={state} onClick={toggle} />
     </>
   );
@@ -55,7 +55,7 @@ const ShowMarkersToggle = () => {
   const id = 'toggle-markers';
   return (
     <>
-      <ToggleLabel htmlFor={id}>マーカーを表示する</ToggleLabel>
+      <ToggleLabel htmlFor={id}>マーカーを表示</ToggleLabel>
       <Toggle id={id} state={state} onClick={toggle} />
     </>
   );
@@ -67,7 +67,7 @@ const VerticalToggle = () => {
   const id = 'toggle-vertical-marker';
   return (
     <>
-      <ToggleLabel htmlFor={id}>マーカーを縦書き表示する</ToggleLabel>
+      <ToggleLabel htmlFor={id}>マーカーを縦書き表示</ToggleLabel>
       <Toggle id={id} state={state} onClick={toggle} disabled={!showMarkers} />
     </>
   );
@@ -78,7 +78,7 @@ const FullScreenToggle = () => {
   const id = 'toggle-fullscreen';
   return (
     <>
-      <ToggleLabel htmlFor={id}>全画面で表示する</ToggleLabel>
+      <ToggleLabel htmlFor={id}>全画面で表示</ToggleLabel>
       <Toggle
         id={id}
         state={state}
@@ -95,7 +95,7 @@ const OrientationToggle = () => {
   const id = 'toggle-orientation';
   return (
     <>
-      <ToggleLabel htmlFor={id}>加速度センサーで操作する</ToggleLabel>
+      <ToggleLabel htmlFor={id}>加速度センサーで操作</ToggleLabel>
       <Toggle id={id} state={state} onClick={toggle} disabled={!available} />
     </>
   );

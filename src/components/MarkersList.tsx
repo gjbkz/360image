@@ -55,10 +55,7 @@ const EditMarker = ({ marker }: { marker: Marker }) => {
     ({ set }) =>
       () => {
         const coords = `${marker.yaw.toFixed(2)}, ${marker.pitch.toFixed(2)}`;
-        const text = prompt(
-          `${marker.text}（${coords}）を編集する`,
-          marker.text,
-        );
+        const text = prompt(`${marker.text}（${coords}）を編集中`, marker.text);
         if (text) {
           set(rcMarker(marker.id), { ...marker, text });
         }
@@ -85,7 +82,6 @@ const DeleteMarker = ({ marker }: { marker: Marker }) => {
   return <Button onClick={onClick}>削除</Button>;
 };
 
-const message = '座標をONにしてください';
 const AddMarker = () => {
   const showCoordinate = useRecoilValue(rcShowCoordinates);
   const onClick = useRecoilCallback(({ snapshot, set }) => () => {
@@ -94,7 +90,7 @@ const AddMarker = () => {
     const pitch = viewer.getPitch();
     const text = prompt(
       [
-        `${yaw.toFixed(2)}, ${pitch.toFixed(2)} にマーカーを追加する`,
+        `${yaw.toFixed(2)}, ${pitch.toFixed(2)} にマーカーを追加`,
         'マーカーの名前を入力してください',
       ].join('\n'),
     );
@@ -106,8 +102,8 @@ const AddMarker = () => {
   });
   return (
     <AddButton disabled={!showCoordinate} onClick={onClick}>
-      <span>＋ 追加する</span>
-      {!showCoordinate && <span>（{message}）</span>}
+      {showCoordinate && <span>＋ マーカーを追加</span>}
+      {!showCoordinate && <span>追加するには「中心の座標を表示」をON</span>}
     </AddButton>
   );
 };
@@ -116,6 +112,6 @@ const AddButton = styled(OutlinedButton)`
   justify-self: stretch;
   grid-column: 1 / 5;
   margin-block-start: 3px;
-  padding-inline: 4px;
+  padding-inline: 8px;
   padding-block: 2px;
 `;
