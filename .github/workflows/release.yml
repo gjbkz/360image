@@ -3,7 +3,7 @@ on:
     branches:
       - main
 jobs:
-  Publish:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -17,3 +17,15 @@ jobs:
       - uses: actions/upload-pages-artifact@v2
         with:
           path: docs
+  deploy:
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/deploy-pages@v2
+        id: deployment
