@@ -236,7 +236,7 @@ main#panorama {
   align-content: end;
   inline-size: 0;
   block-size: 0;
-  row-gap: 6px;
+  row-gap: 7px;
   color: #ffffff;
   text-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
   filter: drop-shadow(0 0 2px #000000);
@@ -247,7 +247,7 @@ main#panorama {
   max-inline-size: 14em;
 }
 .pnlm-render-container[data-vertical='1'] > .pnlm-hotspot > div {
-  margin-inline-end: 6px;
+  margin-inline-end: 4px;
   writing-mode: vertical-rl;
 }
 .pnlm-render-container[data-vertical='0'] > .pnlm-hotspot > div {

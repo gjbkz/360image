@@ -1,6 +1,6 @@
 import { DefaultValue, atom, selectorFamily } from 'recoil';
 import type { Marker } from '../util/app.mjs';
-import { createMarkerIcon } from '../util/createMarkerIcon.mjs';
+import { createMarkerIcon } from '../util/icons.mjs';
 import { dom } from '../util/dom.mjs';
 import { initialViewerConfig } from '../util/setup.mjs';
 import { rcViewer } from './Viewer.mjs';
@@ -64,7 +64,7 @@ export const rcFocusedMarker = atom<string | null>({
   ],
 });
 
-export const rcMarker = selectorFamily<Marker, string>({
+export const rcMarker = selectorFamily<Marker, string | null>({
   key: 'Marker',
   get:
     (id) =>
@@ -87,7 +87,7 @@ export const rcMarker = selectorFamily<Marker, string>({
         const newMarkers = [...markers];
         if (index < 0) {
           if (newValue.text) {
-            newMarkers.push(newValue);
+            newValue.id = `hs-${newMarkers.push(newValue)}`;
           }
         } else if (newValue.text) {
           newMarkers[index] = newValue;

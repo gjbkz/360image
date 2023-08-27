@@ -1,52 +1,44 @@
-import { atom } from 'recoil';
+import { DefaultValue, atom } from 'recoil';
 import type { Viewer } from '../util/pannellum.mjs';
-import { alertError } from '../util/alertError.mjs';
-import { dom } from '../util/dom.mjs';
 import { noop } from '../util/noop.mjs';
 import { searchParams } from '../util/searchParams.mjs';
-import { createMarkerIcon } from '../util/createMarkerIcon.mjs';
 import { rcViewer } from './Viewer.mjs';
 
 export const rcShowCoordinates = atom<boolean>({
   key: 'ShowCoordinates',
   default: searchParams.boolean('coordinates', false),
+});
+
+export const rcCoordinates = atom<{ pitch: number; yaw: number }>({
+  key: 'Coordinates',
+  default: { pitch: 0, yaw: 0 },
   effects: [
-    ({ onSet, getPromise }) => {
-      let disable = noop;
-      const apply = alertError(async (enabled) => {
-        if (enabled) {
-          const viewer = await getPromise(rcViewer);
-          disable = enable(viewer);
-        } else {
-          disable();
-        }
-      });
-      onSet(apply);
-      getPromise(rcShowCoordinates).then(apply).catch(alert);
-      return disable;
+    ({ setSelf, getPromise }) => {
+      let reset = noop;
+      const start = (viewer: Viewer) => {
+        reset = startWatch(viewer, () =>
+          setSelf((current) => {
+            const pitch = viewer.getPitch();
+            const yaw = viewer.getYaw();
+            if (
+              current instanceof DefaultValue ||
+              current.pitch !== pitch ||
+              current.yaw !== yaw
+            ) {
+              return { pitch, yaw };
+            }
+            return current;
+          }),
+        );
+      };
+      getPromise(rcViewer).then(start).catch(alert);
+      return reset;
     },
   ],
 });
 
-// eslint-disable-next-line max-lines-per-function
-const enable = (viewer: Viewer) => {
-  const text = dom('div', null);
-  const markerElement = dom(
-    'div',
-    { class: 'pnlm-coordinates' },
-    text,
-    createMarkerIcon(),
-  );
-  const parent = viewer.getContainer().querySelector('.pnlm-render-container');
-  if (parent) {
-    parent.append(markerElement);
-  }
+const startWatch = (viewer: Viewer, sync: () => void) => {
   let timerId = requestAnimationFrame(noop);
-  const sync = () => {
-    const yaw = viewer.getYaw().toFixed(2);
-    const pitch = viewer.getPitch().toFixed(2);
-    text.textContent = `${yaw}, ${pitch}`;
-  };
   const watch = () => {
     cancelAnimationFrame(timerId);
     const onRendering = () => {
@@ -85,7 +77,6 @@ const enable = (viewer: Viewer) => {
   addEventListener('pointerup', track);
   sync();
   return () => {
-    markerElement.remove();
     viewer.off('mousedown', watch);
     viewer.off('mouseup', track);
     viewer.off('touchstart', watch);

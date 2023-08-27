@@ -1,27 +1,13 @@
-import { isString } from '@nlib/typing';
-import { Fragment, useCallback } from 'react';
-import { useRecoilCallback, useRecoilValue, useSetRecoilState } from 'recoil';
 import { styled } from 'styled-components';
-import type { Marker } from '../util/app.mjs';
-import { rcFullScreen } from '../recoil/FullScreen.mjs';
-import { rcFocusedMarker, rcMarker, rcMarkers } from '../recoil/Markers.mjs';
-import {
-  rcOrientation,
-  rcOrientationAvailabilty,
-} from '../recoil/Orientation.mjs';
-import { rcShowMarkers } from '../recoil/ShowMarkers.mjs';
-import { rcVerticalMarker } from '../recoil/VerticalMarker.mjs';
-import { useRecoilBooleanState } from '../use/RecoilBooleanState.mjs';
-import { rcShowCoordinates } from '../recoil/ShowCoordinates.mjs';
-import { TextButton } from './TextButton.js';
-import { Toggle } from './Toggle.js';
+import { MarkersList } from './MarkersList.js';
+import { TogglesList } from './TogglesList.js';
 
 export const Settings = () => {
   return (
     <Container>
-      <Markers />
+      <MarkersList />
       <hr />
-      <Toggles />
+      <TogglesList />
       <hr />
       <Back href="/">一覧に戻る</Back>
     </Container>
@@ -60,146 +46,3 @@ const Back = styled.a`
     text-decoration: underline;
   }
 `;
-
-const Markers = () => {
-  const markers = useRecoilValue(rcMarkers);
-  return (
-    <MarkersDiv>
-      {markers.map((marker, index) => (
-        <Fragment key={marker.id}>
-          <div>({index + 1})</div>
-          <FocusMarker marker={marker} />
-          <EditMarker marker={marker} />
-        </Fragment>
-      ))}
-    </MarkersDiv>
-  );
-};
-
-const MarkersDiv = styled.div`
-  justify-self: stretch;
-  display: grid;
-  grid-template-columns: max-content 1fr max-content;
-  justify-items: start;
-  align-items: center;
-  column-gap: 6px;
-  row-gap: 4px;
-`;
-
-const FocusMarker = ({ marker }: { marker: Marker }) => {
-  const setFocusedMarker = useSetRecoilState(rcFocusedMarker);
-  const { text, id } = marker;
-  const onClick = useCallback(
-    () => setFocusedMarker(id),
-    [id, setFocusedMarker],
-  );
-  return <TextButton onClick={onClick}>{text}</TextButton>;
-};
-
-const EditMarker = ({ marker }: { marker: Marker }) => {
-  const onClick = useRecoilCallback(
-    ({ set }) =>
-      () => {
-        const coords = `${marker.yaw.toFixed(2)}, ${marker.pitch.toFixed(2)}`;
-        const text = prompt(
-          `${coords} のマーカーを編集する（空にすると削除します）`,
-          marker.text,
-        );
-        if (isString(text)) {
-          set(rcMarker(marker.id), { ...marker, text });
-        }
-      },
-    [marker],
-  );
-  return <TextButton onClick={onClick}>編集</TextButton>;
-};
-
-const Toggles = () => (
-  <TogglesDiv>
-    <ShowCoordinatesToggle />
-    <ShowMarkersToggle />
-    <VerticalToggle />
-    <FullScreenToggle />
-    <OrientationToggle />
-  </TogglesDiv>
-);
-
-const TogglesDiv = styled.div`
-  justify-self: stretch;
-  display: grid;
-  grid-template-columns: 1fr max-content;
-  justify-items: start;
-  align-items: center;
-  column-gap: 6px;
-  row-gap: 6px;
-`;
-
-const ToggleLabel = styled.label`
-  cursor: pointer;
-  user-select: none;
-  &:hover {
-    text-decoration: underline;
-  }
-`;
-
-const ShowCoordinatesToggle = () => {
-  const { state, toggle } = useRecoilBooleanState(rcShowCoordinates);
-  const id = 'toggle-coordinates';
-  return (
-    <>
-      <ToggleLabel htmlFor={id}>中心の座標を表示する</ToggleLabel>
-      <Toggle id={id} state={state} onClick={toggle} />
-    </>
-  );
-};
-
-const ShowMarkersToggle = () => {
-  const { state, toggle } = useRecoilBooleanState(rcShowMarkers);
-  const id = 'toggle-markers';
-  return (
-    <>
-      <ToggleLabel htmlFor={id}>マーカーを表示する</ToggleLabel>
-      <Toggle id={id} state={state} onClick={toggle} />
-    </>
-  );
-};
-
-const VerticalToggle = () => {
-  const showMarkers = useRecoilValue(rcShowMarkers);
-  const { state, toggle } = useRecoilBooleanState(rcVerticalMarker);
-  const id = 'toggle-vertical-marker';
-  return (
-    <>
-      <ToggleLabel htmlFor={id}>マーカーを縦書き表示する</ToggleLabel>
-      <Toggle id={id} state={state} onClick={toggle} disabled={!showMarkers} />
-    </>
-  );
-};
-
-const FullScreenToggle = () => {
-  const { state, toggle } = useRecoilBooleanState(rcFullScreen);
-  const id = 'toggle-fullscreen';
-  return (
-    <>
-      <ToggleLabel htmlFor={id}>全画面で表示する</ToggleLabel>
-      <Toggle
-        id={id}
-        state={state}
-        onClick={toggle}
-        disabled={!rcFullScreen.available}
-      />
-    </>
-  );
-};
-
-const OrientationToggle = () => {
-  const { state, toggle } = useRecoilBooleanState(rcOrientation);
-  const available = useRecoilValue(rcOrientationAvailabilty);
-  const id = 'toggle-orientation';
-  return (
-    <>
-      <ToggleLabel htmlFor={id}>加速度センサーで操作する</ToggleLabel>
-      <Toggle id={id} state={state} onClick={toggle} disabled={!available} />
-    </>
-  );
-};

@@ -8,6 +8,7 @@ import { useRecoilBooleanState } from '../use/RecoilBooleanState.mjs';
 import { Collapsable } from './Collapsable.js';
 import { Settings } from './Settings.js';
 import { TextButton } from './TextButton.js';
+import { Coordinates } from './Coordinates.js';
 
 export const Menu = () => (
   <RecoilRoot>
@@ -28,6 +29,7 @@ const Body = () => {
       <Collapsable opened={opened}>
         <Settings />
       </Collapsable>
+      <Coordinates />
     </>
   );
 };
