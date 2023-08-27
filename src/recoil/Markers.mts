@@ -1,14 +1,12 @@
 import { DefaultValue, atom, selectorFamily } from 'recoil';
 import type { Marker } from '../util/app.mjs';
-import { dom, svg } from '../util/dom.mjs';
+import { createMarkerIcon } from '../util/createMarkerIcon.mjs';
+import { dom } from '../util/dom.mjs';
 import { initialViewerConfig } from '../util/setup.mjs';
 import { rcViewer } from './Viewer.mjs';
 
 const createTooltipFunc = (element: HTMLElement, marker: Marker) => {
-  element.append(
-    dom('div', null, marker.text),
-    svg('svg', { viewBox: '-5 -1 10 7' }, svg('path', { d: 'M-4 0L0 6L4 0Z' })),
-  );
+  element.append(dom('div', null, marker.text), createMarkerIcon());
 };
 
 export const rcMarkers = atom<Array<Marker>>({

@@ -205,6 +205,10 @@ main#panorama {
   display: grid;
   grid-template-columns: 94%;
   place-content: center;
+  pointer-events: none;
+}
+.pnlm-dragfix {
+  pointer-events: auto;
 }
 .pnlm-lbar {
   block-size: 4px;
@@ -221,37 +225,45 @@ main#panorama {
   position: absolute;
   top: 0;
 }
+.pnlm-coordinates,
 .pnlm-hotspot {
+  position: absolute;
+  display: grid;
+  grid-template-columns: max-content;
+  grid-template-rows: max-content max-content;
+  justify-content: center;
+  justify-items: center;
+  align-content: end;
   inline-size: 0;
   block-size: 0;
-  position: absolute;
-  overflow: visible;
+  row-gap: 6px;
   color: #ffffff;
   text-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
   filter: drop-shadow(0 0 2px #000000);
+  overflow: visible;
 }
+.pnlm-coordinates > div,
 .pnlm-hotspot > div {
-  position: absolute;
-  bottom: 14px;
-  inline-size: max-content;
   max-inline-size: 14em;
+}
+.pnlm-render-container[data-vertical='1'] > .pnlm-hotspot > div {
+  margin-inline-end: 6px;
   writing-mode: vertical-rl;
-  transform: translateX(-50%);
 }
 .pnlm-render-container[data-vertical='0'] > .pnlm-hotspot > div {
-  bottom: 10px;
   writing-mode: horizontal-tb;
 }
 .pnlm-render-container[data-nomarker='1'] > .pnlm-hotspot {
   opacity: 0;
   pointer-events: none;
 }
+.pnlm-coordinates > svg,
 .pnlm-hotspot > svg {
   position: absolute;
   bottom: 0;
   width: 12px;
-  transform: translateX(-50%);
 }
+.pnlm-coordinates > svg > path,
 .pnlm-hotspot > svg > path {
   fill: currentColor;
 }
@@ -260,4 +272,8 @@ main#panorama {
 }
 .pnlm-grabbing {
   cursor: grabbing;
+}
+.pnlm-coordinates {
+  left: 50%;
+  top: 50%;
 }

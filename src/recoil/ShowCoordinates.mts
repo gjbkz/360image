@@ -1,9 +1,10 @@
 import { atom } from 'recoil';
 import type { Viewer } from '../util/pannellum.mjs';
-import { searchParams } from '../util/searchParams.mjs';
 import { alertError } from '../util/alertError.mjs';
 import { dom } from '../util/dom.mjs';
 import { noop } from '../util/noop.mjs';
+import { searchParams } from '../util/searchParams.mjs';
+import { createMarkerIcon } from '../util/createMarkerIcon.mjs';
 import { rcViewer } from './Viewer.mjs';
 
 export const rcShowCoordinates = atom<boolean>({
@@ -29,13 +30,22 @@ export const rcShowCoordinates = atom<boolean>({
 
 // eslint-disable-next-line max-lines-per-function
 const enable = (viewer: Viewer) => {
-  const element = dom('div', { class: 'pnlm-coordinates' });
-  viewer.getContainer().append(element);
+  const text = dom('div', null);
+  const markerElement = dom(
+    'div',
+    { class: 'pnlm-coordinates' },
+    text,
+    createMarkerIcon(),
+  );
+  const parent = viewer.getContainer().querySelector('.pnlm-render-container');
+  if (parent) {
+    parent.append(markerElement);
+  }
   let timerId = requestAnimationFrame(noop);
   const sync = () => {
     const yaw = viewer.getYaw().toFixed(2);
     const pitch = viewer.getPitch().toFixed(2);
-    element.textContent = `${yaw}, ${pitch}`;
+    text.textContent = `${yaw}, ${pitch}`;
   };
   const watch = () => {
     cancelAnimationFrame(timerId);
@@ -72,13 +82,15 @@ const enable = (viewer: Viewer) => {
   viewer.on('touchstart', watch);
   viewer.on('touchend', track);
   viewer.on('animatefinished', sync);
+  addEventListener('pointerup', track);
   sync();
   return () => {
-    element.remove();
+    markerElement.remove();
     viewer.off('mousedown', watch);
     viewer.off('mouseup', track);
     viewer.off('touchstart', watch);
     viewer.off('touchend', track);
     viewer.off('animatefinished', sync);
+    removeEventListener('pointerup', track);
   };
 };

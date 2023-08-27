@@ -100,8 +100,9 @@ const EditMarker = ({ marker }: { marker: Marker }) => {
   const onClick = useRecoilCallback(
     ({ set }) =>
       () => {
+        const coords = `${marker.yaw.toFixed(2)}, ${marker.pitch.toFixed(2)}`;
         const text = prompt(
-          'テキストを編集する（空にすると削除します）',
+          `${coords} のマーカーを編集する（空にすると削除します）`,
           marker.text,
         );
         if (isString(text)) {
