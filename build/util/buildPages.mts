@@ -1,3 +1,4 @@
+import { siteTitle } from '../../src/util/site.mjs';
 import { ImageTree } from './ImageTree.mjs';
 import { buildViewerPage } from './buildViewerPage.mjs';
 import { imagesDir, indexHtmlPath, srcDir } from './files.mjs';
@@ -6,7 +7,6 @@ import { getElapsedMs } from './getElapsedMs.mjs';
 import { listFiles } from './listFiles.mjs';
 import { pipeFile } from './pipeFile.mjs';
 import { sanitize } from './sanitize.mjs';
-import { siteTitle } from './site.mjs';
 import { watchFiles } from './watchFiles.mjs';
 import { writeFile } from './writeFile.mjs';
 

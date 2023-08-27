@@ -1,5 +1,20 @@
-import { createRoot } from 'react-dom/client';
-import { ViewerApp } from './components/ViewerApp.js';
-import { getAppContainer } from './util/getAppContainer.mjs';
+import { dom } from './util/dom.mjs';
+import { viewerPromise } from './util/setup.mjs';
 
-createRoot(getAppContainer()).render(<ViewerApp />);
+Promise.all([
+  viewerPromise,
+  import(
+    /* webpackChunkName: "react-dom/client" */
+    'react-dom/client'
+  ),
+  import(
+    /* webpackChunkName: "Menu" */
+    './components/Menu.js'
+  ),
+])
+  .then(([viewer, { createRoot }, { Menu }]) => {
+    const menu = dom('nav', { class: 'viewer-menu' });
+    viewer.getContainer().after(menu);
+    createRoot(menu).render(<Menu />);
+  })
+  .catch(alert);

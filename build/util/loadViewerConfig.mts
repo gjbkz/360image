@@ -1,6 +1,6 @@
 import * as fs from 'node:fs';
 import { ensure, isArray, isFiniteNumber, isString } from '@nlib/typing';
-import type { Marker, ViewerConfig } from '../../@types/app.mjs';
+import type { Marker, ViewerConfig } from '../../src/util/app.mjs';
 import { imagesDir } from './files.mjs';
 
 export const loadViewerConfig = (jsonFileUrl: URL): ViewerConfig => {

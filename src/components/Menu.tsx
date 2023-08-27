@@ -1,56 +1,64 @@
+import { Suspense, useCallback } from 'react';
+import { RecoilRoot, useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
 import type { HTMLAttributes } from 'react';
 import { rcShowMenu } from '../recoil/ShowMenu.mjs';
+import { rcTitle } from '../recoil/Title.mjs';
 import { useRecoilBooleanState } from '../use/RecoilBooleanState.mjs';
-import { viewerConfig } from '../util/viewerConfig.mjs';
 import { Collapsable } from './Collapsable.js';
 import { Settings } from './Settings.js';
+import { TextButton } from './TextButton.js';
 
-export const Menu = () => {
+export const Menu = () => (
+  <RecoilRoot>
+    <Suspense fallback={null}>
+      <Body />
+    </Suspense>
+  </RecoilRoot>
+);
+
+const Body = () => {
   const { state: opened, toggle } = useRecoilBooleanState(rcShowMenu);
   return (
-    <MenuDiv>
+    <>
       <Header>
         <Toggle onClick={toggle} />
-        <Title>{viewerConfig.title}</Title>
+        <Title />
       </Header>
       <Collapsable opened={opened}>
         <Settings />
       </Collapsable>
-    </MenuDiv>
+    </>
   );
 };
-
-const MenuDiv = styled.div`
-  --border-radius: 4px;
-  --inset: 10px;
-  position: absolute;
-  top: var(--inset);
-  left: var(--inset);
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: max-content 1fr;
-  max-inline-size: calc(100% - 2 * var(--inset));
-  max-block-size: calc(100% - 2 * var(--inset));
-  border-radius: var(--border-radius);
-  color: #ffffff;
-  overflow: hidden;
-  background-color: var(--ui-background);
-  backdrop-filter: blur(4px);
-`;
 
 const Header = styled.div`
   --padding: 7px;
   display: grid;
   grid-template-columns: max-content 1fr;
   align-items: center;
+  justify-items: center;
 `;
 
-const Title = styled.div`
-  padding-inline-start: 4px;
-  padding-inline-end: 11px;
+const Title = () => {
+  const [title, setTitle] = useRecoilState(rcTitle);
+  const onClick = useCallback(() => {
+    const newTitle = prompt('タイトルを編集する', title);
+    if (newTitle) {
+      setTitle(newTitle);
+    }
+  }, [title, setTitle]);
+  return (
+    <TitleButton onClick={onClick} title="クリックで編集">
+      {title}
+    </TitleButton>
+  );
+};
+
+const TitleButton = styled(TextButton)`
+  padding-inline: 4px;
+  margin-inline-end: 6px;
   padding-block: 5px;
-  line-height: 1.2;
 `;
 
 const Toggle = (props: HTMLAttributes<HTMLButtonElement>) => (

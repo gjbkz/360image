@@ -1,15 +1,16 @@
 import { isString } from '@nlib/typing';
 import { Fragment, useCallback } from 'react';
-import { useRecoilCallback, useRecoilValue } from 'recoil';
+import { useRecoilCallback, useRecoilValue, useSetRecoilState } from 'recoil';
 import { styled } from 'styled-components';
-import type { Marker } from '../../@types/app.mjs';
-import { ViewerContext } from '../context/Viewer.mjs';
+import type { Marker } from '../util/app.mjs';
 import { rcFullScreen } from '../recoil/FullScreen.mjs';
-import { rcMarker, rcMarkers } from '../recoil/Markers.mjs';
-import { rcOrientation } from '../recoil/Orientation.mjs';
+import { rcFocusedMarker, rcMarker, rcMarkers } from '../recoil/Markers.mjs';
+import {
+  rcOrientation,
+  rcOrientationAvailabilty,
+} from '../recoil/Orientation.mjs';
 import { rcShowMarkers } from '../recoil/ShowMarkers.mjs';
 import { rcVerticalMarker } from '../recoil/VerticalMarker.mjs';
-import { useContextValue } from '../use/ContextValue.mjs';
 import { useRecoilBooleanState } from '../use/RecoilBooleanState.mjs';
 import { TextButton } from './TextButton.js';
 import { Toggle } from './Toggle.js';
@@ -81,14 +82,16 @@ const MarkersDiv = styled.div`
   justify-items: start;
   align-items: center;
   column-gap: 6px;
+  row-gap: 4px;
 `;
 
 const FocusMarker = ({ marker }: { marker: Marker }) => {
-  const viewer = useContextValue(ViewerContext);
-  const { text, pitch, yaw, hfov } = marker;
-  const onClick = useCallback(() => {
-    viewer.lookAt(pitch, yaw, hfov || viewer.getHfov(), 600);
-  }, [viewer, pitch, yaw]);
+  const setFocusedMarker = useSetRecoilState(rcFocusedMarker);
+  const { text, id } = marker;
+  const onClick = useCallback(
+    () => setFocusedMarker(id),
+    [id, setFocusedMarker],
+  );
   return <TextButton onClick={onClick}>{text}</TextButton>;
 };
 
@@ -177,29 +180,12 @@ const FullScreenToggle = () => {
 
 const OrientationToggle = () => {
   const { state, toggle } = useRecoilBooleanState(rcOrientation);
-  const viewer = useContextValue(ViewerContext);
-  // const element = useMemo(() => viewer.getContainer().parentElement, [viewer]);
-  // useEffect(() => {
-  //   const abc = new AbortController();
-  //   if (element) {
-  //     if (value) {
-  //       viewer.startOrientation();
-  //     } else if (document.fullscreenElement) {
-  //       viewer.stopOrientation();
-  //     }
-  //   }
-  //   return () => abc.abort();
-  // }, [value, viewer]);
+  const available = useRecoilValue(rcOrientationAvailabilty);
   const id = 'toggle-orientation';
   return (
     <>
       <ToggleLabel htmlFor={id}>加速度センサーで操作する</ToggleLabel>
-      <Toggle
-        id={id}
-        state={state}
-        onClick={toggle}
-        disabled={!viewer.isOrientationSupported()}
-      />
+      <Toggle id={id} state={state} onClick={toggle} disabled={!available} />
     </>
   );
 };

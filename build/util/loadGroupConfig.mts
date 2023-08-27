@@ -1,5 +1,5 @@
 import * as fs from 'node:fs';
-import type { GroupConfig } from '../../@types/app.mjs';
+import type { GroupConfig } from '../../src/util/app.mjs';
 
 export const loadGroupConfig = (file: URL): GroupConfig => {
   const json = fs.readFileSync(file, 'utf8');

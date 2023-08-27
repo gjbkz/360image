@@ -58,3 +58,14 @@ export const dom = <K extends keyof HTMLElementTagNameMap>(
   const node = document.createElement(tagName);
   return setChildren(setAttributes(node, attrs), children);
 };
+
+export const query = (
+  selector: string,
+  from: HTMLElement = document.documentElement,
+) => {
+  const element = from.querySelector(selector);
+  if (!element) {
+    throw new Error(`NoSuchNode: ${selector}`);
+  }
+  return element as HTMLElement;
+};

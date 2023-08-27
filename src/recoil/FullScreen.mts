@@ -1,7 +1,6 @@
 import { atom } from 'recoil';
 import { isFunction } from '@nlib/typing';
 import type { AtomEffect } from 'recoil';
-import { getAppContainer } from '../util/getAppContainer.mjs';
 
 const effects: Array<AtomEffect<boolean>> = [];
 // eslint-disable-next-line @typescript-eslint/unbound-method
@@ -11,7 +10,7 @@ if (available) {
   effects.push(({ onSet, setSelf }) => {
     onSet((value) => {
       if (value && !document.fullscreenElement) {
-        getAppContainer().requestFullscreen().catch(alert);
+        document.body.requestFullscreen().catch(alert);
       } else if (document.fullscreenElement) {
         document.exitFullscreen().catch(alert);
       }

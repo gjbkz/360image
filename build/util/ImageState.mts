@@ -1,4 +1,4 @@
-import type { Marker, ViewerConfig } from '../../@types/app.mjs';
+import type { Marker, ViewerConfig } from '../../src/util/app.mjs';
 import type { ImageTree } from './ImageTree.mjs';
 import { imagesDir } from './files.mjs';
 import { loadViewerConfig } from './loadViewerConfig.mjs';

@@ -74,6 +74,6 @@ export interface Viewer {
 declare global {
   // eslint-disable-next-line no-var
   var pannellum: {
-    viewer: (container: HTMLElement, initialConfig: Config) => Viewer;
+    viewer: (container: Element, initialConfig: Config) => Viewer;
   };
 }

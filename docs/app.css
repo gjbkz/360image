@@ -121,6 +121,63 @@ button {
   opacity: 0.6;
   pointer-events: none;
 }
+.markers-list {
+  display: flex;
+  flex-wrap: wrap;
+  padding-inline-start: 0;
+  list-style: none;
+}
+.markers-list > li {
+  display: grid;
+  block-size: 1.6em;
+  max-inline-size: 16em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  justify-content: center;
+  align-content: center;
+  margin-inline-end: 4px;
+  margin-block: 0;
+}
+.markers-list > li > a {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
+  align-items: center;
+  column-gap: 0.3em;
+  padding-inline: 4px;
+  padding-block: 4px;
+  border-radius: 3px;
+  text-decoration: none;
+  font-size: 11px;
+  line-height: 1;
+  color: #ffffff;
+  background-color: var(--col-700);
+}
+.markers-list > li > a:hover {
+  background-color: var(--col-800);
+}
+.viewer-menu,
+main#panorama {
+  font-size: 13px;
+  font-weight: 700;
+}
+.viewer-menu {
+  --border-radius: 4px;
+  --inset: 10px;
+  position: fixed;
+  top: var(--inset);
+  left: var(--inset);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: max-content 1fr;
+  max-inline-size: calc(100% - 2 * var(--inset));
+  max-block-size: calc(100% - 2 * var(--inset));
+  border-radius: var(--border-radius);
+  color: #ffffff;
+  overflow: hidden;
+  background-color: var(--ui-background);
+  backdrop-filter: blur(4px);
+}
 main#panorama {
   --ui-background: rgba(0, 0, 0, 0.4);
   position: absolute;
@@ -128,8 +185,6 @@ main#panorama {
   padding: 0;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
-  font-size: 13px;
-  font-weight: 700;
 }
 .pnlm-container {
   display: grid;
@@ -205,39 +260,4 @@ main#panorama {
 }
 .pnlm-grabbing {
   cursor: grabbing;
-}
-.markers-list {
-  display: flex;
-  flex-wrap: wrap;
-  padding-inline-start: 0;
-  list-style: none;
-}
-.markers-list > li {
-  display: grid;
-  block-size: 1.6em;
-  max-inline-size: 16em;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  justify-content: center;
-  align-content: center;
-  margin-inline-end: 4px;
-  margin-block: 0;
-}
-.markers-list > li > a {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: max-content;
-  align-items: center;
-  column-gap: 0.3em;
-  padding-inline: 4px;
-  padding-block: 4px;
-  border-radius: 3px;
-  text-decoration: none;
-  font-size: 11px;
-  line-height: 1;
-  color: #ffffff;
-  background-color: var(--col-700);
-}
-.markers-list > li > a:hover {
-  background-color: var(--col-800);
 }

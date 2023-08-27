@@ -1,10 +1,69 @@
 import { DefaultValue, atom, selectorFamily } from 'recoil';
-import type { Marker } from '../../@types/app.mjs';
-import { viewerConfig } from '../util/viewerConfig.mjs';
+import type { Marker } from '../util/app.mjs';
+import { dom, svg } from '../util/dom.mjs';
+import { initialViewerConfig } from '../util/setup.mjs';
+import { rcViewer } from './Viewer.mjs';
+
+const createTooltipFunc = (element: HTMLElement, marker: Marker) => {
+  element.append(
+    dom('div', null, marker.text),
+    svg('svg', { viewBox: '-5 -1 10 7' }, svg('path', { d: 'M-4 0L0 6L4 0Z' })),
+  );
+};
 
 export const rcMarkers = atom<Array<Marker>>({
   key: 'Markers',
-  default: viewerConfig.markers,
+  default: initialViewerConfig.markers,
+  effects: [
+    ({ onSet, getPromise }) => {
+      const apply = async (markers: Array<Marker>) => {
+        const viewer = await getPromise(rcViewer);
+        for (const hotSpot of viewer.getConfig().hotSpots.slice()) {
+          viewer.removeHotSpot(hotSpot.id);
+        }
+        for (const marker of markers) {
+          viewer.addHotSpot({
+            ...marker,
+            createTooltipFunc,
+            createTooltipArgs: marker,
+          });
+        }
+      };
+      onSet((markers) => {
+        apply(markers).catch(alert);
+      });
+      getPromise(rcMarkers).then(apply).catch(alert);
+    },
+  ],
+});
+
+export const rcFocusedMarker = atom<string | null>({
+  key: 'FocusedMarker',
+  default: null,
+  effects: [
+    ({ onSet, getPromise }) => {
+      const apply = async (id: string | null) => {
+        const [viewer, markers] = await Promise.all([
+          getPromise(rcViewer),
+          getPromise(rcMarkers),
+        ]);
+        const marker = markers.find((m) => m.id === id);
+        if (!marker) {
+          return;
+        }
+        viewer.lookAt(
+          marker.pitch,
+          marker.yaw,
+          marker.hfov || viewer.getHfov(),
+          600,
+        );
+        location.hash = `#${id}`;
+      };
+      onSet((markers) => {
+        apply(markers).catch(alert);
+      });
+    },
+  ],
 });
 
 export const rcMarker = selectorFamily<Marker, string>({

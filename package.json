@@ -27,6 +27,7 @@
     "@typescript-eslint/parser": "^6.4.1",
     "esbuild": "^0.19.2",
     "eslint": "^8.47.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "lint-staged": "^14.0.1",
     "npm-run-all": "^4.1.5",
     "pannellum": "^2.5.6",
@@ -42,7 +43,8 @@
   },
   "eslintConfig": {
     "extends": [
-      "@nlib/eslint-config"
+      "@nlib/eslint-config",
+      "plugin:react-hooks/recommended"
     ],
     "rules": {
       "import/order": [

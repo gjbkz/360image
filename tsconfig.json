@@ -12,6 +12,6 @@
     "noImplicitAny": true,
     "noEmit": true
   },
-  "include": ["./src/**/*", "./build/**/*", "./@types/**/*"],
+  "include": ["./src/**/*", "./build/**/*"],
   "exclude": ["node_modules", "docs"]
 }

@@ -1,4 +1,4 @@
-import type * as app from '../../@types/app.mjs';
+import type * as app from '../../src/util/app.mjs';
 import type { FilledImageState } from './ImageState.mjs';
 import { ImageState } from './ImageState.mjs';
 import { loadGroupConfig } from './loadGroupConfig.mjs';
