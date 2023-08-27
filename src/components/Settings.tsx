@@ -12,6 +12,7 @@ import {
 import { rcShowMarkers } from '../recoil/ShowMarkers.mjs';
 import { rcVerticalMarker } from '../recoil/VerticalMarker.mjs';
 import { useRecoilBooleanState } from '../use/RecoilBooleanState.mjs';
+import { rcShowCoordinates } from '../recoil/ShowCoordinates.mjs';
 import { TextButton } from './TextButton.js';
 import { Toggle } from './Toggle.js';
 
@@ -114,6 +115,7 @@ const EditMarker = ({ marker }: { marker: Marker }) => {
 
 const Toggles = () => (
   <TogglesDiv>
+    <ShowCoordinatesToggle />
     <ShowMarkersToggle />
     <VerticalToggle />
     <FullScreenToggle />
@@ -138,6 +140,17 @@ const ToggleLabel = styled.label`
     text-decoration: underline;
   }
 `;
+
+const ShowCoordinatesToggle = () => {
+  const { state, toggle } = useRecoilBooleanState(rcShowCoordinates);
+  const id = 'toggle-coordinates';
+  return (
+    <>
+      <ToggleLabel htmlFor={id}>中心の座標を表示する</ToggleLabel>
+      <Toggle id={id} state={state} onClick={toggle} />
+    </>
+  );
+};
 
 const ShowMarkersToggle = () => {
   const { state, toggle } = useRecoilBooleanState(rcShowMarkers);
