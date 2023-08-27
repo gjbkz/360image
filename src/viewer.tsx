@@ -1,9 +1,5 @@
 import { createRoot } from 'react-dom/client';
 import { ViewerApp } from './components/ViewerApp.js';
+import { getAppContainer } from './util/getAppContainer.mjs';
 
-const container = document.querySelector('#panorama');
-if (!container) {
-  throw new Error('NoContainer: #panorama');
-}
-const root = createRoot(container);
-root.render(<ViewerApp />);
+createRoot(getAppContainer()).render(<ViewerApp />);

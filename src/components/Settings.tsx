@@ -1,13 +1,16 @@
+import { isString } from '@nlib/typing';
+import { Fragment, useCallback } from 'react';
 import { useRecoilCallback, useRecoilValue } from 'recoil';
 import { styled } from 'styled-components';
-import { Fragment, useCallback, useEffect, useMemo } from 'react';
-import { isString } from '@nlib/typing';
 import type { Marker } from '../../@types/app.mjs';
-import { rcMarker, rcMarkers } from '../recoil/Markers.mjs';
-import { useContextValue } from '../use/ContextValue.mjs';
 import { ViewerContext } from '../context/Viewer.mjs';
-import { useBoolean } from '../use/Boolean.mjs';
-import { fullscreenIsAvailable } from '../util/fullscreen.mjs';
+import { rcFullScreen } from '../recoil/FullScreen.mjs';
+import { rcMarker, rcMarkers } from '../recoil/Markers.mjs';
+import { rcOrientation } from '../recoil/Orientation.mjs';
+import { rcShowMarkers } from '../recoil/ShowMarkers.mjs';
+import { rcVerticalMarker } from '../recoil/VerticalMarker.mjs';
+import { useContextValue } from '../use/ContextValue.mjs';
+import { useRecoilBooleanState } from '../use/RecoilBooleanState.mjs';
 import { TextButton } from './TextButton.js';
 import { Toggle } from './Toggle.js';
 
@@ -108,7 +111,7 @@ const EditMarker = ({ marker }: { marker: Marker }) => {
 
 const Toggles = () => (
   <TogglesDiv>
-    <HideMarkerToggle />
+    <ShowMarkersToggle />
     <VerticalToggle />
     <FullScreenToggle />
     <OrientationToggle />
@@ -125,94 +128,75 @@ const TogglesDiv = styled.div`
   row-gap: 6px;
 `;
 
-const HideMarkerToggle = () => {
-  const { value, toggle } = useBoolean(false, 'nomarker');
-  const viewer = useContextValue(ViewerContext);
-  useEffect(() => {
-    const selector = '.pnlm-render-container';
-    const container = viewer.getContainer().querySelector(selector);
-    if (container) {
-      container.dataset.nomarker = value ? '1' : '0';
-    }
-  }, [value, viewer]);
+const ToggleLabel = styled.label`
+  cursor: pointer;
+  user-select: none;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+const ShowMarkersToggle = () => {
+  const { state, toggle } = useRecoilBooleanState(rcShowMarkers);
+  const id = 'toggle-markers';
   return (
     <>
-      <div>マーカーを表示する</div>
-      <Toggle state={!value} onClick={toggle} />
+      <ToggleLabel htmlFor={id}>マーカーを表示する</ToggleLabel>
+      <Toggle id={id} state={state} onClick={toggle} />
     </>
   );
 };
 
 const VerticalToggle = () => {
-  const { value, toggle } = useBoolean(true, 'vertical');
-  const viewer = useContextValue(ViewerContext);
-  useEffect(() => {
-    const selector = '.pnlm-render-container';
-    const container = viewer.getContainer().querySelector(selector);
-    if (container) {
-      container.dataset.vertical = value ? '1' : '0';
-    }
-  }, [value, viewer]);
+  const showMarkers = useRecoilValue(rcShowMarkers);
+  const { state, toggle } = useRecoilBooleanState(rcVerticalMarker);
+  const id = 'toggle-vertical-marker';
   return (
     <>
-      <div>マーカーを縦書き表示する</div>
-      <Toggle state={value} onClick={toggle} />
+      <ToggleLabel htmlFor={id}>マーカーを縦書き表示する</ToggleLabel>
+      <Toggle id={id} state={state} onClick={toggle} disabled={!showMarkers} />
     </>
   );
 };
 
 const FullScreenToggle = () => {
-  const { value, toggle, setValue } = useBoolean(false);
-  const viewer = useContextValue(ViewerContext);
-  const element = useMemo(() => viewer.getContainer().parentElement, [viewer]);
-  useEffect(() => {
-    const abc = new AbortController();
-    if (element) {
-      element.addEventListener(
-        'fullscreenchange',
-        () => setValue(Boolean(document.fullscreenElement)),
-        { signal: abc.signal },
-      );
-      if (value) {
-        element.requestFullscreen().catch(alert);
-      } else if (document.fullscreenElement) {
-        document.exitFullscreen().catch(alert);
-      }
-    }
-    return () => abc.abort();
-  }, [value]);
+  const { state, toggle } = useRecoilBooleanState(rcFullScreen);
+  const id = 'toggle-fullscreen';
   return (
     <>
-      <div>全画面で表示する</div>
+      <ToggleLabel htmlFor={id}>全画面で表示する</ToggleLabel>
       <Toggle
-        state={value}
+        id={id}
+        state={state}
         onClick={toggle}
-        disabled={!fullscreenIsAvailable}
+        disabled={!rcFullScreen.available}
       />
     </>
   );
 };
 
 const OrientationToggle = () => {
+  const { state, toggle } = useRecoilBooleanState(rcOrientation);
   const viewer = useContextValue(ViewerContext);
-  const { value, toggle } = useBoolean(viewer.isOrientationActive());
-  const element = useMemo(() => viewer.getContainer().parentElement, [viewer]);
-  useEffect(() => {
-    const abc = new AbortController();
-    if (element) {
-      if (value) {
-        viewer.startOrientation();
-      } else if (document.fullscreenElement) {
-        viewer.stopOrientation();
-      }
-    }
-    return () => abc.abort();
-  }, [value, viewer]);
+  // const element = useMemo(() => viewer.getContainer().parentElement, [viewer]);
+  // useEffect(() => {
+  //   const abc = new AbortController();
+  //   if (element) {
+  //     if (value) {
+  //       viewer.startOrientation();
+  //     } else if (document.fullscreenElement) {
+  //       viewer.stopOrientation();
+  //     }
+  //   }
+  //   return () => abc.abort();
+  // }, [value, viewer]);
+  const id = 'toggle-orientation';
   return (
     <>
-      <div>加速度センサーで操作する</div>
+      <ToggleLabel htmlFor={id}>加速度センサーで操作する</ToggleLabel>
       <Toggle
-        state={value}
+        id={id}
+        state={state}
         onClick={toggle}
         disabled={!viewer.isOrientationSupported()}
       />

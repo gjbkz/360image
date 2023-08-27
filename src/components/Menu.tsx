@@ -1,12 +1,13 @@
 import { styled } from 'styled-components';
 import type { HTMLAttributes } from 'react';
-import { useBoolean } from '../use/Boolean.mjs';
+import { rcShowMenu } from '../recoil/ShowMenu.mjs';
+import { useRecoilBooleanState } from '../use/RecoilBooleanState.mjs';
 import { viewerConfig } from '../util/viewerConfig.mjs';
 import { Collapsable } from './Collapsable.js';
 import { Settings } from './Settings.js';
 
 export const Menu = () => {
-  const { value: opened, toggle } = useBoolean(false, 'menu');
+  const { state: opened, toggle } = useRecoilBooleanState(rcShowMenu);
   return (
     <MenuDiv>
       <Header>
@@ -35,7 +36,7 @@ const MenuDiv = styled.div`
   color: #ffffff;
   overflow: hidden;
   background-color: var(--ui-background);
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(4px);
 `;
 
 const Header = styled.div`

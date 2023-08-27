@@ -19,6 +19,7 @@
   stroke-linecap: round;
   stroke-width: 1px;
   fill: none;
+  transform-origin: center;
 }
 :root {
   --col-900: #1a202c;

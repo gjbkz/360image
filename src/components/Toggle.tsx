@@ -11,24 +11,25 @@ export const Toggle = ({ state, ...props }: ToggleProps) => (
 );
 
 const ToggleButton = styled.button`
-  --width: 56px;
-  --height: 24px;
-  --margin: 1px;
+  --width: 48px;
+  --height: 20px;
+  --margin: 0px;
   --knobHeight: calc(var(--height) - 2 * var(--margin));
-  --knobWidth: 36px;
+  --knobWidth: 32px;
+  --col-on: #1fb917;
   width: var(--width);
   height: var(--height);
   border-radius: calc(var(--height) / 2);
-  box-shadow: inset 0 0 0 1px currentColor;
+  box-shadow:
+    0 0 0 1.25px currentColor inset,
+    0 0 2px 1.25px rgba(0, 0, 0, 0.5) inset;
   outline: 0;
   overflow: hidden;
-  background-color: rgba(31, 185, 23, 0);
-  transition-property: background-color;
-  transition-duration: 0.1s;
-  transition &::before {
+  &::before {
     content: '';
     position: absolute;
     inset: 0;
+    background-color: rgba(255, 255, 255, 0);
   }
   &:hover {
     &::before {
@@ -50,16 +51,18 @@ const ToggleButton = styled.button`
     width: var(--knobWidth);
     height: var(--knobHeight);
     border-radius: calc(var(--knobHeight) / 2);
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
     color: var(--col-text);
     background-color: rgba(255, 255, 255, 1);
     transition-property: left;
     transition-duration: 0.1s;
     transition-timing-function: ease-in-out;
-    box-shadow: 0 0 0 1px #ffffff inset;
+    font-size: 11px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
   }
+  background-image: linear-gradient(0deg, var(--col-on), var(--col-on));
+  background-size: 50% 100%;
+  background-position: left center;
   &[data-state='1'] {
-    background-color: rgba(31, 185, 23, 1);
     &::after {
       content: 'ON';
       left: calc(var(--width) - var(--margin) - var(--knobWidth));
