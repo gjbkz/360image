@@ -48,9 +48,12 @@ export const load = async (url, context, nextLoad) => {
 const markExternalPlugin = {
   name: 'mark-external',
   setup(build) {
-    build.onResolve({ filter: /^[^.]/ }, (args) => {
+    build.onResolve({ filter: /./ }, (args) => {
       if (!args.importer) {
         return null;
+      }
+      if (args.path.startsWith('.')) {
+        return { path: args.path.replace(/\.mjs$/, '.mts'), external: true };
       }
       return { path: args.path, external: true };
     });
