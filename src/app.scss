@@ -43,14 +43,10 @@
     'Hiragino Sans', 'BIZ UDPGothic', Meiryo, sans-serif;
   font-size: 15px;
   line-height: 1.5;
-}
-@media (max-width: 809px) {
-  :root {
+  @media (max-width: 809px) {
     --base-size: 94%;
   }
-}
-@media (max-width: 500px) {
-  :root {
+  @media (max-width: 500px) {
     font-size: 14px;
   }
 }
@@ -114,8 +110,10 @@ figure {
   row-gap: 0.3em;
   counter-increment: figure;
 }
-figcaption::before {
-  content: '図' counter(figure) ' ';
+figcaption {
+  &::before {
+    content: '図' counter(figure) ' ';
+  }
 }
 button {
   cursor: pointer;
@@ -132,35 +130,35 @@ symbol[id^='icon-'] > path {
   flex-wrap: wrap;
   padding-inline-start: 0;
   list-style: none;
-}
-.markers-list > li {
-  display: grid;
-  block-size: 1.6em;
-  max-inline-size: 16em;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  justify-content: center;
-  align-content: center;
-  margin-inline-end: 4px;
-  margin-block: 0;
-}
-.markers-list > li > a {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: max-content;
-  align-items: center;
-  column-gap: 0.3em;
-  padding-inline: 4px;
-  padding-block: 4px;
-  border-radius: 3px;
-  text-decoration: none;
-  font-size: 11px;
-  line-height: 1;
-  color: #ffffff;
-  background-color: var(--col-700);
-}
-.markers-list > li > a:hover {
-  background-color: var(--col-800);
+  & > li {
+    display: grid;
+    block-size: 1.6em;
+    max-inline-size: 16em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    justify-content: center;
+    align-content: center;
+    margin-inline-end: 4px;
+    margin-block: 0;
+    & > a {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: max-content;
+      align-items: center;
+      column-gap: 0.3em;
+      padding-inline: 4px;
+      padding-block: 4px;
+      border-radius: 3px;
+      text-decoration: none;
+      font-size: 11px;
+      line-height: 1;
+      color: #ffffff;
+      background-color: var(--col-700);
+      &:hover {
+        background-color: var(--col-800);
+      }
+    }
+  }
 }
 .viewer-menu,
 main#panorama {
@@ -203,6 +201,17 @@ main#panorama {
   position: absolute;
   inset: 0;
   pointer-events: none;
+  &[data-vertical='1'] > .pnlm-hotspot > div {
+    margin-inline-end: 4px;
+    writing-mode: vertical-rl;
+  }
+  &[data-vertical='0'] > .pnlm-hotspot > div {
+    writing-mode: horizontal-tb;
+  }
+  &[data-nomarker='1'] > .pnlm-hotspot {
+    opacity: 0;
+    pointer-events: none;
+  }
 }
 .pnlm-ui,
 .pnlm-dragfix {
@@ -248,29 +257,15 @@ main#panorama {
   text-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
   filter: drop-shadow(0 0 2px #000000);
   overflow: visible;
-}
-.pnlm-coordinates > div,
-.pnlm-hotspot > div {
-  max-inline-size: 14em;
-}
-.pnlm-render-container[data-vertical='1'] > .pnlm-hotspot > div {
-  margin-inline-end: 4px;
-  writing-mode: vertical-rl;
-}
-.pnlm-render-container[data-vertical='0'] > .pnlm-hotspot > div {
-  writing-mode: horizontal-tb;
-}
-.pnlm-render-container[data-nomarker='1'] > .pnlm-hotspot {
-  opacity: 0;
-  pointer-events: none;
-}
-.pnlm-coordinates > svg,
-.pnlm-hotspot > svg {
-  width: 12px;
-}
-.pnlm-coordinates > svg > path,
-.pnlm-hotspot > svg > path {
-  fill: currentColor;
+  & > div {
+    max-inline-size: 14em;
+  }
+  & > svg {
+    width: 12px;
+    & > path {
+      fill: currentColor;
+    }
+  }
 }
 .pnlm-grab {
   cursor: grab;
@@ -287,21 +282,21 @@ main#panorama {
   background-color: rgba(255, 255, 255, 0);
   transition: background-color 0.1s linear;
   cursor: pointer;
-}
-.menu-button-bg:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-.menu-button-bg:active {
-  background-color: rgba(255, 255, 255, 0.2);
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  &:active {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
 }
 .icons {
   display: flex;
   flex-wrap: wrap;
   padding: 0;
-}
-.icons > li {
-  display: grid;
-  grid-auto-flow: column;
-  justify-content: start;
-  margin-inline-end: 8px;
+  & > li {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: start;
+    margin-inline-end: 8px;
+  }
 }
