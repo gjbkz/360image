@@ -41,6 +41,9 @@ export const rcFocusedMarker = atom<string | null>({
   effects: [
     ({ onSet, getPromise }) => {
       const apply = async (id: string | null) => {
+        if (!id) {
+          return;
+        }
         const [viewer, markers] = await Promise.all([
           getPromise(rcViewer),
           getPromise(rcMarkers),
@@ -55,7 +58,9 @@ export const rcFocusedMarker = atom<string | null>({
           marker.hfov || viewer.getHfov(),
           600,
         );
-        location.hash = `#${id}`;
+        const url = new URL(location.href);
+        url.hash = id;
+        history.replaceState(null, '', url);
       };
       onSet((markers) => {
         apply(markers).catch(alert);

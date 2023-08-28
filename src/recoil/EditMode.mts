@@ -8,7 +8,8 @@ export const rcEditMode = atom<boolean>({
   effects: [
     ({ onSet }) => {
       const apply = (value: boolean) => {
-        const params = new URLSearchParams(location.search);
+        const url = new URL(location.href);
+        const params = url.searchParams;
         if (value) {
           if (params.get(name) === '1') {
             return;
@@ -20,7 +21,7 @@ export const rcEditMode = atom<boolean>({
           }
           params.delete(name);
         }
-        history.replaceState(null, '', `${location.pathname}?${params}`);
+        history.replaceState(null, '', url);
       };
       onSet(apply);
     },
