@@ -11,6 +11,23 @@ export const initialViewerConfig = ensure(
   isViewerConfig,
 );
 export const viewerPromise = new Promise<Viewer>((resolve) => {
+  let startDirection: { pitch: number; yaw: number } | undefined;
+  const startMarkerId = location.hash.slice(1);
+  if (startMarkerId) {
+    console.info({ startMarkerId });
+    for (const marker of initialViewerConfig.markers) {
+      if (marker.id === startMarkerId) {
+        startDirection = { pitch: marker.pitch, yaw: marker.yaw };
+        break;
+      }
+    }
+  }
+  if (!startDirection) {
+    startDirection = {
+      pitch: initialViewerConfig.initPitch,
+      yaw: initialViewerConfig.initYaw,
+    };
+  }
   const viewer = globalThis.pannellum.viewer(panoramaContainer, {
     panorama: initialViewerConfig.filename,
     hotSpots: [],
@@ -20,6 +37,7 @@ export const viewerPromise = new Promise<Viewer>((resolve) => {
     friction: 0.8,
     maxPitch: 38,
     minHfov: 25,
+    ...startDirection,
   });
   viewer.on('error', alert);
   const onLoad = () => {
