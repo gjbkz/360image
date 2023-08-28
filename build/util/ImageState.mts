@@ -1,12 +1,12 @@
 import type { Marker, ViewerConfig } from '../../src/util/app.mjs';
 import type { ImageTree } from './ImageTree.mjs';
 import { imagesDir } from './files.mjs';
-import { loadViewerConfig } from './loadViewerConfig.mjs';
+import { PartialViewerConfig, loadViewerConfig } from './loadViewerConfig.mjs';
 
 export class ImageState {
   public readonly parent: ImageTree;
   public readonly name: string;
-  public partialConfig: Readonly<Omit<ViewerConfig, 'filename'>> | null = null;
+  public partialConfig: Readonly<PartialViewerConfig> | null = null;
   private imageExt: string | null = null;
 
   public constructor(parent: ImageTree, name: string) {
@@ -46,9 +46,13 @@ export class ImageState {
     if (ext === '.jpg') {
       this.imageExt = ext;
     } else if (ext === '.json') {
-      this.partialConfig = loadViewerConfig(
-        new URL(`${basePath}${ext}`, imagesDir),
-      );
+      try {
+        this.partialConfig = loadViewerConfig(
+          new URL(`${basePath}${ext}`, imagesDir),
+        );
+      } catch (error) {
+        console.error(error);
+      }
     } else {
       throw new Error(`UnexpectedFile: ${basePath}${ext}`);
     }
@@ -75,7 +79,7 @@ export class ImageState {
     if (!partialConfig) {
       return null;
     }
-    return { ...partialConfig, filename };
+    return { ...partialConfig, filename, location: this.parent.title };
   }
 }
 

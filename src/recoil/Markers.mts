@@ -4,6 +4,7 @@ import { createMarkerIcon } from '../util/icons.mjs';
 import { dom } from '../util/dom.mjs';
 import { initialViewerConfig } from '../util/setup.mjs';
 import { rcViewer } from './Viewer.mjs';
+import { rcNorthYaw } from './NorthYaw.mjs';
 
 const createTooltipFunc = (element: HTMLElement, marker: Marker) => {
   element.append(dom('div', null, marker.text), createMarkerIcon());
@@ -15,11 +16,27 @@ export const rcMarkers = atom<Array<Marker>>({
   effects: [
     ({ onSet, getPromise }) => {
       const apply = async (markers: Array<Marker>) => {
-        const viewer = await getPromise(rcViewer);
+        const [viewer, northYaw] = await Promise.all([
+          getPromise(rcViewer),
+          getPromise(rcNorthYaw),
+        ]);
         for (const hotSpot of viewer.getConfig().hotSpots.slice()) {
           viewer.removeHotSpot(hotSpot.id);
         }
         for (const marker of markers) {
+          viewer.addHotSpot({
+            ...marker,
+            createTooltipFunc,
+            createTooltipArgs: marker,
+          });
+        }
+        for (let i = 0; i < 4; i++) {
+          const marker = {
+            id: 'NESW'[i],
+            yaw: northYaw + i * 90,
+            pitch: 0,
+            text: '北東南西'[i],
+          };
           viewer.addHotSpot({
             ...marker,
             createTooltipFunc,

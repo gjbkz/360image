@@ -6,11 +6,13 @@ export const availableIcons = [
   'add',
   'location_on',
   'arrow_back_ios',
-  'arrow_drop_down',
   'menu',
   'edit',
   'delete',
   'download',
+  'google',
+  'public',
+  'arrow_outward',
 ] as const;
 
 export const createMarkerIcon = () =>

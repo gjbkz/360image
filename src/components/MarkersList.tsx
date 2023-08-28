@@ -5,8 +5,7 @@ import { styled } from 'styled-components';
 import { rcEditMode } from '../recoil/EditMode.mjs';
 import { rcFocusedMarker, rcMarker, rcMarkers } from '../recoil/Markers.mjs';
 import type { Marker } from '../util/app.mjs';
-import { Icon } from './Icon.js';
-import { TextButton } from './TextButton.js';
+import { IconButton } from './Icon.js';
 
 export const MarkersList = ({ children }: PropsWithChildren) => {
   const editMode = useRecoilValue(rcEditMode);
@@ -16,7 +15,7 @@ export const MarkersList = ({ children }: PropsWithChildren) => {
       {markers.map((marker, index) => (
         <Fragment key={marker.id}>
           <div>({index + 1})</div>
-          <FocusMarker marker={marker} />
+          <MarkerName marker={marker} />
           {editMode && <EditMarker marker={marker} />}
           {editMode && <DeleteMarker marker={marker} />}
         </Fragment>
@@ -32,7 +31,7 @@ const MarkersDiv = styled.div`
   grid-template-columns: max-content 1fr;
   justify-items: start;
   align-items: center;
-  column-gap: 6px;
+  column-gap: 4px;
   row-gap: 4px;
   &.editable {
     grid-template-columns: max-content 1fr max-content max-content;
@@ -42,21 +41,22 @@ const MarkersDiv = styled.div`
   }
 `;
 
-const FocusMarker = ({ marker }: { marker: Marker }) => {
+const MarkerName = ({ marker }: { marker: Marker }) => {
   const setFocusedMarker = useSetRecoilState(rcFocusedMarker);
   const { text, id } = marker;
   const onClick = useCallback(
     () => setFocusedMarker(id),
     [id, setFocusedMarker],
   );
-  return <TextButton onClick={onClick}>{text}</TextButton>;
+  return <MarkerDiv onClick={onClick}>{text}</MarkerDiv>;
 };
 
-const Button = styled.button`
-  display: grid;
-  place-content: center;
-  padding: 2px;
-  margin: -2px;
+const MarkerDiv = styled.button`
+  text-decoration: none;
+  text-align: start;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const EditMarker = ({ marker }: { marker: Marker }) => {
@@ -71,11 +71,7 @@ const EditMarker = ({ marker }: { marker: Marker }) => {
       },
     [marker],
   );
-  return (
-    <Button className="menu-button-bg" onClick={onClick} title="編集">
-      <Icon icon="edit" size={20} />
-    </Button>
-  );
+  return <IconButton icon="edit" onClick={onClick} title="編集" />;
 };
 
 const DeleteMarker = ({ marker }: { marker: Marker }) => {
@@ -92,9 +88,5 @@ const DeleteMarker = ({ marker }: { marker: Marker }) => {
       },
     [marker],
   );
-  return (
-    <Button className="menu-button-bg" onClick={onClick} title="削除">
-      <Icon icon="delete" size={20} />
-    </Button>
-  );
+  return <IconButton icon="delete" onClick={onClick} title="削除" />;
 };

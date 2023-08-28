@@ -31,14 +31,9 @@ export const buildPages = async ({ watch, signal }: Options = {}) => {
 const buildIndexPage = async () => {
   const startedAt = process.hrtime.bigint();
   const imageTree = new ImageTree();
-  const viewerBuilds: Array<Promise<void>> = [];
   for await (const file of listFiles(imagesDir)) {
-    const image = imageTree.add(file.pathname.slice(imagesDir.pathname.length));
-    if (image) {
-      viewerBuilds.push(buildViewerPage(image));
-    }
+    imageTree.add(file.pathname.slice(imagesDir.pathname.length));
   }
-  await Promise.all(viewerBuilds);
   if (await writeFile(indexHtmlPath, generateIndexHtml(imageTree))) {
     console.info(`buildIndexPage:done (${getElapsedMs(startedAt)})`);
   }
@@ -46,6 +41,7 @@ const buildIndexPage = async () => {
 };
 
 const generateIndexHtml = async function* (imageTree: ImageTree) {
+  const viewerBuilds: Array<Promise<void>> = [];
   yield* generateHtmlPreamble({ title: '画像一覧', rootPath: './' });
   yield `<header><h1>${sanitize(siteTitle)}</h1></header>\n`;
   yield '<main>\n';
@@ -54,6 +50,7 @@ const generateIndexHtml = async function* (imageTree: ImageTree) {
     yield `<h2>${sanitize(node ? node.title : 'その他')}</h2>\n`;
     yield '<ul>\n';
     for (const leaf of leaves) {
+      viewerBuilds.push(buildViewerPage(leaf));
       yield '<li>';
       yield `<a href="${leaf.htmlPath}">${sanitize(leaf.config.title)}</a>`;
       const markers = [...leaf.listMarkers()];
@@ -73,6 +70,7 @@ const generateIndexHtml = async function* (imageTree: ImageTree) {
   }
   yield '</main>\n';
   yield* generateSvgIcons();
+  await Promise.all(viewerBuilds);
 };
 
 const generateTestHtml = async function* () {

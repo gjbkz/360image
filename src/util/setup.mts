@@ -14,7 +14,6 @@ export const viewerPromise = new Promise<Viewer>((resolve) => {
   let startDirection: { pitch: number; yaw: number } | undefined;
   const startMarkerId = location.hash.slice(1);
   if (startMarkerId) {
-    console.info({ startMarkerId });
     for (const marker of initialViewerConfig.markers) {
       if (marker.id === startMarkerId) {
         startDirection = { pitch: marker.pitch, yaw: marker.yaw };

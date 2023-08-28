@@ -15,14 +15,18 @@ const isMarker = createTypeChecker<Marker>('Marker', {
   id: isString,
 });
 
-export interface ViewerConfig {
+export interface Coordinates {
+  latitude: number;
+  longitude: number;
+  altitude: number;
+}
+
+export interface ViewerConfig extends Coordinates {
   filename: string;
   title: string;
-  author?: string;
+  location: string;
+  northYaw: number;
   markers: Array<Marker>;
-  latitude?: number;
-  longitude?: number;
-  altitude?: number;
   initPitch: number;
   initYaw: number;
 }
@@ -30,11 +34,12 @@ export interface ViewerConfig {
 export const isViewerConfig = createTypeChecker<ViewerConfig>('ViewerConfig', {
   filename: isString,
   title: isString,
-  author: isString.optional,
+  location: isString,
+  northYaw: isFiniteNumber,
   markers: isMarker.array,
-  latitude: isFiniteNumber.optional,
-  longitude: isFiniteNumber.optional,
-  altitude: isFiniteNumber.optional,
+  latitude: isFiniteNumber,
+  longitude: isFiniteNumber,
+  altitude: isFiniteNumber,
   initPitch: isFiniteNumber,
   initYaw: isFiniteNumber,
 });

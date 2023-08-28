@@ -2,9 +2,9 @@ import { useRecoilValue } from 'recoil';
 import { styled } from 'styled-components';
 import { rcFullScreen } from '../recoil/FullScreen.mjs';
 import {
-  rcOrientation,
-  rcOrientationAvailabilty,
-} from '../recoil/Orientation.mjs';
+  rcOrientationMode,
+  rcOrientationModeAvailabilty,
+} from '../recoil/OrientationMode.mjs';
 import { rcShowMarkers } from '../recoil/ShowMarkers.mjs';
 import { rcVerticalMarker } from '../recoil/VerticalMarker.mjs';
 import { useRecoilBooleanState } from '../use/RecoilBooleanState.mjs';
@@ -59,8 +59,8 @@ export const FullScreenToggle = () => {
 };
 
 export const OrientationToggle = () => {
-  const { state, toggle } = useRecoilBooleanState(rcOrientation);
-  const available = useRecoilValue(rcOrientationAvailabilty);
+  const { state, toggle } = useRecoilBooleanState(rcOrientationMode);
+  const available = useRecoilValue(rcOrientationModeAvailabilty);
   const id = 'toggle-orientation';
   return (
     <>

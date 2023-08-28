@@ -13,11 +13,14 @@ import {
   VerticalToggle,
 } from './Toggles.js';
 import { AddMarkerButton } from './AddMarkerButton.js';
+import { GoogleLinks } from './GoogleLinks.js';
 
 export const Settings = () => {
   const editMode = useRecoilValue(rcEditMode);
   return (
     <Container>
+      <hr />
+      <GoogleLinks />
       <hr />
       <Toggles>
         <ShowMarkersToggle />

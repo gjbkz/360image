@@ -2,17 +2,17 @@ import * as fs from 'node:fs';
 import { ensure, isArray, isFiniteNumber, isString } from '@nlib/typing';
 import type { Marker, ViewerConfig } from '../../src/util/app.mjs';
 
-export const loadViewerConfig = (
-  jsonFileUrl: URL,
-): Omit<ViewerConfig, 'filename'> => {
+export type PartialViewerConfig = Omit<ViewerConfig, 'filename' | 'location'>;
+
+export const loadViewerConfig = (jsonFileUrl: URL): PartialViewerConfig => {
   const json = fs.readFileSync(jsonFileUrl, 'utf8');
   const parsed = ensure(JSON.parse(json), {
     title: isString,
-    author: isString.optional,
     markers: isArray.optional,
-    latitude: isFiniteNumber.optional,
-    longitude: isFiniteNumber.optional,
-    altitude: isFiniteNumber.optional,
+    latitude: isFiniteNumber,
+    longitude: isFiniteNumber,
+    altitude: isFiniteNumber,
+    northYaw: isFiniteNumber,
     initPitch: isFiniteNumber.optional,
     initYaw: isFiniteNumber.optional,
   });

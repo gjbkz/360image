@@ -42,7 +42,7 @@
   font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN',
     'Hiragino Sans', 'BIZ UDPGothic', Meiryo, sans-serif;
   font-size: 15px;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 @media (max-width: 809px) {
   :root {
@@ -70,8 +70,8 @@ main {
 }
 header {
   justify-items: center;
-  padding-block-start: 0.5em;
-  padding-block-end: 0.2em;
+  padding-block-start: 7px;
+  padding-block-end: 5px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
   background-color: var(--col-800);
   color: #ffffff;
@@ -79,8 +79,8 @@ header {
 main {
   align-content: start;
   row-gap: 1em;
-  padding-block-start: 2em;
-  padding-block-end: 3em;
+  padding-block-start: 30px;
+  padding-block-end: 45px;
   overflow-y: auto;
 }
 section {
@@ -89,10 +89,10 @@ section {
 }
 ul,
 ol {
-  padding-inline-start: 1.4em;
+  padding-inline-start: 20px;
 }
 li {
-  margin-block: 0.3em;
+  margin-block: 4px;
 }
 h1,
 h2,
@@ -244,7 +244,6 @@ main#panorama {
   align-content: end;
   inline-size: 0;
   block-size: 0;
-  row-gap: 7px;
   color: #ffffff;
   text-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
   filter: drop-shadow(0 0 2px #000000);
@@ -267,8 +266,6 @@ main#panorama {
 }
 .pnlm-coordinates > svg,
 .pnlm-hotspot > svg {
-  position: absolute;
-  bottom: 0;
   width: 12px;
 }
 .pnlm-coordinates > svg > path,
