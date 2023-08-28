@@ -1,6 +1,9 @@
 {
   "title": "小貝川 (茨城県)",
-  "author": "Takeo Ito",
+  "latitude": 50,
+  "longitude": -100,
+  "northYaw": 0.123456789,
+  "altitude": 500,
   "markers": [
     {
       "pitch": -1.21,
