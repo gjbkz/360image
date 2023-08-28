@@ -39,9 +39,6 @@ const MarkersDiv = styled.div`
   &.editable {
     grid-template-columns: max-content 1fr max-content max-content;
   }
-  & > button.add {
-    grid-column: 1 / -1;
-  }
 `;
 
 const NoMarkerDiv = styled.div`

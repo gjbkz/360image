@@ -9,6 +9,14 @@ interface Orientation {
   yaw: number;
 }
 
+export const rcInitialOrientation = atom<Orientation>({
+  key: 'InitialOrientation',
+  default: {
+    pitch: initialViewerConfig.initPitch,
+    yaw: initialViewerConfig.initYaw,
+  },
+});
+
 export const rcOrientation = atom<Orientation>({
   key: 'Orientation',
   default: {

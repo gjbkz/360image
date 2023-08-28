@@ -1,8 +1,11 @@
+import { useRecoilCallback, useRecoilValue } from 'recoil';
 import { styled } from 'styled-components';
-import { useRecoilValue } from 'recoil';
-import { indexPagePath } from '../util/setup.mjs';
 import { rcEditMode } from '../recoil/EditMode.mjs';
+import { rcMarker } from '../recoil/Markers.mjs';
+import { rcViewer } from '../recoil/Viewer.mjs';
+import { indexPagePath } from '../util/setup.mjs';
 import { DownloadButton } from './DownloadButton.js';
+import { GoogleLinks } from './GoogleLinks.js';
 import { Icon } from './Icon.js';
 import { MarkersList } from './MarkersList.js';
 import {
@@ -12,9 +15,8 @@ import {
   ShowMarkersToggle,
   VerticalToggle,
 } from './Toggles.js';
-import { AddMarkerButton } from './AddMarkerButton.js';
-import { GoogleLinks } from './GoogleLinks.js';
-import { OrientationSettings } from './OrientationSettings.js';
+import { CoordinatesSettings } from './CoordinatesSettings.js';
+import { OrientationSettings } from './OrientaionSettings.js';
 
 export const Settings = () => {
   const editMode = useRecoilValue(rcEditMode);
@@ -32,24 +34,22 @@ export const Settings = () => {
       </Toggles>
       <hr />
       <MarkersList>{editMode && <AddMarkerButton />}</MarkersList>
-      {editMode && <EditModeControls />}
+      {editMode && (
+        <>
+          <hr />
+          <CoordinatesSettings />
+          <hr />
+          <OrientationSettings />
+          <hr />
+          <DownloadButton />
+        </>
+      )}
       <hr />
       <Back href={indexPagePath}>
         <Icon icon="arrow_back_ios" size={16} />
         <span>一覧に戻る</span>
       </Back>
     </Container>
-  );
-};
-
-const EditModeControls = () => {
-  return (
-    <>
-      <hr />
-      <OrientationSettings />
-      <hr />
-      <DownloadButton />
-    </>
   );
 };
 
@@ -94,3 +94,32 @@ const Toggles = styled.div`
   column-gap: 6px;
   row-gap: 5px;
 `;
+
+const AddMarkerButton = () => {
+  const onClick = useRecoilCallback(
+    ({ snapshot, set }) =>
+      () => {
+        const viewer = snapshot.getLoadable(rcViewer).getValue();
+        const yaw = viewer.getYaw();
+        const pitch = viewer.getPitch();
+        const text = prompt(
+          [
+            `${yaw.toFixed(2)}, ${pitch.toFixed(2)} にマーカーを追加`,
+            'マーカーのテキストを入力してください',
+          ].join('\n'),
+        );
+        if (!text) {
+          return;
+        }
+        const id = 'new';
+        set(rcMarker(null), { id, text, yaw, pitch });
+      },
+    [],
+  );
+  return (
+    <button className="menu-button-bg full" onClick={onClick}>
+      <Icon icon="add" />
+      <span>マーカーを追加</span>
+    </button>
+  );
+};

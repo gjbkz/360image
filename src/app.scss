@@ -115,9 +115,12 @@ figcaption {
     content: '図' counter(figure) ' ';
   }
 }
-button {
+label,
+button,
+input[type='file'] {
   cursor: pointer;
 }
+[aria-disabled],
 [disabled] {
   opacity: 0.6;
   pointer-events: none;
@@ -287,6 +290,24 @@ main#panorama {
   }
   &:active {
     background-color: rgba(255, 255, 255, 0.2);
+  }
+  &.full {
+    grid-column: 1 / -1;
+    justify-self: stretch;
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: center;
+    align-items: center;
+    column-gap: 4px;
+    padding-inline: 8px;
+    padding-block: 2px;
+    text-decoration: none;
+    & > svg {
+      margin-inline-start: -12px;
+    }
+    & > span {
+      margin-block-start: 2px;
+    }
   }
 }
 .icons {
