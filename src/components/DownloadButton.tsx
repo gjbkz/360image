@@ -4,6 +4,7 @@ import { styled } from 'styled-components';
 import { rcMarkers } from '../recoil/Markers.mjs';
 import { rcTitle } from '../recoil/Title.mjs';
 import { initialViewerConfig } from '../util/setup.mjs';
+import { Icon } from './Icon.js';
 
 export const DownloadButton = () => {
   const title = useRecoilValue(rcTitle);
@@ -25,27 +26,23 @@ export const DownloadButton = () => {
     return () => URL.revokeObjectURL(url);
   }, [title, markers]);
   return (
-    <Outlined download={download} href={href}>
-      データをダウンロードする
-    </Outlined>
+    <Button className="menu-button-bg" download={download} href={href}>
+      <Icon icon="download" />
+      <span>データをダウンロード</span>
+    </Button>
   );
 };
 
-const Outlined = styled.a`
+const Button = styled.a`
   justify-self: stretch;
   display: grid;
-  place-content: center;
-  padding-block: 2px;
+  grid-auto-flow: column;
+  justify-content: center;
+  align-items: center;
   padding-inline: 8px;
-  border: solid 1px currentColor;
-  border-radius: 3px;
-  background-color: rgba(255, 255, 255, 0);
+  padding-block: 2px;
   text-decoration: none;
-  cursor: pointer;
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-  &:active {
-    background-color: rgba(255, 255, 255, 0.2);
+  & > svg {
+    margin-inline-start: -12px;
   }
 `;

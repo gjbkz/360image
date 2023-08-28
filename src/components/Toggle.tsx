@@ -12,7 +12,7 @@ export const Toggle = ({ state, ...props }: ToggleProps) => (
 
 const ToggleButton = styled.button`
   --width: 48px;
-  --height: 20px;
+  --height: 24px;
   --margin: 0px;
   --knobHeight: calc(var(--height) - 2 * var(--margin));
   --knobWidth: 32px;
@@ -30,6 +30,7 @@ const ToggleButton = styled.button`
     position: absolute;
     inset: 0;
     background-color: rgba(255, 255, 255, 0);
+    transition: background-color 0.1s linear;
   }
   &:hover {
     &::before {

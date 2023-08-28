@@ -1,13 +1,7 @@
 import { DefaultValue, atom } from 'recoil';
 import type { Viewer } from '../util/pannellum.mjs';
 import { noop } from '../util/noop.mjs';
-import { searchParams } from '../util/searchParams.mjs';
 import { rcViewer } from './Viewer.mjs';
-
-export const rcShowCoordinates = atom<boolean>({
-  key: 'ShowCoordinates',
-  default: searchParams.boolean('coordinates', false),
-});
 
 export const rcCoordinates = atom<{ pitch: number; yaw: number }>({
   key: 'Coordinates',

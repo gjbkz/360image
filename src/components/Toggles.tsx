@@ -5,31 +5,11 @@ import {
   rcOrientation,
   rcOrientationAvailabilty,
 } from '../recoil/Orientation.mjs';
-import { rcShowCoordinates } from '../recoil/Coordinates.mjs';
 import { rcShowMarkers } from '../recoil/ShowMarkers.mjs';
 import { rcVerticalMarker } from '../recoil/VerticalMarker.mjs';
 import { useRecoilBooleanState } from '../use/RecoilBooleanState.mjs';
+import { rcEditMode } from '../recoil/EditMode.mjs';
 import { Toggle } from './Toggle.js';
-
-export const TogglesList = () => (
-  <TogglesDiv>
-    <ShowCoordinatesToggle />
-    <ShowMarkersToggle />
-    <VerticalToggle />
-    <FullScreenToggle />
-    <OrientationToggle />
-  </TogglesDiv>
-);
-
-const TogglesDiv = styled.div`
-  justify-self: stretch;
-  display: grid;
-  grid-template-columns: 1fr max-content;
-  justify-items: start;
-  align-items: center;
-  column-gap: 6px;
-  row-gap: 6px;
-`;
 
 const ToggleLabel = styled.label`
   cursor: pointer;
@@ -39,64 +19,64 @@ const ToggleLabel = styled.label`
   }
 `;
 
-const ShowCoordinatesToggle = () => {
-  const { state, toggle } = useRecoilBooleanState(rcShowCoordinates);
-  const id = 'toggle-coordinates';
-  return (
-    <>
-      <ToggleLabel htmlFor={id}>中心の座標を表示</ToggleLabel>
-      <Toggle id={id} state={state} onClick={toggle} />
-    </>
-  );
-};
-
-const ShowMarkersToggle = () => {
+export const ShowMarkersToggle = () => {
   const { state, toggle } = useRecoilBooleanState(rcShowMarkers);
   const id = 'toggle-markers';
   return (
     <>
-      <ToggleLabel htmlFor={id}>マーカーを表示</ToggleLabel>
       <Toggle id={id} state={state} onClick={toggle} />
+      <ToggleLabel htmlFor={id}>マーカーを表示</ToggleLabel>
     </>
   );
 };
 
-const VerticalToggle = () => {
+export const VerticalToggle = () => {
   const showMarkers = useRecoilValue(rcShowMarkers);
   const { state, toggle } = useRecoilBooleanState(rcVerticalMarker);
   const id = 'toggle-vertical-marker';
   return (
     <>
-      <ToggleLabel htmlFor={id}>マーカーを縦書き表示</ToggleLabel>
       <Toggle id={id} state={state} onClick={toggle} disabled={!showMarkers} />
+      <ToggleLabel htmlFor={id}>マーカーを縦書き表示</ToggleLabel>
     </>
   );
 };
 
-const FullScreenToggle = () => {
+export const FullScreenToggle = () => {
   const { state, toggle } = useRecoilBooleanState(rcFullScreen);
   const id = 'toggle-fullscreen';
   return (
     <>
-      <ToggleLabel htmlFor={id}>全画面で表示</ToggleLabel>
       <Toggle
         id={id}
         state={state}
         onClick={toggle}
         disabled={!rcFullScreen.available}
       />
+      <ToggleLabel htmlFor={id}>全画面で表示</ToggleLabel>
     </>
   );
 };
 
-const OrientationToggle = () => {
+export const OrientationToggle = () => {
   const { state, toggle } = useRecoilBooleanState(rcOrientation);
   const available = useRecoilValue(rcOrientationAvailabilty);
   const id = 'toggle-orientation';
   return (
     <>
-      <ToggleLabel htmlFor={id}>加速度センサーで操作</ToggleLabel>
       <Toggle id={id} state={state} onClick={toggle} disabled={!available} />
+      <ToggleLabel htmlFor={id}>加速度センサーで操作</ToggleLabel>
+    </>
+  );
+};
+
+export const EditModeToggle = () => {
+  const { state, toggle } = useRecoilBooleanState(rcEditMode);
+  const id = 'toggle-edit-mode';
+  return (
+    <>
+      <Toggle id={id} state={state} onClick={toggle} />
+      <ToggleLabel htmlFor={id}>編集モード</ToggleLabel>
     </>
   );
 };

@@ -72,14 +72,20 @@ header {
   justify-items: center;
   padding-block-start: 0.5em;
   padding-block-end: 0.2em;
-  border-block-end: 1px solid var(--col-400);
-  background-color: var(--col-100);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  background-color: var(--col-800);
+  color: #ffffff;
 }
 main {
+  align-content: start;
   row-gap: 1em;
   padding-block-start: 2em;
   padding-block-end: 3em;
   overflow-y: auto;
+}
+section {
+  display: grid;
+  grid-auto-flow: row;
 }
 ul,
 ol {
@@ -87,9 +93,6 @@ ol {
 }
 li {
   margin-block: 0.3em;
-}
-h1 {
-  font-size: 110%;
 }
 h1,
 h2,
@@ -120,6 +123,9 @@ button {
 [disabled] {
   opacity: 0.6;
   pointer-events: none;
+}
+symbol[id^='icon-'] > path {
+  fill: currentColor;
 }
 .markers-list {
   display: flex;
@@ -276,4 +282,27 @@ main#panorama {
 .pnlm-coordinates {
   left: 50%;
   top: 50%;
+}
+.menu-button-bg {
+  border-radius: var(--border-radius);
+  background-color: rgba(255, 255, 255, 0);
+  transition: background-color 0.1s linear;
+  cursor: pointer;
+}
+.menu-button-bg:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.menu-button-bg:active {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.icons {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+}
+.icons > li {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+  margin-inline-end: 8px;
 }

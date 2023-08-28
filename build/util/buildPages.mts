@@ -1,8 +1,10 @@
+import { availableIcons } from '../../src/util/icons.mjs';
 import { siteTitle } from '../../src/util/site.mjs';
 import { ImageTree } from './ImageTree.mjs';
 import { buildViewerPage } from './buildViewerPage.mjs';
-import { imagesDir, indexHtmlPath } from './files.mjs';
+import { imagesDir, indexHtmlPath, testHtmlPath } from './files.mjs';
 import { generateHtmlPreamble } from './generateHtmlPreamble.mjs';
+import { generateSvgIcons } from './generateSvgIcons.mjs';
 import { getElapsedMs } from './getElapsedMs.mjs';
 import { listFiles } from './listFiles.mjs';
 import { sanitize } from './sanitize.mjs';
@@ -40,13 +42,13 @@ const buildIndexPage = async () => {
   if (await writeFile(indexHtmlPath, generateIndexHtml(imageTree))) {
     console.info(`buildIndexPage:done (${getElapsedMs(startedAt)})`);
   }
+  await writeFile(testHtmlPath, generateTestHtml());
 };
 
-const generateIndexHtml = function* (imageTree: ImageTree) {
+const generateIndexHtml = async function* (imageTree: ImageTree) {
   yield* generateHtmlPreamble({ title: '画像一覧', rootPath: './' });
   yield `<header><h1>${sanitize(siteTitle)}</h1></header>\n`;
   yield '<main>\n';
-  yield '<h1>画像一覧</h1>\n';
   for (const [node, leaves] of imageTree.groupLeaves()) {
     yield '<section>\n';
     yield `<h2>${sanitize(node ? node.title : 'その他')}</h2>\n`;
@@ -70,4 +72,21 @@ const generateIndexHtml = function* (imageTree: ImageTree) {
     yield '</section>\n';
   }
   yield '</main>\n';
+  yield* generateSvgIcons();
+};
+
+const generateTestHtml = async function* () {
+  yield* generateHtmlPreamble({ title: '表示テスト', rootPath: './' });
+  yield `<header><h1>${sanitize(siteTitle)}</h1></header>\n`;
+  yield '<main>\n';
+  yield '<section>\n';
+  yield '<h2>Icons</h2>\n';
+  yield '<ul class="icons">\n';
+  for (const name of availableIcons) {
+    yield `<li><svg width="24" height="24" viewBox="0 0 24 24"><use href="#icon-${name}"/></svg><span>${name}</span></li>`;
+  }
+  yield '</ul>\n';
+  yield '</section>\n';
+  yield '</main>\n';
+  yield* generateSvgIcons();
 };

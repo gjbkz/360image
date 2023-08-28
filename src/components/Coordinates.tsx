@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import { rcCoordinates, rcShowCoordinates } from '../recoil/Coordinates.mjs';
+import { rcCoordinates } from '../recoil/Coordinates.mjs';
 import { rcRenderContainer } from '../recoil/Viewer.mjs';
 import { dom } from '../util/dom.mjs';
 import { createMarkerIcon } from '../util/icons.mjs';
+import { rcEditMode } from '../recoil/EditMode.mjs';
 
 export const Coordinates = () => {
-  return useRecoilValue(rcShowCoordinates) && <Sync />;
+  return useRecoilValue(rcEditMode) && <Sync />;
 };
 
 const Sync = () => {

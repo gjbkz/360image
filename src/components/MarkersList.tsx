@@ -1,26 +1,27 @@
+import type { PropsWithChildren } from 'react';
 import { Fragment, useCallback } from 'react';
 import { useRecoilCallback, useRecoilValue, useSetRecoilState } from 'recoil';
 import { styled } from 'styled-components';
-import type { Marker } from '../util/app.mjs';
+import { rcEditMode } from '../recoil/EditMode.mjs';
 import { rcFocusedMarker, rcMarker, rcMarkers } from '../recoil/Markers.mjs';
-import { rcShowCoordinates } from '../recoil/Coordinates.mjs';
-import { rcViewer } from '../recoil/Viewer.mjs';
+import type { Marker } from '../util/app.mjs';
+import { Icon } from './Icon.js';
 import { TextButton } from './TextButton.js';
-import { OutlinedButton } from './OutlinedButton.js';
 
-export const MarkersList = () => {
+export const MarkersList = ({ children }: PropsWithChildren) => {
+  const editMode = useRecoilValue(rcEditMode);
   const markers = useRecoilValue(rcMarkers);
   return (
-    <MarkersDiv>
+    <MarkersDiv className={editMode ? 'editable' : undefined}>
       {markers.map((marker, index) => (
         <Fragment key={marker.id}>
           <div>({index + 1})</div>
           <FocusMarker marker={marker} />
-          <EditMarker marker={marker} />
-          <DeleteMarker marker={marker} />
+          {editMode && <EditMarker marker={marker} />}
+          {editMode && <DeleteMarker marker={marker} />}
         </Fragment>
       ))}
-      <AddMarker />
+      {children}
     </MarkersDiv>
   );
 };
@@ -28,11 +29,17 @@ export const MarkersList = () => {
 const MarkersDiv = styled.div`
   justify-self: stretch;
   display: grid;
-  grid-template-columns: max-content 1fr max-content max-content;
+  grid-template-columns: max-content 1fr;
   justify-items: start;
   align-items: center;
   column-gap: 6px;
   row-gap: 4px;
+  &.editable {
+    grid-template-columns: max-content 1fr max-content max-content;
+  }
+  & > button.add {
+    grid-column: 1 / -1;
+  }
 `;
 
 const FocusMarker = ({ marker }: { marker: Marker }) => {
@@ -45,9 +52,11 @@ const FocusMarker = ({ marker }: { marker: Marker }) => {
   return <TextButton onClick={onClick}>{text}</TextButton>;
 };
 
-const Button = styled(OutlinedButton)`
-  font-size: 11px;
-  padding-inline: 4px;
+const Button = styled.button`
+  display: grid;
+  place-content: center;
+  padding: 2px;
+  margin: -2px;
 `;
 
 const EditMarker = ({ marker }: { marker: Marker }) => {
@@ -62,7 +71,11 @@ const EditMarker = ({ marker }: { marker: Marker }) => {
       },
     [marker],
   );
-  return <Button onClick={onClick}>編集</Button>;
+  return (
+    <Button className="menu-button-bg" onClick={onClick} title="編集">
+      <Icon icon="edit" size={20} />
+    </Button>
+  );
 };
 
 const DeleteMarker = ({ marker }: { marker: Marker }) => {
@@ -79,39 +92,9 @@ const DeleteMarker = ({ marker }: { marker: Marker }) => {
       },
     [marker],
   );
-  return <Button onClick={onClick}>削除</Button>;
-};
-
-const AddMarker = () => {
-  const showCoordinate = useRecoilValue(rcShowCoordinates);
-  const onClick = useRecoilCallback(({ snapshot, set }) => () => {
-    const viewer = snapshot.getLoadable(rcViewer).getValue();
-    const yaw = viewer.getYaw();
-    const pitch = viewer.getPitch();
-    const text = prompt(
-      [
-        `${yaw.toFixed(2)}, ${pitch.toFixed(2)} にマーカーを追加`,
-        'マーカーの名前を入力してください',
-      ].join('\n'),
-    );
-    if (!text) {
-      return;
-    }
-    const id = 'new';
-    set(rcMarker(null), { id, text, yaw, pitch });
-  });
   return (
-    <AddButton disabled={!showCoordinate} onClick={onClick}>
-      {showCoordinate && <span>＋ マーカーを追加</span>}
-      {!showCoordinate && <span>追加するには「中心の座標を表示」をON</span>}
-    </AddButton>
+    <Button className="menu-button-bg" onClick={onClick} title="削除">
+      <Icon icon="delete" size={20} />
+    </Button>
   );
 };
-
-const AddButton = styled(OutlinedButton)`
-  justify-self: stretch;
-  grid-column: 1 / 5;
-  margin-block-start: 3px;
-  padding-inline: 8px;
-  padding-block: 2px;
-`;

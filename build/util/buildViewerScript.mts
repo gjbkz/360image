@@ -18,6 +18,7 @@ export const buildViewerScript = async ({ watch, signal }: Options = {}) => {
       absWorkingDir: fileURLToPath(rootDir),
       entryPoints: ['src/viewer.tsx'],
       resolveExtensions: ['.tsx', '.ts', '.mts'],
+      jsx: 'automatic',
       outfile: 'docs/viewer.js',
       banner: { js: await fs.readFile(pnlmJs, 'utf8') },
       bundle: true,
