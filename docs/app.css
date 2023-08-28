@@ -200,6 +200,8 @@ main#panorama {
   outline: 0;
 }
 .pnlm-render-container {
+  position: absolute;
+  inset: 0;
   pointer-events: none;
 }
 .pnlm-ui,
