@@ -2,12 +2,15 @@ import { useRecoilCallback, useRecoilValue } from 'recoil';
 import { styled } from 'styled-components';
 import { rcEditMode } from '../recoil/EditMode.mjs';
 import { rcMarker } from '../recoil/Markers.mjs';
+import { rcTitle } from '../recoil/Title.mjs';
 import { rcViewer } from '../recoil/Viewer.mjs';
+import { useDownloadLink } from '../use/DownloadLink.mjs';
 import { indexPagePath } from '../util/setup.mjs';
-import { DownloadButton } from './DownloadButton.js';
+import { CoordinatesSettings } from './CoordinatesSettings.js';
 import { GoogleLinks } from './GoogleLinks.js';
 import { Icon } from './Icon.js';
 import { MarkersList } from './MarkersList.js';
+import { OrientationSettings } from './OrientaionSettings.js';
 import {
   EditModeToggle,
   FullScreenToggle,
@@ -15,8 +18,6 @@ import {
   ShowMarkersToggle,
   VerticalToggle,
 } from './Toggles.js';
-import { CoordinatesSettings } from './CoordinatesSettings.js';
-import { OrientationSettings } from './OrientaionSettings.js';
 
 export const Settings = () => {
   const editMode = useRecoilValue(rcEditMode);
@@ -121,5 +122,24 @@ const AddMarkerButton = () => {
       <Icon icon="add" />
       <span>マーカーを追加</span>
     </button>
+  );
+};
+
+const DownloadButton = () => {
+  const title = useRecoilValue(rcTitle);
+  const href = useDownloadLink();
+  return (
+    <a
+      className="menu-button-bg full"
+      download={`${title}.json`}
+      href={href}
+      aria-disabled={href ? undefined : true}
+    >
+      <Icon
+        className={href ? undefined : 'rotate'}
+        icon={href ? 'download' : 'autorenew'}
+      />
+      <span>データを{href ? 'ダウンロード' : '更新中'}</span>
+    </a>
   );
 };

@@ -2,6 +2,7 @@ import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useRecoilCallback, useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
 import { rcCoordinates } from '../recoil/Coordinates.mjs';
+import { readExif } from '../util/readExif.mjs';
 import { Icon } from './Icon.js';
 
 type Event = ChangeEvent<HTMLInputElement>;
@@ -83,6 +84,13 @@ const ReadFileButton = () => {
         return;
       }
       alert('未実装です');
+      Promise.resolve()
+        .then(async () => {
+          for await (const [key, value] of readExif(file.stream())) {
+            console.log(`${key}=${value}`);
+          }
+        })
+        .catch(alert);
     },
     [],
   );

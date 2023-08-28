@@ -321,3 +321,14 @@ main#panorama {
     margin-inline-end: 8px;
   }
 }
+.rotate {
+  animation: Rotate 1.2s linear infinite;
+}
+@keyframes Rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
