@@ -13,6 +13,7 @@ export const availableIcons = [
   'google',
   'public',
   'arrow_outward',
+  'explore',
 ] as const;
 
 export const createMarkerIcon = () =>

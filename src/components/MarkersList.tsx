@@ -20,6 +20,9 @@ export const MarkersList = ({ children }: PropsWithChildren) => {
           {editMode && <DeleteMarker marker={marker} />}
         </Fragment>
       ))}
+      {markers.length === 0 && !editMode && (
+        <NoMarkerDiv>マーカーはありません</NoMarkerDiv>
+      )}
       {children}
     </MarkersDiv>
   );
@@ -39,6 +42,14 @@ const MarkersDiv = styled.div`
   & > button.add {
     grid-column: 1 / -1;
   }
+`;
+
+const NoMarkerDiv = styled.div`
+  justify-self: center;
+  grid-column: 1 / -1;
+  padding-inline: 8px;
+  padding-block: 2px;
+  line-height: 24px;
 `;
 
 const MarkerName = ({ marker }: { marker: Marker }) => {

@@ -6,7 +6,7 @@ import { dom } from '../util/dom.mjs';
 import { createMarkerIcon } from '../util/icons.mjs';
 import { rcEditMode } from '../recoil/EditMode.mjs';
 
-export const Coordinates = () => {
+export const SyncCoordinates = () => {
   return useRecoilValue(rcEditMode) && <Sync />;
 };
 

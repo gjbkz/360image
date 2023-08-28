@@ -5,6 +5,7 @@ import { dom } from '../util/dom.mjs';
 import { initialViewerConfig } from '../util/setup.mjs';
 import { rcViewer } from './Viewer.mjs';
 import { rcNorthYaw } from './NorthYaw.mjs';
+import { rcEditMode } from './EditMode.mjs';
 
 const createTooltipFunc = (element: HTMLElement, marker: Marker) => {
   element.append(dom('div', null, marker.text), createMarkerIcon());
@@ -16,9 +17,10 @@ export const rcMarkers = atom<Array<Marker>>({
   effects: [
     ({ onSet, getPromise }) => {
       const apply = async (markers: Array<Marker>) => {
-        const [viewer, northYaw] = await Promise.all([
+        const [viewer, northYaw, editMode] = await Promise.all([
           getPromise(rcViewer),
           getPromise(rcNorthYaw),
+          getPromise(rcEditMode),
         ]);
         for (const hotSpot of viewer.getConfig().hotSpots.slice()) {
           viewer.removeHotSpot(hotSpot.id);
@@ -42,6 +44,22 @@ export const rcMarkers = atom<Array<Marker>>({
             createTooltipFunc,
             createTooltipArgs: marker,
           });
+          if (editMode) {
+            for (let j = 1; j < 6; j += 1) {
+              const deg = i * 90 + j * 15;
+              const marker = {
+                id: `${deg}deg`,
+                yaw: northYaw + deg,
+                pitch: 0,
+                text: `${deg}`,
+              };
+              viewer.addHotSpot({
+                ...marker,
+                createTooltipFunc,
+                createTooltipArgs: marker,
+              });
+            }
+          }
         }
       };
       onSet((markers) => {

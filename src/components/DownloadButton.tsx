@@ -4,16 +4,22 @@ import { styled } from 'styled-components';
 import { rcMarkers } from '../recoil/Markers.mjs';
 import { rcTitle } from '../recoil/Title.mjs';
 import { initialViewerConfig } from '../util/setup.mjs';
+import { rcNorthYaw } from '../recoil/NorthYaw.mjs';
+import { rcCoordinates } from '../recoil/Coordinates.mjs';
 import { Icon } from './Icon.js';
 
 export const DownloadButton = () => {
   const title = useRecoilValue(rcTitle);
   const markers = useRecoilValue(rcMarkers);
+  const northYaw = useRecoilValue(rcNorthYaw);
+  const coordinates = useRecoilValue(rcCoordinates);
   const download = useMemo(() => `${title}.json`, [title]);
   const [href, setHref] = useState('#');
   useEffect(() => {
     const data = {
       ...initialViewerConfig,
+      ...coordinates,
+      northYaw,
       title,
       markers: markers.map(({ id: _id, ...marker }) => marker),
     };
@@ -24,7 +30,7 @@ export const DownloadButton = () => {
     const url = URL.createObjectURL(blob);
     setHref(url);
     return () => URL.revokeObjectURL(url);
-  }, [title, markers]);
+  }, [coordinates, title, markers, northYaw]);
   return (
     <Button className="menu-button-bg" download={download} href={href}>
       <Icon icon="download" />
@@ -39,6 +45,7 @@ const Button = styled.a`
   grid-auto-flow: column;
   justify-content: center;
   align-items: center;
+  column-gap: 4px;
   padding-inline: 8px;
   padding-block: 2px;
   text-decoration: none;

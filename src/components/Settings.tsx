@@ -14,6 +14,7 @@ import {
 } from './Toggles.js';
 import { AddMarkerButton } from './AddMarkerButton.js';
 import { GoogleLinks } from './GoogleLinks.js';
+import { OrientationSettings } from './OrientationSettings.js';
 
 export const Settings = () => {
   const editMode = useRecoilValue(rcEditMode);
@@ -44,6 +45,8 @@ export const Settings = () => {
 const EditModeControls = () => {
   return (
     <>
+      <hr />
+      <OrientationSettings />
       <hr />
       <DownloadButton />
     </>
