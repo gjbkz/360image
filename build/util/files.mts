@@ -1,4 +1,5 @@
-export const rootDir = new URL('../../', import.meta.url);
+/** loader.mjsがbundleするのでimport.meta.urlはmain.mtsになります */
+export const rootDir = new URL('../', import.meta.url);
 export const srcDir = new URL('src/', rootDir);
 export const docsDir = new URL('docs/', rootDir);
 export const imagesDir = new URL('images/', rootDir);

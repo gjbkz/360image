@@ -7,9 +7,9 @@
     "test": "run-s test:*",
     "test:type": "tsc --noEmit",
     "build": "run-s build:*",
-    "build:main": "tsx build/main.mts",
+    "build:main": "node --experimental-loader ./loader.mjs build/main.mts",
     "start": "run-p start:*",
-    "start:watch": "tsx build/main.mts --watch",
+    "start:watch": "node --experimental-loader ./loader.mjs build/main.mts --watch",
     "start:server": "sable docs",
     "postversion": "run-s postversion:*",
     "postversion:changelog": "npx @nlib/changelog -- --output CHANGELOG.md",
@@ -39,7 +39,6 @@
     "recoil": "^0.7.7",
     "sable": "^0.5.14",
     "styled-components": "^6.0.7",
-    "tsx": "^3.12.7",
     "typescript": "^5.1.6"
   },
   "lint-staged": {
