@@ -29,8 +29,8 @@ export const rcOrientation = atom<Orientation>({
       const start = (viewer: Viewer) => {
         reset = startWatch(viewer, () =>
           setSelf((current) => {
-            const pitch = viewer.getPitch();
-            const yaw = viewer.getYaw();
+            const pitch = Math.round(viewer.getPitch() * 1000) / 1000;
+            const yaw = Math.round(viewer.getYaw() * 1000) / 1000;
             if (
               current instanceof DefaultValue ||
               current.pitch !== pitch ||

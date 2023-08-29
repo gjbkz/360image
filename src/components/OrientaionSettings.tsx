@@ -34,7 +34,7 @@ export const OrientationSettings = () => {
         <div>north yaw</div>
         <input
           type="number"
-          value={northYaw.toFixed(2)}
+          value={northYaw}
           onChange={onChangeNorthYaw}
           step={0.01}
         />
@@ -43,7 +43,7 @@ export const OrientationSettings = () => {
         <div>default pitch</div>
         <input
           type="number"
-          value={orientation.pitch.toFixed(2)}
+          value={orientation.pitch}
           onChange={onChangePitch}
           step={0.01}
         />
@@ -52,7 +52,7 @@ export const OrientationSettings = () => {
         <div>default yaw</div>
         <input
           type="number"
-          value={orientation.yaw.toFixed(2)}
+          value={orientation.yaw}
           onChange={onChangeYaw}
           step={0.01}
         />

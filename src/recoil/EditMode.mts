@@ -1,5 +1,7 @@
 import { atom } from 'recoil';
 import { searchParams } from '../util/searchParams.mjs';
+import { alertError } from '../util/alertError.mjs';
+import { rcRenderContainer } from './Viewer.mjs';
 
 const name = 'edit';
 export const rcEditMode = atom<boolean>({
@@ -24,6 +26,14 @@ export const rcEditMode = atom<boolean>({
         history.replaceState(null, '', url);
       };
       onSet(apply);
+    },
+    ({ onSet, getPromise }) => {
+      const apply = alertError(async (value: boolean) => {
+        const container = await getPromise(rcRenderContainer);
+        container.dataset.edit = value ? '1' : '0';
+      });
+      onSet(apply);
+      getPromise(rcEditMode).then(apply).catch(alert);
     },
   ],
 });

@@ -34,7 +34,7 @@ export const CoordinatesSettings = () => {
         <div>latitude</div>
         <input
           type="number"
-          value={coordinates.latitude.toFixed(5)}
+          value={coordinates.latitude}
           onChange={onChangeLat}
           step={0.0001}
         />
@@ -43,7 +43,7 @@ export const CoordinatesSettings = () => {
         <div>longitude</div>
         <input
           type="number"
-          value={coordinates.longitude.toFixed(5)}
+          value={coordinates.longitude}
           onChange={onChangeLong}
           step={0.0001}
         />
@@ -52,7 +52,7 @@ export const CoordinatesSettings = () => {
         <div>altitude</div>
         <input
           type="number"
-          value={coordinates.altitude.toFixed(2)}
+          value={coordinates.altitude}
           onChange={onChangeAlt}
           step={0.01}
         />
@@ -69,7 +69,7 @@ const CoordinatesSettingsDiv = styled.div`
   display: grid;
   row-gap: 2px;
   column-gap: 6px;
-  grid-template-columns: max-content max-content 100px max-content;
+  grid-template-columns: max-content max-content max-content max-content;
   & > input {
     text-align: end;
     border-block-end: solid 1px currentColor;

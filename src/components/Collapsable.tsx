@@ -26,6 +26,7 @@ export const Collapsable = ({
     setStyle({
       width: Math.max(container.scrollWidth, rect.width),
       height: Math.min(container.scrollHeight, rect.height),
+      overflow: 'hidden',
     });
     if (opened) {
       return noop;
@@ -37,7 +38,7 @@ export const Collapsable = ({
     if (style === closedStyle) {
       return noop;
     }
-    const timer = setTimeout(() => setStyle(openedStyle), 300);
+    const timer = setTimeout(() => setStyle(openedStyle), 250);
     return () => clearTimeout(timer);
   }, [style]);
   return (

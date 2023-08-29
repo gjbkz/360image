@@ -35,10 +35,3 @@ export const useGoogleEarthLink = () => {
     return `https://earth.google.com/web/@${params.join(',')}`;
   }, [longitude, latitude, altitude, yaw, northYaw, pitch]);
 };
-
-/**
- * https://earth.google.com/web/@40.82076302,-74.09074971,12a,270d,35y,132,89t,0r
- * https://earth.google.com/web/@40.82076302,-74.09074971,15a,270d,35y,132,89t,0r
- * https://earth.google.com/web/@40.82076302,-74.09074971,18a,270d,35y,132,89t,0r
- * https://earth.google.com/web/@40.82076302,-74.09074971,21a,270d,35y,132,89t,0r
- */

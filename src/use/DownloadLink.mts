@@ -35,6 +35,6 @@ export const useDownloadLink = () => {
     }, 600);
     return () => clearTimeout(timerId);
   }, [coordinates, title, markers, northYaw, initPitch, initYaw]);
-  useEffect(() => URL.revokeObjectURL(href), [href]);
+  useEffect(() => () => URL.revokeObjectURL(href), [href]);
   return href;
 };
