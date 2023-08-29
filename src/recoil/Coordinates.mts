@@ -5,8 +5,8 @@ import { initialViewerConfig } from '../util/setup.mjs';
 export const rcCoordinates = atom<Coordinates>({
   key: 'Coordinates',
   default: {
-    latitude: initialViewerConfig.longitude,
-    longitude: initialViewerConfig.latitude,
+    latitude: initialViewerConfig.latitude,
+    longitude: initialViewerConfig.longitude,
     altitude: initialViewerConfig.altitude,
   },
 });

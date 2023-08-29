@@ -1,10 +1,10 @@
 import * as fs from 'node:fs/promises';
 import { imagesDir } from '../../build/util/files.mjs';
-import { readExif } from './readExif.mjs';
+import { listImageInfo } from './listImageInfo.mjs';
 
 const file = new URL('exif-sample.jpg', imagesDir);
 const log = (...args: Array<unknown>) => console.info(...args);
-for (const tag of readExif((await fs.readFile(file)).buffer, log)) {
+for (const tag of listImageInfo((await fs.readFile(file)).buffer, log)) {
   if (typeof tag.type === 'string') {
     console.info(tag);
   } else {

@@ -2,7 +2,7 @@ import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useRecoilCallback, useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
 import { rcCoordinates } from '../recoil/Coordinates.mjs';
-import { readExif } from '../util/readExif.mjs';
+import { extractImageData } from '../util/extractImageData.mjs';
 import { Icon } from './Icon.js';
 
 type Event = ChangeEvent<HTMLInputElement>;
@@ -78,20 +78,16 @@ const CoordinatesSettingsDiv = styled.div`
 
 const ReadFileButton = () => {
   const onChange = useRecoilCallback(
-    () => (event: ChangeEvent<HTMLInputElement>) => {
-      const file = event.target.files?.[0];
-      if (!file) {
-        return;
-      }
-      alert('未実装です');
-      Promise.resolve()
-        .then(async () => {
-          for await (const [key, value] of readExif(file.stream())) {
-            console.log(`${key}=${value}`);
-          }
-        })
-        .catch(alert);
-    },
+    ({ set }) =>
+      (event: ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (!file) {
+          return;
+        }
+        extractImageData(file)
+          .then((data) => set(rcCoordinates, (v) => ({ ...v, ...data })))
+          .catch(alert);
+      },
     [],
   );
   const id = 'jpeg-file-input';

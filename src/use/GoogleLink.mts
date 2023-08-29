@@ -7,7 +7,7 @@ import { rcNorthYaw } from '../recoil/NorthYaw.mjs';
 export const useGoogleMapLink = () => {
   const { longitude, latitude } = useRecoilValue(rcCoordinates);
   return useMemo(() => {
-    const params = [longitude.toFixed(6), latitude.toFixed(6), '1500m'];
+    const params = [latitude.toFixed(6), longitude.toFixed(6), '1500m'];
     return `https://www.google.com/maps/@${params.join(',')}/data=!3m1!1e3`;
   }, [longitude, latitude]);
 };
@@ -18,8 +18,8 @@ export const useGoogleEarthLink = () => {
   const { yaw, pitch } = useRecoilValue(rcOrientation);
   return useMemo(() => {
     const params = [
-      longitude.toFixed(6),
       latitude.toFixed(6),
+      longitude.toFixed(6),
       `${altitude.toFixed(6)}a`,
       /** 距離 */
       '0d',
