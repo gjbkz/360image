@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import { ChangeEvent, useCallback } from 'react';
 import { useRecoilCallback, useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
 import { rcCoordinates } from '../recoil/Coordinates.mjs';
@@ -9,24 +9,21 @@ type Event = ChangeEvent<HTMLInputElement>;
 
 export const CoordinatesSettings = () => {
   const [coordinates, setCoordinates] = useRecoilState(rcCoordinates);
-  const [latitude, setLatitude] = useState(coordinates.latitude);
-  const [longitude, setLongitude] = useState(coordinates.longitude);
-  const [altitude, setAltitude] = useState(coordinates.altitude);
   const onChangeLat = useCallback(
-    (event: Event) => setLatitude(Number(event.target.value)),
-    [],
+    (event: Event) =>
+      setCoordinates((c) => ({ ...c, latitude: Number(event.target.value) })),
+    [setCoordinates],
   );
   const onChangeLong = useCallback(
-    (event: Event) => setLongitude(Number(event.target.value)),
-    [],
+    (event: Event) =>
+      setCoordinates((c) => ({ ...c, longitude: Number(event.target.value) })),
+    [setCoordinates],
   );
   const onChangeAlt = useCallback(
-    (event: Event) => setAltitude(Number(event.target.value)),
-    [],
+    (event: Event) =>
+      setCoordinates((c) => ({ ...c, altitude: Number(event.target.value) })),
+    [setCoordinates],
   );
-  useEffect(() => {
-    setCoordinates({ latitude, longitude, altitude });
-  }, [setCoordinates, latitude, longitude, altitude]);
   return (
     <>
       <CoordinatesSettingsDiv>

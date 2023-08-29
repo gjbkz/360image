@@ -1,9 +1,11 @@
 {
-  "title": "センターピボット",
+  "title": "センターピボット 200m",
   "latitude": 48.197333,
   "longitude": -103.078194,
-  "northYaw": -49.193000000000005,
+  "northYaw": -48.701,
   "altitude": 535.43,
+  "initPitch": -12.88,
+  "initYaw": 1.19,
   "markers": [
     {
       "pitch": -23.171,

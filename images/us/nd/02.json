@@ -1,8 +1,10 @@
 {
-  "title": "製油所2 (Williams County, ND, USA)",
-  "latitude": 50,
-  "longitude": -100,
-  "northYaw": 0.123456789,
-  "altitude": 500,
+  "title": "製油所2",
+  "latitude": 48.284127749,
+  "longitude": -102.932336388,
+  "northYaw": -42.37,
+  "altitude": 869.77,
+  "initPitch": -42.369,
+  "initYaw": -41.104,
   "markers": []
 }

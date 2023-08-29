@@ -1,8 +1,10 @@
 {
-  "title": "小麦畑とコンバイン (Williams County, ND, USA)",
-  "latitude": 50,
-  "longitude": -100,
-  "northYaw": 0.123456789,
-  "altitude": 500,
+  "title": "小麦畑とコンバイン",
+  "latitude": 48.401052916666664,
+  "longitude": -103.01696358333334,
+  "northYaw": -171.49,
+  "altitude": 831.632,
+  "initPitch": -15.83,
+  "initYaw": 98.51,
   "markers": []
 }

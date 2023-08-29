@@ -51,7 +51,7 @@ export class ImageState {
           new URL(`${basePath}${ext}`, imagesDir),
         );
       } catch (error) {
-        console.error(error);
+        console.error(`${basePath}${ext}`, error);
       }
     } else {
       console.error(`UnexpectedFile: ${basePath}${ext}`);

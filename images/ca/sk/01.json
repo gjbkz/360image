@@ -1,8 +1,10 @@
 {
-  "title": "小麦収穫1, Torquay",
+  "title": "小麦収穫1",
   "latitude": 49.051064,
   "longitude": -103.5008583,
-  "northYaw": 60.0,
+  "northYaw": 137.191,
   "altitude": 778.28,
+  "initPitch": -16.116,
+  "initYaw": -157.212,
   "markers": []
 }

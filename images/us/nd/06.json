@@ -1,8 +1,10 @@
 {
-  "title": "Hess Corporation Tioga Gas Plant (Williams County, ND, USA)",
-  "latitude": 50,
-  "longitude": -100,
-  "northYaw": 0.123456789,
-  "altitude": 500,
+  "title": "Hess Corporation Tioga Gas Plant",
+  "latitude": 48.395602333333336,
+  "longitude": -102.92325555555556,
+  "northYaw": -99.813,
+  "altitude": 1028.1669980119284,
+  "initPitch": -23.589,
+  "initYaw": -42.531,
   "markers": []
 }

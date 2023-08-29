@@ -1,8 +1,10 @@
 {
-  "title": "油田3 (Williams County, ND, USA)",
-  "latitude": 50,
-  "longitude": -100,
-  "northYaw": 0.123456789,
-  "altitude": 500,
+  "title": "油田3",
+  "latitude": 48.44528505555555,
+  "longitude": -102.99457261121086,
+  "northYaw": -57.554,
+  "altitude": 956.462,
+  "initPitch": -29.383,
+  "initYaw": -22.794,
   "markers": []
 }

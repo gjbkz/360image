@@ -18,17 +18,19 @@ export const useDownloadLink = () => {
   useEffect(() => {
     setHref('');
     const timerId = setTimeout(() => {
-      const data = {
+      const data: Record<string, unknown> = {
         ...initialViewerConfig,
         ...coordinates,
         northYaw,
         initPitch,
         initYaw,
         title,
-        markers: markers.map(({ id: _id, ...marker }) => marker),
       };
-      const BOM = new Uint8Array([0xef, 0xbb, 0xbf]);
-      const blob = new Blob([BOM, JSON.stringify(data, null, 2)], {
+      delete data.filename;
+      delete data.location;
+      delete data.markers;
+      data.markers = markers.map(({ id: _id, ...marker }) => marker);
+      const blob = new Blob([JSON.stringify(data, null, 2)], {
         type: 'application/json',
       });
       setHref(URL.createObjectURL(blob));

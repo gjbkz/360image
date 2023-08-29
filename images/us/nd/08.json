@@ -1,8 +1,10 @@
 {
-  "title": "風力発電 (Williams County, ND, USA)",
-  "latitude": 50,
-  "longitude": -100,
-  "northYaw": 0.123456789,
-  "altitude": 500,
+  "title": "風力発電",
+  "latitude": 48.44528505555555,
+  "longitude": -102.99457261121086,
+  "northYaw": -57.451,
+  "altitude": 956.462,
+  "initPitch": -4.755,
+  "initYaw": -40.496,
   "markers": []
 }
