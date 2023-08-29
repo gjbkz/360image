@@ -1,4 +1,10 @@
-import { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import {
+  ChangeEvent,
+  MouseEvent,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 import { useRecoilCallback, useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
 import { rcNorthYaw } from '../recoil/NorthYaw.mjs';
@@ -59,6 +65,7 @@ export const OrientationSettings = () => {
         <div>度</div>
       </OrientationSettingsDiv>
       <SetOrientationButtons />
+      <SetInitialOrientationButton />
     </>
   );
 };
@@ -79,12 +86,46 @@ const OrientationSettingsDiv = styled.div`
 const SetOrientationButtons = () => {
   const setNorthYaw = useRecoilCallback(
     ({ set, snapshot }) =>
-      () => {
+      (event: MouseEvent<HTMLElement>) => {
+        const offset = Number((event.target as HTMLElement).dataset.offset);
+        console.info(offset);
         const { yaw } = snapshot.getLoadable(rcOrientation).getValue();
-        set(rcNorthYaw, yaw);
+        set(rcNorthYaw, yaw + offset);
       },
     [],
   );
+  return (
+    <ButtonsDiv>
+      <span>今の方向を</span>
+      <button
+        className="menu-button-bg"
+        data-offset="-90"
+        onClick={setNorthYaw}
+      >
+        東
+      </button>
+      <span>/</span>
+      <button className="menu-button-bg" data-offset="0" onClick={setNorthYaw}>
+        北
+      </button>
+      <span>/</span>
+      <button className="menu-button-bg" data-offset="90" onClick={setNorthYaw}>
+        西
+      </button>
+      <span>/</span>
+      <button
+        className="menu-button-bg"
+        data-offset="180"
+        onClick={setNorthYaw}
+      >
+        南
+      </button>
+      <span>に設定</span>
+    </ButtonsDiv>
+  );
+};
+
+const SetInitialOrientationButton = () => {
   const setInitialOrientation = useRecoilCallback(
     ({ set, snapshot }) =>
       () => {
@@ -94,29 +135,20 @@ const SetOrientationButtons = () => {
     [],
   );
   return (
-    <ButtonsDiv>
-      <span>今の方向を</span>
-      <button className="menu-button-bg" onClick={setNorthYaw}>
-        北に設定
-      </button>
-      <span>/</span>
-      <button className="menu-button-bg" onClick={setInitialOrientation}>
-        初期方向に設定
-      </button>
-    </ButtonsDiv>
+    <button className="menu-button-bg full" onClick={setInitialOrientation}>
+      <span>今の方向を初期方向に設定</span>
+    </button>
   );
 };
 
 const ButtonsDiv = styled.div`
-  --padding-h: 6px;
   justify-self: center;
   display: grid;
   grid-auto-flow: column;
   align-items: center;
   column-gap: 2px;
-  padding-inline-start: var(--padding-h);
   & > button {
-    padding-inline: var(--padding-h);
+    padding-inline: 6px;
     padding-block: 4px;
   }
 `;
