@@ -1,36 +1,13 @@
-import * as fs from 'node:fs';
-import * as stream from 'node:stream';
+import * as fs from 'node:fs/promises';
 import { imagesDir } from '../../build/util/files.mjs';
 import { readExif } from './readExif.mjs';
 
-const toReadable = (input: stream.Readable): ReadableStream<Uint8Array> => {
-  if (input instanceof ReadableStream) {
-    return input;
-  }
-  if (input instanceof Blob) {
-    return input.stream();
-  }
-  return new ReadableStream<Uint8Array>({
-    start(controller) {
-      input.pipe(
-        new stream.Writable({
-          write(chunk: Buffer, _encoding, callback) {
-            controller.enqueue(new Uint8Array(chunk));
-            callback();
-          },
-          final(callback) {
-            controller.close();
-            callback();
-          },
-        }),
-      );
-    },
-  });
-};
-
 const file = new URL('exif-sample.jpg', imagesDir);
-const result = new Map<string, string>();
-for await (const item of readExif(toReadable(fs.createReadStream(file)))) {
-  result.set(item[0], item[1]);
+const log = (...args: Array<unknown>) => console.info(...args);
+for (const tag of readExif((await fs.readFile(file)).buffer, log)) {
+  if (typeof tag.type === 'string') {
+    console.info(tag);
+  } else {
+    console.info(`0x${tag.tag.toString(16).padStart(4, '0')}`, tag);
+  }
 }
-console.info(result);
