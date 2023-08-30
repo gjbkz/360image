@@ -3,10 +3,10 @@
   "latitude": 48.317527000000005,
   "longitude": -102.8761898611111,
   "northYaw": 173.34,
-  "altitude": 731.936,
+  "elevation": 724,
+  "altitude": 731.9,
   "initPitch": -33.028,
   "initYaw": -40.56,
-  "markers": [],
-  "elevation": 724,
-  "initHfov": 30
+  "initHfov": 30,
+  "markers": []
 }

@@ -2,8 +2,12 @@
   "title": "メットライフ・スタジアム",
   "latitude": 40.810215,
   "longitude": -74.075657,
+  "elevation": 12,
   "altitude": 103.95,
   "northYaw": -67.625,
+  "initPitch": 0,
+  "initYaw": 0,
+  "initHfov": 30,
   "markers": [
     {
       "pitch": -17.809,
@@ -59,9 +63,5 @@
       "pitch": -9.539114092847036,
       "id": "hs-9"
     }
-  ],
-  "elevation": 12,
-  "initPitch": 0,
-  "initYaw": 0,
-  "initHfov": 30
+  ]
 }

@@ -101,7 +101,8 @@ export const CoordinatesSettings = () => {
         />
         <div>m</div>
         <Tooltip>
-          撮影地点の地表からの距離です。Google Earth の機能で利用します。
+          撮影地点の標高です。一般にelevationより大きい値になります。Google
+          Earth の機能で利用します。
         </Tooltip>
       </CoordinatesSettingsDiv>
       <ReadFileButton />

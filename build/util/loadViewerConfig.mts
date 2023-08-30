@@ -27,6 +27,10 @@ export const loadViewerConfig = async (
     elevation = await getElevation(parsed);
     updateJson = true;
   }
+  if (parsed.altitude < elevation) {
+    parsed.altitude = elevation + 30;
+    updateJson = true;
+  }
   if (!isFiniteNumber(initPitch)) {
     initPitch = 0;
     updateJson = true;

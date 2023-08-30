@@ -23,11 +23,12 @@ export const useGoogleEarthLink = () => {
       northYaw,
     });
     const tDeg = 90 + orientation.pitch;
+    const relativeAltitude = coords.altitude - coords.elevation;
     const params = [
       target.latitude.toFixed(8),
       target.longitude.toFixed(8),
       `${coords.elevation.toFixed(0)}a`,
-      `${(coords.altitude / Math.cos(deg2rad(tDeg))).toFixed(0)}d`,
+      `${(relativeAltitude / Math.cos(deg2rad(tDeg))).toFixed(0)}d`,
       `${hfov.toFixed(8)}y`,
       `${(orientation.yaw - northYaw).toFixed(6)}h`,
       `${tDeg.toFixed(6)}t`,

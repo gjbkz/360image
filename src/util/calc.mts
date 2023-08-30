@@ -31,7 +31,8 @@ const bM = 6356752;
 export const getTargetCoordinates = ({
   latitude: latDeg,
   longitude: longDeg,
-  altitude: altM,
+  altitude,
+  elevation,
   pitch: pitchDeg,
   yaw: rYawDeg,
   northYaw: nYawDeg,
@@ -39,6 +40,7 @@ export const getTargetCoordinates = ({
   latitude: number;
   longitude: number;
   altitude: number;
+  elevation: number;
   pitch: number;
   yaw: number;
   northYaw: number;
@@ -48,7 +50,7 @@ export const getTargetCoordinates = ({
   const tRad = deg2rad(tDeg);
   const yawDeg = rYawDeg - nYawDeg;
   const yawRad = deg2rad(yawDeg);
-  const rM = altM * tan(tRad);
+  const rM = (altitude - elevation) * tan(tRad);
   const dxM = rM * sin(yawRad);
   const dyM = rM * cos(yawRad);
   return {
@@ -58,6 +60,7 @@ export const getTargetCoordinates = ({
 };
 
 export const calculateAltitude = ({
+  elevation,
   latitude: latDeg,
   longitude: longDeg,
   pitch: pitchDeg,
@@ -66,6 +69,7 @@ export const calculateAltitude = ({
   targetLatitude: targetLatDeg,
   targetLongitude: targetLongDeg,
 }: {
+  elevation: number;
   latitude: number;
   longitude: number;
   pitch: number;
@@ -84,5 +88,5 @@ export const calculateAltitude = ({
     sin(yawRad) /
     tan(tRad);
   const altMy = (deg2rad(targetLatDeg - latDeg) * bM) / cos(yawRad) / tan(tRad);
-  return (altMx + altMy) / 2;
+  return elevation + (altMx + altMy) / 2;
 };
