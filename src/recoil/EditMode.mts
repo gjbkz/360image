@@ -1,6 +1,7 @@
 import { atom } from 'recoil';
 import { searchParams } from '../util/searchParams.mjs';
 import { alertError } from '../util/alertError.mjs';
+import { dom } from '../util/dom.mjs';
 import { rcRenderContainer } from './Viewer.mjs';
 
 const name = 'edit';
@@ -34,6 +35,29 @@ export const rcEditMode = atom<boolean>({
       });
       onSet(apply);
       getPromise(rcEditMode).then(apply).catch(alert);
+    },
+    ({ onSet, getPromise }) => {
+      const elements = new Set<HTMLElement>();
+      const reset = () => {
+        for (const element of elements) {
+          element.remove();
+        }
+      };
+      const apply = alertError(async (value: boolean) => {
+        reset();
+        if (!value) {
+          return;
+        }
+        const container = await getPromise(rcRenderContainer);
+        const v = dom('div', { class: 'pnlm-crosshair pnlm-crosshair-v' });
+        elements.add(v);
+        const h = dom('div', { class: 'pnlm-crosshair pnlm-crosshair-h' });
+        elements.add(h);
+        container.append(v, h);
+      });
+      onSet(apply);
+      getPromise(rcEditMode).then(apply).catch(alert);
+      return reset;
     },
   ],
 });

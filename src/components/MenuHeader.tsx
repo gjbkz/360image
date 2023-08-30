@@ -5,7 +5,7 @@ import { rcEditMode } from '../recoil/EditMode.mjs';
 import { rcShowMenu } from '../recoil/ShowMenu.mjs';
 import { rcTitle } from '../recoil/Title.mjs';
 import { useRecoilBooleanState } from '../use/RecoilBooleanState.mjs';
-import { initialViewerConfig } from '../util/setup.mjs';
+import { indexPagePath, initialViewerConfig } from '../util/setup.mjs';
 import { Icon, IconButton } from './Icon.js';
 
 export const MenuHeader = () => {
@@ -14,7 +14,15 @@ export const MenuHeader = () => {
   const title = useRecoilValue(rcTitle);
   return (
     <HeaderDiv>
-      <Toggle className="menu-button-bg" onClick={toggle}>
+      <Back href={indexPagePath} className="menu-button-bg" title="一覧に戻る">
+        <Icon icon="arrow_back_ios" size={18} />
+      </Back>
+      <hr />
+      <Toggle
+        className="menu-button-bg"
+        onClick={toggle}
+        title={opened ? 'メニューを閉じる' : 'メニューを開く'}
+      >
         <Icon icon={opened ? 'close' : 'menu'} />
       </Toggle>
       <h1>
@@ -28,16 +36,25 @@ export const MenuHeader = () => {
 
 const HeaderDiv = styled.div`
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: auto max-content auto auto;
+  grid-template-rows: auto auto;
   align-items: center;
   justify-content: start;
   justify-items: start;
-  column-gap: 4px;
   padding-block: 4px;
-  padding-inline-start: 2px;
-  padding-inline-end: 8px;
+  padding-inline: var(--padding-h);
+  & > hr {
+    grid-row: 1 / -1;
+    margin-inline: 3px;
+    inline-size: 1px;
+    block-size: 80%;
+    background-color: currentColor;
+  }
+  & > h1,
+  & > h2 {
+    margin-inline-start: 4px;
+  }
   & > h1 {
-    grid-column: 2 / 3;
     grid-row: 1 / 2;
     display: grid;
     grid-auto-flow: column;
@@ -45,18 +62,29 @@ const HeaderDiv = styled.div`
     column-gap: 4px;
   }
   & > h2 {
-    grid-column: 2 / 3;
     grid-row: 2 / 3;
     font-size: 90%;
   }
 `;
 
-const Toggle = styled.button`
-  grid-column: 1 / 2;
-  grid-row: 1 / 3;
+const Back = styled.a`
+  grid-row: 1 / -1;
+  align-self: stretch;
   display: grid;
   place-content: center;
-  padding: 2px;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto;
+  text-decoration: none;
+  margin-inline-start: -4px;
+  padding-inline: 2px;
+`;
+
+const Toggle = styled.button`
+  grid-row: 1 / -1;
+  align-self: stretch;
+  display: grid;
+  place-content: center;
+  padding-inline: 6px;
 `;
 
 const EditTitleButton = () => {

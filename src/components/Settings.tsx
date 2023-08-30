@@ -5,7 +5,6 @@ import { rcMarker } from '../recoil/Markers.mjs';
 import { rcTitle } from '../recoil/Title.mjs';
 import { rcViewer } from '../recoil/Viewer.mjs';
 import { useDownloadLink } from '../use/DownloadLink.mjs';
-import { indexPagePath } from '../util/setup.mjs';
 import { CoordinatesSettings } from './CoordinatesSettings.js';
 import { GoogleLinks } from './GoogleLinks.js';
 import { Icon } from './Icon.js';
@@ -23,9 +22,9 @@ export const Settings = () => {
   const editMode = useRecoilValue(rcEditMode);
   return (
     <Container>
-      <hr />
+      <Hr />
       <GoogleLinks />
-      <hr />
+      <Hr />
       <Toggles>
         <ShowMarkersToggle />
         <VerticalToggle />
@@ -33,56 +32,47 @@ export const Settings = () => {
         <OrientationToggle />
         <EditModeToggle />
       </Toggles>
-      <hr />
+      <Hr />
       <MarkersList>{editMode && <AddMarkerButton />}</MarkersList>
       {editMode && (
         <>
-          <hr />
+          <Hr />
           <OrientationSettings />
-          <hr />
+          <Hr />
           <CoordinatesSettings />
-          <hr />
+          <Hr />
           <DownloadButton />
         </>
       )}
-      <hr />
-      <Back href={indexPagePath}>
-        <Icon icon="arrow_back_ios" size={16} />
-        <span>一覧に戻る</span>
-      </Back>
     </Container>
   );
 };
 
 const Container = styled.section`
-  --padding-h: 8px;
-  --padding-v: 8px;
   display: grid;
   grid-auto-flow: row;
   justify-items: start;
-  padding-block-end: var(--padding-v);
-  padding-inline: var(--padding-h);
   min-inline-size: 200px;
-  overflow-y: auto;
-  & > hr {
-    inline-size: 100%;
-    block-size: 1px;
-    margin-block: var(--padding-v);
-    background-color: currentColor;
-    &:first-child {
-      margin-block-start: 0;
-    }
+  padding-block-end: var(--padding-v);
+  & > * {
+    padding-inline: var(--padding-h);
+  }
+  & > .full {
+    margin-inline: var(--padding-h);
   }
 `;
 
-const Back = styled.a`
-  display: grid;
-  grid-template-columns: max-content 1fr;
-  align-items: center;
-  column-gap: 4px;
-  text-decoration: none;
-  &:hover {
-    text-decoration: underline;
+const Hr = styled.div`
+  justify-self: stretch;
+  margin-inline: var(--padding-h);
+  block-size: 1px;
+  margin-block: var(--padding-v);
+  background-color: currentColor;
+  &:first-child {
+    position: sticky;
+    inset-inline: var(--padding-h);
+    inset-block-start: 0;
+    margin-block-start: 0;
   }
 `;
 

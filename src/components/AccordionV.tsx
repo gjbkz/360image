@@ -3,17 +3,17 @@ import { styled } from 'styled-components';
 import type { CSSProperties, PropsWithChildren } from 'react';
 import { noop } from '../util/noop.mjs';
 
-export interface CollapsableProps {
+export interface AccordionVProps {
   opened?: boolean;
 }
 
 const closedStyle: CSSProperties = { width: 0, height: 0 };
 const openedStyle: CSSProperties = {};
 
-export const Collapsable = ({
+export const AccordionV = ({
   opened,
   children,
-}: PropsWithChildren<CollapsableProps>) => {
+}: PropsWithChildren<AccordionVProps>) => {
   const [container, setContainer] = useState<HTMLDivElement | null>(null);
   const [style, setStyle] = useState<CSSProperties>(
     opened ? openedStyle : closedStyle,
@@ -22,11 +22,11 @@ export const Collapsable = ({
     if (!container) {
       return noop;
     }
-    const rect = getNatualRect(container);
+    const rect = getContentRect(container);
     setStyle({
-      width: Math.max(container.scrollWidth, rect.width),
-      height: Math.min(container.scrollHeight, rect.height),
-      overflow: 'hidden',
+      width: Math.max(rect.scrollWidth, rect.width),
+      height: Math.min(rect.height, rect.scrollHeight),
+      overflow: rect.height < rect.scrollHeight ? 'scroll' : 'hidden',
     });
     if (opened) {
       return noop;
@@ -52,14 +52,21 @@ export const Collapsable = ({
   );
 };
 
-const getNatualRect = (element: HTMLElement) => {
+const getContentRect = (element: HTMLElement) => {
   const { style } = element;
   const { width, height } = style;
-  style.width = style.height = '';
+  style.width = style.height = 'auto';
   const rect = element.getBoundingClientRect();
+  const { scrollWidth, scrollHeight } = element;
   style.width = width;
   style.height = height;
-  return rect;
+  const { round } = Math;
+  return {
+    width: round(rect.width),
+    height: round(rect.height),
+    scrollWidth: round(scrollWidth),
+    scrollHeight: round(scrollHeight),
+  };
 };
 
 const Container = styled.div`
@@ -72,5 +79,25 @@ const Container = styled.div`
   &.closed {
     transition-delay: 150ms, 150ms, 0s;
     opacity: 0;
+  }
+  --sb-track-color: rgba(255, 255, 255, 0);
+  --sb-thumb-color: rgba(255, 255, 255, 1);
+  --sb-size: 6px;
+  scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+  &::-webkit-scrollbar {
+    width: var(--sb-size);
+  }
+  &::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+  }
+  &::-webkit-scrollbar-thumb {
+    background: transparent;
+    background-image: linear-gradient(
+      0deg,
+      var(--sb-thumb-color),
+      var(--sb-thumb-color)
+    );
+    background-repeat: no-repeat;
+    background-size: 1.4px calc(100% - 6px);
   }
 `;

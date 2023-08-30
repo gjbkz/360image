@@ -9,7 +9,12 @@ export const rcViewer = atom<Viewer>({
 });
 
 export const rcRenderContainer = selector<HTMLElement>({
-  key: 'ViewerContainer',
+  key: 'RenderContainer',
   get: ({ get }) =>
     query('.pnlm-render-container', get(rcViewer).getContainer()),
+});
+
+export const rcViewerContainer = selector<HTMLElement>({
+  key: 'ViewerContainer',
+  get: ({ get }) => get(rcViewer).getContainer(),
 });

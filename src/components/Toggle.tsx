@@ -53,7 +53,7 @@ const ToggleButton = styled.button`
     height: var(--knobHeight);
     border-radius: calc(var(--knobHeight) / 2);
     color: var(--col-text);
-    background-color: rgba(255, 255, 255, 1);
+    background-color: #ffffff;
     transition-property: left;
     transition-duration: 0.1s;
     transition-timing-function: ease-in-out;

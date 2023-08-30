@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { RecoilRoot, useRecoilValue } from 'recoil';
 import { rcShowMenu } from '../recoil/ShowMenu.mjs';
-import { Collapsable } from './Collapsable.js';
+import { AccordionV } from './AccordionV.js';
 import { SyncCoordinates } from './SyncCoordinates.js';
 import { MenuHeader } from './MenuHeader.js';
 import { Settings } from './Settings.js';
@@ -20,9 +20,9 @@ const Body = () => {
   return (
     <>
       <MenuHeader />
-      <Collapsable opened={opened}>
+      <AccordionV opened={opened}>
         <Settings />
-      </Collapsable>
+      </AccordionV>
       <SyncCoordinates />
       <SyncEditMode />
     </>

@@ -61,23 +61,8 @@ export const rcMarkers = atom<Array<Marker>>({
             }
           }
         }
-        if (editMode) {
-          const marker = {
-            id: 'O',
-            yaw: 0,
-            pitch: -90,
-            text: '',
-          };
-          viewer.addHotSpot({
-            ...marker,
-            createTooltipFunc,
-            createTooltipArgs: marker,
-          });
-        }
       };
-      onSet((markers) => {
-        apply(markers).catch(alert);
-      });
+      onSet((markers) => apply(markers).catch(alert));
       getPromise(rcMarkers).then(apply).catch(alert);
     },
   ],
@@ -105,9 +90,7 @@ export const rcFocusedMarker = atom<string | null>({
         url.hash = id;
         history.replaceState(null, '', url);
       };
-      onSet((markers) => {
-        apply(markers).catch(alert);
-      });
+      onSet((markers) => apply(markers).catch(alert));
     },
   ],
 });
