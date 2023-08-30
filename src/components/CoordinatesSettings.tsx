@@ -86,8 +86,7 @@ export const CoordinatesSettings = () => {
         />
         <div>m</div>
         <Tooltip>
-          緯度経度で指定される地点の標高です。Google Map および Google Earth
-          の機能で利用します。
+          緯度経度で指定される地点の標高です。Google Earth の機能で利用します。
         </Tooltip>
         <div>高度</div>
         <div>altitude</div>
@@ -99,8 +98,7 @@ export const CoordinatesSettings = () => {
         />
         <div>m</div>
         <Tooltip>
-          撮影地点の地表からの距離です。Google Map および Google Earth
-          の機能で利用します。
+          撮影地点の地表からの距離です。Google Earth の機能で利用します。
         </Tooltip>
       </CoordinatesSettingsDiv>
       <ReadFileButton />
