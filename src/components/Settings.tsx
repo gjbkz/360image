@@ -38,9 +38,9 @@ export const Settings = () => {
       {editMode && (
         <>
           <hr />
-          <CoordinatesSettings />
-          <hr />
           <OrientationSettings />
+          <hr />
+          <CoordinatesSettings />
           <hr />
           <DownloadButton />
         </>

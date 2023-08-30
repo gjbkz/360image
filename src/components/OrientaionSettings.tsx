@@ -9,6 +9,7 @@ import { useRecoilCallback, useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
 import { rcNorthYaw } from '../recoil/NorthYaw.mjs';
 import { rcInitialOrientation, rcOrientation } from '../recoil/Orientation.mjs';
+import { Tooltip } from './Tooltip.js';
 
 type Event = ChangeEvent<HTMLInputElement>;
 
@@ -33,36 +34,60 @@ export const OrientationSettings = () => {
     (event: Event) => setNorthYaw(Number(event.target.value)),
     [setNorthYaw],
   );
+  const initOrientation = useRecoilCallback(
+    ({ set }) =>
+      () => {
+        set(rcOrientation, orientation);
+      },
+    [orientation],
+  );
+  const setToNorth = useRecoilCallback(
+    ({ set }) =>
+      () => {
+        set(rcOrientation, (c) => ({ ...c, yaw: northYaw }));
+      },
+    [northYaw],
+  );
   return (
     <>
       <OrientationSettingsDiv>
-        <div>北方向</div>
-        <div>north yaw</div>
+        <OrientationButton className="menu-button-bg" onClick={setToNorth}>
+          北方向 northYaw
+        </OrientationButton>
         <input
           type="number"
           value={northYaw}
           onChange={onChangeNorthYaw}
-          step={0.01}
+          step={0.25}
         />
         <div>度</div>
-        <div>初期ピッチ</div>
-        <div>default pitch</div>
+        <Tooltip>画像内の北方向を設定します。</Tooltip>
+        <OrientationButton className="menu-button-bg" onClick={initOrientation}>
+          初期ピッチ initPitch
+        </OrientationButton>
         <input
           type="number"
           value={orientation.pitch}
           onChange={onChangePitch}
-          step={0.01}
+          step={0.25}
         />
         <div>度</div>
-        <div>初期ヨー</div>
-        <div>default yaw</div>
+        <Tooltip>
+          マーカーが指定されない場合に最初に表示する方向（横）を指定します。
+        </Tooltip>
+        <OrientationButton className="menu-button-bg" onClick={initOrientation}>
+          初期ヨー initYaw
+        </OrientationButton>
         <input
           type="number"
           value={orientation.yaw}
           onChange={onChangeYaw}
-          step={0.01}
+          step={0.25}
         />
         <div>度</div>
+        <Tooltip>
+          マーカーが指定されない場合に最初に表示する方向（縦）を指定します。
+        </Tooltip>
       </OrientationSettingsDiv>
       <SetOrientationButtons />
       <SetInitialOrientationButton />
@@ -70,13 +95,18 @@ export const OrientationSettings = () => {
   );
 };
 
+const OrientationButton = styled.button`
+  text-align: start;
+`;
+
 const OrientationSettingsDiv = styled.div`
   justify-self: center;
   margin-block: 4px;
   display: grid;
   row-gap: 2px;
   column-gap: 6px;
-  grid-template-columns: max-content max-content 68px max-content;
+  grid-template-columns: max-content 74px max-content max-content;
+  align-items: center;
   & > input {
     text-align: end;
     border-block-end: solid 1px currentColor;

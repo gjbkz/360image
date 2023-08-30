@@ -32,7 +32,7 @@ export interface APIEvent {
   scenechange: unknown;
   touchend: unknown;
   touchstart: unknown;
-  zoomchange: unknown;
+  zoomchange: number;
 }
 
 export interface Viewer {

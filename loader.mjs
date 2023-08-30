@@ -34,6 +34,7 @@ export const load = async (url, context, nextLoad) => {
       bundle: true,
       write: false,
       outfile: 'out.mjs',
+      sourcemap: 'inline',
     });
     return {
       format: 'module',

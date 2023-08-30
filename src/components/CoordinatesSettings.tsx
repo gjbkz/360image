@@ -1,27 +1,50 @@
 import { ChangeEvent, useCallback } from 'react';
 import { useRecoilCallback, useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
+import { isFiniteNumber } from '@nlib/typing';
 import { rcCoordinates } from '../recoil/Coordinates.mjs';
 import { extractImageData } from '../util/extractImageData.mjs';
 import { Icon } from './Icon.js';
+import { Tooltip } from './Tooltip.js';
 
 type Event = ChangeEvent<HTMLInputElement>;
 
 export const CoordinatesSettings = () => {
   const [coordinates, setCoordinates] = useRecoilState(rcCoordinates);
   const onChangeLat = useCallback(
-    (event: Event) =>
-      setCoordinates((c) => ({ ...c, latitude: Number(event.target.value) })),
+    (event: Event) => {
+      const value = Number(event.target.value);
+      if (isFiniteNumber(value)) {
+        setCoordinates((c) => ({ ...c, latitude: value }));
+      }
+    },
     [setCoordinates],
   );
   const onChangeLong = useCallback(
-    (event: Event) =>
-      setCoordinates((c) => ({ ...c, longitude: Number(event.target.value) })),
+    (event: Event) => {
+      const value = Number(event.target.value);
+      if (isFiniteNumber(value)) {
+        setCoordinates((c) => ({ ...c, longitude: value }));
+      }
+    },
     [setCoordinates],
   );
   const onChangeAlt = useCallback(
-    (event: Event) =>
-      setCoordinates((c) => ({ ...c, altitude: Number(event.target.value) })),
+    (event: Event) => {
+      const value = Number(event.target.value);
+      if (isFiniteNumber(value)) {
+        setCoordinates((c) => ({ ...c, altitude: value }));
+      }
+    },
+    [setCoordinates],
+  );
+  const onChangeElv = useCallback(
+    (event: Event) => {
+      const value = Number(event.target.value);
+      if (isFiniteNumber(value)) {
+        setCoordinates((c) => ({ ...c, elevation: value }));
+      }
+    },
     [setCoordinates],
   );
   return (
@@ -36,6 +59,10 @@ export const CoordinatesSettings = () => {
           step={0.0001}
         />
         <div>度</div>
+        <Tooltip>
+          撮影地点の緯度です。Google Map および Google Earth
+          の機能で利用します。
+        </Tooltip>
         <div>経度</div>
         <div>longitude</div>
         <input
@@ -45,15 +72,36 @@ export const CoordinatesSettings = () => {
           step={0.0001}
         />
         <div>度</div>
+        <Tooltip>
+          撮影地点の経度です。Google Map および Google Earth
+          の機能で利用します。
+        </Tooltip>
+        <div>標高</div>
+        <div>elevation</div>
+        <input
+          type="number"
+          value={coordinates.elevation}
+          onChange={onChangeElv}
+          step={1}
+        />
+        <div>m</div>
+        <Tooltip>
+          緯度経度で指定される地点の標高です。Google Map および Google Earth
+          の機能で利用します。
+        </Tooltip>
         <div>高度</div>
         <div>altitude</div>
         <input
           type="number"
           value={coordinates.altitude}
           onChange={onChangeAlt}
-          step={0.01}
+          step={1}
         />
         <div>m</div>
+        <Tooltip>
+          撮影地点の地表からの距離です。Google Map および Google Earth
+          の機能で利用します。
+        </Tooltip>
       </CoordinatesSettingsDiv>
       <ReadFileButton />
     </>
@@ -66,7 +114,8 @@ const CoordinatesSettingsDiv = styled.div`
   display: grid;
   row-gap: 2px;
   column-gap: 6px;
-  grid-template-columns: max-content max-content max-content max-content;
+  grid-template-columns: max-content max-content 100px max-content max-content;
+  align-items: center;
   & > input {
     text-align: end;
     border-block-end: solid 1px currentColor;

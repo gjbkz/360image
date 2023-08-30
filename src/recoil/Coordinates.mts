@@ -8,5 +8,6 @@ export const rcCoordinates = atom<Coordinates>({
     latitude: initialViewerConfig.latitude,
     longitude: initialViewerConfig.longitude,
     altitude: initialViewerConfig.altitude,
+    elevation: initialViewerConfig.elevation,
   },
 });

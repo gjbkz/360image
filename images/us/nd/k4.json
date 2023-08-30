@@ -6,5 +6,7 @@
   "altitude": 701.7340067340067,
   "initPitch": -28.842,
   "initYaw": -23.242,
-  "markers": []
+  "markers": [],
+  "elevation": 689,
+  "initHfov": 30
 }

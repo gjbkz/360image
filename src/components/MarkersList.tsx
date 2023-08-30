@@ -14,7 +14,7 @@ export const MarkersList = ({ children }: PropsWithChildren) => {
     <MarkersDiv className={editMode ? 'editable' : undefined}>
       {markers.map((marker, index) => (
         <Fragment key={marker.id}>
-          <div>({index + 1})</div>
+          <MarkerIndex>{index + 1}.</MarkerIndex>
           <MarkerName marker={marker} />
           {editMode && <EditMarker marker={marker} />}
           {editMode && <DeleteMarker marker={marker} />}
@@ -27,6 +27,10 @@ export const MarkersList = ({ children }: PropsWithChildren) => {
     </MarkersDiv>
   );
 };
+
+const MarkerIndex = styled.div`
+  justify-self: end;
+`;
 
 const MarkersDiv = styled.div`
   justify-self: stretch;
@@ -72,7 +76,10 @@ const EditMarker = ({ marker }: { marker: Marker }) => {
     ({ set }) =>
       () => {
         const coords = `${marker.yaw.toFixed(2)}, ${marker.pitch.toFixed(2)}`;
-        const text = prompt(`${marker.text}（${coords}）を編集中`, marker.text);
+        const text = prompt(
+          `${marker.text}（${coords}）を編集する`,
+          marker.text,
+        );
         if (text) {
           set(rcMarker(marker.id), { ...marker, text });
         }

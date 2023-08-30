@@ -3,7 +3,6 @@ import { createTypeChecker, isFiniteNumber, isString } from '@nlib/typing';
 export interface Marker {
   pitch: number;
   yaw: number;
-  hfov?: number;
   text: string;
   id: string;
 }
@@ -19,6 +18,7 @@ export interface Coordinates {
   latitude: number;
   longitude: number;
   altitude: number;
+  elevation: number;
 }
 
 export interface ViewerConfig extends Coordinates {
@@ -29,6 +29,7 @@ export interface ViewerConfig extends Coordinates {
   markers: Array<Marker>;
   initPitch: number;
   initYaw: number;
+  initHfov: number;
 }
 
 export const isViewerConfig = createTypeChecker<ViewerConfig>('ViewerConfig', {
@@ -42,6 +43,8 @@ export const isViewerConfig = createTypeChecker<ViewerConfig>('ViewerConfig', {
   altitude: isFiniteNumber,
   initPitch: isFiniteNumber,
   initYaw: isFiniteNumber,
+  initHfov: isFiniteNumber,
+  elevation: isFiniteNumber,
 });
 
 export interface GroupConfig {

@@ -1,4 +1,4 @@
-import { DefaultValue, atom } from 'recoil';
+import { DefaultValue, atom, selector } from 'recoil';
 import type { Viewer } from '../util/pannellum.mjs';
 import { noop } from '../util/noop.mjs';
 import { initialViewerConfig } from '../util/setup.mjs';
@@ -17,7 +17,7 @@ export const rcInitialOrientation = atom<Orientation>({
   },
 });
 
-export const rcOrientation = atom<Orientation>({
+export const rc$Orientation = atom<Orientation>({
   key: 'Orientation',
   default: {
     pitch: initialViewerConfig.initPitch,
@@ -27,6 +27,7 @@ export const rcOrientation = atom<Orientation>({
     ({ setSelf, getPromise }) => {
       let reset = noop;
       const start = (viewer: Viewer) => {
+        reset();
         reset = startWatch(viewer, () =>
           setSelf((current) => {
             const pitch = Math.round(viewer.getPitch() * 1000) / 1000;
@@ -43,7 +44,7 @@ export const rcOrientation = atom<Orientation>({
         );
       };
       getPromise(rcViewer).then(start).catch(alert);
-      return reset;
+      return () => reset();
     },
   ],
 });
@@ -96,3 +97,15 @@ const startWatch = (viewer: Viewer, sync: () => void) => {
     removeEventListener('pointerup', track);
   };
 };
+
+export const rcOrientation = selector<Orientation>({
+  key: 'SetOrientation',
+  get: ({ get }) => get(rc$Orientation),
+  set: ({ get }, orientation) => {
+    if (orientation instanceof DefaultValue) {
+      return;
+    }
+    const viewer = get(rcViewer);
+    viewer.lookAt(orientation.pitch, orientation.yaw, viewer.getHfov(), 600);
+  },
+});

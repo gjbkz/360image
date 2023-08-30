@@ -42,12 +42,12 @@ export class ImageState {
       : null;
   }
 
-  public add(basePath: string, ext: string) {
+  public async add(basePath: string, ext: string) {
     if (ext === '.jpg') {
       this.imageExt = ext;
     } else if (ext === '.json') {
       try {
-        this.partialConfig = loadViewerConfig(
+        this.partialConfig = await loadViewerConfig(
           new URL(`${basePath}${ext}`, imagesDir),
         );
       } catch (error) {
