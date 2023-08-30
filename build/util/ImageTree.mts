@@ -84,18 +84,17 @@ export class ImageTree {
     return this;
   }
 
-  public add(relativeFilePath: string) {
+  public async add(relativeFilePath: string) {
     if (relativeFilePath.endsWith('/group.json')) {
       const path = relativeFilePath.slice(0, -'/group.json'.length);
       this.getNode(path).loadGroupConfig();
-      return null;
+      return;
     }
     const ext = relativeFilePath.slice(relativeFilePath.lastIndexOf('.'));
     const pagePath = relativeFilePath.slice(0, -ext.length);
     const node = this.getNode(dirPath(pagePath));
     const leaf = node.getLeaf(pagePath);
-    leaf.add(pagePath, ext);
-    return leaf.filled;
+    await leaf.add(pagePath, ext);
   }
 
   private get sortedChildren(): Array<[string, ImageTree]> {
@@ -141,6 +140,21 @@ export class ImageTree {
 
   public get depth(): number {
     return this.parent ? this.parent.depth + 1 : 0;
+  }
+
+  public *walk(): Generator<ImageTree> {
+    yield this;
+    for (const child of this.children.values()) {
+      yield* child.walk();
+    }
+  }
+
+  public *listImages(): Generator<ImageState> {
+    for (const node of this.walk()) {
+      for (const leaf of node.leaves.values()) {
+        yield leaf;
+      }
+    }
   }
 }
 

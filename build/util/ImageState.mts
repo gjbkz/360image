@@ -37,9 +37,15 @@ export class ImageState {
   }
 
   public get filled(): FilledImageState | null {
-    return this.imageExt && this.partialConfig
-      ? (this as FilledImageState)
-      : null;
+    if (!this.imageExt) {
+      console.info(`NoImageExt: ${this.imagePath}`);
+      return null;
+    }
+    if (!this.partialConfig) {
+      console.info(`NoImageConfig: ${this.imagePath}`);
+      return null;
+    }
+    return this as FilledImageState;
   }
 
   public async add(basePath: string, ext: string) {
