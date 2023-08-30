@@ -9,7 +9,13 @@ export interface IconProps extends SVGAttributes<SVGSVGElement> {
 }
 
 export const Icon = ({ icon, size = 24, ...props }: IconProps) => (
-  <svg {...props} width={size} height={size} viewBox="0 0 24 24">
+  <svg
+    {...props}
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    className={classnames('icon', props.className)}
+  >
     <use href={`#icon-${icon}`} />
   </svg>
 );

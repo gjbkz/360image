@@ -3,9 +3,11 @@
   "latitude": 35.89122011,
   "longitude": 140.1433959,
   "northYaw": -53.273,
-  "altitude": 500,
+  "altitude": 30,
+  "elevation": 19,
   "initPitch": -24.433,
   "initYaw": -32.819,
+  "initHfov": 30,
   "markers": [
     {
       "pitch": -1.21,
@@ -31,7 +33,5 @@
       "text": "台地にできた住宅地",
       "id": "hs-4"
     }
-  ],
-  "elevation": 19,
-  "initHfov": 30
+  ]
 }

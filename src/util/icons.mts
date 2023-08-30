@@ -17,6 +17,8 @@ export const availableIcons = [
   'add_photo_alternate',
   'autorenew',
   'info',
+  'landscape',
+  'calculate',
 ] as const;
 
 export const createMarkerIcon = () =>
