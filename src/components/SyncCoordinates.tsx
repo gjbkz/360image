@@ -35,11 +35,8 @@ const useCoordinateElement = () => {
     ({ snapshot }) =>
       () => {
         const { yaw, pitch } = snapshot.getLoadable(rcOrientation).getValue();
-        const hfov = snapshot.getLoadable(rcHfov).getValue();
         if (navigator.clipboard) {
-          navigator.clipboard.writeText(
-            JSON.stringify({ yaw, pitch, hfov }, null, 2),
-          );
+          navigator.clipboard.writeText(`y${yaw}p${pitch}`);
           element.textContent += '\nコピーしました';
         } else {
           element.textContent += '\nコピーできません';

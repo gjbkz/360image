@@ -14,6 +14,7 @@ export const rcHfov = atom<number>({
         reset();
         viewer.on('zoomchange', setSelf);
         reset = () => viewer.off('zoomchange', setSelf);
+        setSelf(viewer.getHfov());
       };
       getPromise(rcViewer).then(start).catch(alert);
       return () => reset();

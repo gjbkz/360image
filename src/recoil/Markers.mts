@@ -11,6 +11,16 @@ const createTooltipFunc = (element: HTMLElement, marker: Marker) => {
   element.append(dom('div', null, marker.text), createMarkerIcon());
 };
 
+const createTick = (element: HTMLElement, d: number) => {
+  element.classList.add('tick');
+  if (d % 90 === 0) {
+    element.classList.add('main');
+  } else if (d % 15 === 0) {
+    element.classList.add('sub');
+  }
+  element.dataset.d = `${d}`;
+};
+
 export const rcMarkers = atom<Array<Marker>>({
   key: 'Markers',
   default: initialViewerConfig.markers,
@@ -32,34 +42,16 @@ export const rcMarkers = atom<Array<Marker>>({
             createTooltipArgs: marker,
           });
         }
-        for (let i = 0; i < 4; i++) {
-          const marker = {
-            id: 'NESW'[i],
-            yaw: northYaw + i * 90,
-            pitch: 0,
-            text: '北東南西'[i],
-          };
+        const degStep = editMode ? 15 : 90;
+        for (let deg = 0; deg < 360; deg += degStep) {
           viewer.addHotSpot({
-            ...marker,
-            createTooltipFunc,
-            createTooltipArgs: marker,
+            id: `${deg}deg`,
+            yaw: northYaw + deg,
+            pitch: 0,
+            text: `${deg}`,
+            createTooltipFunc: createTick,
+            createTooltipArgs: deg,
           });
-          if (editMode) {
-            for (let j = 1; j < 6; j += 1) {
-              const deg = i * 90 + j * 15;
-              const marker = {
-                id: `${deg}deg`,
-                yaw: northYaw + deg,
-                pitch: 0,
-                text: `${deg}`,
-              };
-              viewer.addHotSpot({
-                ...marker,
-                createTooltipFunc,
-                createTooltipArgs: marker,
-              });
-            }
-          }
         }
       };
       onSet((markers) => apply(markers).catch(alert));

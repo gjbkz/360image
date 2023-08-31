@@ -6,6 +6,7 @@ import { SyncCoordinates } from './SyncCoordinates.js';
 import { MenuHeader } from './MenuHeader.js';
 import { Settings } from './Settings.js';
 import { SyncEditMode } from './SyncEditMode.js';
+import { LimitHfov } from './LimitHfov.js';
 
 export const Menu = () => (
   <RecoilRoot>
@@ -25,6 +26,7 @@ const Body = () => {
       </AccordionV>
       <SyncCoordinates />
       <SyncEditMode />
+      <LimitHfov />
     </>
   );
 };

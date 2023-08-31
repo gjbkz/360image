@@ -16,8 +16,11 @@ export interface Config {
   keyboardZoom?: boolean;
   showControls?: boolean;
   friction?: number;
+  minPitch?: number;
   maxPitch?: number;
   minHfov?: number;
+  maxHfov?: number;
+  hfov?: number;
 }
 
 /** https://pannellum.org/documentation/reference/#api-events */
@@ -49,11 +52,15 @@ export interface Viewer {
     callback?: () => void,
   ) => Viewer;
   getYaw: () => number;
-  setYaw: (yaw: number) => Viewer;
+  setYaw: (yaw: number, animated: number) => Viewer;
   getPitch: () => number;
-  setPitch: (pitch: number) => Viewer;
+  setPitch: (pitch: number, animated: number) => Viewer;
+  getPitchBounds: () => [number, number];
+  setPitchBounds: (bounds: [number, number]) => Viewer;
   getHfov: () => number;
-  setHfov: (hfov: number) => Viewer;
+  setHfov: (hfov: number, animated: number) => Viewer;
+  getHfovBounds: () => [number, number];
+  setHfovBounds: (bounds: [number, number]) => Viewer;
   removeHotSpot: (id: string) => boolean;
   addHotSpot: <T>(hotSpot: HotSpot<T>, sceneId?: string) => boolean;
   on: <T extends keyof APIEvent>(

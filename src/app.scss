@@ -288,6 +288,47 @@ main#panorama {
       fill: currentColor;
     }
   }
+  &.tick {
+    font-size: 11px;
+    line-height: 1.2;
+    &::after {
+      content: '';
+      inline-size: 1px;
+      block-size: 12px;
+      background-color: #ffffff;
+    }
+    &.sub {
+      &::before {
+        content: attr(data-d);
+      }
+    }
+    &.main {
+      font-size: 12px;
+      &::after {
+        block-size: 16px;
+      }
+    }
+    &[data-d='0'] {
+      &::before {
+        content: '北';
+      }
+    }
+    &[data-d='90'] {
+      &::before {
+        content: '東';
+      }
+    }
+    &[data-d='180'] {
+      &::before {
+        content: '南';
+      }
+    }
+    &[data-d='270'] {
+      &::before {
+        content: '西';
+      }
+    }
+  }
 }
 .pnlm-grab {
   cursor: grab;
