@@ -360,9 +360,14 @@ main#panorama {
   }
 }
 .menu-button-bg {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  column-gap: 3px;
   border-radius: var(--border-radius);
   background-color: rgba(255, 255, 255, 0);
   transition: background-color 0.1s linear;
+  text-decoration: none;
   cursor: pointer;
   &:hover {
     background-color: rgba(255, 255, 255, 0.1);
@@ -370,28 +375,34 @@ main#panorama {
   &:active {
     background-color: rgba(255, 255, 255, 0.2);
   }
+  & > span {
+    margin-block-start: 2px;
+  }
   &.full {
     grid-column: 1 / -1;
     justify-self: stretch;
-    display: grid;
-    grid-auto-flow: column;
     justify-content: center;
-    align-items: center;
-    column-gap: 4px;
     padding-inline: 8px;
     padding-block: 2px;
-    text-decoration: none;
+  }
+  & > .tooltip,
+  & > .icon {
+    &:first-child {
+      margin-inline-start: -6px;
+    }
+    &:last-child {
+      margin-inline-end: -6px;
+    }
+  }
+  &.nonpad {
     & > .tooltip,
     & > .icon {
       &:first-child {
-        margin-inline-start: -12px;
+        margin-inline-start: unset;
       }
       &:last-child {
-        margin-inline-end: -12px;
+        margin-inline-end: unset;
       }
-    }
-    & > span {
-      margin-block-start: 2px;
     }
   }
 }

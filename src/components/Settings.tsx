@@ -119,17 +119,42 @@ const DownloadButton = () => {
   const title = useRecoilValue(rcTitle);
   const href = useDownloadLink();
   return (
-    <a
-      className="menu-button-bg full"
-      download={`${title}.json`}
-      href={href}
-      aria-disabled={href ? undefined : true}
-    >
-      <Icon
-        className={href ? undefined : 'rotate'}
-        icon={href ? 'download' : 'autorenew'}
-      />
-      <span>データを{href ? 'ダウンロード' : '更新中'}</span>
-    </a>
+    <Buttons>
+      <a
+        className="menu-button-bg"
+        download={`${title}.json`}
+        href={href}
+        aria-disabled={href ? undefined : true}
+      >
+        <Icon
+          className={href ? undefined : 'rotate'}
+          icon={href ? 'download' : 'autorenew'}
+        />
+        <span>{href ? 'ダウンロード' : '更新中'}</span>
+      </a>
+      <a
+        className="menu-button-bg"
+        target="_blank"
+        href={href}
+        aria-disabled={href ? undefined : true}
+      >
+        <Icon
+          className={href ? undefined : 'rotate'}
+          icon={href ? 'arrow_outward' : 'autorenew'}
+        />
+        <span>{href ? '別タブで開く' : '更新中'}</span>
+      </a>
+    </Buttons>
   );
 };
+
+const Buttons = styled.div`
+  justify-self: stretch;
+  display: grid;
+  grid-template-columns: auto auto;
+  & > a {
+    justify-content: center;
+    padding-block: 2px;
+    padding-inline: 4px;
+  }
+`;

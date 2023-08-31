@@ -28,7 +28,7 @@ export const IconButton = ({ icon, ...props }: IconButtonProps) => (
   <ButtonWrap>
     <Button
       {...props}
-      className={classnames('menu-button-bg', props.className)}
+      className={classnames('menu-button-bg nonpad', props.className)}
     >
       <Icon icon={icon} size={18} />
     </Button>

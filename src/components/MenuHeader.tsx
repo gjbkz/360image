@@ -14,12 +14,16 @@ export const MenuHeader = () => {
   const title = useRecoilValue(rcTitle);
   return (
     <HeaderDiv>
-      <Back href={indexPagePath} className="menu-button-bg" title="一覧に戻る">
+      <Back
+        href={indexPagePath}
+        className="menu-button-bg nonpad"
+        title="一覧に戻る"
+      >
         <Icon icon="arrow_back_ios" size={18} />
       </Back>
       <hr />
       <Toggle
-        className="menu-button-bg"
+        className="menu-button-bg nonpad"
         onClick={toggle}
         title={opened ? 'メニューを閉じる' : 'メニューを開く'}
       >

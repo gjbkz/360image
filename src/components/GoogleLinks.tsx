@@ -6,7 +6,7 @@ export const GoogleLinks = () => {
   return (
     <LinksDiv>
       <Link
-        className="menu-button-bg"
+        className="menu-button-bg nonpad"
         target="_blank"
         href={useGoogleMapLink()}
       >
@@ -15,7 +15,7 @@ export const GoogleLinks = () => {
         <Icon icon="arrow_outward" size={18} />
       </Link>
       <Link
-        className="menu-button-bg"
+        className="menu-button-bg nonpad"
         target="_blank"
         href={useGoogleEarthLink()}
       >
@@ -31,17 +31,14 @@ const LinksDiv = styled.div`
   justify-self: center;
   display: grid;
   grid-template-columns: auto auto;
-  row-gap: 4px;
 `;
 
 const Link = styled.a`
   display: grid;
   grid-auto-flow: column;
   justify-content: start;
-  align-items: center;
-  column-gap: 2px;
   padding-block: 2px;
-  padding-inline: 4px;
+  padding-inline: 8px;
   text-decoration: none;
   & > span {
     margin-block-start: 2px;
