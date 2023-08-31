@@ -19,6 +19,7 @@ export const availableIcons = [
   'info',
   'landscape',
   'calculate',
+  'help',
 ] as const;
 
 export const createMarkerIcon = () =>

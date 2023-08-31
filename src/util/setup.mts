@@ -56,10 +56,4 @@ export const viewerPromise = new Promise<Viewer>((resolve) => {
     resolve(viewer);
   };
   viewer.on('load', onLoad);
-  addEventListener('keydown', (event) => {
-    switch (event.key) {
-      case 'p':
-        viewer.setHfov(viewer.getHfov() + 0.1, 0);
-    }
-  });
 });
