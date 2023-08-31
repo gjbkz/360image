@@ -17,7 +17,7 @@ export const Tooltip = ({ children }: TooltipProps) => {
   );
   return (
     <TooltipButton className="menu-button-bg tooltip" onClick={onClick}>
-      <Icon icon="info" size={18} />
+      <Icon icon="help" size={18} />
     </TooltipButton>
   );
 };

@@ -1,5 +1,6 @@
 import { useRecoilCallback, useRecoilValue } from 'recoil';
 import { styled } from 'styled-components';
+import { useEffect } from 'react';
 import { rcEditMode } from '../recoil/EditMode.mjs';
 import { rcMarker } from '../recoil/Markers.mjs';
 import { rcTitle } from '../recoil/Title.mjs';
@@ -107,10 +108,27 @@ const AddMarkerButton = () => {
       },
     [],
   );
+  useEffect(() => {
+    const abc = new AbortController();
+    addEventListener(
+      'keydown',
+      (event) => {
+        const target = event.target as HTMLElement | null;
+        if (target && target.closest('input')) {
+          return;
+        }
+        if (event.key === 'Enter') {
+          onClick();
+        }
+      },
+      { signal: abc.signal },
+    );
+    return () => abc.abort();
+  }, [onClick]);
   return (
     <button className="menu-button-bg full" onClick={onClick}>
       <Icon icon="add" />
-      <span>マーカーを追加</span>
+      <span>マーカーを追加（Enter）</span>
     </button>
   );
 };
