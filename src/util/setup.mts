@@ -29,14 +29,6 @@ export const viewerPromise = new Promise<Viewer>((resolve) => {
   }
   const container = query('main#panorama');
   const aspectRatio = container.clientWidth / container.clientHeight;
-  console.info({
-    maxPitch,
-    aspectRatio,
-    maxVFov: maxPitch * 2,
-    maxHfov: maxPitch * 2 * aspectRatio,
-    vfov: (maxPitch - 3) * 2,
-    hfov: (maxPitch - 3) * 2 * aspectRatio,
-  });
   const viewer = globalThis.pannellum.viewer(container, {
     panorama: initialViewerConfig.filename,
     hotSpots: [],
