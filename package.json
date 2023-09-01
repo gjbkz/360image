@@ -6,7 +6,7 @@
     "lint": "eslint src build",
     "test": "run-s test:*",
     "test:type": "tsc --noEmit",
-    "test:unit": "node --experimental-loader=@nlib/mts build/test.mts",
+    "test:unit": "nlib-mts-test build",
     "build": "run-s build:*",
     "build:main": "node --experimental-loader=@nlib/mts build/main.mts",
     "start": "run-p start:*",
@@ -20,7 +20,7 @@
   "devDependencies": {
     "@material-design-icons/svg": "^0.14.11",
     "@nlib/githooks": "^0.2.0",
-    "@nlib/mts": "0.0.3",
+    "@nlib/mts": "0.0.4",
     "@nlib/typing": "1.1.0",
     "@types/node": "^20.5.4",
     "@types/react": "^18.2.21",
