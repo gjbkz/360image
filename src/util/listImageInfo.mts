@@ -128,13 +128,21 @@ const readEXIF = function* (r: Reader, log: Logger): Generator<IFDTag> {
       const numberOfEntries = r.read(2);
       log(`numberOfEntries: ${numberOfEntries}`);
       let previousTag = 0;
+      let aborted = false;
       for (let i = 0; i < numberOfEntries; i++) {
         r.pos = ifdOffset + 2 + i * 12;
         const tag = readTag(r, tiffHeaderOffset, log);
         if (tag && previousTag < tag.tag) {
           yield tag;
           previousTag = tag.tag;
+        } else {
+          log(`aborted at tag #${i}`);
+          aborted = true;
+          break;
         }
+      }
+      if (aborted) {
+        break;
       }
       r.pos = ifdOffset + 2 + numberOfEntries * 12;
       const nextOffset = r.read(4);
