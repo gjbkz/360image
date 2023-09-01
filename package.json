@@ -6,7 +6,7 @@
     "lint": "eslint src build",
     "test": "run-s test:*",
     "test:type": "tsc --noEmit",
-    "test:unit": "nlib-mts-test build",
+    "test:unit": "nlib-mts-test build src",
     "build": "run-s build:*",
     "build:main": "node --experimental-loader=@nlib/mts build/main.mts",
     "start": "run-p start:*",
