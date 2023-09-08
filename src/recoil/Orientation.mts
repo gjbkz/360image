@@ -30,7 +30,10 @@ export const rc$Orientation = atom<Orientation>({
         reset();
         reset = startWatch(viewer, () =>
           setSelf((current) => {
-            const pitch = Math.round(viewer.getPitch() * 1000) / 1000;
+            const pitch = Math.min(
+              Math.round(viewer.getPitch() * 1000) / 1000,
+              -1,
+            );
             const yaw = Math.round(viewer.getYaw() * 1000) / 1000;
             if (
               current instanceof DefaultValue ||
