@@ -3,7 +3,9 @@
   "latitude": 48.197333,
   "longitude": -103.078194,
   "northYaw": -48.701,
-  "altitude": 606,
+  "altitude": 776,
+  "elevation": 576,
+  "initHfov": 30,
   "initPitch": -12.88,
   "initYaw": 1.19,
   "markers": [
@@ -37,7 +39,5 @@
       "pitch": -21.804,
       "id": "hs-5"
     }
-  ],
-  "elevation": 576,
-  "initHfov": 30
+  ]
 }
