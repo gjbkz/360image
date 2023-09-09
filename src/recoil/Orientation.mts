@@ -1,7 +1,7 @@
 import { DefaultValue, atom, selector } from 'recoil';
-import type { Viewer } from '../util/pannellum.mjs';
 import { noop } from '../util/noop.mjs';
-import { initialViewerConfig } from '../util/setup.mjs';
+import type { Viewer } from '../util/pannellum.mjs';
+import { initialViewerConfig, pitchStore, yawStore } from '../util/setup.mjs';
 import { rcViewer } from './Viewer.mjs';
 
 interface Orientation {
@@ -20,10 +20,22 @@ export const rcInitialOrientation = atom<Orientation>({
 export const rc$Orientation = atom<Orientation>({
   key: 'Orientation',
   default: {
-    pitch: initialViewerConfig.initPitch,
-    yaw: initialViewerConfig.initYaw,
+    pitch: pitchStore.get(),
+    yaw: yawStore.get(),
   },
   effects: [
+    ({ onSet }) => {
+      let timerId = setTimeout(noop);
+      const sync = (value: Orientation) => {
+        clearTimeout(timerId);
+        timerId = setTimeout(() => {
+          pitchStore.set(value.pitch);
+          yawStore.set(value.yaw);
+        }, 500);
+      };
+      onSet(sync);
+      return () => clearTimeout(timerId);
+    },
     ({ setSelf, getPromise }) => {
       let reset = noop;
       const start = (viewer: Viewer) => {

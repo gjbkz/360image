@@ -2,6 +2,7 @@ import { ensure } from '@nlib/typing';
 import type { Viewer } from './pannellum.mjs';
 import { isViewerConfig } from './app.mjs';
 import { query } from './dom.mjs';
+import { createFloatParameterStore } from './ParameterStore.mjs';
 
 const cssLink = query('link[rel="stylesheet"][href$="app.css"]', document.head);
 export const indexPagePath = `${cssLink.getAttribute('href')}`.slice(0, -7);
@@ -10,6 +11,14 @@ export const initialViewerConfig = ensure(
   isViewerConfig,
 );
 export const maxPitch = 38;
+export const pitchStore = createFloatParameterStore(
+  'pitch',
+  initialViewerConfig.initPitch,
+);
+export const yawStore = createFloatParameterStore(
+  'yaw',
+  initialViewerConfig.initYaw,
+);
 export const viewerPromise = new Promise<Viewer>((resolve) => {
   let startDirection: { pitch: number; yaw: number } | undefined;
   const startMarkerId = location.hash.slice(1);
@@ -23,8 +32,8 @@ export const viewerPromise = new Promise<Viewer>((resolve) => {
   }
   if (!startDirection) {
     startDirection = {
-      pitch: initialViewerConfig.initPitch,
-      yaw: initialViewerConfig.initYaw,
+      pitch: pitchStore.get(),
+      yaw: yawStore.get(),
     };
   }
   const container = query('main#panorama');
