@@ -19,6 +19,10 @@ export const yawStore = createFloatParameterStore(
   'yaw',
   initialViewerConfig.initYaw,
 );
+export const hfovStore = createFloatParameterStore(
+  'hfov',
+  initialViewerConfig.initHfov,
+);
 export const viewerPromise = new Promise<Viewer>((resolve) => {
   let startDirection: { pitch: number; yaw: number } | undefined;
   const startMarkerId = location.hash.slice(1);
@@ -38,6 +42,7 @@ export const viewerPromise = new Promise<Viewer>((resolve) => {
   }
   const container = query('main#panorama');
   const aspectRatio = container.clientWidth / container.clientHeight;
+  hfovStore.setDefault(maxPitch * 2 * aspectRatio - 12 * aspectRatio ** 2);
   const viewer = globalThis.pannellum.viewer(container, {
     panorama: initialViewerConfig.filename,
     hotSpots: [],
@@ -48,7 +53,7 @@ export const viewerPromise = new Promise<Viewer>((resolve) => {
     maxPitch,
     minHfov: 25,
     maxHfov: maxPitch * 2 * aspectRatio,
-    hfov: maxPitch * 2 * aspectRatio - 12 * aspectRatio ** 2,
+    hfov: hfovStore.get(),
     ...startDirection,
   });
   viewer.on('error', alert);

@@ -94,9 +94,11 @@ export const createFloatParameterStore = (
     if (!isFiniteNumber(value)) {
       value = defaultValue;
     }
-    console.info({ get: name, v, value });
     set(value);
     return value;
   };
-  return { get, set };
+  const setDefault = (value: number) => {
+    defaultValue = value;
+  };
+  return { get, set, setDefault };
 };
