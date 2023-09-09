@@ -1,8 +1,9 @@
 import { atom } from 'recoil';
-import { searchParams } from '../util/searchParams.mjs';
+import { createBooleanParameterStore } from '../util/ParameterStore.mjs';
 
+const store = createBooleanParameterStore('menu', false, sessionStorage);
 export const rcShowMenu = atom<boolean>({
   key: 'ShowMenu',
-  default:
-    searchParams.boolean('menu', false) || searchParams.boolean('edit', false),
+  default: store.get(),
+  effects: [({ onSet }) => onSet(store.set)],
 });

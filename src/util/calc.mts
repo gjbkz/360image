@@ -54,8 +54,9 @@ export const getTargetCoordinates = ({
   const dxM = rM * sin(yawRad);
   const dyM = rM * cos(yawRad);
   return {
-    latitude: latDeg + rad2deg(dyM / bM),
-    longitude: longDeg + rad2deg(dxM / (aM * cos(deg2rad(latDeg)))),
+    latitude: latDeg + rad2deg(dyM / (bM + elevation)),
+    longitude:
+      longDeg + rad2deg(dxM / ((aM + elevation) * cos(deg2rad(latDeg)))),
   };
 };
 

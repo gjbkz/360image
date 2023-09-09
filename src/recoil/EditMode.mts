@@ -1,33 +1,15 @@
 import { atom } from 'recoil';
-import { searchParams } from '../util/searchParams.mjs';
 import { alertError } from '../util/alertError.mjs';
 import { dom } from '../util/dom.mjs';
+import { createBooleanParameterStore } from '../util/ParameterStore.mjs';
 import { rcRenderContainer } from './Viewer.mjs';
 
-const name = 'edit';
+const store = createBooleanParameterStore('edit', false, sessionStorage);
 export const rcEditMode = atom<boolean>({
   key: 'EditMode',
-  default: searchParams.boolean(name, false),
+  default: store.get(),
   effects: [
-    ({ onSet }) => {
-      const apply = (value: boolean) => {
-        const url = new URL(location.href);
-        const params = url.searchParams;
-        if (value) {
-          if (params.get(name) === '1') {
-            return;
-          }
-          params.set(name, '1');
-        } else {
-          if (!params.has(name)) {
-            return;
-          }
-          params.delete(name);
-        }
-        history.replaceState(null, '', url);
-      };
-      onSet(apply);
-    },
+    ({ onSet }) => onSet(store.set),
     ({ onSet, getPromise }) => {
       const apply = alertError(async (value: boolean) => {
         const container = await getPromise(rcRenderContainer);
