@@ -68,7 +68,7 @@ const Hr = styled.div`
   margin-inline: var(--padding-h);
   block-size: 1px;
   margin-block: var(--padding-v);
-  background-color: currentColor;
+  background-color: currentcolor;
   &:first-child {
     position: sticky;
     inset-inline: var(--padding-h);

@@ -122,7 +122,7 @@ const CoordinatesSettingsDiv = styled.div`
   align-items: center;
   & > input {
     text-align: end;
-    border-block-end: solid 1px currentColor;
+    border-block-end: solid 1px currentcolor;
   }
 `;
 

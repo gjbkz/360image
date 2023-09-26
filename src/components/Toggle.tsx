@@ -21,7 +21,7 @@ const ToggleButton = styled.button`
   height: var(--height);
   border-radius: calc(var(--height) / 2);
   box-shadow:
-    0 0 0 1.25px currentColor inset,
+    0 0 0 1.25px currentcolor inset,
     0 0 2px 1.25px rgba(0, 0, 0, 0.5) inset;
   outline: 0;
   overflow: hidden;

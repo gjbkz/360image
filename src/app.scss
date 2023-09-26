@@ -12,7 +12,7 @@
   background-repeat: no-repeat;
   background-position: center;
   border-style: none;
-  border-color: currentColor;
+  border-color: currentcolor;
   border-width: 1px;
   border-radius: 0;
   stroke-linejoin: round;
@@ -84,6 +84,11 @@ section {
   display: grid;
   grid-auto-flow: row;
 }
+footer {
+  margin-block-start: 2em;
+  padding-block-start: 2em;
+  border-block-start: solid 1px currentcolor;
+}
 ul,
 ol {
   padding-inline-start: 20px;
@@ -127,7 +132,7 @@ input[type='file'] {
   pointer-events: none;
 }
 symbol[id^='icon-'] > path {
-  fill: currentColor;
+  fill: currentcolor;
 }
 .markers-list {
   display: flex;
@@ -259,7 +264,7 @@ main#panorama {
   position: absolute;
   inset-block: 0;
   inset-inline-start: 0;
-  background-color: currentColor;
+  background-color: currentcolor;
 }
 .pnlm-hotspot-base {
   visibility: hidden;
@@ -285,7 +290,7 @@ main#panorama {
   & > svg {
     width: 12px;
     & > path {
-      fill: currentColor;
+      fill: currentcolor;
     }
   }
   &.tick {

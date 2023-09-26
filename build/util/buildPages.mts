@@ -71,6 +71,9 @@ const generateIndexHtml = async function* (imageTree: ImageTree) {
     yield '</ul>\n';
     yield '</section>\n';
   }
+  yield '<footer>\n';
+  yield 'アプリについてのお問い合わせは <a target="_blank" href="https://gojabako.zone/author">Kei Ito</a> までお願いします。\n';
+  yield '</footer>\n';
   yield '</main>\n';
   yield* generateSvgIcons();
   await Promise.all(viewerBuilds);

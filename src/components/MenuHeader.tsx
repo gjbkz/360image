@@ -52,7 +52,7 @@ const HeaderDiv = styled.div`
     margin-inline: 3px;
     inline-size: 1px;
     block-size: 80%;
-    background-color: currentColor;
+    background-color: currentcolor;
   }
   & > h1,
   & > h2 {
