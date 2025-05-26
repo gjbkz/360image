@@ -20,7 +20,7 @@
   "devDependencies": {
     "@material-design-icons/svg": "0.14.11",
     "@nlib/githooks": "0.2.0",
-    "@nlib/tsm": "^0.1.0",
+    "@nlib/tsm": "0.1.0",
     "@nlib/typing": "1.1.0",
     "@types/node": "20.5.7",
     "@types/react": "18.2.21",
