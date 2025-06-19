@@ -22,7 +22,7 @@
     "@nlib/githooks": "0.2.0",
     "@nlib/tsm": "^0.1.0",
     "@nlib/typing": "1.1.0",
-    "@types/node": "20.5.7",
+    "@types/node": "20.19.1",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
     "@typescript-eslint/eslint-plugin": "6.5.0",
