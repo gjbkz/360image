@@ -41,7 +41,7 @@
     "sable": "0.5.14",
     "sass": "1.66.1",
     "styled-components": "6.0.7",
-    "tsx": "^4.23.15",
+    "tsx": "4.23.15",
     "typescript": "5.2.2"
   },
   "lint-staged": {
